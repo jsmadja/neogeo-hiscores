@@ -28,7 +28,7 @@ public class GameServiceTest {
     @Test
     public void should_add_new_game() {
         Game game = new Game("Fatal Fury");
-        game.setRules("Objectif : Faire le maximum de points avec 1 crédit.");
+        game.setRules("Objectif : Faire le maximum de points avec 1 credit.");
 
         gameService.add(game);
         Set<Game> games = gameService.findAll();
