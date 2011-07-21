@@ -22,15 +22,19 @@ import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Scores;
+import javax.ejb.Stateless;
 
+@Stateless
 public class ScoreService {
 
     private Map<Game, Scores> scoresByGame = new HashMap<Game, Scores>();
     private Map<Player, Scores> scoresByPlayer = new HashMap<Player, Scores>();
+    private Scores scores = new Scores();
 
     public void add(Score score) {
         addScoreInGameMap(score);
         addScoreInPlayerMap(score);
+        scores.add(score);
     }
 
     private void addScoreInGameMap(Score score) {
@@ -66,6 +70,10 @@ public class ScoreService {
         if (scores == null) {
             scores = new Scores();
         }
+        return scores;
+    }
+
+    public Scores findAll() {
         return scores;
     }
 

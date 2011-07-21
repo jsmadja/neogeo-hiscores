@@ -17,6 +17,7 @@
 package com.anzymus.neogeo.hiscores.domain;
 
 import com.google.common.base.Objects;
+import java.util.Date;
 
 public class Score implements Comparable<Score> {
 
@@ -24,12 +25,14 @@ public class Score implements Comparable<Score> {
     private String value;
     private Player player;
     private Level level;
+    private Date creationDate;
 
     public Score(String value, Player player, Level level, Game game) {
         this.value = value;
         this.player = player;
         this.level = level;
         this.game = game;
+        this.creationDate = new Date();
     }
 
     public Game getGame() {
@@ -48,6 +51,10 @@ public class Score implements Comparable<Score> {
         return level;
     }
 
+    public Date getCreationDate() {
+        return creationDate;
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Score) {
@@ -55,14 +62,15 @@ public class Score implements Comparable<Score> {
             return Objects.equal(value, score.value) && //
                     Objects.equal(game, score.game) && //
                     Objects.equal(player, score.player) && //
-                    Objects.equal(level, score.level);
+                    Objects.equal(level, score.level) && //
+                    Objects.equal(creationDate, score.creationDate);
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(game, value, player, level);
+        return Objects.hashCode(game, value, player, level, creationDate);
     }
 
     @Override
@@ -72,6 +80,7 @@ public class Score implements Comparable<Score> {
                 .addValue(value) //
                 .addValue(player) //
                 .addValue(level) //
+                .addValue(creationDate) //
                 .toString();
     }
 

@@ -20,7 +20,9 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
 import com.anzymus.neogeo.hiscores.domain.Game;
+import javax.ejb.Stateless;
 
+@Stateless
 public class GameService {
 
     Set<Game> games = new TreeSet<Game>();
