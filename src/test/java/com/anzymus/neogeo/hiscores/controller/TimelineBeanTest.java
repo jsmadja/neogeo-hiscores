@@ -18,9 +18,14 @@ package com.anzymus.neogeo.hiscores.controller;
 
 import org.junit.Before;
 import org.junit.Ignore;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import com.anzymus.neogeo.hiscores.service.ScoreService;
 
 public class TimelineBeanTest {
+
+    @Mock
+    ScoreService scoreService;
 
     @Before
     public void init() {
