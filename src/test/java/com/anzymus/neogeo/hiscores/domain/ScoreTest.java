@@ -16,8 +16,9 @@
 
 package com.anzymus.neogeo.hiscores.domain;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class ScoreTest {
 
@@ -27,36 +28,35 @@ public class ScoreTest {
         Level level1 = new Level("MVS");
         Game game1 = new Game("game");
         String pictureUrl1 = "pictureUrl";
-        
+
         Score score1 = new Score("1", player1, level1, game1, pictureUrl1);
-        
+
         Player player2 = new Player("def", "ABC");
         Level level2 = new Level("MVS");
         Game game2 = new Game("game");
         String pictureUrl2 = "pictureUrl";
-        
+
         Score score2 = new Score("1", player2, level2, game2, pictureUrl2);
-        
+
         assertFalse(score1.equals(score2));
     }
-    
+
     @Test
     public void should_be_equal() {
         Player player1 = new Player("abc", "ABC");
         Level level1 = new Level("MVS");
         Game game1 = new Game("game");
         String pictureUrl1 = "pictureUrl";
-        
+
         Score score1 = new Score("1", player1, level1, game1, pictureUrl1);
-        
+
         Player player2 = new Player("abc", "ABC");
         Level level2 = new Level("MVS");
         Game game2 = new Game("game");
         String pictureUrl2 = "pictureUrl";
-        
-        Score score2 = new Score("1", player1, level1, game1, pictureUrl1);
-        
+
+        Score score2 = new Score("1", player2, level2, game2, pictureUrl2);
+
         assertEquals(score1, score2);
     }
-    
 }

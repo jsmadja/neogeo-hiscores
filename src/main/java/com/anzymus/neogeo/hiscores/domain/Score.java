@@ -16,8 +16,8 @@
 
 package com.anzymus.neogeo.hiscores.domain;
 
-import com.google.common.base.Objects;
 import java.util.Date;
+import com.google.common.base.Objects;
 
 public class Score {
 

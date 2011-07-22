@@ -16,12 +16,6 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
-import com.anzymus.neogeo.hiscores.domain.Game;
-import com.anzymus.neogeo.hiscores.domain.Level;
-import com.anzymus.neogeo.hiscores.domain.Score;
-import com.anzymus.neogeo.hiscores.domain.Scores;
-import com.anzymus.neogeo.hiscores.service.ScoreService;
-import com.google.common.base.Strings;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +23,11 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import com.anzymus.neogeo.hiscores.domain.Game;
+import com.anzymus.neogeo.hiscores.domain.Level;
+import com.anzymus.neogeo.hiscores.domain.Score;
+import com.anzymus.neogeo.hiscores.domain.Scores;
+import com.anzymus.neogeo.hiscores.service.ScoreService;
 
 @ManagedBean
 public class GameBean {

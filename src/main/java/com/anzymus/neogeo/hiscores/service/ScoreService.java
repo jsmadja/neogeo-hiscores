@@ -19,11 +19,11 @@ package com.anzymus.neogeo.hiscores.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.ejb.Stateless;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Scores;
-import javax.ejb.Stateless;
 
 @Stateless
 public class ScoreService {

@@ -19,8 +19,8 @@ package com.anzymus.neogeo.hiscores.service;
 import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
-import com.anzymus.neogeo.hiscores.domain.Game;
 import javax.ejb.Stateless;
+import com.anzymus.neogeo.hiscores.domain.Game;
 
 @Stateless
 public class GameService {

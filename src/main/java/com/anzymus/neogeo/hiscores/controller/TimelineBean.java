@@ -16,15 +16,13 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
-import com.anzymus.neogeo.hiscores.domain.Score;
-import com.anzymus.neogeo.hiscores.domain.Scores;
-import com.anzymus.neogeo.hiscores.service.ScoreService;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import com.anzymus.neogeo.hiscores.domain.Score;
+import com.anzymus.neogeo.hiscores.service.ScoreService;
 
 @ManagedBean
 @SessionScoped

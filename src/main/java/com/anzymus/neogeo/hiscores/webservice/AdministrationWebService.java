@@ -16,15 +16,15 @@
 
 package com.anzymus.neogeo.hiscores.webservice;
 
+import javax.ejb.EJB;
+import javax.jws.WebMethod;
+import javax.jws.WebService;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Level;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
-import javax.ejb.EJB;
-import javax.jws.WebService;
-import javax.jws.WebMethod;
 
 @WebService
 public class AdministrationWebService {
