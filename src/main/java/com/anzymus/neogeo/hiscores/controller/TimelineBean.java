@@ -28,18 +28,17 @@ import com.anzymus.neogeo.hiscores.service.ScoreService;
 @SessionScoped
 public class TimelineBean {
 
-    @EJB ScoreService scoreService;
+    @EJB
+    ScoreService scoreService;
 
     public List<TimelineItem> getItems() {
         List<Score> scores = scoreService.findLastScoresOrderByDateDesc();
-        
         List<TimelineItem> items = new ArrayList<TimelineItem>();
-        for(Score score:scores) {
+        for (Score score : scores) {
             TimelineItem item = new TimelineItem(score);
             items.add(item);
         }
-        
         return items;
     }
-    
+
 }

@@ -17,13 +17,18 @@
 package com.anzymus.neogeo.hiscores.controller;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.mockito.MockitoAnnotations;
 
 public class TimelineBeanTest {
-    
+
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
     }
-    
+
+    @Ignore
+    public void test() {
+    }
+
 }
