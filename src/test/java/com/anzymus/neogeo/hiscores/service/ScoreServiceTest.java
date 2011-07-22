@@ -47,13 +47,6 @@ public class ScoreServiceTest {
     }
 
     @Test
-    public void should_have_no_score() {
-        Game game = new Game("Fatal Fury");
-        Scores scores = scoreService.findAllByGame(game);
-        assertEquals(0, scores.count());
-    }
-
-    @Test
     public void should_find_scores_by_player() {
         Player player = new Player("Anzymus", "ANZ");
         Score score1 = new Score("100", player, new Level("MVS"), new Game("Fatal Fury"), pictureUrl);

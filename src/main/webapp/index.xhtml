@@ -26,47 +26,28 @@
 
         <f:view>
             <center>
-
-                <h2>${msgs.text_add_my_score_title}</h2>
-                <h:form>
-                    <h:panelGrid columns="2" >
-                        <h:inputText id="fullname" value="#{scoreBean.fullname}" onfocus="clearText(this)" />
-                        <h:inputText id="shortname" value="#{scoreBean.shortname}" onfocus="clearText(this)" maxlength="3" />
-                        <h:selectOneMenu id="selectGame" value="#{scoreBean.currentGame}">
-                            <f:selectItems value="#{scoreBean.gameList}" />
-                        </h:selectOneMenu>
-                        <h:selectOneMenu id="selectLevel" value="#{scoreBean.currentLevel}">
-                            <f:selectItems value="#{scoreBean.levelList}" />
-                        </h:selectOneMenu>
-                        <h:inputText id="score" value="#{scoreBean.score}" onfocus="clearText(this)" />
-                        <h:inputText id="pictureUrl" value="#{scoreBean.pictureUrl}" onfocus="clearText(this)" />
-                        <h:commandButton id="submit" value="${msgs.form_button_add}" action="#{scoreBean.add}" />
-                    </h:panelGrid>
-                </h:form>
-
                 <h2>${msgs.text_last_events_title}</h2>
-
                 <h:dataTable  id="timelineTable" value="#{timelineBean.items}" var="item" >
                     <h:column>
                         <a class="thumbnail" href="#thumb">
                             <img src="${item.score.pictureUrl}" width="100px" height="100px" border="0" />
                             <span>
-                                <img src="${item.score.pictureUrl}" />
+                                <img src="${item.score.pictureUrl}" width="320px"/>
                             </span>
                         </a>
                     </h:column>
                     <h:column>
-                        <p style="font-size:18px">
-                            <h:link outcome="player" value="${item.score.player.fullname} (${item.score.player.shortname})">
+                        <p style="font-size:10pt">
+                            <h:link styleClass="player" outcome="player" value="${item.score.player.fullname} (${item.score.player.shortname})">
                                 <f:param name="fullname" value="${item.score.player.fullname}"/>
                                 <f:param name="shortname" value="${item.score.player.shortname}"/>
                             </h:link><br/>
                             ${item.score.value} on 
-                            <h:link outcome="game" value="${item.score.game.name}">
+                            <h:link styleClass="game" outcome="game" value="${item.score.game.name}">
                                 <f:param name="name" value="${item.score.game.name}"/>
                             </h:link> (${item.score.level.label})
                             <br/>
-                            <h:outputText value="${item.score.creationDate}" style="font-size:15px" converter="dateConverter"/>
+                            <h:outputText value="${item.score.creationDate}" style="font-size:8pt" converter="dateConverter"/>
                         </p>
                     </h:column>
                 </h:dataTable>

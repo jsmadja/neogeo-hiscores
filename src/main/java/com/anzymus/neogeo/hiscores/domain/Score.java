@@ -75,7 +75,7 @@ public class Score {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(game, value, player, level, creationDate, pictureUrl);
+        return Objects.hashCode(game, value, player, level, pictureUrl);
     }
 
     @Override

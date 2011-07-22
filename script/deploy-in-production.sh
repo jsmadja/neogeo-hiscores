@@ -1,3 +1,4 @@
+#!/bin/bash
 #
 #     Copyright (C) 2011 Julien SMADJA <julien dot smadja at gmail dot com>
 #
@@ -14,8 +15,5 @@
 #     limitations under the License.
 #
 
-text_hiscores_title=Neo Geo Hi-Scores
-text_last_events_title=Last events
-text_add_my_score_title=Enter my score
-
-form_button_add=Add my score
+script/clean.sh
+mvn clean package && scp target/hiscores.war fluxx@fluxx.fr.cr:/opt/glassfishv3/glassfish/domains/domain1/autodeploy

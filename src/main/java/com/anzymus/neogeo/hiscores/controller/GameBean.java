@@ -17,12 +17,15 @@
 package com.anzymus.neogeo.hiscores.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import com.anzymus.neogeo.hiscores.comparator.ScoreSortedByValueDescComparator;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Level;
 import com.anzymus.neogeo.hiscores.domain.Score;
@@ -32,21 +35,24 @@ import com.anzymus.neogeo.hiscores.service.ScoreService;
 @ManagedBean
 public class GameBean {
 
-    @EJB ScoreService scoreService;
-    
-    @ManagedProperty(value="#{param.name}")
+    @EJB
+    ScoreService scoreService;
+
+    @ManagedProperty(value = "#{param.name}")
     private String name;
-    
+
     private Scores scores;
-    
-    private static final String[] RANKS = {"1st", "2nd", "3rd"};
-    
+
+    private static final String[] RANKS = { "1st", "2nd", "3rd" };
+
+    private static Comparator<Score> sortScoreByValueDesc = new ScoreSortedByValueDescComparator();
+
     @PostConstruct
     public void init() {
         Game game = new Game(name);
         scores = scoreService.findAllByGame(game);
     }
-    
+
     public String getName() {
         return name;
     }
@@ -57,9 +63,10 @@ public class GameBean {
 
     public List<LevelItem> getLevels() {
         List<LevelItem> levelItems = new ArrayList<LevelItem>();
-        for(Map.Entry<Level, List<Score>> value:this.scores.getScoresByLevels().entrySet()) {
+        for (Map.Entry<Level, List<Score>> value : this.scores.getScoresByLevels().entrySet()) {
             Level level = value.getKey();
             List<Score> scores = value.getValue();
+            Collections.sort(scores, sortScoreByValueDesc);
             List<ScoreItem> scoreItems = createScoreItems(scores);
             LevelItem levelItem = new LevelItem(level.getLabel());
             levelItem.setScoreItems(scoreItems);
@@ -67,12 +74,12 @@ public class GameBean {
         }
         return levelItems;
     }
-    
+
     private List<ScoreItem> createScoreItems(List<Score> scores) {
         List<ScoreItem> scoreItems = new ArrayList<ScoreItem>();
-        for(int i=0; i<10; i++) {
+        for (int i = 0; i < 10; i++) {
             ScoreItem scoreItem = new ScoreItem();
-            if(i<scores.size()) {
+            if (i < scores.size()) {
                 Score score = scores.get(i);
                 scoreItem.setValue(score.getValue());
                 scoreItem.setPlayer(score.getPlayer().getShortname());
@@ -84,7 +91,7 @@ public class GameBean {
             if (i <= 2) {
                 scoreItem.setRank(RANKS[i]);
             } else {
-                scoreItem.setRank((i+1)+"th");
+                scoreItem.setRank((i + 1) + "th");
             }
             scoreItems.add(scoreItem);
         }

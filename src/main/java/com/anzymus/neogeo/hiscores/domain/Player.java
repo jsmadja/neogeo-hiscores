@@ -23,6 +23,9 @@ public class Player {
     private String fullname;
     private String shortname;
 
+    private int points;
+    private int contribution;
+
     public Player(String fullname, String shortname) {
         this.fullname = fullname;
         this.shortname = shortname;
@@ -34,6 +37,22 @@ public class Player {
 
     public String getShortname() {
         return shortname;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setScore(int score) {
+        this.points = score;
+    }
+
+    public int getContribution() {
+        return contribution;
+    }
+
+    public void setContribution(int contribution) {
+        this.contribution = contribution;
     }
 
     @Override

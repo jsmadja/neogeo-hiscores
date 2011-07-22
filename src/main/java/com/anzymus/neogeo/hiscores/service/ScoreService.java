@@ -29,14 +29,16 @@ import com.anzymus.neogeo.hiscores.domain.Scores;
 public class ScoreService {
     public static final int MAX_SCORES_TO_RETURN = 20;
 
-    private Map<Game, Scores> scoresByGame = new HashMap<Game, Scores>();
-    private Map<String, Scores> scoresByPlayer = new HashMap<String, Scores>();
-    private Scores scores = new Scores();
+    private static final Map<Game, Scores> scoresByGame = new HashMap<Game, Scores>();
+    private static final Map<String, Scores> scoresByPlayer = new HashMap<String, Scores>();
+    private static final Scores scores = new Scores();
 
     public void add(Score score) {
-        addScoreInGameMap(score);
-        addScoreInPlayerMap(score);
-        scores.add(score);
+        if (!scores.contains(score)) {
+            scores.add(score);
+            addScoreInGameMap(score);
+            addScoreInPlayerMap(score);
+        }
     }
 
     private void addScoreInGameMap(Score score) {
@@ -72,6 +74,10 @@ public class ScoreService {
         if (scores == null) {
             scores = new Scores();
         }
+        return scores;
+    }
+
+    public Scores findAll() {
         return scores;
     }
 

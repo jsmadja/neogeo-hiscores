@@ -25,6 +25,8 @@ import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
+import java.util.Arrays;
+import java.util.List;
 
 @WebService
 public class AdministrationWebService {
@@ -35,21 +37,51 @@ public class AdministrationWebService {
     
     @WebMethod
     public void initialize() {
-        Game gameFatalFury = new Game("Fatal Fury");
-        gameFatalFury.setRules("Objectif : Faire le maximum de points avec 1 credit.");
+        initializeGameList();
+        initializeScoreList();
+    }
+    
+    private void initializeGameList() {
+        List<String> games = Arrays.asList("Robo Army", "Sengoku 2");
+        for(String gameName:games) {
+            addGame(gameName);
+        }
+    }
+    
+    private void initializeScoreList() {
+        addScore("Robo Army", "MVS", "Twilight_Guardian", "TGU", "86900", "http://img860.imageshack.us/img860/2171/img03592.jpg");
+        addScore("Robo Army", "MVS", "just", "JUS", "76900", "http://img232.imageshack.us/img232/8680/003hob.jpg");
+        addScore("Robo Army", "MVS", "juanito1979", "JLO", "39800", "http://img25.imageshack.us/img25/5374/picture121oh5.jpg");
+        addScore("Robo Army", "MVS", "kurush75", "KUR", "32900", "http://img821.imageshack.us/img821/4363/roboarmy.jpg");
+        addScore("Robo Army", "MVS", "aescdmvs", "AES", "31600", "http://i43.tinypic.com/28atapw.jpg");
         
-        Game gameSamuraiShodown = new Game("Samurai Shodown");
-
-        gameService.add(gameFatalFury);
-        gameService.add(gameSamuraiShodown);
+        addScore("Sengoku 2", "MVS", "NeoJin", "AAA", "115200", "http://img707.imageshack.us/img707/9459/sengoku2score.jpg");
+        addScore("Sengoku 2", "MVS", "juanito1979", "JLO", "111400", "http://img188.imageshack.us/img188/6392/p7080745.jpg");
+        addScore("Sengoku 2", "MVS", "Redemslug", "KAN", "108800", "http://img97.imageshack.us/img97/4318/sengokuii.jpg");
+        addScore("Sengoku 2", "MVS", "Mpower", "MPO", "100300", "http://valou.ludo.free.fr/NEO/Sengoku2.JPG");
+        addScore("Sengoku 2", "MVS", "aescdmvs", "AES", "77650", "http://i41.tinypic.com/335gyvk.jpg");
+    }
+    
+    @WebMethod
+    public void addScore(String gameName, String levelLabel, String fullname, String shortname, String scorePoints, String pictureUrl) {
+        Game game = new Game(gameName);
+        Level level = new Level(levelLabel);
+        Player player = new Player(fullname, shortname);
+        Score score = new Score(scorePoints, player, level, game, pictureUrl);
+        scoreService.add(score);
+    }
         
-        Player player = new Player("Anzymus", "ANZ");
-        Score score1 = new Score("100", player, new Level("MVS"), gameFatalFury, "http://img860.imageshack.us/img860/9089/img1207jp.jpg");
-        Score score2 = new Score("1mn32", player, new Level("Easy"), gameSamuraiShodown, "http://img860.imageshack.us/img860/9089/img1207jp.jpg");
-        Score score3 = new Score("150", player, new Level("Normal"), gameFatalFury, "http://img860.imageshack.us/img860/9089/img1207jp.jpg");
-
-        scoreService.add(score1);
-        scoreService.add(score2);
-        scoreService.add(score3);
+    @WebMethod
+    public void addGame(String name) {
+        Game game = new Game(name);
+        gameService.add(game);
+    }
+    
+    @WebMethod
+    public void addLevel(String gameName, String levelLabel, int position) {
+        Game game = gameService.findByName(gameName);
+        if (game != null) {
+            game.addLevel(position, new Level(levelLabel));
+        }
     }
 }

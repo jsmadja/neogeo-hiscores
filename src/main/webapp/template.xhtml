@@ -44,10 +44,21 @@
                 <div id="content">
                     <div id="content_left">
                         <div class="post">
-                            <a href="#{facesContext.externalContext.requestContextPath}">
-                                <img width="20%" style="border-style: none" src="#{facesContext.externalContext.requestContextPath}/myimages/logo.png" alt="logo" />
-                            </a>
-                            <span style="color: orange;font-size: 72px">Neo Geo</span> <span style="color: #3399FF;font-size: 72px">Hi Scores</span>
+                            <center>
+                                <a href="#{facesContext.externalContext.requestContextPath}">
+                                    <img width="100px" style="border-style: none" src="#{facesContext.externalContext.requestContextPath}/myimages/logo.png" alt="logo" />
+                                </a>
+                                <span class="title_neogeo">Neo Geo</span> <span class="title_hiscore">Hi Scores</span>
+
+                                <p style="color: rgb(118, 118, 118); font-size: 14px;">
+                                    <a class="link" href="#{facesContext.externalContext.requestContextPath}">Home</a>
+                                    |
+                                    <h:link styleClass="link" value="Add new score" outcome="score/create" />
+                                    |
+                                    <h:link styleClass="link" value="Hall of Fame" outcome="hallOfFame" />
+                                </p>
+                            </center>
+
                             <ui:insert name="content_right" />
                         </div>
                     </div>

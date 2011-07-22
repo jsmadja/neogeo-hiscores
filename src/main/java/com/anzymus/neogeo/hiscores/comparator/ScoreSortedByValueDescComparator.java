@@ -14,34 +14,18 @@
  *     limitations under the License.
  */
 
-package com.anzymus.neogeo.hiscores.service;
+package com.anzymus.neogeo.hiscores.comparator;
 
-import java.util.Collections;
-import java.util.Set;
-import java.util.TreeSet;
-import javax.ejb.Stateless;
-import com.anzymus.neogeo.hiscores.domain.Game;
+import java.util.Comparator;
+import com.anzymus.neogeo.hiscores.domain.Score;
 
-@Stateless
-public class GameService {
-
-    private static final Set<Game> games = new TreeSet<Game>();
-
-    public void add(Game game) {
-        games.add(game);
+public class ScoreSortedByValueDescComparator implements Comparator<Score> {
+    @Override
+    public int compare(Score s1, Score s2) {
+        String value1 = s1.getValue();
+        String value2 = s2.getValue();
+        Integer score1 = Integer.parseInt(value1);
+        Integer score2 = Integer.parseInt(value2);
+        return score2.compareTo(score1);
     }
-
-    public Set<Game> findAll() {
-        return Collections.unmodifiableSet(games);
-    }
-
-    public Game findByName(String gameName) {
-        for(Game game:games) {
-            if (gameName.equals(game.getName())) {
-                return game;
-            }
-        }
-        return null;
-    }
-
 }

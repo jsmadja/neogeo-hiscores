@@ -28,7 +28,7 @@ import java.util.Set;
 
 public class Scores implements Iterable<Score> {
 
-    Set<Score> scores = new HashSet<Score>();
+    private Set<Score> scores = new HashSet<Score>();
     private Map<Level, List<Score>> scoresByLevels = new HashMap<Level, List<Score>>();
 
     public void add(Score score) {
@@ -78,12 +78,11 @@ public class Scores implements Iterable<Score> {
         Collections.sort(sortedScores, comparator);
         return sortedScores;
     }
-
     private static Comparator<Score> comparatorByDateDesc = new Comparator<Score>() {
+
         @Override
         public int compare(Score s1, Score s2) {
             return s2.getCreationDate().compareTo(s1.getCreationDate());
         }
     };
-
 }

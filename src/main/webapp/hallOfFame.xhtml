@@ -27,29 +27,31 @@
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
     <ui:define name="content_right">
         <center>
-            <h2>${gameBean.name}</h2>
-            <c:forEach var="level" items="${gameBean.levels}">
-                <h3>Level ${level.label}</h3>
-                TOP 10
-                <h:dataTable width="60%" id="scoreTable" value="#{level.scoreItems}" var="score" style="text-align: right">
-                    <h:column>
-                        <h:outputText value="${score.rank}" />
-                    </h:column>
-                    <h:column>
-                        <h:link styleClass="player" outcome="player" value="${score.player}">
-                            <f:param name="shortname" value="${score.player}"/>
-                        </h:link>
-                    </h:column>
-                    <h:column>
-                        <a class="thumbnail" href="#thumb">
-                            <h:outputText value="${score.value}" />
-                            <span>
-                                <img src="${score.pictureUrl}" width="320px" />
-                            </span>
-                        </a>
-                    </h:column>
-                </h:dataTable>
-            </c:forEach>
+            <h2>Hall of Fame</h2>
+            <h:dataTable width="100%" id="playerTable" value="#{hallOfFameBean.players}" var="player" style="text-align: right">
+                <h:column>
+                    <f:facet name="header">Rank</f:facet>
+                    <h:outputText value="${player.rank}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Shortname</f:facet>
+                    <h:link styleClass="player" outcome="player" value="${player.shortname}">
+                        <f:param name="shortname" value="${player.shortname}"/>
+                    </h:link>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Fullname</f:facet>
+                    <h:outputText value="${player.fullname}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Score</f:facet>
+                    <h:outputText value="${player.score}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Contribution</f:facet>
+                    <h:outputText value="${player.contribution}" />
+                </h:column>
+            </h:dataTable>
         </center>
     </ui:define>
 </ui:composition>

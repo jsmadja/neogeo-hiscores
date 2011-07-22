@@ -27,6 +27,8 @@ import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
+import java.util.Set;
+import java.util.TreeSet;
 
 @ManagedBean
 @SessionScoped
@@ -35,21 +37,28 @@ public class ScoreBean {
     @EJB ScoreService scoreService;
     @EJB GameService gameService;
 
-    private String fullname = "anzymus";
-    private String shortname = "ANZ";
-    private String score = "132670";
-    private String pictureUrl = "http://img860.imageshack.us/img860/9089/img1207jp.jpg";
+    private String fullname = "login";
+    private String shortname = "SNK";
+    private String score = "score";
+    private String password = "password";
+    private String pictureUrl = "picture url";
     
     private String currentGame;
     private String currentLevel;
     
-    public void add() {
-        Score scoreToAdd = new Score(score, new Player(fullname, shortname), new Level(currentLevel), new Game(currentGame), pictureUrl);
+    public String add() {
+        Score scoreToAdd = new Score(score, new Player(fullname, shortname.toUpperCase()), new Level(currentLevel), new Game(currentGame), pictureUrl);
         scoreService.add(scoreToAdd);
+        return "home";
     }
     
-    public List<String> getGameList() {
-        return Arrays.asList("Fatal Fury", "Samurai Shodown");
+    public Set<String> getGameList() {
+        Set<String> gameNames = new TreeSet<String>();
+        Set<Game> games = gameService.findAll();
+        for (Game game:games) {
+            gameNames.add(game.getName());
+        }
+        return gameNames;
     }
     
     public List<String> getLevelList() {
@@ -118,6 +127,14 @@ public class ScoreBean {
 
     public void setShortname(String shortname) {
         this.shortname = shortname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
 }

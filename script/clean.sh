@@ -14,8 +14,8 @@
 #     limitations under the License.
 #
 
-text_hiscores_title=Neo Geo Hi-Scores
-text_last_events_title=Last events
-text_add_my_score_title=Enter my score
-
-form_button_add=Add my score
+mvn clean
+rm -rf src/main/webapp/WEB-INF/classes
+rm -rf src/main/webapp/WEB-INF/lib
+rm -rf src/main/webapp/WEB-INF/classes
+rm -rf src/main/webapp/WEB-INF/lib
