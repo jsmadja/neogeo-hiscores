@@ -8,3 +8,4 @@ maven-eclipse.xml
 .checkstyle
 .metadata
 ucdetector_reports
+faces-config.NavData

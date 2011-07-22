@@ -17,31 +17,17 @@
 package com.anzymus.neogeo.hiscores.controller;
 
 import com.anzymus.neogeo.hiscores.domain.Score;
-import com.anzymus.neogeo.hiscores.domain.Scores;
-import com.anzymus.neogeo.hiscores.service.ScoreService;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+public class TimelineItem {
+    
+    private final Score score;
 
-@ManagedBean
-@SessionScoped
-public class TimelineBean {
-
-    @EJB ScoreService scoreService;
-
-    public List<TimelineItem> getItems() {
-        List<Score> scores = scoreService.findLastScoresOrderByDateDesc();
-        
-        List<TimelineItem> items = new ArrayList<TimelineItem>();
-        for(Score score:scores) {
-            TimelineItem item = new TimelineItem(score);
-            items.add(item);
-        }
-        
-        return items;
+    public TimelineItem(Score score) {
+        this.score = score;
+    }
+    
+    public Score getScore() {
+        return score;
     }
     
 }

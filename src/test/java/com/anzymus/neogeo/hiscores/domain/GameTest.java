@@ -16,7 +16,7 @@
 
 package com.anzymus.neogeo.hiscores.domain;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import java.util.List;
 import org.junit.Test;
 
@@ -55,5 +55,12 @@ public class GameTest {
         assertEquals(levelEasy, levels.get(0));
         assertEquals(levelNormal, levels.get(1));
         assertEquals(levelHard, levels.get(2));
+    }
+    
+    @Test
+    public void should_be_equal() {
+        Game game1 = new Game("game");
+        Game game2 = new Game("game");
+        assertEquals(game1, game2);
     }
 }

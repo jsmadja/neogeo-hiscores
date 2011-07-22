@@ -16,15 +16,30 @@
 
 package com.anzymus.neogeo.hiscores.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
-public class Scores {
+public class Scores implements Iterable<Score> {
 
-    Set<Score> scores = new TreeSet<Score>();
+    Set<Score> scores = new HashSet<Score>();
+    private Map<Level, List<Score>> scoresByLevels = new HashMap<Level, List<Score>>();
 
     public void add(Score score) {
         scores.add(score);
+        Level level = score.getLevel();
+        List<Score> scoreList = scoresByLevels.get(level);
+        if (scoreList == null) {
+            scoreList = new ArrayList<Score>();
+            scoresByLevels.put(level, scoreList);
+        }
+        scoreList.add(score);
     }
 
     public boolean contains(Score score) {
@@ -33,6 +48,10 @@ public class Scores {
 
     public int count() {
         return scores.size();
+    }
+    
+    public Map<Level, List<Score>> getScoresByLevels() {
+        return scoresByLevels;
     }
 
     @Override
@@ -47,5 +66,48 @@ public class Scores {
     public Score[] toArray() {
         return scores.toArray(new Score[scores.size()]);
     }
+
+    @Override
+    public Iterator<Score> iterator() {
+        return scores.iterator();
+    }
+
+    public List<Score> sortByDateDesc() {
+        return asSortedList(comparatorByDateDesc);
+    }
+
+    public List<Score> sortByGame() {
+        return asSortedList(comparatorByGame);
+    }
+    
+    public List<Score> sortByValueDesc() {
+        return asSortedList(comparatorByValueDesc);
+    }
+    
+    private List<Score> asSortedList(Comparator<Score> comparator) {
+        List<Score> sortedScores = new ArrayList<Score>();
+        sortedScores.addAll(scores);
+        Collections.sort(sortedScores, comparator);
+        return sortedScores;
+    }
+    
+    private static Comparator<Score> comparatorByDateDesc = new Comparator<Score>() {
+        @Override
+        public int compare(Score s1, Score s2) {
+            return s2.getCreationDate().compareTo(s1.getCreationDate());
+        }
+    };
+    private static Comparator<Score> comparatorByGame = new Comparator<Score>() {
+        @Override
+        public int compare(Score s1, Score s2) {
+            return s1.getGame().getName().compareTo(s2.getGame().getName());
+        }
+    };
+    private static Comparator<Score> comparatorByValueDesc = new Comparator<Score>() {
+        @Override
+        public int compare(Score s1, Score s2) {
+            return s2.getValue().compareTo(s1.getValue());
+        }
+    };
 
 }

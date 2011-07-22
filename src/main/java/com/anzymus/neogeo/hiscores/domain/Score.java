@@ -19,19 +19,21 @@ package com.anzymus.neogeo.hiscores.domain;
 import com.google.common.base.Objects;
 import java.util.Date;
 
-public class Score implements Comparable<Score> {
+public class Score {
 
     private Game game;
     private String value;
     private Player player;
     private Level level;
     private Date creationDate;
+    private String pictureUrl;
 
-    public Score(String value, Player player, Level level, Game game) {
+    public Score(String value, Player player, Level level, Game game, String pictureUrl) {
         this.value = value;
         this.player = player;
         this.level = level;
         this.game = game;
+        this.pictureUrl = pictureUrl;
         this.creationDate = new Date();
     }
 
@@ -54,6 +56,10 @@ public class Score implements Comparable<Score> {
     public Date getCreationDate() {
         return creationDate;
     }
+
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
     
     @Override
     public boolean equals(Object obj) {
@@ -62,15 +68,14 @@ public class Score implements Comparable<Score> {
             return Objects.equal(value, score.value) && //
                     Objects.equal(game, score.game) && //
                     Objects.equal(player, score.player) && //
-                    Objects.equal(level, score.level) && //
-                    Objects.equal(creationDate, score.creationDate);
+                    Objects.equal(level, score.level);
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(game, value, player, level, creationDate);
+        return Objects.hashCode(game, value, player, level, creationDate, pictureUrl);
     }
 
     @Override
@@ -81,18 +86,8 @@ public class Score implements Comparable<Score> {
                 .addValue(player) //
                 .addValue(level) //
                 .addValue(creationDate) //
+                .addValue(pictureUrl) //
                 .toString();
     }
 
-    @Override
-    public int compareTo(Score score) {
-        int comparison = game.getName().compareTo(score.game.getName());
-        if (comparison == 0) {
-            comparison = level.getLabel().compareTo(score.level.getLabel());
-        }
-        if (comparison == 0) {
-            comparison = value.compareTo(score.value);
-        }
-        return comparison;
-    }
 }

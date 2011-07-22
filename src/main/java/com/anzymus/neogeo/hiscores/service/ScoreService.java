@@ -17,6 +17,7 @@
 package com.anzymus.neogeo.hiscores.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
@@ -26,9 +27,10 @@ import javax.ejb.Stateless;
 
 @Stateless
 public class ScoreService {
+    public static final int MAX_SCORES_TO_RETURN = 20;
 
     private Map<Game, Scores> scoresByGame = new HashMap<Game, Scores>();
-    private Map<Player, Scores> scoresByPlayer = new HashMap<Player, Scores>();
+    private Map<String, Scores> scoresByPlayer = new HashMap<String, Scores>();
     private Scores scores = new Scores();
 
     public void add(Score score) {
@@ -49,10 +51,10 @@ public class ScoreService {
 
     private void addScoreInPlayerMap(Score score) {
         Player player = score.getPlayer();
-        Scores scores = scoresByPlayer.get(player);
+        Scores scores = scoresByPlayer.get(player.getShortname());
         if (scores == null) {
             scores = new Scores();
-            scoresByPlayer.put(player, scores);
+            scoresByPlayer.put(player.getShortname(), scores);
         }
         scores.add(score);
     }
@@ -66,7 +68,7 @@ public class ScoreService {
     }
 
     public Scores findAllByPlayer(Player player) {
-        Scores scores = scoresByPlayer.get(player);
+        Scores scores = scoresByPlayer.get(player.getShortname());
         if (scores == null) {
             scores = new Scores();
         }
@@ -75,6 +77,12 @@ public class ScoreService {
 
     public Scores findAll() {
         return scores;
+    }
+
+    public List<Score> findLastScoresOrderByDateDesc() {
+        List<Score> sortedScores = scores.sortByDateDesc();
+        int end = MAX_SCORES_TO_RETURN > sortedScores.size() ? sortedScores.size() : MAX_SCORES_TO_RETURN;
+        return sortedScores.subList(0, end);
     }
 
 }

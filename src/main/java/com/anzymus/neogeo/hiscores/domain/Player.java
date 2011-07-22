@@ -28,6 +28,14 @@ public class Player {
         this.shortname = shortname;
     }
 
+    public String getFullname() {
+        return fullname;
+    }
+
+    public String getShortname() {
+        return shortname;
+    }
+
     @Override
     public String toString() {
         return Objects.toStringHelper(this) //
