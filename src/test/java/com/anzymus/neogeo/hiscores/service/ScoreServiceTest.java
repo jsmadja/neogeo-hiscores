@@ -32,7 +32,7 @@ public class ScoreServiceTest {
     ScoreService scoreService = new ScoreService();
 
     String pictureUrl = "http://www.imageshack.com";
-        
+
     @Test
     public void should_add_hiscore() {
         Game game = new Game("Fatal Fury");
@@ -73,29 +73,6 @@ public class ScoreServiceTest {
         assertTrue(scores.contains(score3));
     }
 
-    @Test
-    public void should_order_scores_by_game() {
-        Game gameFatalFury = new Game("Fatal Fury");
-        Game gameSamuraiShodown = new Game("Samurai Shodown");
-
-        Player player = new Player("Anzymus", "ANZ");
-        Score score1 = new Score("100", player, new Level("MVS"), gameFatalFury, pictureUrl);
-        Score score2 = new Score("1mn32", player, new Level("Easy"), gameSamuraiShodown, pictureUrl);
-        Score score3 = new Score("150", player, new Level("Normal"), gameFatalFury, pictureUrl);
-
-        scoreService.add(score1);
-        scoreService.add(score2);
-        scoreService.add(score3);
-
-        Scores scores = scoreService.findAllByPlayer(player);
-        List<Score> sortedScores = scores.sortByGame();
-        
-        assertEquals(gameFatalFury, sortedScores.get(0).getGame());
-        assertEquals(gameFatalFury, sortedScores.get(1).getGame());
-        assertEquals(gameSamuraiShodown, sortedScores.get(2).getGame());
-    }
-
-    
     @Test
     public void should_find_last_scores_order_by_date_desc() {
         List<Score> scores = scoreService.findLastScoresOrderByDateDesc();

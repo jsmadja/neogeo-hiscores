@@ -75,10 +75,6 @@ public class ScoreService {
         return scores;
     }
 
-    public Scores findAll() {
-        return scores;
-    }
-
     public List<Score> findLastScoresOrderByDateDesc() {
         List<Score> sortedScores = scores.sortByDateDesc();
         int end = MAX_SCORES_TO_RETURN > sortedScores.size() ? sortedScores.size() : MAX_SCORES_TO_RETURN;
