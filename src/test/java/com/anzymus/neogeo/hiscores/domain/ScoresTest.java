@@ -26,14 +26,14 @@ public class ScoresTest {
     @Test
     public void should_add_two_scores() {
         Player player1 = new Player("abc", "ABC");
-        Level level1 = new Level("MVS");
+        String level1 = "MVS";
         Game game1 = new Game("game");
         String pictureUrl1 = "pictureUrl";
 
         Score score1 = new Score("1", player1, level1, game1, pictureUrl1);
 
         Player player2 = new Player("def", "ABC");
-        Level level2 = new Level("MVS");
+        String level2 = "MVS";
         Game game2 = new Game("game");
         String pictureUrl2 = "pictureUrl";
 
@@ -49,14 +49,14 @@ public class ScoresTest {
     @Test
     public void should_add_one_score() {
         Player player1 = new Player("abc", "ABC");
-        Level level1 = new Level("MVS");
+        String level1 = "MVS";
         Game game1 = new Game("game");
         String pictureUrl1 = "pictureUrl";
 
         Score score1 = new Score("1", player1, level1, game1, pictureUrl1);
 
         Player player2 = new Player("abc", "ABC");
-        Level level2 = new Level("MVS");
+        String level2 = "MVS";
         Game game2 = new Game("game");
         String pictureUrl2 = "pictureUrl";
 
@@ -79,7 +79,7 @@ public class ScoresTest {
     @Test
     public void should_return_one_list_item_when_there_is_one_score() {
         Player player = new Player("fullname", "shortname");
-        Level level = new Level("MVS");
+        String level = "MVS";
         Game game = new Game("Fatal Fury");
         String pictureUrl = "url";
         Score score = new Score("1", player, level, game, pictureUrl);
@@ -96,7 +96,7 @@ public class ScoresTest {
     public void should_return_two_list_item_when_there_is_two_elements_sorted_by_creation_date_desc()
             throws InterruptedException {
         Player player = new Player("fullname", "shortname");
-        Level level = new Level("MVS");
+        String level = "MVS";
         Game game = new Game("Fatal Fury");
         String pictureUrl = "url";
         Score score1 = new Score("1", player, level, game, pictureUrl);

@@ -19,11 +19,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link href="#{facesContext.externalContext.requestContextPath}/style.css" rel="stylesheet" type="text/css" />
 
+        <link rel="icon" type="image/png" href="#{facesContext.externalContext.requestContextPath}/myimages/logo.png" />
+        
         <script language="javascript" type="text/javascript">
                 function clearText(field) {
                         if (field.defaultValue == field.value)
@@ -55,7 +58,9 @@
                                     |
                                     <h:link styleClass="link" value="Add new score" outcome="score/create" />
                                     |
-                                    <h:link styleClass="link" value="Hall of Fame" outcome="hallOfFame" />
+                                    <h:link styleClass="link" value="Hall of Fame" outcome="hallOfFame">
+                                        <f:param name="level" value="MVS"/>
+                                    </h:link>
                                 </p>
                             </center>
 

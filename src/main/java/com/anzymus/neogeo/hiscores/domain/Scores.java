@@ -29,11 +29,11 @@ import java.util.Set;
 public class Scores implements Iterable<Score> {
 
     private Set<Score> scores = new HashSet<Score>();
-    private Map<Level, List<Score>> scoresByLevels = new HashMap<Level, List<Score>>();
+    private Map<String, List<Score>> scoresByLevels = new HashMap<String, List<Score>>();
 
     public void add(Score score) {
         scores.add(score);
-        Level level = score.getLevel();
+        String level = score.getLevel();
         List<Score> scoreList = scoresByLevels.get(level);
         if (scoreList == null) {
             scoreList = new ArrayList<Score>();
@@ -50,7 +50,7 @@ public class Scores implements Iterable<Score> {
         return scores.size();
     }
 
-    public Map<Level, List<Score>> getScoresByLevels() {
+    public Map<String, List<Score>> getScoresByLevels() {
         return scoresByLevels;
     }
 

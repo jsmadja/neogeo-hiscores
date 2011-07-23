@@ -16,36 +16,25 @@
 
 package com.anzymus.neogeo.hiscores.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import com.google.common.base.Objects;
 
 public class Game implements Comparable<Game> {
 
     private String name;
     private String rules;
-
-    private List<Level> levels = new ArrayList<Level>();
-
+    private int id;
+    
     public Game(String name) {
         this.name = name;
+        this.id = Math.abs(name.hashCode());
     }
 
-    public void addLevel(int position, Level level) {
-        if (position > levels.size()) {
-            levels.add(level);
-        } else {
-            levels.add(position, level);
-        }
+    public int getId() {
+        return id;
     }
-
+    
     public String getName() {
         return name;
-    }
-
-    public List<Level> getLevels() {
-        return Collections.unmodifiableList(levels);
     }
 
     public void setRules(String rules) {
@@ -77,9 +66,7 @@ public class Game implements Comparable<Game> {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this) //
-                .addValue(name) //
-                .toString();
+        return name;
     }
 
 }

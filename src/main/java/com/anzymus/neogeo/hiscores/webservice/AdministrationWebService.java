@@ -20,13 +20,10 @@ import javax.ejb.EJB;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import com.anzymus.neogeo.hiscores.domain.Game;
-import com.anzymus.neogeo.hiscores.domain.Level;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
-import java.util.Arrays;
-import java.util.List;
 
 @WebService
 public class AdministrationWebService {
@@ -37,14 +34,14 @@ public class AdministrationWebService {
     
     @WebMethod
     public void initialize() {
-        initializeGameList();
         initializeScoreList();
     }
     
-    private void initializeGameList() {
-        List<String> games = Arrays.asList("Robo Army", "Sengoku 2");
+    @WebMethod
+    public void initializeGameList(String list) {
+        String[] games = list.split(";");
         for(String gameName:games) {
-            addGame(gameName);
+            addGame(gameName.trim());
         }
     }
     
@@ -55,17 +52,16 @@ public class AdministrationWebService {
         addScore("Robo Army", "MVS", "kurush75", "KUR", "32900", "http://img821.imageshack.us/img821/4363/roboarmy.jpg");
         addScore("Robo Army", "MVS", "aescdmvs", "AES", "31600", "http://i43.tinypic.com/28atapw.jpg");
         
-        addScore("Sengoku 2", "MVS", "NeoJin", "AAA", "115200", "http://img707.imageshack.us/img707/9459/sengoku2score.jpg");
-        addScore("Sengoku 2", "MVS", "juanito1979", "JLO", "111400", "http://img188.imageshack.us/img188/6392/p7080745.jpg");
-        addScore("Sengoku 2", "MVS", "Redemslug", "KAN", "108800", "http://img97.imageshack.us/img97/4318/sengokuii.jpg");
-        addScore("Sengoku 2", "MVS", "Mpower", "MPO", "100300", "http://valou.ludo.free.fr/NEO/Sengoku2.JPG");
-        addScore("Sengoku 2", "MVS", "aescdmvs", "AES", "77650", "http://i41.tinypic.com/335gyvk.jpg");
+        addScore("Sengoku 2 / Sengoku Denshou 2", "MVS", "NeoJin", "AAA", "115200", "http://img707.imageshack.us/img707/9459/sengoku2score.jpg");
+        addScore("Sengoku 2 / Sengoku Denshou 2", "MVS", "juanito1979", "JLO", "111400", "http://img188.imageshack.us/img188/6392/p7080745.jpg");
+        addScore("Sengoku 2 / Sengoku Denshou 2", "MVS", "Redemslug", "KAN", "108800", "http://img97.imageshack.us/img97/4318/sengokuii.jpg");
+        addScore("Sengoku 2 / Sengoku Denshou 2", "MVS", "Mpower", "MPO", "100300", "http://valou.ludo.free.fr/NEO/Sengoku2.JPG");
+        addScore("Sengoku 2 / Sengoku Denshou 2", "MVS", "aescdmvs", "AES", "77650", "http://i41.tinypic.com/335gyvk.jpg");
     }
     
     @WebMethod
-    public void addScore(String gameName, String levelLabel, String fullname, String shortname, String scorePoints, String pictureUrl) {
+    public void addScore(String gameName, String level, String fullname, String shortname, String scorePoints, String pictureUrl) {
         Game game = new Game(gameName);
-        Level level = new Level(levelLabel);
         Player player = new Player(fullname, shortname);
         Score score = new Score(scorePoints, player, level, game, pictureUrl);
         scoreService.add(score);
@@ -77,11 +73,4 @@ public class AdministrationWebService {
         gameService.add(game);
     }
     
-    @WebMethod
-    public void addLevel(String gameName, String levelLabel, int position) {
-        Game game = gameService.findByName(gameName);
-        if (game != null) {
-            game.addLevel(position, new Level(levelLabel));
-        }
-    }
 }

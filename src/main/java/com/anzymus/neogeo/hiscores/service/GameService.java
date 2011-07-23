@@ -44,4 +44,13 @@ public class GameService {
         return null;
     }
 
+    public Game findById(int gameId) {
+        for(Game game:games) {
+            if (gameId == game.getId()) {
+                return game;
+            }
+        }
+        return null;
+    }
+
 }

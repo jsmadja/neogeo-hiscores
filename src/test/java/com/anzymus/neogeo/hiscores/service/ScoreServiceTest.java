@@ -22,7 +22,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 import org.junit.Test;
 import com.anzymus.neogeo.hiscores.domain.Game;
-import com.anzymus.neogeo.hiscores.domain.Level;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Scores;
@@ -37,7 +36,7 @@ public class ScoreServiceTest {
     public void should_add_hiscore() {
         Game game = new Game("Fatal Fury");
         Player player = new Player("Anzymus", "ANZ");
-        Level level = new Level("MVS");
+        String level = "MVS";
         Score score = new Score("100", player, level, game, pictureUrl);
         scoreService.add(score);
 
@@ -49,9 +48,9 @@ public class ScoreServiceTest {
     @Test
     public void should_find_scores_by_player() {
         Player player = new Player("Anzymus", "ANZ");
-        Score score1 = new Score("100", player, new Level("MVS"), new Game("Fatal Fury"), pictureUrl);
-        Score score2 = new Score("150", player, new Level("Normal"), new Game("Fatal Fury"), pictureUrl);
-        Score score3 = new Score("1mn32", player, new Level("Easy"), new Game("Samurai Shodown"), pictureUrl);
+        Score score1 = new Score("100", player, "MVS", new Game("Fatal Fury"), pictureUrl);
+        Score score2 = new Score("150", player, "Normal", new Game("Fatal Fury"), pictureUrl);
+        Score score3 = new Score("1mn32", player, "Easy", new Game("Samurai Shodown"), pictureUrl);
 
         scoreService.add(score1);
         scoreService.add(score2);

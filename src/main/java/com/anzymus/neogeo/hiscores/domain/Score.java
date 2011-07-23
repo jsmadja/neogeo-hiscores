@@ -24,11 +24,12 @@ public class Score {
     private Game game;
     private String value;
     private Player player;
-    private Level level;
+    private String level;
     private Date creationDate;
     private String pictureUrl;
+    private String message;
 
-    public Score(String value, Player player, Level level, Game game, String pictureUrl) {
+    public Score(String value, Player player, String level, Game game, String pictureUrl) {
         this.value = value;
         this.player = player;
         this.level = level;
@@ -49,7 +50,7 @@ public class Score {
         return value;
     }
 
-    public Level getLevel() {
+    public String getLevel() {
         return level;
     }
 
@@ -59,6 +60,14 @@ public class Score {
 
     public String getPictureUrl() {
         return pictureUrl;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
     
     @Override
@@ -76,18 +85,6 @@ public class Score {
     @Override
     public int hashCode() {
         return Objects.hashCode(game, value, player, level, pictureUrl);
-    }
-
-    @Override
-    public String toString() {
-        return Objects.toStringHelper(this) //
-                .addValue(game) //
-                .addValue(value) //
-                .addValue(player) //
-                .addValue(level) //
-                .addValue(creationDate) //
-                .addValue(pictureUrl) //
-                .toString();
     }
 
 }

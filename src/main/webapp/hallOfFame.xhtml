@@ -27,7 +27,7 @@
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
     <ui:define name="content_right">
         <center>
-            <h2>Hall of Fame</h2>
+            <h2>Hall of Fame  - #{hallOfFameBean.level}</h2>
             <h:dataTable width="100%" id="playerTable" value="#{hallOfFameBean.players}" var="player" style="text-align: right">
                 <h:column>
                     <f:facet name="header">Rank</f:facet>

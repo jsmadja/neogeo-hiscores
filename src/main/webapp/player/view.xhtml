@@ -28,13 +28,13 @@
     <ui:define name="content_right">
         <center>
             <h2>${playerBean.shortname}</h2>
-            <table width="50%">
+            <table width="100%">
                 <c:forEach var="game" items="${playerBean.games}">
                     <tr>
                         <td>
                             <h3>
                                 <h:link styleClass="game" outcome="game" value="${game.name}">
-                                    <f:param name="name" value="${game.name}"/>
+                                    <f:param name="id" value="${game.id}"/>
                                 </h:link>
                             </h3>
                         </td>

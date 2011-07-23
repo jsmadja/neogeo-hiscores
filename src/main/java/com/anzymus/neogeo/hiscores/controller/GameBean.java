@@ -27,9 +27,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import com.anzymus.neogeo.hiscores.comparator.ScoreSortedByValueDescComparator;
 import com.anzymus.neogeo.hiscores.domain.Game;
-import com.anzymus.neogeo.hiscores.domain.Level;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Scores;
+import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
 
 @ManagedBean
@@ -38,9 +38,14 @@ public class GameBean {
     @EJB
     ScoreService scoreService;
 
-    @ManagedProperty(value = "#{param.name}")
-    private String name;
+    @EJB
+    GameService gameService;
+    
+    @ManagedProperty(value = "#{param.id}")
+    private int id;
 
+    private String name;
+    
     private Scores scores;
 
     private static final String[] RANKS = { "1st", "2nd", "3rd" };
@@ -49,7 +54,8 @@ public class GameBean {
 
     @PostConstruct
     public void init() {
-        Game game = new Game(name);
+        Game game = gameService.findById(id);
+        name = game.getName();
         scores = scoreService.findAllByGame(game);
     }
 
@@ -57,18 +63,22 @@ public class GameBean {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public int getId() {
+        return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public List<LevelItem> getLevels() {
         List<LevelItem> levelItems = new ArrayList<LevelItem>();
-        for (Map.Entry<Level, List<Score>> value : this.scores.getScoresByLevels().entrySet()) {
-            Level level = value.getKey();
-            List<Score> scores = value.getValue();
-            Collections.sort(scores, sortScoreByValueDesc);
-            List<ScoreItem> scoreItems = createScoreItems(scores);
-            LevelItem levelItem = new LevelItem(level.getLabel());
+        for (Map.Entry<String, List<Score>> value : this.scores.getScoresByLevels().entrySet()) {
+            String level = value.getKey();
+            List<Score> scoreList = value.getValue();
+            Collections.sort(scoreList, sortScoreByValueDesc);
+            List<ScoreItem> scoreItems = createScoreItems(scoreList);
+            LevelItem levelItem = new LevelItem(level);
             levelItem.setScoreItems(scoreItems);
             levelItems.add(levelItem);
         }

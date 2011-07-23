@@ -22,25 +22,30 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.anzymus.neogeo.hiscores.domain.Level;
 
 public class GameItem {
 
     private String name;
-    private Map<Level, LevelItem> levelItems = new HashMap<Level, LevelItem>();
+    private int id;
+    private Map<String, LevelItem> levelItems = new HashMap<String, LevelItem>();
 
-    public GameItem(String name) {
+    public GameItem(String name, int id) {
         this.name = name;
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void addScore(Level level, String value) {
+    public int getId() {
+        return id;
+    }
+    
+    public void addScore(String level, String value) {
         LevelItem levelItem = levelItems.get(level);
         if (levelItem == null) {
-            levelItem = new LevelItem(level.getLabel());
+            levelItem = new LevelItem(level);
             levelItems.put(level, levelItem);
         }
         levelItem.addScore(value);

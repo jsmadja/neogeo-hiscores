@@ -22,6 +22,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.service.HallOfFameService;
+import javax.faces.bean.ManagedProperty;
 
 @ManagedBean
 public class HallOfFameBean {
@@ -29,9 +30,12 @@ public class HallOfFameBean {
     @EJB
     HallOfFameService hallOfFameService;
 
+    @ManagedProperty(value = "#{param.level}")
+    private String level = "MVS";
+    
     public List<PlayerItem> getPlayers() {
         List<PlayerItem> playerItems = new ArrayList<PlayerItem>();
-        List<Player> players = hallOfFameService.getPlayersOrderByRank();
+        List<Player> players = hallOfFameService.getPlayersOrderByRank(level);
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
             PlayerItem playerItem = new PlayerItem();
@@ -44,4 +48,13 @@ public class HallOfFameBean {
         }
         return playerItems;
     }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+    
 }

@@ -25,14 +25,14 @@ public class ScoreTest {
     @Test
     public void should_not_be_equal() {
         Player player1 = new Player("abc", "ABC");
-        Level level1 = new Level("MVS");
+        String level1 = "MVS";
         Game game1 = new Game("game");
         String pictureUrl1 = "pictureUrl";
 
         Score score1 = new Score("1", player1, level1, game1, pictureUrl1);
 
         Player player2 = new Player("def", "ABC");
-        Level level2 = new Level("MVS");
+        String level2 = "MVS";
         Game game2 = new Game("game");
         String pictureUrl2 = "pictureUrl";
 
@@ -44,14 +44,14 @@ public class ScoreTest {
     @Test
     public void should_be_equal() {
         Player player1 = new Player("abc", "ABC");
-        Level level1 = new Level("MVS");
+        String level1 = "MVS";
         Game game1 = new Game("game");
         String pictureUrl1 = "pictureUrl";
 
         Score score1 = new Score("1", player1, level1, game1, pictureUrl1);
 
         Player player2 = new Player("abc", "ABC");
-        Level level2 = new Level("MVS");
+        String level2 = "MVS";
         Game game2 = new Game("game");
         String pictureUrl2 = "pictureUrl";
 

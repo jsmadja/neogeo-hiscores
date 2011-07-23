@@ -27,7 +27,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import com.anzymus.neogeo.hiscores.domain.Game;
-import com.anzymus.neogeo.hiscores.domain.Level;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Scores;
@@ -53,12 +52,12 @@ public class PlayerBean {
         
         for(Score score:scores) {
             Game game = score.getGame();
-            Level level = score.getLevel();
+            String level = score.getLevel();
             String value = score.getValue();
             
             GameItem gameItem = gameItems.get(game);
             if (gameItem == null) {
-                gameItem = new GameItem(game.getName());
+                gameItem = new GameItem(game.getName(), game.getId());
                 gameItems.put(game, gameItem);
             }
             gameItem.addScore(level, value);

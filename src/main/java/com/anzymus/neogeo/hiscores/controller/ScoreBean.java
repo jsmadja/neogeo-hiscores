@@ -22,13 +22,11 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import com.anzymus.neogeo.hiscores.domain.Game;
-import com.anzymus.neogeo.hiscores.domain.Level;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
 import java.util.Set;
-import java.util.TreeSet;
 
 @ManagedBean
 @SessionScoped
@@ -37,39 +35,40 @@ public class ScoreBean {
     @EJB ScoreService scoreService;
     @EJB GameService gameService;
 
-    private String fullname = "login";
-    private String shortname = "SNK";
-    private String score = "score";
-    private String password = "password";
-    private String pictureUrl = "picture url";
+    private String fullname = "";
+    private String shortname = "";
+    private String score = "";
+    private String password = "";
+    private String pictureUrl = "";
+    private String message;
     
-    private String currentGame;
-    private String currentLevel;
+    private int currentGame;
+    private String currentLevel = "MVS";
+    
+    private static final int MAX_MESSAGE_LENGTH = 255;
     
     public String add() {
-        Score scoreToAdd = new Score(score, new Player(fullname, shortname.toUpperCase()), new Level(currentLevel), new Game(currentGame), pictureUrl);
+        Game game = gameService.findById(currentGame);
+        Score scoreToAdd = new Score(score, new Player(fullname, shortname.toUpperCase()), currentLevel, game, pictureUrl);
+        
+        int end = message.length() > MAX_MESSAGE_LENGTH ? MAX_MESSAGE_LENGTH : message.length();
+        scoreToAdd.setMessage(message.substring(0, end));
         scoreService.add(scoreToAdd);
         return "home";
     }
-    
-    public Set<String> getGameList() {
-        Set<String> gameNames = new TreeSet<String>();
-        Set<Game> games = gameService.findAll();
-        for (Game game:games) {
-            gameNames.add(game.getName());
-        }
-        return gameNames;
+    public Set<Game> getGames() {
+        return gameService.findAll();
     }
     
     public List<String> getLevelList() {
         return Arrays.asList("Easy", "Normal", "MVS", "Hard");
     }
 
-    public String getCurrentGame() {
+    public int getCurrentGame() {
         return currentGame;
     }
 
-    public void setCurrentGame(String currentGame) {
+    public void setCurrentGame(int currentGame) {
         this.currentGame = currentGame;
     }
 
@@ -135,6 +134,14 @@ public class ScoreBean {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
     
 }

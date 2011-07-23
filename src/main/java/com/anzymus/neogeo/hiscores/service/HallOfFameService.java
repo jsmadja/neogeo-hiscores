@@ -27,7 +27,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import com.anzymus.neogeo.hiscores.comparator.ScoreSortedByValueDescComparator;
 import com.anzymus.neogeo.hiscores.domain.Game;
-import com.anzymus.neogeo.hiscores.domain.Level;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Scores;
@@ -45,14 +44,13 @@ public class HallOfFameService {
 
     private static final int[] POINTS = new int[]{10,8,6,5,4,3,2,1};
     
-    public List<Player> getPlayersOrderByRank() {
+    public List<Player> getPlayersOrderByRank(String level) {
         Map<String, Player> players = new HashMap<String, Player>();
 
         Set<Game> games = gameService.findAll();
         for (Game game : games) {
             Scores scores = scoreService.findAllByGame(game);
-            Map<Level, List<Score>> scoresByLevels = scores.getScoresByLevels();
-            Level level = new Level("MVS");
+            Map<String, List<Score>> scoresByLevels = scores.getScoresByLevels();
             List<Score> mvsScores = scoresByLevels.get(level);
             if (mvsScores != null) {
                 Collections.sort(mvsScores, sortScoreByValueDesc);
