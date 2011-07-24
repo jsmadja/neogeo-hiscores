@@ -28,49 +28,45 @@ import com.anzymus.neogeo.hiscores.service.ScoreService;
 @WebService
 public class AdministrationWebService {
 
-    @EJB GameService gameService;
-    
-    @EJB ScoreService scoreService;
-    
-    @WebMethod
-    public void initialize() {
-        initializeScoreList();
-    }
-    
+    @EJB
+    GameService gameService;
+
+    @EJB
+    ScoreService scoreService;
+
     @WebMethod
     public void initializeGameList(String list) {
         String[] games = list.split(";");
-        for(String gameName:games) {
+        for (String gameName : games) {
             addGame(gameName.trim());
         }
     }
-    
-    private void initializeScoreList() {
-        addScore("Robo Army", "MVS", "Twilight_Guardian", "TGU", "86900", "http://img860.imageshack.us/img860/2171/img03592.jpg");
-        addScore("Robo Army", "MVS", "just", "JUS", "76900", "http://img232.imageshack.us/img232/8680/003hob.jpg");
-        addScore("Robo Army", "MVS", "juanito1979", "JLO", "39800", "http://img25.imageshack.us/img25/5374/picture121oh5.jpg");
-        addScore("Robo Army", "MVS", "kurush75", "KUR", "32900", "http://img821.imageshack.us/img821/4363/roboarmy.jpg");
-        addScore("Robo Army", "MVS", "aescdmvs", "AES", "31600", "http://i43.tinypic.com/28atapw.jpg");
-        
-        addScore("Sengoku 2 / Sengoku Denshou 2", "MVS", "NeoJin", "AAA", "115200", "http://img707.imageshack.us/img707/9459/sengoku2score.jpg");
-        addScore("Sengoku 2 / Sengoku Denshou 2", "MVS", "juanito1979", "JLO", "111400", "http://img188.imageshack.us/img188/6392/p7080745.jpg");
-        addScore("Sengoku 2 / Sengoku Denshou 2", "MVS", "Redemslug", "KAN", "108800", "http://img97.imageshack.us/img97/4318/sengokuii.jpg");
-        addScore("Sengoku 2 / Sengoku Denshou 2", "MVS", "Mpower", "MPO", "100300", "http://valou.ludo.free.fr/NEO/Sengoku2.JPG");
-        addScore("Sengoku 2 / Sengoku Denshou 2", "MVS", "aescdmvs", "AES", "77650", "http://i41.tinypic.com/335gyvk.jpg");
-    }
-    
+
     @WebMethod
-    public void addScore(String gameName, String level, String fullname, String shortname, String scorePoints, String pictureUrl) {
+    public void initializeScoreList(String list) {
+        String[] scores = list.split(",");
+        for (String scoreLine : scores) {
+            String[] scoreValue = scoreLine.split(";");
+            for (int i = 0; i < scoreValue.length; i++) {
+                scoreValue[i] = scoreValue[i].replaceAll("\"", "").trim();
+            }
+            addScore(scoreValue[0], "MVS", scoreValue[1], scoreValue[2], "");
+        }
+    }
+
+    @WebMethod
+    public void addScore(String gameName, String level, String fullname, String scorePoints,
+            String pictureUrl) {
         Game game = new Game(gameName);
-        Player player = new Player(fullname, shortname);
+        Player player = new Player(fullname);
         Score score = new Score(scorePoints, player, level, game, pictureUrl);
         scoreService.add(score);
     }
-        
+
     @WebMethod
     public void addGame(String name) {
         Game game = new Game(name);
         gameService.add(game);
     }
-    
+
 }

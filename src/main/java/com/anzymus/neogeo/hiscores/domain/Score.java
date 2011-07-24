@@ -28,6 +28,7 @@ public class Score {
     private Date creationDate;
     private String pictureUrl;
     private String message;
+    private int id;
 
     public Score(String value, Player player, String level, Game game, String pictureUrl) {
         this.value = value;
@@ -36,6 +37,11 @@ public class Score {
         this.game = game;
         this.pictureUrl = pictureUrl;
         this.creationDate = new Date();
+        this.id = Math.abs(hashCode());
+    }
+
+    public int getId() {
+        return id;
     }
 
     public Game getGame() {
@@ -68,6 +74,22 @@ public class Score {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
     
     @Override

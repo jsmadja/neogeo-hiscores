@@ -58,13 +58,11 @@ public class HallOfFameService {
                     Score score = mvsScores.get(i);
                     int point = POINTS[i];
                     Player scorePlayer = score.getPlayer();
-
-                    String shortname = scorePlayer.getShortname();
-                    String fullname = scorePlayer.getFullname();
-                    Player player = players.get(shortname);
+                    String fullname = scorePlayer.getFullname().toUpperCase();
+                    Player player = players.get(fullname);
                     if (player == null) {
-                        player = new Player(fullname, shortname);
-                        players.put(shortname, player);
+                        player = new Player(fullname);
+                        players.put(fullname, player);
                     }
                     player.setScore(player.getPoints() + point);
                     player.setContribution(player.getContribution() + 1);

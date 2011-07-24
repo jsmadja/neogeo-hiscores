@@ -27,15 +27,13 @@
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
     <ui:define name="content_right">
         <center>
-            <h2>${msgs.text_add_my_score_title}</h2>
+            <h2>Update my score</h2>
             <h:form id="form">
                 <h:panelGrid columns="3" >
                     <h:outputText value="Fullname: " />
-                    <h:inputText id="fullname" value="#{scoreBean.fullname}" onfocus="clearText(this)" required="true" >
-                        <f:validateLength minimum="1" />
-                    </h:inputText>
-                    <h:message for="fullname" styleClass="error" />
-
+                    <h:inputText id="fullname" value="#{scoreBean.fullname}" readonly="true" />
+                    <h:outputText value="" />
+                    
                     <h:outputText value="Score: " />
                     <h:inputText id="score" value="#{scoreBean.score}" onfocus="clearText(this)" maxlength="10" size="10" required="true" >
                         <f:validateLongRange minimum="1" maximum="2147483647"/>
@@ -64,8 +62,9 @@
                     <h:inputTextarea id="message" value="#{scoreBean.message}" onfocus="clearText(this)" cols="40" rows="5" style="width:100%" />
                     <h:outputText />
 
-                    <h:commandButton id="submit" value="${msgs.form_button_add}" action="#{scoreBean.add}" />
+                    <h:commandButton id="submit" value="${msgs.form_button_update}" action="#{scoreBean.edit}" />
                 </h:panelGrid>
+                <h:inputHidden id="id" value="#{scoreBean.id}" />
             </h:form>
         </center>
     </ui:define>

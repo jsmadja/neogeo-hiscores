@@ -23,8 +23,8 @@ public class PlayerTest {
 
     @Test
     public void should_be_equal() {
-        Player player1 = new Player("a", "A");
-        Player player2 = new Player("a", "A");
+        Player player1 = new Player("a");
+        Player player2 = new Player("a");
         assertEquals(player1, player2);
     }
     

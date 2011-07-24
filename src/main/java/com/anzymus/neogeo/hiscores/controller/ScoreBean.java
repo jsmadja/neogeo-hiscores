@@ -20,23 +20,25 @@ import java.util.Arrays;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
 import java.util.Set;
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedProperty;
 
 @ManagedBean
-@SessionScoped
 public class ScoreBean {
 
     @EJB ScoreService scoreService;
     @EJB GameService gameService;
 
+    @ManagedProperty(value = "#{param.scoreId}")
+    private String id;
+    
     private String fullname = "";
-    private String shortname = "";
     private String score = "";
     private String password = "";
     private String pictureUrl = "";
@@ -47,21 +49,47 @@ public class ScoreBean {
     
     private static final int MAX_MESSAGE_LENGTH = 255;
     
+    @PostConstruct
+    public void init() {
+        if (id != null) {
+            Score scoreFromDb = scoreService.findById(Integer.parseInt(id));
+            fullname = scoreFromDb.getPlayer().getFullname();
+            score = scoreFromDb.getValue();
+            pictureUrl = scoreFromDb.getPictureUrl();
+            message = scoreFromDb.getMessage();
+            currentLevel = scoreFromDb.getLevel();
+            currentGame = scoreFromDb.getGame().getId();
+        }
+    }        
+    
     public String add() {
         Game game = gameService.findById(currentGame);
-        Score scoreToAdd = new Score(score, new Player(fullname, shortname.toUpperCase()), currentLevel, game, pictureUrl);
+        Score scoreToAdd = new Score(score, new Player(fullname), currentLevel, game, pictureUrl);
         
         int end = message.length() > MAX_MESSAGE_LENGTH ? MAX_MESSAGE_LENGTH : message.length();
         scoreToAdd.setMessage(message.substring(0, end));
         scoreService.add(scoreToAdd);
         return "home";
     }
+    
+    public String edit() {
+        Game game = gameService.findById(currentGame);
+        Score scoreFromDb = scoreService.findById(Integer.parseInt(id));
+        scoreFromDb.setMessage(message);            
+        scoreFromDb.setGame(game);
+        scoreFromDb.setPictureUrl(pictureUrl);
+        scoreFromDb.setLevel(currentLevel);
+        scoreFromDb.setValue(score);
+        gameService.update(scoreFromDb);
+        return "home";
+    }
+    
     public Set<Game> getGames() {
         return gameService.findAll();
     }
     
     public List<String> getLevelList() {
-        return Arrays.asList("Easy", "Normal", "MVS", "Hard");
+        return Levels.list();
     }
 
     public int getCurrentGame() {
@@ -120,12 +148,12 @@ public class ScoreBean {
         this.scoreService = scoreService;
     }
 
-    public String getShortname() {
-        return shortname;
+    public String getId() {
+        return id;
     }
 
-    public void setShortname(String shortname) {
-        this.shortname = shortname;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getPassword() {

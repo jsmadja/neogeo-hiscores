@@ -14,20 +14,15 @@
  *     limitations under the License.
  */
 
-package com.anzymus.neogeo.hiscores.comparator;
+package com.anzymus.neogeo.hiscores.controller;
 
-import java.util.Comparator;
-import com.anzymus.neogeo.hiscores.domain.Score;
+import java.util.Arrays;
+import java.util.List;
 
-public class ScoreSortedByValueDescComparator implements Comparator<Score> {
-    @Override
-    public int compare(Score s1, Score s2) {
-        String value1 = s1.getValue();
-        String value2 = s2.getValue();
-        value1 = value1.replaceAll("\\.", "");
-        value2 = value2.replaceAll("\\.", "");
-        Integer score1 = Integer.parseInt(value1);
-        Integer score2 = Integer.parseInt(value2);
-        return score2.compareTo(score1);
+public class Levels {
+
+    public static List<String> list() {
+        return Arrays.asList("Very Easy","Easy", "Normal", "MVS", "Hard", "Harder", "Hardest", "Expert");
     }
+    
 }

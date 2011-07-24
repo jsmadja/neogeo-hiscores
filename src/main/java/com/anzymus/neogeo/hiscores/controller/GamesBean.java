@@ -16,34 +16,37 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
+import com.anzymus.neogeo.hiscores.domain.Game;
+import com.anzymus.neogeo.hiscores.domain.Scores;
+import com.anzymus.neogeo.hiscores.service.GameService;
+import com.anzymus.neogeo.hiscores.service.ScoreService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import com.anzymus.neogeo.hiscores.domain.Score;
-import com.anzymus.neogeo.hiscores.service.ScoreService;
 
 @ManagedBean
-@SessionScoped
-public class TimelineBean {
-
+public class GamesBean {
+    
+    @EJB
+    GameService gameService;
+    
     @EJB
     ScoreService scoreService;
-
-    public List<TimelineItem> getItems() {
-        List<Score> scores = scoreService.findLastScoresOrderByDateDesc();
-        List<TimelineItem> items = new ArrayList<TimelineItem>();
-        for (Score score : scores) {
-            TimelineItem item = new TimelineItem(score);
-            if (score.getPictureUrl() == null || score.getPictureUrl().length()==0) {
-                item.setPictureUrl("myimages/nopic.jpg");
-            } else {
-                item.setPictureUrl(score.getPictureUrl());
+    
+    public List<GameItem> getGames() {
+        Set<Game> games = gameService.findAll();
+        List<GameItem> gameItems = new ArrayList<GameItem>();
+        for (Game game:games) {
+            Scores scores = scoreService.findAllByGame(game);
+            int count = scores.count();
+            if (count > 0) {
+                GameItem gameItem = new GameItem(game.getName(), game.getId(), count);
+                gameItems.add(gameItem);
             }
-            items.add(item);
         }
-        return items;
+        return gameItems;
     }
-
+    
 }

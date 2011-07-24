@@ -16,6 +16,7 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
+import com.anzymus.neogeo.hiscores.domain.Game;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,11 +28,17 @@ public class GameItem {
 
     private String name;
     private int id;
+    private int count;
     private Map<String, LevelItem> levelItems = new HashMap<String, LevelItem>();
 
     public GameItem(String name, int id) {
         this.name = name;
         this.id = id;
+    }
+
+    GameItem(String name, int id, int count) {
+        this(name, id);
+        this.count = count;
     }
 
     public String getName() {
@@ -40,6 +47,10 @@ public class GameItem {
 
     public int getId() {
         return id;
+    }
+
+    public int getCount() {
+        return count;
     }
     
     public void addScore(String level, String value) {

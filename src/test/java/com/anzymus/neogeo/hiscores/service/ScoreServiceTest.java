@@ -35,7 +35,7 @@ public class ScoreServiceTest {
     @Test
     public void should_add_hiscore() {
         Game game = new Game("Fatal Fury");
-        Player player = new Player("Anzymus", "ANZ");
+        Player player = new Player("Anzymus");
         String level = "MVS";
         Score score = new Score("100", player, level, game, pictureUrl);
         scoreService.add(score);
@@ -47,7 +47,7 @@ public class ScoreServiceTest {
 
     @Test
     public void should_find_scores_by_player() {
-        Player player = new Player("Anzymus", "ANZ");
+        Player player = new Player("Anzymus");
         Score score1 = new Score("100", player, "MVS", new Game("Fatal Fury"), pictureUrl);
         Score score2 = new Score("150", player, "Normal", new Game("Fatal Fury"), pictureUrl);
         Score score3 = new Score("1mn32", player, "Easy", new Game("Samurai Shodown"), pictureUrl);

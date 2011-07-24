@@ -31,16 +31,18 @@ public class HallOfFameBean {
     HallOfFameService hallOfFameService;
 
     @ManagedProperty(value = "#{param.level}")
-    private String level = "MVS";
+    private String level;
     
     public List<PlayerItem> getPlayers() {
+        if (level == null) {
+            level = "MVS";
+        }
         List<PlayerItem> playerItems = new ArrayList<PlayerItem>();
         List<Player> players = hallOfFameService.getPlayersOrderByRank(level);
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
             PlayerItem playerItem = new PlayerItem();
             playerItem.setRank(Integer.toString(i + 1));
-            playerItem.setShortname(player.getShortname());
             playerItem.setFullname(player.getFullname());
             playerItem.setScore(player.getPoints());
             playerItem.setContribution(player.getContribution());
@@ -55,6 +57,10 @@ public class HallOfFameBean {
 
     public String getLevel() {
         return level;
+    }
+    
+    public List<String> getLevels() {
+        return Levels.list();
     }
     
 }

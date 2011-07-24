@@ -21,22 +21,16 @@ import com.google.common.base.Objects;
 public class Player {
 
     private String fullname;
-    private String shortname;
-
+    
     private int points;
     private int contribution;
 
-    public Player(String fullname, String shortname) {
-        this.fullname = fullname;
-        this.shortname = shortname;
+    public Player(String fullname) {
+        this.fullname = fullname.toUpperCase();
     }
 
     public String getFullname() {
         return fullname;
-    }
-
-    public String getShortname() {
-        return shortname;
     }
 
     public int getPoints() {
@@ -57,22 +51,19 @@ public class Player {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this) //
-                .add("fullname", fullname) //
-                .add("shortname", shortname) //
-                .toString();
+        return fullname;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(fullname, shortname);
+        return Objects.hashCode(fullname);
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Player) {
             Player player = (Player) obj;
-            return Objects.equal(fullname, player.fullname) && Objects.equal(shortname, player.shortname);
+            return Objects.equal(fullname, player.fullname);
         }
         return false;
     }

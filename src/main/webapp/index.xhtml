@@ -21,7 +21,9 @@
 <ui:composition template="./template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
                 xmlns:emcomp="http://java.sun.com/jsf/composite/emcomp" xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core">
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                >
     <ui:define name="content_right">
 
         <f:view>
@@ -29,26 +31,29 @@
                 <h:dataTable  id="timelineTable" value="#{timelineBean.items}" var="item" style="margin-left: 300px" >
                     <h:column>
                         <a class="thumbnail" href="#thumb">
-                            <img src="${item.score.pictureUrl}" width="100px" border="0" />
+                            <img src="${item.pictureUrl}" width="100px" border="0" />
                             <span>
-                                <img src="${item.score.pictureUrl}" width="500px"/>
+                                <img src="${item.pictureUrl}" width="500px"/>
                             </span>
                         </a>
                     </h:column>
                     <h:column>
                         <p style="font-size:10pt">
-                            <h:link styleClass="player" outcome="player" value="${item.score.player.fullname} (${item.score.player.shortname})">
+                            <h:link styleClass="player" outcome="player" value="${item.score.player.fullname}">
                                 <f:param name="fullname" value="${item.score.player.fullname}"/>
-                                <f:param name="shortname" value="${item.score.player.shortname}"/>
                             </h:link><br/>
-                            ${item.score.value} on 
+                            <h:link outcome="score/edit" styleClass="score" >
+                                <h:outputText value="${item.score.value}" converter="scoreConverter" />    
+                                <f:param name="scoreId" value="${item.score.id}" />
+                            </h:link>
+                             on 
                             <h:link styleClass="game" outcome="game" value="${item.score.game.name}">
                                 <f:param name="id" value="${item.score.game.id}"/>
                             </h:link> (${item.score.level})
                             <br/>
-                            <h:outputText value="${item.score.message}" style="font-size:8pt;font-style: italic" />
+                            <h:outputText value="${item.score.message}" style="font-size:10pt;font-style: italic"/>
                             <br/>
-                            <h:outputText value="${item.score.creationDate}" style="font-size:8pt" converter="dateConverter"/>
+                            <h:outputText value="${item.score.creationDate}" style="font-size:10pt" converter="dateConverter"/>
                         </p>
                     </h:column>
                 </h:dataTable>

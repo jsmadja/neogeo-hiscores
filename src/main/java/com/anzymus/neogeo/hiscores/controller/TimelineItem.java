@@ -21,6 +21,7 @@ import com.anzymus.neogeo.hiscores.domain.Score;
 public class TimelineItem {
     
     private final Score score;
+    private String pictureUrl;
 
     public TimelineItem(Score score) {
         this.score = score;
@@ -28,6 +29,14 @@ public class TimelineItem {
     
     public Score getScore() {
         return score;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+    }
+
+    public String getPictureUrl() {
+        return pictureUrl;
     }
     
 }

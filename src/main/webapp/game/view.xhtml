@@ -31,18 +31,18 @@
             <c:forEach var="level" items="${gameBean.levels}">
                 <h3>Level ${level.label}</h3>
                 TOP 10
-                <h:dataTable width="60%" id="scoreTable" value="#{level.scoreItems}" var="score" style="text-align: right">
+                <h:dataTable id="scoreTable" value="#{level.scoreItems}" var="score" style="text-align: right;min-width: 30%">
                     <h:column>
                         <h:outputText value="${score.rank}" />
                     </h:column>
                     <h:column>
                         <h:link styleClass="player" outcome="player" value="${score.player}">
-                            <f:param name="shortname" value="${score.player}"/>
+                            <f:param name="fullname" value="${score.player}"/>
                         </h:link>
                     </h:column>
                     <h:column>
                         <a class="thumbnail" href="#thumb">
-                            <h:outputText value="${score.value}" />
+                            <h:outputText value="${score.value}" converter="scoreConverter" />
                             <span>
                                 <img src="${score.pictureUrl}" width="500px" />
                             </span>

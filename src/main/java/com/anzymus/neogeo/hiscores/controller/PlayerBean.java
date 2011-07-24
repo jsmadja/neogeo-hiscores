@@ -40,14 +40,11 @@ public class PlayerBean {
     @ManagedProperty(value="#{param.fullname}")
     private String fullname;
     
-    @ManagedProperty(value="#{param.shortname}")
-    private String shortname;
-    
     Map<Game, GameItem> gameItems = new HashMap<Game, GameItem>();
     
     @PostConstruct
     public void init() {
-        Player player = new Player(fullname, shortname);
+        Player player = new Player(fullname);
         Scores scores = scoreService.findAllByPlayer(player);
         
         for(Score score:scores) {
@@ -72,14 +69,6 @@ public class PlayerBean {
         this.fullname = fullname;
     }
 
-    public String getShortname() {
-        return shortname;
-    }
-
-    public void setShortname(String shortname) {
-        this.shortname = shortname;
-    }
-    
     public List<GameItem> getGames() {
         List<GameItem> games = new ArrayList<GameItem>();
         games.addAll(gameItems.values());

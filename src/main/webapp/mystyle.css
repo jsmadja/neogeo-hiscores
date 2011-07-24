@@ -20,17 +20,28 @@
     font-size: 12px;
 }
 
+.score_count {
+    text-align: left;
+}
+
 .player {
     color: #3399FF;
+    font-size:14pt;
 }
 
 .game {
     color: #3399FF;
-    font-size:10pt;
+    font-size:14pt;
+}
+
+.score {
+    color: orange;
+    font-size:14pt;
 }
 
 .link {
     color: #3399FF;
+    font-size:14pt;
 }
 
 .title_neogeo {

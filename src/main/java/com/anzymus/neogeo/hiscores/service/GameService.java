@@ -16,6 +16,7 @@
 
 package com.anzymus.neogeo.hiscores.service;
 
+import com.anzymus.neogeo.hiscores.domain.Score;
 import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
@@ -51,6 +52,10 @@ public class GameService {
             }
         }
         return null;
+    }
+
+    public void update(Score score) {
+        //
     }
 
 }

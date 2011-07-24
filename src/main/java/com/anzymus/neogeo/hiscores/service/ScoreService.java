@@ -31,6 +31,7 @@ public class ScoreService {
 
     private static final Map<Game, Scores> scoresByGame = new HashMap<Game, Scores>();
     private static final Map<String, Scores> scoresByPlayer = new HashMap<String, Scores>();
+    private static final Map<Integer, Score> scoresById = new HashMap<Integer, Score>();
     private static final Scores scores = new Scores();
 
     public void add(Score score) {
@@ -38,6 +39,7 @@ public class ScoreService {
             scores.add(score);
             addScoreInGameMap(score);
             addScoreInPlayerMap(score);
+            addScoreInIdMap(score);
         }
     }
 
@@ -51,12 +53,17 @@ public class ScoreService {
         scores.add(score);
     }
 
+    private void addScoreInIdMap(Score score) {
+        scoresById.put(score.getId(), score);
+    }
+
     private void addScoreInPlayerMap(Score score) {
         Player player = score.getPlayer();
-        Scores scores = scoresByPlayer.get(player.getShortname());
+        String fullname = player.getFullname().toUpperCase();
+        Scores scores = scoresByPlayer.get(fullname);
         if (scores == null) {
             scores = new Scores();
-            scoresByPlayer.put(player.getShortname(), scores);
+            scoresByPlayer.put(fullname, scores);
         }
         scores.add(score);
     }
@@ -70,7 +77,7 @@ public class ScoreService {
     }
 
     public Scores findAllByPlayer(Player player) {
-        Scores scores = scoresByPlayer.get(player.getShortname());
+        Scores scores = scoresByPlayer.get(player.getFullname().toUpperCase());
         if (scores == null) {
             scores = new Scores();
         }
@@ -85,6 +92,10 @@ public class ScoreService {
         List<Score> sortedScores = scores.sortByDateDesc();
         int end = MAX_SCORES_TO_RETURN > sortedScores.size() ? sortedScores.size() : MAX_SCORES_TO_RETURN;
         return sortedScores.subList(0, end);
+    }
+
+    public Score findById(int id) {
+        return scoresById.get(id);
     }
 
 }

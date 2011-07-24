@@ -25,14 +25,14 @@ public class ScoresTest {
 
     @Test
     public void should_add_two_scores() {
-        Player player1 = new Player("abc", "ABC");
+        Player player1 = new Player("abc");
         String level1 = "MVS";
         Game game1 = new Game("game");
         String pictureUrl1 = "pictureUrl";
 
         Score score1 = new Score("1", player1, level1, game1, pictureUrl1);
 
-        Player player2 = new Player("def", "ABC");
+        Player player2 = new Player("def");
         String level2 = "MVS";
         Game game2 = new Game("game");
         String pictureUrl2 = "pictureUrl";
@@ -48,14 +48,14 @@ public class ScoresTest {
 
     @Test
     public void should_add_one_score() {
-        Player player1 = new Player("abc", "ABC");
+        Player player1 = new Player("abc");
         String level1 = "MVS";
         Game game1 = new Game("game");
         String pictureUrl1 = "pictureUrl";
 
         Score score1 = new Score("1", player1, level1, game1, pictureUrl1);
 
-        Player player2 = new Player("abc", "ABC");
+        Player player2 = new Player("abc");
         String level2 = "MVS";
         Game game2 = new Game("game");
         String pictureUrl2 = "pictureUrl";
@@ -78,7 +78,7 @@ public class ScoresTest {
 
     @Test
     public void should_return_one_list_item_when_there_is_one_score() {
-        Player player = new Player("fullname", "shortname");
+        Player player = new Player("fullname");
         String level = "MVS";
         Game game = new Game("Fatal Fury");
         String pictureUrl = "url";
@@ -95,7 +95,7 @@ public class ScoresTest {
     @Test
     public void should_return_two_list_item_when_there_is_two_elements_sorted_by_creation_date_desc()
             throws InterruptedException {
-        Player player = new Player("fullname", "shortname");
+        Player player = new Player("fullname");
         String level = "MVS";
         Game game = new Game("Fatal Fury");
         String pictureUrl = "url";

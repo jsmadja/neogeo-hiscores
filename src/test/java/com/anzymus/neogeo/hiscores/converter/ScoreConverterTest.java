@@ -14,20 +14,21 @@
  *     limitations under the License.
  */
 
-package com.anzymus.neogeo.hiscores.comparator;
+package com.anzymus.neogeo.hiscores.converter;
 
-import java.util.Comparator;
-import com.anzymus.neogeo.hiscores.domain.Score;
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
-public class ScoreSortedByValueDescComparator implements Comparator<Score> {
-    @Override
-    public int compare(Score s1, Score s2) {
-        String value1 = s1.getValue();
-        String value2 = s2.getValue();
-        value1 = value1.replaceAll("\\.", "");
-        value2 = value2.replaceAll("\\.", "");
-        Integer score1 = Integer.parseInt(value1);
-        Integer score2 = Integer.parseInt(value2);
-        return score2.compareTo(score1);
+public class ScoreConverterTest {
+
+    @Test
+    public void should_add_dot_to_score() {
+        ScoreConverter converter = new ScoreConverter();
+        String[] scores = { "1", "12", "123", "1234", "12345", "123456", "1234567", };
+        String[] scoresWithDots = { "1", "12", "123", "1.234", "12.345", "123.456", "1.234.567" };
+        for (int i = 0; i < scores.length; i++) {
+            String result = converter.getAsString(null, null, scores[i]);
+            assertEquals(scoresWithDots[i], result);
+        }
     }
 }

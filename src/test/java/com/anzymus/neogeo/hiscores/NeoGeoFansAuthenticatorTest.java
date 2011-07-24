@@ -14,20 +14,18 @@
  *     limitations under the License.
  */
 
-package com.anzymus.neogeo.hiscores.comparator;
+package com.anzymus.neogeo.hiscores;
 
-import java.util.Comparator;
-import com.anzymus.neogeo.hiscores.domain.Score;
+import static org.junit.Assert.assertTrue;
+import org.junit.Ignore;
+import org.junit.Test;
 
-public class ScoreSortedByValueDescComparator implements Comparator<Score> {
-    @Override
-    public int compare(Score s1, Score s2) {
-        String value1 = s1.getValue();
-        String value2 = s2.getValue();
-        value1 = value1.replaceAll("\\.", "");
-        value2 = value2.replaceAll("\\.", "");
-        Integer score1 = Integer.parseInt(value1);
-        Integer score2 = Integer.parseInt(value2);
-        return score2.compareTo(score1);
+public class NeoGeoFansAuthenticatorTest {
+    @Test
+    @Ignore
+    public void testSomeMethod() {
+        NeoGeoFansAuthenticator authenticator = new NeoGeoFansAuthenticator();
+        boolean result = authenticator.authenticate("anzymus", "xedy4bsa");
+        assertTrue(result);
     }
 }

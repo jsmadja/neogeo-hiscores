@@ -92,7 +92,7 @@ public class GameBean {
             if (i < scores.size()) {
                 Score score = scores.get(i);
                 scoreItem.setValue(score.getValue());
-                scoreItem.setPlayer(score.getPlayer().getShortname());
+                scoreItem.setPlayer(score.getPlayer().getFullname());
                 scoreItem.setPictureUrl(score.getPictureUrl());
             } else {
                 scoreItem.setValue("");
