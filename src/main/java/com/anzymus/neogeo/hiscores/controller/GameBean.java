@@ -42,7 +42,7 @@ public class GameBean {
     GameService gameService;
     
     @ManagedProperty(value = "#{param.id}")
-    private int id;
+    private long id;
 
     private String name;
     
@@ -63,11 +63,11 @@ public class GameBean {
         return name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
     
@@ -94,6 +94,7 @@ public class GameBean {
                 scoreItem.setValue(score.getValue());
                 scoreItem.setPlayer(score.getPlayer().getFullname());
                 scoreItem.setPictureUrl(score.getPictureUrl());
+                scoreItem.setId(score.getId());
             } else {
                 scoreItem.setValue("");
                 scoreItem.setPlayer("");

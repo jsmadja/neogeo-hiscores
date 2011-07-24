@@ -22,7 +22,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import com.anzymus.neogeo.hiscores.comparator.ScoreSortedByValueDescComparator;
@@ -47,7 +46,7 @@ public class HallOfFameService {
     public List<Player> getPlayersOrderByRank(String level) {
         Map<String, Player> players = new HashMap<String, Player>();
 
-        Set<Game> games = gameService.findAll();
+        List<Game> games = gameService.findAll();
         for (Game game : games) {
             Scores scores = scoreService.findAllByGame(game);
             Map<String, List<Score>> scoresByLevels = scores.getScoresByLevels();

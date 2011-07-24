@@ -16,212 +16,270 @@
 
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<!-- Copyright (C) 2011 Julien SMADJA <julien dot smadja at gmail dot com> 
+	Licensed under the Apache License, Version 2.0 (the "License"); you may not 
+	use this file except in compliance with the License. You may obtain a copy 
+	of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. -->
 
-    <groupId>com.anzymus.neogeo</groupId>
-    <artifactId>hiscores</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
-    <name>hiscores</name>
-    <description>Hi-Scores management of Neo Geo games</description>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <properties>
-        <eclipselink-version>2.2.0-RC3</eclipselink-version>
-        <glassfish-version>3.1-b38</glassfish-version>
-        <javaee-version>6.0</javaee-version>
-        <javax-persistence-version>2.0.0</javax-persistence-version>
-        <jsf-version>2.0.2-b10</jsf-version>
-        <junit-version>4.8.2</junit-version>
-        <mockito-version>1.8.5</mockito-version>
-        <mysql-version>5.1.14</mysql-version>
-        <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+	<groupId>com.anzymus.neogeo</groupId>
+	<artifactId>hiscores</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>hiscores</name>
+	<description>Hi-Scores management of Neo Geo games</description>
 
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-            <comments />
-        </license>
-    </licenses>
+	<properties>
+		<eclipselink-version>2.2.0-RC3</eclipselink-version>
+		<glassfish-version>3.1-b38</glassfish-version>
+		<javaee-version>6.0</javaee-version>
+		<javax-persistence-version>2.0.0</javax-persistence-version>
+		<jsf-version>2.0.2-b10</jsf-version>
+		<junit-version>4.8.2</junit-version>
+		<mockito-version>1.8.5</mockito-version>
+		<mysql-version>5.1.14</mysql-version>
+		<netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
-    <issueManagement>
-        <system>github</system>
-        <url>https://github.com/jsmadja/neogeo-hiscores/issues</url>
-    </issueManagement>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments />
+		</license>
+	</licenses>
 
-    <developers>
-        <developer>
-            <id>jsmadja</id>
-            <name>Julien Smadja</name>
-            <email>julien dot smadja at gmail dot com</email>
-        </developer>
-    </developers>
+	<issueManagement>
+		<system>github</system>
+		<url>https://github.com/jsmadja/neogeo-hiscores/issues</url>
+	</issueManagement>
 
-    <scm>
-        <connection>scm:git:git://github.com/jsmadja/neogeo-hiscores.git</connection>
-        <developerConnection>scm:git:git@github.com:jsmadja/neogeo-hiscores.git</developerConnection>
-        <url>http://github.com/jsmadja/neogeo-hiscores</url>
-    </scm>
+	<developers>
+		<developer>
+			<id>jsmadja</id>
+			<name>Julien Smadja</name>
+			<email>julien dot smadja at gmail dot com</email>
+		</developer>
+	</developers>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.mycila.maven-license-plugin</groupId>
-                <artifactId>maven-license-plugin</artifactId>
-                <version>1.8.0</version>
-                <configuration>
-                    <header>src/main/resources/header.txt</header>
-                    <strictCheck>true</strictCheck>
-                    <useDefaultExcludes>false</useDefaultExcludes>
-                    <excludes>
-                        <exclude>**/*.png</exclude>
-                        <exclude>.metadata/**</exclude>
-                        <exclude>.gitignore</exclude>
-                        <exclude>.git/**</exclude>
-                        <exclude>target/**</exclude>
-                        <exclude>.settings/**</exclude>
-                        <exclude>.project</exclude>
-                        <exclude>.classpath</exclude>
-                        <exclude>LICENCE</exclude>
-                        <exclude>README</exclude>
-                        <exclude>**/MANIFEST.MF</exclude>
-                        <exclude>src/main/webapp/WEB-INF/lib/**</exclude>
-                        <exclude>src/main/webapp/WEB-INF/classes/**</exclude>
-                        <exclude>src/main/webapp/images/**</exclude>
-                        <exclude>.externalToolBuilders/**</exclude>
-                        <exclude>.pmd/**</exclude>
-                        <exclude>src/test/resources/**</exclude>
-                        <exclude>src/main/webapp/js/jquery/**</exclude>
-                        <exclude>infinitest.filters</exclude>
-                    </excludes>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>check</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.4.3</version>
-                <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-        </plugins>
-        <finalName>hiscores</finalName>
-    </build>
+	<scm>
+		<connection>scm:git:git://github.com/jsmadja/neogeo-hiscores.git</connection>
+		<developerConnection>scm:git:git@github.com:jsmadja/neogeo-hiscores.git</developerConnection>
+		<url>http://github.com/jsmadja/neogeo-hiscores</url>
+	</scm>
+
+	<build>
+		<resources>
+			<resource>
+				<filtering>true</filtering>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.mycila.maven-license-plugin</groupId>
+				<artifactId>maven-license-plugin</artifactId>
+				<version>1.8.0</version>
+				<configuration>
+					<header>src/main/resources/header.txt</header>
+					<strictCheck>true</strictCheck>
+					<useDefaultExcludes>false</useDefaultExcludes>
+					<excludes>
+						<exclude>**/*.png</exclude>
+						<exclude>.metadata/**</exclude>
+						<exclude>.gitignore</exclude>
+						<exclude>.git/**</exclude>
+						<exclude>target/**</exclude>
+						<exclude>.settings/**</exclude>
+						<exclude>.project</exclude>
+						<exclude>.classpath</exclude>
+						<exclude>LICENCE</exclude>
+						<exclude>README</exclude>
+						<exclude>**/MANIFEST.MF</exclude>
+						<exclude>src/main/webapp/WEB-INF/lib/**</exclude>
+						<exclude>src/main/webapp/WEB-INF/classes/**</exclude>
+						<exclude>src/main/webapp/images/**</exclude>
+						<exclude>.externalToolBuilders/**</exclude>
+						<exclude>.pmd/**</exclude>
+						<exclude>src/test/resources/**</exclude>
+						<exclude>src/main/webapp/js/jquery/**</exclude>
+						<exclude>infinitest.filters</exclude>
+					</excludes>
+					<executions>
+						<execution>
+							<goals>
+								<goal>check</goal>
+							</goals>
+						</execution>
+					</executions>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4.3</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+		<finalName>hiscores</finalName>
+	</build>
 
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>maven2-repository.java.net</id>
-            <name>Java.net Repository for Maven</name>
-            <url>http://download.java.net/maven/2/</url>
-        </pluginRepository>
-    </pluginRepositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>maven2-repository.java.net</id>
+			<name>Java.net Repository for Maven</name>
+			<url>http://download.java.net/maven/2/</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<!-- dependencies repos -->
-    <repositories>
-        <repository>
-            <id>glassfish-maven-repository.dev.java.net</id>
-            <name>GlassFish Maven Repository</name>
-            <url>http://download.java.net/maven/glassfish</url>
-        </repository>
-        <repository>
-            <id>EclipseLink Repo</id>
-            <name>Eclipse maven repository http://eclipse.ialto.org/rt/eclipselink/maven.repo/</name>
-            <url>http://mirror.csclub.uwaterloo.ca/eclipse/rt/eclipselink/maven.repo/</url>
-        </repository>
-        <repository>
-            <id>Maven2</id>
-            <url>http://repo1.maven.org/maven2</url>
-            <name>Maven2</name>
-        </repository>
-        <repository>
-            <id>Maven2 Repo 2</id>
-            <url>http://repo2.maven.org/maven2</url>
-            <name>Maven2 Repo 2</name>
-        </repository>
-        <repository>
-            <id>JBoss</id>
-            <url>http://repository.jboss.com/maven2</url>
-            <name>JBoss</name>
-        </repository>
-        <repository>
-            <id>Java</id>
-            <url>http://download.java.net/maven/2/</url>
-            <name>Java</name>
-        </repository>
-        <repository>
-            <id>sourceforge</id>
-            <url>http://oss.sonatype.org/content/groups/sourceforge/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-    <dependencies>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>r09</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>javax.ejb</artifactId>
-            <version>${glassfish-version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.extras</groupId>
-            <artifactId>glassfish-embedded-all</artifactId>
-            <version>${glassfish-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>${javaee-version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>${mockito-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-client</artifactId>
-            <version>1.8</version>
-            <type>jar</type>
-        </dependency>
-    </dependencies>
+	<repositories>
+		<repository>
+			<id>glassfish-maven-repository.dev.java.net</id>
+			<name>GlassFish Maven Repository</name>
+			<url>http://download.java.net/maven/glassfish</url>
+		</repository>
+		<repository>
+			<id>EclipseLink Repo</id>
+			<name>Eclipse maven repository http://eclipse.ialto.org/rt/eclipselink/maven.repo/</name>
+			<url>http://mirror.csclub.uwaterloo.ca/eclipse/rt/eclipselink/maven.repo/</url>
+		</repository>
+		<repository>
+			<id>Maven2</id>
+			<url>http://repo1.maven.org/maven2</url>
+			<name>Maven2</name>
+		</repository>
+		<repository>
+			<id>Maven2 Repo 2</id>
+			<url>http://repo2.maven.org/maven2</url>
+			<name>Maven2 Repo 2</name>
+		</repository>
+		<repository>
+			<id>JBoss</id>
+			<url>http://repository.jboss.com/maven2</url>
+			<name>JBoss</name>
+		</repository>
+		<repository>
+			<id>Java</id>
+			<url>http://download.java.net/maven/2/</url>
+			<name>Java</name>
+		</repository>
+		<repository>
+			<id>sourceforge</id>
+			<url>http://oss.sonatype.org/content/groups/sourceforge/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>r09</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit-version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.ejb</artifactId>
+			<version>${glassfish-version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.extras</groupId>
+			<artifactId>glassfish-embedded-all</artifactId>
+			<version>${glassfish-version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>${javaee-version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>${mockito-version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>1.8</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>javax.persistence</artifactId>
+			<version>${javax-persistence-version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>eclipselink</artifactId>
+			<version>${eclipselink-version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>production</id>
+			<properties>
+				<jta-data-source>jdbc/__default</jta-data-source>
+				<eclipselink.target-database>MYSQL</eclipselink.target-database>
+				<eclipselink.ddl-generation>create-tables</eclipselink.ddl-generation>
+				<javax.persistence.jdbc.driver>com.mysql.jdbc.Driver</javax.persistence.jdbc.driver>
+				<javax.persistence.jdbc.url>jdbc:mysql://localhost:3306/hiscores</javax.persistence.jdbc.url>
+				<javax.persistence.jdbc.user>hiscores_db_user</javax.persistence.jdbc.user>
+				<javax.persistence.jdbc.password>hiscores</javax.persistence.jdbc.password>
+			</properties>
+		</profile>
+		<profile>
+			<id>development</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<jta-data-source>jdbc/__default</jta-data-source>
+				<eclipselink.target-database>DERBY</eclipselink.target-database>
+				<eclipselink.ddl-generation>drop-and-create-tables</eclipselink.ddl-generation>
+				<javax.persistence.jdbc.driver>org.apache.derby.jdbc.ClientDriver</javax.persistence.jdbc.driver>
+				<javax.persistence.jdbc.url>jdbc:derby://localhost:1527/fluxx;create=true</javax.persistence.jdbc.url>
+				<javax.persistence.jdbc.user>APP</javax.persistence.jdbc.user>
+				<javax.persistence.jdbc.password>APP</javax.persistence.jdbc.password>
+			</properties>
+		</profile>
+	</profiles>
 </project>

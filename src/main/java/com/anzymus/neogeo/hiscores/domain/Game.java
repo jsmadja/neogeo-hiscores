@@ -17,20 +17,48 @@
 package com.anzymus.neogeo.hiscores.domain;
 
 import com.google.common.base.Objects;
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
-public class Game implements Comparable<Game> {
+@Entity
+@Table(name="GAME", uniqueConstraints=@UniqueConstraint(columnNames = {"NAME"}))
+@NamedQueries(
+        {
+            @NamedQuery(name="game_findAll", query="SELECT g FROM Game g ORDER BY g.name ASC"),
+            @NamedQuery(name="game_findByName", query="SELECT g FROM Game g WHERE g.name = :name")
+        }
+        )
+public class Game implements Comparable<Game>, Serializable {
 
+    @Column(nullable = false)
     private String name;
+    
     private String rules;
-    private int id;
+    
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    public Game() {
+    }
     
     public Game(String name) {
         this.name = name;
-        this.id = Math.abs(name.hashCode());
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
     
     public String getName() {

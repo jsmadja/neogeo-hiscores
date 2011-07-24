@@ -16,4 +16,4 @@
 #
 
 script/clean.sh
-mvn clean package && scp target/hiscores.war fluxx@fluxx.fr.cr:/opt/glassfishv3/glassfish/domains/domain1/autodeploy
+mvn clean test && mvn clean package -Pproduction -DskipTests=true && scp target/hiscores.war fluxx@fluxx.fr.cr:/opt/glassfishv3/glassfish/domains/domain1/autodeploy

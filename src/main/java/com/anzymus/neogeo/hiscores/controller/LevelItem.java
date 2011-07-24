@@ -16,6 +16,7 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
+import com.anzymus.neogeo.hiscores.domain.Score;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -26,7 +27,7 @@ import java.util.Set;
 public class LevelItem {
 
     private String label;
-    private Set<String> scores = new HashSet<String>();
+    private Set<Score> scores = new HashSet<Score>();
     private List<ScoreItem> scoreItems;
 
     public LevelItem(String label) {
@@ -37,20 +38,20 @@ public class LevelItem {
         return label;
     }
 
-    public void addScore(String value) {
-        scores.add(value);
+    public void addScore(Score score) {
+        scores.add(score);
     }
 
-    public List<String> getScores() {
-        List<String> sortedScores = new ArrayList<String>();
+    public List<Score> getScores() {
+        List<Score> sortedScores = new ArrayList<Score>();
         sortedScores.addAll(scores);
         Collections.sort(sortedScores, sortByValueDescComparator);
         return sortedScores;
     }
-    private static Comparator<String> sortByValueDescComparator = new Comparator<String>() {
+    private static Comparator<Score> sortByValueDescComparator = new Comparator<Score>() {
         @Override
-        public int compare(String s1, String s2) {
-            return s2.compareTo(s1);
+        public int compare(Score s1, Score s2) {
+            return s2.getValue().compareTo(s1.getValue());
         }
     };
 

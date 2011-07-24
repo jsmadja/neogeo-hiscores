@@ -16,86 +16,78 @@
 
 package com.anzymus.neogeo.hiscores.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.ejb.Stateless;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Scores;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 @Stateless
+@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public class ScoreService {
+    
+    @PersistenceContext
+    EntityManager em;
+    
     public static final int MAX_SCORES_TO_RETURN = 20;
 
-    private static final Map<Game, Scores> scoresByGame = new HashMap<Game, Scores>();
-    private static final Map<String, Scores> scoresByPlayer = new HashMap<String, Scores>();
-    private static final Map<Integer, Score> scoresById = new HashMap<Integer, Score>();
-    private static final Scores scores = new Scores();
-
-    public void add(Score score) {
-        if (!scores.contains(score)) {
-            scores.add(score);
-            addScoreInGameMap(score);
-            addScoreInPlayerMap(score);
-            addScoreInIdMap(score);
-        }
-    }
-
-    private void addScoreInGameMap(Score score) {
-        Game game = score.getGame();
-        Scores scores = scoresByGame.get(game);
-        if (scores == null) {
-            scores = new Scores();
-            scoresByGame.put(game, scores);
-        }
-        scores.add(score);
-    }
-
-    private void addScoreInIdMap(Score score) {
-        scoresById.put(score.getId(), score);
-    }
-
-    private void addScoreInPlayerMap(Score score) {
-        Player player = score.getPlayer();
-        String fullname = player.getFullname().toUpperCase();
-        Scores scores = scoresByPlayer.get(fullname);
-        if (scores == null) {
-            scores = new Scores();
-            scoresByPlayer.put(fullname, scores);
-        }
-        scores.add(score);
-    }
-
     public Scores findAllByGame(Game game) {
-        Scores scores = scoresByGame.get(game);
-        if (scores == null) {
-            scores = new Scores();
-        }
-        return scores;
+        TypedQuery<Score> query = em.createNamedQuery("score_findAllByGame", Score.class);
+        query.setParameter("game", game);
+        List<Score> scores = query.getResultList();
+        return toScores(scores);
     }
 
     public Scores findAllByPlayer(Player player) {
-        Scores scores = scoresByPlayer.get(player.getFullname().toUpperCase());
-        if (scores == null) {
-            scores = new Scores();
+        TypedQuery<Score> query = em.createNamedQuery("score_findAllByPlayer", Score.class);
+        query.setParameter("player", player);
+        List<Score> scores = query.getResultList();
+        return toScores(scores);
+    }
+
+    public Scores findAll() {
+        TypedQuery<Score> query = em.createNamedQuery("score_findAll", Score.class);
+        List<Score> scores = query.getResultList();
+        return toScores(scores);
+    }
+    
+    public List<Score> findLastScoresOrderByDateDesc() {
+        TypedQuery<Score> query = em.createNamedQuery("score_findAllOrderByDateDesc", Score.class);
+        query.setMaxResults(MAX_SCORES_TO_RETURN);
+        return query.getResultList();
+    }
+
+    public Score findById(long id) {
+        return em.find(Score.class, id);
+    }
+
+    private Scores toScores(List<Score> scoreList) {
+        Scores scores = new Scores();
+        if (scoreList != null) {
+            for(Score score:scoreList) {
+                scores.add(score);
+            }
         }
         return scores;
     }
 
-    public Scores findAll() {
-        return scores;
-    }
-
-    public List<Score> findLastScoresOrderByDateDesc() {
-        List<Score> sortedScores = scores.sortByDateDesc();
-        int end = MAX_SCORES_TO_RETURN > sortedScores.size() ? sortedScores.size() : MAX_SCORES_TO_RETURN;
-        return sortedScores.subList(0, end);
-    }
-
-    public Score findById(int id) {
-        return scoresById.get(id);
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public Score store(Score score) {
+        Score storedScore;
+        if (score.getId() == null) {
+            em.persist(score);
+            storedScore = score;
+        } else {
+            storedScore = em.merge(score);
+        }
+        em.flush();
+        return storedScore;
     }
 
 }

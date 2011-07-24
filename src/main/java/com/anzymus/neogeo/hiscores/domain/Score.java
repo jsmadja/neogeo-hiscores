@@ -16,19 +16,56 @@
 
 package com.anzymus.neogeo.hiscores.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import com.google.common.base.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-public class Score {
+@Entity
+@Table(name = "SCORE")
+@NamedQueries({
+    @NamedQuery(name = "score_findAllByGame", query = "SELECT s FROM Score s WHERE s.game = :game"),
+    @NamedQuery(name = "score_findAllByPlayer", query = "SELECT s FROM Score s WHERE s.player = :player"),
+    @NamedQuery(name = "score_findAll", query = "SELECT s FROM Score s"),
+    @NamedQuery(name = "score_findAllOrderByDateDesc", query = "SELECT s FROM Score s ORDER BY s.creationDate DESC")
+})
+public class Score implements Serializable {
 
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @ManyToOne(optional = false)
     private Game game;
-    private String value;
+    
+    @ManyToOne(optional = false)
     private Player player;
+    
+    @Column(name = "LEVEL_LABEL", nullable = false)
     private String level;
+    
+    @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
+    
+    @Column(name = "SCORE_VALUE", nullable = false)
+    private String value;
+    
+    @Column(name = "PICTURE_URL")
     private String pictureUrl;
+    
     private String message;
-    private int id;
+    
+    public Score() {
+    }
 
     public Score(String value, Player player, String level, Game game, String pictureUrl) {
         this.value = value;
@@ -37,11 +74,14 @@ public class Score {
         this.game = game;
         this.pictureUrl = pictureUrl;
         this.creationDate = new Date();
-        this.id = Math.abs(hashCode());
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Game getGame() {
@@ -91,7 +131,7 @@ public class Score {
     public void setValue(String value) {
         this.value = value;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Score) {
@@ -108,5 +148,4 @@ public class Score {
     public int hashCode() {
         return Objects.hashCode(game, value, player, level, pictureUrl);
     }
-
 }

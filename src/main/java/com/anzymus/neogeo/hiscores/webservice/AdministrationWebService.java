@@ -23,6 +23,7 @@ import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.service.GameService;
+import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
 
 @WebService
@@ -34,6 +35,9 @@ public class AdministrationWebService {
     @EJB
     ScoreService scoreService;
 
+    @EJB
+    PlayerService playerService;
+    
     @WebMethod
     public void initializeGameList(String list) {
         String[] games = list.split(";");
@@ -57,16 +61,19 @@ public class AdministrationWebService {
     @WebMethod
     public void addScore(String gameName, String level, String fullname, String scorePoints,
             String pictureUrl) {
-        Game game = new Game(gameName);
-        Player player = new Player(fullname);
+        Game game = gameService.findByName(gameName);
+        Player player = playerService.findByFullname(fullname.toUpperCase());
+        if (player == null) {
+            player = playerService.store(new Player(fullname));
+        }
         Score score = new Score(scorePoints, player, level, game, pictureUrl);
-        scoreService.add(score);
+        scoreService.store(score);
     }
 
     @WebMethod
     public void addGame(String name) {
         Game game = new Game(name);
-        gameService.add(game);
+        gameService.store(game);
     }
 
 }

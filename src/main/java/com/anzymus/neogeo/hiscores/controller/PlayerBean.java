@@ -30,6 +30,7 @@ import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Scores;
+import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
 
 @ManagedBean
@@ -37,27 +38,28 @@ public class PlayerBean {
     
     @EJB ScoreService scoreService;
 
+    @EJB PlayerService playerService;
+    
     @ManagedProperty(value="#{param.fullname}")
     private String fullname;
     
-    Map<Game, GameItem> gameItems = new HashMap<Game, GameItem>();
+    private Map<Game, GameItem> gameItems = new HashMap<Game, GameItem>();
     
     @PostConstruct
     public void init() {
-        Player player = new Player(fullname);
+        Player player = playerService.findByFullname(fullname);
         Scores scores = scoreService.findAllByPlayer(player);
         
         for(Score score:scores) {
             Game game = score.getGame();
             String level = score.getLevel();
-            String value = score.getValue();
             
             GameItem gameItem = gameItems.get(game);
             if (gameItem == null) {
                 gameItem = new GameItem(game.getName(), game.getId());
                 gameItems.put(game, gameItem);
             }
-            gameItem.addScore(level, value);
+            gameItem.addScore(level, score);
         }
     }
 

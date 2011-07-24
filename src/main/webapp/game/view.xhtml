@@ -41,12 +41,10 @@
                         </h:link>
                     </h:column>
                     <h:column>
-                        <a class="thumbnail" href="#thumb">
-                            <h:outputText value="${score.value}" converter="scoreConverter" />
-                            <span>
-                                <img src="${score.pictureUrl}" width="500px" />
-                            </span>
-                        </a>
+                        <h:link outcome="score/edit" styleClass="score" >
+                            <h:outputText value="${score.value}" converter="scoreConverter" />    
+                            <f:param name="scoreId" value="${score.id}" />
+                        </h:link>
                     </h:column>
                 </h:dataTable>
             </c:forEach>

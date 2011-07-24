@@ -30,9 +30,19 @@
             <h2>Update my score</h2>
             <h:form id="form">
                 <h:panelGrid columns="3" >
+                    <h:outputText value="Picture Url*: " />
+                    <h:inputText id="pictureUrl" value="#{scoreBean.pictureUrl}" onblur="document.getElementById('picture').src=this.value" onfocus="clearText(this)" required="true" style="width:100%" >
+                        <f:validateRegex pattern="(http):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=%@!\-\/]))?" />
+                    </h:inputText>
+                    <h:message for="pictureUrl" styleClass="error" />
+                    
+                    <h:outputText />
+                    <img id="picture" src="#{scoreBean.pictureUrl}" width="500px"/>
+                    <h:outputText />
+                    
                     <h:outputText value="Fullname: " />
                     <h:inputText id="fullname" value="#{scoreBean.fullname}" readonly="true" />
-                    <h:outputText value="" />
+                    <h:outputText />
                     
                     <h:outputText value="Score: " />
                     <h:inputText id="score" value="#{scoreBean.score}" onfocus="clearText(this)" maxlength="10" size="10" required="true" >
@@ -52,12 +62,6 @@
                     </h:selectOneMenu>
                     <h:outputText />
                     
-                    <h:outputText value="Picture Url: " />
-                    <h:inputText id="pictureUrl" value="#{scoreBean.pictureUrl}" onfocus="clearText(this)" required="true" style="width:100%" >
-                        <f:validateRegex pattern="(http):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=%@!\-\/]))?" />
-                    </h:inputText>
-                    <h:message for="pictureUrl" styleClass="error" />
-
                     <h:outputText value="Message: " />
                     <h:inputTextarea id="message" value="#{scoreBean.message}" onfocus="clearText(this)" cols="40" rows="5" style="width:100%" />
                     <h:outputText />

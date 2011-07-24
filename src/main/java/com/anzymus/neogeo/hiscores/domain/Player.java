@@ -16,17 +16,63 @@
 
 package com.anzymus.neogeo.hiscores.domain;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import com.google.common.base.Objects;
+import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
-public class Player {
+@Entity
+@Table(name = "PLAYER", uniqueConstraints =
+@UniqueConstraint(columnNames = {"fullname"}))
+@NamedQueries({
+    @NamedQuery(name = "player_findByFullname", query = "SELECT p FROM Player p WHERE p.fullname = :fullname")
+})
+public class Player implements Serializable {
 
+    @Id
+    @GeneratedValue
+    private Long id;
+    
+    @Column(nullable = false)
     private String fullname;
     
+    @Transient
     private int points;
+    
+    @Transient
     private int contribution;
+
+    public Player() {
+    }
 
     public Player(String fullname) {
         this.fullname = fullname.toUpperCase();
+    }
+
+    @Override
+    public String toString() {
+        return fullname;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(fullname);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Player) {
+            Player player = (Player) obj;
+            return Objects.equal(fullname, player.fullname);
+        }
+        return false;
     }
 
     public String getFullname() {
@@ -49,22 +95,11 @@ public class Player {
         this.contribution = contribution;
     }
 
-    @Override
-    public String toString() {
-        return fullname;
+    public Long getId() {
+        return id;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(fullname);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Player) {
-            Player player = (Player) obj;
-            return Objects.equal(fullname, player.fullname);
-        }
-        return false;
+    public void setId(Long id) {
+        this.id = id;
     }
 }

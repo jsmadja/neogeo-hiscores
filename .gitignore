@@ -9,3 +9,4 @@ maven-eclipse.xml
 .metadata
 ucdetector_reports
 faces-config.NavData
+derby.log

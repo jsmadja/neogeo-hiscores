@@ -16,7 +16,6 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
-import java.util.Arrays;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -24,8 +23,8 @@ import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.service.GameService;
+import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
-import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedProperty;
 
@@ -34,6 +33,7 @@ public class ScoreBean {
 
     @EJB ScoreService scoreService;
     @EJB GameService gameService;
+    @EJB PlayerService playerService;
 
     @ManagedProperty(value = "#{param.scoreId}")
     private String id;
@@ -44,7 +44,7 @@ public class ScoreBean {
     private String pictureUrl = "";
     private String message;
     
-    private int currentGame;
+    private long currentGame;
     private String currentLevel = "MVS";
     
     private static final int MAX_MESSAGE_LENGTH = 255;
@@ -64,11 +64,14 @@ public class ScoreBean {
     
     public String add() {
         Game game = gameService.findById(currentGame);
-        Score scoreToAdd = new Score(score, new Player(fullname), currentLevel, game, pictureUrl);
-        
+        Player player = playerService.findByFullname(fullname);
+        if (player == null) {
+            player = playerService.store(new Player(fullname));
+        }
+        Score scoreToAdd = new Score(score, player, currentLevel, game, pictureUrl);
         int end = message.length() > MAX_MESSAGE_LENGTH ? MAX_MESSAGE_LENGTH : message.length();
         scoreToAdd.setMessage(message.substring(0, end));
-        scoreService.add(scoreToAdd);
+        scoreService.store(scoreToAdd);
         return "home";
     }
     
@@ -80,11 +83,11 @@ public class ScoreBean {
         scoreFromDb.setPictureUrl(pictureUrl);
         scoreFromDb.setLevel(currentLevel);
         scoreFromDb.setValue(score);
-        gameService.update(scoreFromDb);
+        scoreService.store(scoreFromDb);
         return "home";
     }
     
-    public Set<Game> getGames() {
+    public List<Game> getGames() {
         return gameService.findAll();
     }
     
@@ -92,11 +95,11 @@ public class ScoreBean {
         return Levels.list();
     }
 
-    public int getCurrentGame() {
+    public long getCurrentGame() {
         return currentGame;
     }
 
-    public void setCurrentGame(int currentGame) {
+    public void setCurrentGame(long currentGame) {
         this.currentGame = currentGame;
     }
 

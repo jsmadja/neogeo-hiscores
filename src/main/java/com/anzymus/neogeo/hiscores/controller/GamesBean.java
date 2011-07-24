@@ -36,7 +36,7 @@ public class GamesBean {
     ScoreService scoreService;
     
     public List<GameItem> getGames() {
-        Set<Game> games = gameService.findAll();
+        List<Game> games = gameService.findAll();
         List<GameItem> gameItems = new ArrayList<GameItem>();
         for (Game game:games) {
             Scores scores = scoreService.findAllByGame(game);

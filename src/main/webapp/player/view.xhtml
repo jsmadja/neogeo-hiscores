@@ -43,8 +43,12 @@
                                 <c:forEach var="level" items="${game.levels}">
                                     <tr align="right">
                                         <td>${level.label} :</td>
-                                        <td><c:forEach var="score" items="${level.scores}" begin="0" end="1">
-                                                <h:outputText value="${score}" converter="scoreConverter" />
+                                        <td>
+                                            <c:forEach var="score" items="${level.scores}" begin="0" end="1">
+                                                <h:link outcome="score/edit" styleClass="score" >
+                                                    <h:outputText value="${score.value}" converter="scoreConverter" />    
+                                                    <f:param name="scoreId" value="${score.id}" />
+                                                </h:link>
                                             </c:forEach>
                                         </td>
                                     </tr> 

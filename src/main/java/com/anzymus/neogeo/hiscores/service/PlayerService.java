@@ -16,52 +16,43 @@
 
 package com.anzymus.neogeo.hiscores.service;
 
-import com.anzymus.neogeo.hiscores.domain.Score;
-import java.util.Collections;
-import java.util.Set;
-import java.util.TreeSet;
-import javax.ejb.Stateless;
-import com.anzymus.neogeo.hiscores.domain.Game;
+import com.anzymus.neogeo.hiscores.domain.Player;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-@Stateless
-@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-public class GameService {
 
+@Stateless
+public class PlayerService {
+    
     @PersistenceContext
     EntityManager em;
-    
+
+    public Player findByFullname(String fullname) {
+        TypedQuery<Player> query = em.createNamedQuery("player_findByFullname", Player.class);
+        query.setParameter("fullname", fullname);
+        List<Player> player = query.getResultList();
+        if (player.isEmpty()) {
+            return null;
+        } 
+        return player.get(0);
+    }
+
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Game store(Game game) {
-        Game storedGame;
-        if (game.getId() == null) {
-            em.persist(game);
-            storedGame = game;
+    public Player store(Player player) {
+        Player storedPlayer;
+        if (player.getId() == null) {
+            em.persist(player);
+            storedPlayer = player;
         } else {
-            storedGame = em.merge(game);
+            storedPlayer = em.merge(player);
         }
         em.flush();
-        return storedGame;
+        return storedPlayer;
     }
-
-    public List<Game> findAll() {
-        TypedQuery<Game> query = em.createNamedQuery("game_findAll", Game.class);
-        return query.getResultList();
-    }
-
-    public Game findByName(String gameName) {
-        TypedQuery<Game> query = em.createNamedQuery("game_findByName", Game.class);
-        query.setParameter("name", gameName);
-        return query.getSingleResult();
-    }
-
-    public Game findById(long gameId) {
-        return em.find(Game.class, gameId);
-    }
-
+    
 }

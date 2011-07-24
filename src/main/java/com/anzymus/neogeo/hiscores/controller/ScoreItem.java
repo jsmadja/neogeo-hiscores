@@ -22,7 +22,16 @@ public class ScoreItem {
     private String rank;
     private String player;
     private String pictureUrl;
+    private long id;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+    
     public String getPlayer() {
         return player;
     }
