@@ -16,18 +16,14 @@
 
 package com.anzymus.neogeo.hiscores.service;
 
-import com.anzymus.neogeo.hiscores.domain.Score;
-import java.util.Collections;
-import java.util.Set;
-import java.util.TreeSet;
-import javax.ejb.Stateless;
-import com.anzymus.neogeo.hiscores.domain.Game;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import com.anzymus.neogeo.hiscores.domain.Game;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
@@ -35,7 +31,7 @@ public class GameService {
 
     @PersistenceContext
     EntityManager em;
-    
+
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Game store(Game game) {
         Game storedGame;

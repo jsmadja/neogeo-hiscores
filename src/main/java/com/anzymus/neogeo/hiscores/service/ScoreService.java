@@ -18,24 +18,24 @@ package com.anzymus.neogeo.hiscores.service;
 
 import java.util.List;
 import javax.ejb.Stateless;
-import com.anzymus.neogeo.hiscores.domain.Game;
-import com.anzymus.neogeo.hiscores.domain.Player;
-import com.anzymus.neogeo.hiscores.domain.Score;
-import com.anzymus.neogeo.hiscores.domain.Scores;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import com.anzymus.neogeo.hiscores.domain.Game;
+import com.anzymus.neogeo.hiscores.domain.Player;
+import com.anzymus.neogeo.hiscores.domain.Score;
+import com.anzymus.neogeo.hiscores.domain.Scores;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public class ScoreService {
-    
+
     @PersistenceContext
     EntityManager em;
-    
-    public static final int MAX_SCORES_TO_RETURN = 20;
+
+    private static final int MAX_SCORES_TO_RETURN = 20;
 
     public Scores findAllByGame(Game game) {
         TypedQuery<Score> query = em.createNamedQuery("score_findAllByGame", Score.class);
@@ -56,7 +56,7 @@ public class ScoreService {
         List<Score> scores = query.getResultList();
         return toScores(scores);
     }
-    
+
     public List<Score> findLastScoresOrderByDateDesc() {
         TypedQuery<Score> query = em.createNamedQuery("score_findAllOrderByDateDesc", Score.class);
         query.setMaxResults(MAX_SCORES_TO_RETURN);
@@ -70,7 +70,7 @@ public class ScoreService {
     private Scores toScores(List<Score> scoreList) {
         Scores scores = new Scores();
         if (scoreList != null) {
-            for(Score score:scoreList) {
+            for (Score score : scoreList) {
                 scores.add(score);
             }
         }

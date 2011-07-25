@@ -16,14 +16,13 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
-import com.anzymus.neogeo.hiscores.domain.Game;
-import com.anzymus.neogeo.hiscores.domain.Score;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.anzymus.neogeo.hiscores.domain.Score;
 
 public class GameItem {
 
@@ -53,7 +52,7 @@ public class GameItem {
     public int getCount() {
         return count;
     }
-    
+
     public void addScore(String level, Score score) {
         LevelItem levelItem = levelItems.get(level);
         if (levelItem == null) {
@@ -69,6 +68,7 @@ public class GameItem {
         Collections.sort(levels, sortByLabelComparator);
         return levels;
     }
+
     private static Comparator<LevelItem> sortByLabelComparator = new Comparator<LevelItem>() {
         @Override
         public int compare(LevelItem item1, LevelItem item2) {

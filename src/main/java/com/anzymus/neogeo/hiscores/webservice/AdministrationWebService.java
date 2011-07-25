@@ -16,9 +16,6 @@
 
 package com.anzymus.neogeo.hiscores.webservice;
 
-import java.io.UnsupportedEncodingException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -28,7 +25,6 @@ import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
-import java.nio.charset.Charset;
 
 @WebService
 public class AdministrationWebService {
@@ -56,7 +52,7 @@ public class AdministrationWebService {
         for (String scoreLine : scores) {
             String[] scoreValue = scoreLine.split(";");
             for (int i = 0; i < scoreValue.length; i++) {
-                scoreValue[i] = scoreValue[i].replaceAll("\"", "").trim();      
+                scoreValue[i] = scoreValue[i].replaceAll("\"", "").trim();
             }
             String fullname = scoreValue[1];
             addScore(scoreValue[0], "MVS", fullname, scoreValue[2], scoreValue[3]);
