@@ -17,30 +17,11 @@
 package com.anzymus.neogeo.hiscores.service;
 
 import static org.junit.Assert.assertTrue;
+import java.util.List;
 import org.junit.Test;
 import com.anzymus.neogeo.hiscores.domain.Game;
-import java.util.List;
-import javax.persistence.EntityManager;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
-public class GameServiceTest {
-
-    GameService gameService;
-
-    @Mock
-    EntityManager em;
-    
-    @Before
-    public void init() {
-        MockitoAnnotations.initMocks(this);
-        gameService = new GameService();
-        gameService.em = em;
-    }
-    
-    @Ignore
+public class GameServiceTest extends AbstractTest {
     @Test
     public void should_add_new_game() {
         Game game = new Game("Fatal Fury");

@@ -24,12 +24,14 @@ import javax.naming.Context;
 import javax.naming.NamingException;
 
 public class AbstractTest {
- 
+
     protected static EJBContainer container;
 
     protected static Context namingContext;
 
     protected static PlayerService playerService;
+    protected static ScoreService scoreService;
+    protected static GameService gameService;
 
     static {
         try {
@@ -40,12 +42,13 @@ public class AbstractTest {
             namingContext = container.getContext();
 
             playerService = (PlayerService) lookup("PlayerService");
-            
+            scoreService = (ScoreService) lookup("ScoreService");
+            gameService = (GameService) lookup("GameService");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-        
+
     private static Object lookup(String key) throws NamingException {
         return namingContext.lookup("java:global/classes/" + key);
     }

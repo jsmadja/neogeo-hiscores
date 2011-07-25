@@ -20,53 +20,62 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import java.util.List;
-import javax.persistence.EntityManager;
-import org.junit.Before;
-import org.junit.Ignore;
+import org.apache.commons.lang.RandomStringUtils;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Scores;
 
-@Ignore
-public class ScoreServiceTest {
+public class ScoreServiceTest extends AbstractTest {
 
-    ScoreService scoreService;
+    private static Game game1, game2;
+
+    private static Player player;
+    private static String level;
 
     String pictureUrl = "http://www.imageshack.com";
 
-    @Mock
-    EntityManager em;
-
-    @Before
-    public void init() {
-        MockitoAnnotations.initMocks(this);
-        scoreService = new ScoreService();
-        scoreService.em = em;
+    @BeforeClass
+    public static void init() {
+        game1 = gameService.store(new Game(RandomStringUtils.random(10)));
+        game2 = gameService.store(new Game(RandomStringUtils.random(10)));
+        player = playerService.store(new Player(RandomStringUtils.random(5)));
+        level = "MVS";
     }
 
     @Test
     public void should_add_hiscore() {
-        Game game = new Game("Fatal Fury");
-        Player player = new Player("Anzymus");
-        String level = "MVS";
-        Score score = new Score("100", player, level, game, pictureUrl);
+        Score score = new Score("100", player, level, game1, pictureUrl);
         scoreService.store(score);
 
-        Scores scores = scoreService.findAllByGame(game);
+        Scores scores = scoreService.findAllByGame(game1);
 
         assertTrue(scores.contains(score));
     }
 
     @Test
+    public void should_not_add_same_score() {
+        Scores scoresInitial = scoreService.findAll();
+
+        Score score = new Score("999", player, level, game1, pictureUrl);
+        scoreService.store(score);
+
+        score = new Score("999", player, level, game1, pictureUrl);
+        scoreService.store(score);
+
+        Scores scoresFinal = scoreService.findAll();
+        assertEquals(scoresFinal.count(), scoresInitial.count() + 1);
+    }
+
+    @Test
     public void should_find_scores_by_player() {
-        Player player = new Player("Anzymus");
-        Score score1 = new Score("100", player, "MVS", new Game("Fatal Fury"), pictureUrl);
-        Score score2 = new Score("150", player, "Normal", new Game("Fatal Fury"), pictureUrl);
-        Score score3 = new Score("1mn32", player, "Easy", new Game("Samurai Shodown"), pictureUrl);
+        int initialCount = scoreService.findAllByPlayer(player).count();
+
+        Score score1 = new Score("123", player, "MVS", game1, pictureUrl);
+        Score score2 = new Score("456", player, "Normal", game1, pictureUrl);
+        Score score3 = new Score("1mn32", player, "Easy", game2, pictureUrl);
 
         scoreService.store(score1);
         scoreService.store(score2);
@@ -74,7 +83,7 @@ public class ScoreServiceTest {
 
         Scores scores = scoreService.findAllByPlayer(player);
 
-        assertEquals(3, scores.count());
+        assertEquals(initialCount + 3, scores.count());
 
         assertTrue(scores.contains(score1));
         assertTrue(scores.contains(score2));

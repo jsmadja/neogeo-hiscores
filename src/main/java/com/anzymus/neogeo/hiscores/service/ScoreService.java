@@ -79,6 +79,9 @@ public class ScoreService {
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Score store(Score score) {
+        if (alreadyExist(score)) {
+            return score;
+        }
         Score storedScore;
         if (score.getId() == null) {
             em.persist(score);
@@ -88,6 +91,12 @@ public class ScoreService {
         }
         em.flush();
         return storedScore;
+    }
+
+    private boolean alreadyExist(Score score) {
+        System.err.println(score);
+        Scores scores = findAllByPlayer(score.getPlayer());
+        return scores.contains(score);
     }
 
 }
