@@ -25,6 +25,7 @@ import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
+import java.util.Arrays;
 
 @WebService
 public class AdministrationWebService {
@@ -55,18 +56,21 @@ public class AdministrationWebService {
                 scoreValue[i] = scoreValue[i].replaceAll("\"", "").trim();
             }
             String fullname = scoreValue[1];
-            addScore(scoreValue[0], "MVS", fullname, scoreValue[2], scoreValue[3]);
+            System.err.println(Arrays.toString(scoreValue));
+            String message = scoreValue.length >= 5 ? scoreValue[4] : "";
+            addScore(scoreValue[0], "MVS", fullname, scoreValue[2], scoreValue[3], message);
         }
     }
 
     @WebMethod
-    public void addScore(String gameName, String level, String fullname, String scorePoints, String pictureUrl) {
+    public void addScore(String gameName, String level, String fullname, String scorePoints, String pictureUrl, String message) {
         Game game = gameService.findByName(gameName);
         Player player = playerService.findByFullname(fullname);
         if (player == null) {
             player = playerService.store(new Player(fullname));
         }
         Score score = new Score(scorePoints, player, level, game, pictureUrl);
+        score.setMessage(message);
         scoreService.store(score);
     }
 

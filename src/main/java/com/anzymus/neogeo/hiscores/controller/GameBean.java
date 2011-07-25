@@ -46,6 +46,10 @@ public class GameBean {
 
     private String name;
     
+    private String pictureUrl;
+    
+    private String rules;
+    
     private Scores scores;
 
     private static final String[] RANKS = { "1st", "2nd", "3rd" };
@@ -57,6 +61,14 @@ public class GameBean {
         Game game = gameService.findById(id);
         name = game.getName();
         scores = scoreService.findAllByGame(game);
+    }
+    
+    public String edit() {
+        Game game = gameService.findById(id);
+        game.setRules(rules);
+        game.setPictureUrl(pictureUrl);
+        gameService.store(game);
+        return "home";
     }
 
     public String getName() {
@@ -107,6 +119,22 @@ public class GameBean {
             scoreItems.add(scoreItem);
         }
         return scoreItems;
+    }
+
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+    }
+
+    public String getRules() {
+        return rules;
+    }
+
+    public void setRules(String rules) {
+        this.rules = rules;
     }
 
 }

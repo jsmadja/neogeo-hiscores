@@ -94,7 +94,6 @@ public class ScoreService {
     }
 
     private boolean alreadyExist(Score score) {
-        System.err.println(score);
         Scores scores = findAllByPlayer(score.getPlayer());
         return scores.contains(score);
     }

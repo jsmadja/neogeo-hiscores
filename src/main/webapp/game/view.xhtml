@@ -28,6 +28,17 @@
     <ui:define name="content_right">
         <center>
             <h2>${gameBean.name}</h2>
+            
+            <table>
+                <tr>
+                    <td>
+                        <img src="#{gameBean.pictureUrl}" />
+                    </td>
+                    <td>
+                        #{gameBean.rules}
+                    </td>
+                </tr>
+            </table>
             <c:forEach var="level" items="${gameBean.levels}">
                 <h3>Level ${level.label}</h3>
                 TOP 10

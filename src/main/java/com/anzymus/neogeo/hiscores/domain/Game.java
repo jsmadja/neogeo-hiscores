@@ -25,6 +25,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
@@ -37,15 +38,18 @@ import javax.persistence.UniqueConstraint;
         )
 public class Game implements Comparable<Game>, Serializable {
 
+    @Id
+    @GeneratedValue
+    private Long id;
+
     @Column(nullable = false)
     private String name;
     
     private String rules;
     
-    @Id
-    @GeneratedValue
-    private Long id;
-
+    @Transient
+    private String pictureUrl;
+    
     public Game() {
     }
     
@@ -71,6 +75,14 @@ public class Game implements Comparable<Game>, Serializable {
 
     public String getRules() {
         return rules;
+    }
+
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 
     @Override
