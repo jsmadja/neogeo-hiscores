@@ -23,7 +23,7 @@ import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
 import javax.naming.NamingException;
 
-public class AbstractTest {
+public abstract class AbstractTest {
 
     protected static EJBContainer container;
 
