@@ -39,9 +39,9 @@ public class ScoreServiceTest extends AbstractTest {
 
     @BeforeClass
     public static void init() {
-        game1 = gameService.store(new Game(RandomStringUtils.random(10)));
-        game2 = gameService.store(new Game(RandomStringUtils.random(10)));
-        player = playerService.store(new Player(RandomStringUtils.random(5)));
+        game1 = gameService.store(new Game(RandomStringUtils.randomAlphabetic(10)));
+        game2 = gameService.store(new Game(RandomStringUtils.randomAlphabetic(10)));
+        player = playerService.store(new Player(RandomStringUtils.randomAlphabetic(5)));
         level = "MVS";
     }
 
