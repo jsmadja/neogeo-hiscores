@@ -48,9 +48,9 @@
                     <h:message for="fullname" styleClass="error" />
 
                     <h:outputText value="NGF password: " />
-                    <h:inputText id="password" value="#{scoreBean.password}" onfocus="clearText(this)" required="true" >
+                    <h:inputSecret id="password" value="#{scoreBean.password}" onfocus="clearText(this)" required="true" >
                         <f:validateLength minimum="1" />
-                    </h:inputText>
+                    </h:inputSecret>
                     <h:message for="password" styleClass="error" />
 
                     <h:outputText value="Score: " />

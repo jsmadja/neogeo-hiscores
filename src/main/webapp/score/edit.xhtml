@@ -42,13 +42,13 @@
                     <h:outputText />
                     
                     <h:outputText value="NGF login " />
-                    <h:inputText id="fullname" value="#{scoreBean.fullname}" readonly="true" />
+                    <h:inputText id="fullname_" value="#{scoreBean.fullname}" readonly="true" />
                     <h:outputText />
                     
                     <h:outputText value="NGF password: " />
-                    <h:inputText id="password" value="#{scoreBean.password}" onfocus="clearText(this)" required="true" >
+                    <h:inputSecret id="password" value="#{scoreBean.password}" onfocus="clearText(this)" required="true" >
                         <f:validateLength minimum="1" />
-                    </h:inputText>
+                    </h:inputSecret>
                     <h:message for="password" styleClass="error" />
                     
                     <h:outputText value="Score: " />
@@ -76,6 +76,7 @@
                     <h:commandButton id="submit" value="${msgs.form_button_update}" action="#{scoreBean.edit}" />
                 </h:panelGrid>
                 <h:inputHidden id="id" value="#{scoreBean.id}" />
+                <h:inputHidden id="fullname" value="#{scoreBean.fullname}" />
             </h:form>
         </center>
     </ui:define>

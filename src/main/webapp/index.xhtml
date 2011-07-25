@@ -28,7 +28,7 @@
 
         <f:view>
             <center>
-                <h:dataTable  id="timelineTable" value="#{timelineBean.items}" var="item" style="margin-left: 300px" >
+                <h:dataTable  id="timelineTable" value="#{timelineBean.items}" var="item" style="margin-left: 300px;max-width:40%" >
                     <h:column>
                         <a class="thumbnail" href="#thumb">
                             <img src="${item.pictureUrl}" width="100px" border="0" />

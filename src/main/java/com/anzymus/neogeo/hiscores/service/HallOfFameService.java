@@ -41,8 +41,8 @@ public class HallOfFameService {
 
     private static Comparator<Score> sortScoreByValueDesc = new ScoreSortedByValueDescComparator();
 
-    private static final int[] POINTS = new int[]{10,8,6,5,4,3,2,1};
-    
+    private static final int[] POINTS = new int[] { 10, 8, 6, 5, 4, 3, 2, 1 };
+
     public List<Player> getPlayersOrderByRank(String level) {
         Map<String, Player> players = new HashMap<String, Player>();
 
@@ -57,7 +57,7 @@ public class HallOfFameService {
                     Score score = mvsScores.get(i);
                     int point = POINTS[i];
                     Player scorePlayer = score.getPlayer();
-                    String fullname = scorePlayer.getFullname().toUpperCase();
+                    String fullname = scorePlayer.getFullname();
                     Player player = players.get(fullname);
                     if (player == null) {
                         player = new Player(fullname);

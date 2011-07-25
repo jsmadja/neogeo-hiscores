@@ -37,7 +37,7 @@ public class AdministrationWebService {
 
     @EJB
     PlayerService playerService;
-    
+
     @WebMethod
     public void initializeGameList(String list) {
         String[] games = list.split(";");
@@ -59,10 +59,9 @@ public class AdministrationWebService {
     }
 
     @WebMethod
-    public void addScore(String gameName, String level, String fullname, String scorePoints,
-            String pictureUrl) {
+    public void addScore(String gameName, String level, String fullname, String scorePoints, String pictureUrl) {
         Game game = gameService.findByName(gameName);
-        Player player = playerService.findByFullname(fullname.toUpperCase());
+        Player player = playerService.findByFullname(fullname);
         if (player == null) {
             player = playerService.store(new Player(fullname));
         }
