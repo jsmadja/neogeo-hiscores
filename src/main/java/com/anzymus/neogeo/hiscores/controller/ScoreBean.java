@@ -13,10 +13,13 @@
  *     See the License for the specific language governing permissions and
  *     limitations under the License.
  */
-
 package com.anzymus.neogeo.hiscores.controller;
 
+import com.anzymus.neogeo.hiscores.authenticator.AuthenticationFailed;
+import com.anzymus.neogeo.hiscores.authenticator.NeoGeoFansAuthenticator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import com.anzymus.neogeo.hiscores.domain.Game;
@@ -26,29 +29,30 @@ import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 public class ScoreBean {
 
-    @EJB ScoreService scoreService;
-    @EJB GameService gameService;
-    @EJB PlayerService playerService;
-
+    @EJB
+    ScoreService scoreService;
+    @EJB
+    GameService gameService;
+    @EJB
+    PlayerService playerService;
     @ManagedProperty(value = "#{param.scoreId}")
     private String id;
-    
     private String fullname = "";
     private String score = "";
     private String password = "";
     private String pictureUrl = "";
     private String message;
-    
     private long currentGame;
     private String currentLevel = "MVS";
-    
     private static final int MAX_MESSAGE_LENGTH = 255;
-    
+
     @PostConstruct
     public void init() {
         if (id != null) {
@@ -60,37 +64,63 @@ public class ScoreBean {
             currentLevel = scoreFromDb.getLevel();
             currentGame = scoreFromDb.getGame().getId();
         }
-    }        
-    
+    }
+
     public String add() {
-        Game game = gameService.findById(currentGame);
-        Player player = playerService.findByFullname(fullname);
-        if (player == null) {
-            player = playerService.store(new Player(fullname));
+        try {
+            NeoGeoFansAuthenticator authenticator = new NeoGeoFansAuthenticator();
+            boolean isAuthenticated = authenticator.authenticate(fullname, password);
+            if (isAuthenticated) {
+                Game game = gameService.findById(currentGame);
+                Player player = playerService.findByFullname(fullname);
+                if (player == null) {
+                    player = playerService.store(new Player(fullname));
+                }
+                Score scoreToAdd = new Score(score, player, currentLevel, game, pictureUrl);
+                int end = message.length() > MAX_MESSAGE_LENGTH ? MAX_MESSAGE_LENGTH : message.length();
+                scoreToAdd.setMessage(message.substring(0, end));
+                scoreService.store(scoreToAdd);
+                return "home";
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Your NGF is invalid"));
+                return "score/create";
+            }
+        } catch (AuthenticationFailed ex) {
+            Logger.getLogger(ScoreBean.class.getName()).log(Level.SEVERE, null, ex);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
+            return "score/create";
         }
-        Score scoreToAdd = new Score(score, player, currentLevel, game, pictureUrl);
-        int end = message.length() > MAX_MESSAGE_LENGTH ? MAX_MESSAGE_LENGTH : message.length();
-        scoreToAdd.setMessage(message.substring(0, end));
-        scoreService.store(scoreToAdd);
-        return "home";
     }
-    
+
     public String edit() {
-        Game game = gameService.findById(currentGame);
-        Score scoreFromDb = scoreService.findById(Integer.parseInt(id));
-        scoreFromDb.setMessage(message);            
-        scoreFromDb.setGame(game);
-        scoreFromDb.setPictureUrl(pictureUrl);
-        scoreFromDb.setLevel(currentLevel);
-        scoreFromDb.setValue(score);
-        scoreService.store(scoreFromDb);
-        return "home";
+        try {
+            NeoGeoFansAuthenticator authenticator = new NeoGeoFansAuthenticator();
+            boolean isAuthenticated = authenticator.authenticate(fullname, password);
+            if (isAuthenticated) {
+                Game game = gameService.findById(currentGame);
+                Score scoreFromDb = scoreService.findById(Integer.parseInt(id));
+                scoreFromDb.setMessage(message);
+                scoreFromDb.setGame(game);
+                scoreFromDb.setPictureUrl(pictureUrl);
+                scoreFromDb.setLevel(currentLevel);
+                scoreFromDb.setValue(score);
+                scoreService.store(scoreFromDb);
+                return "home";
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The password is not a valid NGF password"));
+                return "score/edit";
+            }
+        } catch (AuthenticationFailed ex) {
+            Logger.getLogger(ScoreBean.class.getName()).log(Level.SEVERE, null, ex);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
+            return "score/edit";
+        }
     }
-    
+
     public List<Game> getGames() {
         return gameService.findAll();
     }
-    
+
     public List<String> getLevelList() {
         return Levels.list();
     }
@@ -174,5 +204,4 @@ public class ScoreBean {
     public void setMessage(String message) {
         this.message = message;
     }
-    
 }

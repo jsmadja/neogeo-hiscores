@@ -14,18 +14,17 @@
  *     limitations under the License.
  */
 
-package com.anzymus.neogeo.hiscores;
+package com.anzymus.neogeo.hiscores.authenticator;
 
 import static org.junit.Assert.assertTrue;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class NeoGeoFansAuthenticatorTest {
+
     @Test
-    @Ignore
-    public void testSomeMethod() {
+    public void should_authenticate_successfully() throws AuthenticationFailed {
         NeoGeoFansAuthenticator authenticator = new NeoGeoFansAuthenticator();
-        boolean result = authenticator.authenticate("anzymus", "xedy4bsa");
+        boolean result = authenticator.authenticate("anzymus-hiscores", "12AZQSWX");
         assertTrue(result);
     }
 }
