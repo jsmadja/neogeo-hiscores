@@ -21,14 +21,21 @@ import org.junit.Test;
 
 public class ScoreConverterTest {
 
+    ScoreConverter converter = new ScoreConverter();
+        
     @Test
     public void should_add_dot_to_score() {
-        ScoreConverter converter = new ScoreConverter();
         String[] scores = { "1", "12", "123", "1234", "12345", "123456", "1234567", };
         String[] scoresWithDots = { "1", "12", "123", "1.234", "12.345", "123.456", "1.234.567" };
         for (int i = 0; i < scores.length; i++) {
             String result = converter.getAsString(null, null, scores[i]);
             assertEquals(scoresWithDots[i], result);
         }
+    }
+    
+    @Test
+    public void should_not_format_chorno_score() {  
+        String result = converter.getAsString(null, null, "12:55:50");
+        assertEquals("12:55:50", result);
     }
 }

@@ -32,7 +32,9 @@ public class ScoreConverter implements Converter {
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         String score = value.toString();
-        score = addDots(score);
+        if (isNotChrono(score)) {
+            score = addDots(score);
+        }
         return score;
     }
 
@@ -48,6 +50,10 @@ public class ScoreConverter implements Converter {
         }
         score = sb.reverse().toString();
         return score;
+    }
+
+    private boolean isNotChrono(String score) {
+        return !score.contains(":");
     }
 
 }

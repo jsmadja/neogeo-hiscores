@@ -16,8 +16,8 @@
 
 package com.anzymus.neogeo.hiscores.comparator;
 
-import com.anzymus.neogeo.hiscores.domain.Game;
 import java.util.Comparator;
+import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Score;
 
 public class ScoreSortedByValueDescComparator implements Comparator<Score> {
@@ -27,22 +27,36 @@ public class ScoreSortedByValueDescComparator implements Comparator<Score> {
         String gameName = game.getName();
         String value1 = s1.getValue();
         String value2 = s2.getValue();
-        
+
         int comparison = 0;
-        if (gameName.equals("Neo Turf Masters / Big Tournament Golf")) {
+        if (isNegativeScoreGame(gameName)) {
             comparison = compareAsNegativeInt(value1, value2);
+        } else if (isChronoGame(gameName)) {
+            comparison = compareAsChrono(value1, value2);
         } else {
             comparison = compareAsInt(value1, value2);
         }
         return comparison;
     }
-    
+
+    private boolean isNegativeScoreGame(String gameName) {
+        return gameName.equals("Neo Turf Masters / Big Tournament Golf");
+    }
+
+    private boolean isChronoGame(String gameName) {
+        return gameName.equals("Thrash Rally") || gameName.equals("Neo Drift Out: New Technology") || gameName.equals("Samurai Shodown IV: Amakusa's Revenge / Samurai Spirits: Amakusa Kourin");
+    }
+
+    private int compareAsChrono(String value1, String value2) {
+        return value1.compareTo(value2);
+    }
+
     private int compareAsInt(String value1, String value2) {
         Integer score1 = Integer.parseInt(value1);
         Integer score2 = Integer.parseInt(value2);
         return score2.compareTo(score1);
     }
-    
+
     private int compareAsNegativeInt(String value1, String value2) {
         value1 = value1.replaceAll("-", "");
         value2 = value2.replaceAll("-", "");

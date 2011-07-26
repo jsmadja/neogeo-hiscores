@@ -16,11 +16,12 @@
 
 package com.anzymus.neogeo.hiscores.comparator;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
-import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class ScoreSortedByValueDescComparatorTest {
 
@@ -38,9 +39,9 @@ public class ScoreSortedByValueDescComparatorTest {
         int comparison = comparator.compare(score1, score2);
         assertEquals(1, comparison);
     }
-    
+
     @Test
-    public void should_return_sorted_score__for_neo_turf_masters() {
+    public void should_return_sorted_score_for_neo_turf_masters() {
         Game gameNeoTurf = new Game("Neo Turf Masters / Big Tournament Golf");
         Score score1 = new Score("-2", player, level, gameNeoTurf, pictureUrl);
         Score score2 = new Score("-3", player, level, gameNeoTurf, pictureUrl);
@@ -48,5 +49,35 @@ public class ScoreSortedByValueDescComparatorTest {
         int comparison = comparator.compare(score1, score2);
         assertEquals(1, comparison);
     }
+
+    @Test
+    public void should_return_sorted_score_for_thrash_rally() {
+        Game gameThrashRally = new Game("Thrash Rally");
+        Score score1 = new Score("3:07:21", player, level, gameThrashRally, pictureUrl);
+        Score score2 = new Score("3:09:13", player, level, gameThrashRally, pictureUrl);
+
+        int comparison = comparator.compare(score1, score2);
+        assertTrue(comparison < 0);
+    }
+
+    @Test
+    public void should_return_sorted_score_for_neo_drift_out() {
+        Game gameThrashRally = new Game("Neo Drift Out: New Technology");
+        Score score1 = new Score("3:07:21", player, level, gameThrashRally, pictureUrl);
+        Score score2 = new Score("3:09:13", player, level, gameThrashRally, pictureUrl);
+
+        int comparison = comparator.compare(score1, score2);
+        assertTrue(comparison < 0);
+    }
     
+    @Test
+    public void should_return_sorted_score_for_samsho4() {
+        Game gameSamsho4 = new Game("Samurai Shodown IV: Amakusa's Revenge / Samurai Spirits: Amakusa Kourin");
+        Score score1 = new Score("3:07:21", player, level, gameSamsho4, pictureUrl);
+        Score score2 = new Score("3:09:13", player, level, gameSamsho4, pictureUrl);
+
+        int comparison = comparator.compare(score1, score2);
+        assertTrue(comparison < 0);
+    }            
+            
 }

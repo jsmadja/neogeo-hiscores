@@ -41,7 +41,7 @@ public class GameBean {
     GameService gameService;
 
     @ManagedProperty(value = "#{param.id}")
-    private long id;
+    private String id;
 
     private String name;
 
@@ -57,13 +57,15 @@ public class GameBean {
 
     @PostConstruct
     public void init() {
-        Game game = gameService.findById(id);
+        long gameId = Long.parseLong(id);
+        Game game = gameService.findById(gameId);
         name = game.getName();
         scores = scoreService.findAllByGame(game);
     }
 
     public String edit() {
-        Game game = gameService.findById(id);
+        long gameId = Long.parseLong(id);
+        Game game = gameService.findById(gameId);
         game.setRules(rules);
         game.setPictureUrl(pictureUrl);
         gameService.store(game);
@@ -74,11 +76,11 @@ public class GameBean {
         return name;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

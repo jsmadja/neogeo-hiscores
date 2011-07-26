@@ -39,12 +39,16 @@ public class ScoreBean {
 
     @EJB
     ScoreService scoreService;
+    
     @EJB
     GameService gameService;
+    
     @EJB
     PlayerService playerService;
+    
     @ManagedProperty(value = "#{param.scoreId}")
     private String id;
+    
     private String fullname = "";
     private String score = "";
     private String password = "";

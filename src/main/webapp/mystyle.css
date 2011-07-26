@@ -36,6 +36,7 @@
 
 .score_row {
     vertical-align: top;
+    text-align: right;
 }
 
 .player {
