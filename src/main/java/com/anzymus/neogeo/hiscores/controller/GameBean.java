@@ -107,6 +107,7 @@ public class GameBean {
                 scoreItem.setPlayer(score.getPlayer().getFullname());
                 scoreItem.setPictureUrl(score.getPictureUrl());
                 scoreItem.setId(score.getId());
+                scoreItem.setMessage(score.getMessage());
             } else {
                 scoreItem.setValue("");
                 scoreItem.setPlayer("");

@@ -16,16 +16,36 @@
 
 package com.anzymus.neogeo.hiscores.comparator;
 
+import com.anzymus.neogeo.hiscores.domain.Game;
 import java.util.Comparator;
 import com.anzymus.neogeo.hiscores.domain.Score;
 
 public class ScoreSortedByValueDescComparator implements Comparator<Score> {
     @Override
     public int compare(Score s1, Score s2) {
+        Game game = s1.getGame();
+        String gameName = game.getName();
         String value1 = s1.getValue();
         String value2 = s2.getValue();
+        
+        int comparison = 0;
+        if (gameName.equals("Neo Turf Masters / Big Tournament Golf")) {
+            comparison = compareAsNegativeInt(value1, value2);
+        } else {
+            comparison = compareAsInt(value1, value2);
+        }
+        return comparison;
+    }
+    
+    private int compareAsInt(String value1, String value2) {
         Integer score1 = Integer.parseInt(value1);
         Integer score2 = Integer.parseInt(value2);
         return score2.compareTo(score1);
+    }
+    
+    private int compareAsNegativeInt(String value1, String value2) {
+        value1 = value1.replaceAll("-", "");
+        value2 = value2.replaceAll("-", "");
+        return compareAsInt(value1, value2);
     }
 }

@@ -28,6 +28,7 @@ public class ScoreItem {
     private int rankNumber;
     private String level;
     private Game game;
+    private String message;
     
     public long getId() {
         return id;
@@ -92,6 +93,13 @@ public class ScoreItem {
     public void setGame(Game game) {
         this.game = game;
     }
-    
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
     
 }
