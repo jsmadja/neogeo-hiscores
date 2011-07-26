@@ -41,7 +41,7 @@
             </table>
             <c:forEach var="level" items="${gameBean.levels}">
                 <h3>${level.label}</h3>
-                <h:dataTable id="scoreTable" value="#{level.scoreItems}" var="score" style="text-align: right;min-width: 50%">
+                <h:dataTable id="scoreTable" value="#{level.scoreItems}" var="score" rowClasses="score_row" style="min-width: 30%">
                     <h:column>
                         <h:outputText value="${score.rank}" />
                     </h:column>
@@ -57,7 +57,9 @@
                         </h:link>
                     </h:column>
                     <h:column>
-                        <h:outputText value="${score.message}" style="max-width: 50%;font-size: 10pt" />    
+                        <p class="message_column">
+                            <h:outputText value="${score.message}"/>
+                        </p>
                     </h:column>
                 </h:dataTable>
             </c:forEach>
