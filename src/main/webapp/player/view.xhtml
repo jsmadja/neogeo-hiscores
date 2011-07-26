@@ -28,7 +28,7 @@
     <ui:define name="content_right">
         <center>
             <h2>${playerBean.fullname}'s scores</h2>
-            <h:dataTable width="60%" id="scoreTable" value="#{playerBean.scores}" var="score" style="text-align: left">
+            <h:dataTable id="scoreTable" value="#{playerBean.scores}" var="score" style="text-align: left; min-width:60%">
                 <h:column>
                     <f:facet name="header">Game</f:facet>
                     <h:link styleClass="game" outcome="game" value="${score.game.name}">
