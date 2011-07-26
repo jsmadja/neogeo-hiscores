@@ -40,8 +40,7 @@
                 </tr>
             </table>
             <c:forEach var="level" items="${gameBean.levels}">
-                <h3>Level ${level.label}</h3>
-                TOP 10
+                <h3>${level.label}</h3>
                 <h:dataTable id="scoreTable" value="#{level.scoreItems}" var="score" style="text-align: right;min-width: 30%">
                     <h:column>
                         <h:outputText value="${score.rank}" />

@@ -18,7 +18,6 @@ package com.anzymus.neogeo.hiscores.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import com.google.common.base.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,15 +28,15 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import com.google.common.base.Objects;
 
 @Entity
 @Table(name = "SCORE")
 @NamedQueries({
-    @NamedQuery(name = "score_findAllByGame", query = "SELECT s FROM Score s WHERE s.game = :game"),
-    @NamedQuery(name = "score_findAllByPlayer", query = "SELECT s FROM Score s WHERE s.player = :player"),
-    @NamedQuery(name = "score_findAll", query = "SELECT s FROM Score s"),
-    @NamedQuery(name = "score_findAllOrderByDateDesc", query = "SELECT s FROM Score s ORDER BY s.creationDate DESC")
-})
+        @NamedQuery(name = "score_findAllByGame", query = "SELECT s FROM Score s WHERE s.game = :game"),
+        @NamedQuery(name = "score_findAllByPlayer", query = "SELECT s FROM Score s WHERE s.player = :player"),
+        @NamedQuery(name = "score_findAll", query = "SELECT s FROM Score s"),
+        @NamedQuery(name = "score_findAllOrderByDateDesc", query = "SELECT s FROM Score s ORDER BY s.creationDate DESC") })
 public class Score implements Serializable {
 
     @Id
@@ -46,24 +45,24 @@ public class Score implements Serializable {
 
     @ManyToOne(optional = false)
     private Game game;
-    
+
     @ManyToOne(optional = false)
     private Player player;
-    
+
     @Column(name = "LEVEL_LABEL", nullable = false)
     private String level;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
-    
+
     @Column(name = "SCORE_VALUE", nullable = false)
     private String value;
-    
+
     @Column(name = "PICTURE_URL")
     private String pictureUrl;
-    
+
     private String message;
-    
+
     public Score() {
     }
 
@@ -148,4 +147,5 @@ public class Score implements Serializable {
     public int hashCode() {
         return Objects.hashCode(game, value, player, level, pictureUrl);
     }
+
 }

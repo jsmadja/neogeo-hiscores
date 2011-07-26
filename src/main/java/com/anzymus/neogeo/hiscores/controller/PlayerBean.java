@@ -16,52 +16,35 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
+import com.anzymus.neogeo.hiscores.comparator.ScoreSortedByValueDescComparator;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import com.anzymus.neogeo.hiscores.domain.Game;
-import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Scores;
+import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
 
 @ManagedBean
 public class PlayerBean {
-    
-    @EJB ScoreService scoreService;
 
-    @EJB PlayerService playerService;
+    @EJB
+    ScoreService scoreService;
+
+    @EJB
+    PlayerService playerService;
     
-    @ManagedProperty(value="#{param.fullname}")
+    @EJB
+    GameService gameService;
+
+    @ManagedProperty(value = "#{param.fullname}")
     private String fullname;
-    
-    private Map<Game, GameItem> gameItems = new HashMap<Game, GameItem>();
-    
-    @PostConstruct
-    public void init() {
-        Player player = playerService.findByFullname(fullname);
-        Scores scores = scoreService.findAllByPlayer(player);
-        
-        for(Score score:scores) {
-            Game game = score.getGame();
-            String level = score.getLevel();
-            
-            GameItem gameItem = gameItems.get(game);
-            if (gameItem == null) {
-                gameItem = new GameItem(game.getName(), game.getId());
-                gameItems.put(game, gameItem);
-            }
-            gameItem.addScore(level, score);
-        }
-    }
 
     public String getFullname() {
         return fullname;
@@ -70,18 +53,29 @@ public class PlayerBean {
     public void setFullname(String fullname) {
         this.fullname = fullname;
     }
-
-    public List<GameItem> getGames() {
-        List<GameItem> games = new ArrayList<GameItem>();
-        games.addAll(gameItems.values());
-        Collections.sort(games, sortByNameComparator);
-        return games;
-    }
     
-    private static Comparator<GameItem> sortByNameComparator = new Comparator<GameItem>() {
-        @Override
-        public int compare(GameItem item1, GameItem item2) {
-            return item1.getName().compareTo(item2.getName());
+    public List<ScoreItem> getScores() {
+        List<ScoreItem> scoreItems = new ArrayList<ScoreItem>();
+        for(Game game:gameService.findAll()) {
+            Scores scores = scoreService.findAllByGame(game);
+            for(String level:Levels.list()) {
+                List<Score> scoreList = scores.getScoresByLevel(level);
+                Collections.sort(scoreList, new ScoreSortedByValueDescComparator());
+                for (int i=0; i<scoreList.size(); i++) {
+                    Score score = scoreList.get(i);
+                    if (score.getPlayer().getFullname().equals(fullname)) {
+                        ScoreItem scoreItem = new ScoreItem();
+                        scoreItem.setRankNumber(i+1);
+                        scoreItem.setValue(score.getValue());
+                        scoreItem.setLevel(level);
+                        scoreItem.setGame(game);
+                        scoreItem.setId(score.getId());
+                        scoreItems.add(scoreItem);
+                    }
+                }
+            }
         }
-    };
+        return scoreItems;
+    }
+
 }

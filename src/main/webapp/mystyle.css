@@ -24,6 +24,10 @@
     text-align: left;
 }
 
+.column_header {
+    text-align: left;
+}
+
 .player {
     color: #3399FF;
     font-size:14pt;

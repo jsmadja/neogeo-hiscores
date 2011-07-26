@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -40,16 +39,16 @@ public class GameBean {
 
     @EJB
     GameService gameService;
-    
+
     @ManagedProperty(value = "#{param.id}")
     private long id;
 
     private String name;
-    
+
     private String pictureUrl;
-    
+
     private String rules;
-    
+
     private Scores scores;
 
     private static final String[] RANKS = { "1st", "2nd", "3rd" };
@@ -62,7 +61,7 @@ public class GameBean {
         name = game.getName();
         scores = scoreService.findAllByGame(game);
     }
-    
+
     public String edit() {
         Game game = gameService.findById(id);
         game.setRules(rules);
@@ -82,17 +81,18 @@ public class GameBean {
     public void setId(long id) {
         this.id = id;
     }
-    
+
     public List<LevelItem> getLevels() {
         List<LevelItem> levelItems = new ArrayList<LevelItem>();
-        for (Map.Entry<String, List<Score>> value : this.scores.getScoresByLevels().entrySet()) {
-            String level = value.getKey();
-            List<Score> scoreList = value.getValue();
-            Collections.sort(scoreList, sortScoreByValueDesc);
-            List<ScoreItem> scoreItems = createScoreItems(scoreList);
-            LevelItem levelItem = new LevelItem(level);
-            levelItem.setScoreItems(scoreItems);
-            levelItems.add(levelItem);
+        for (String level : Levels.list()) {
+            List<Score> scoreList = scores.getScoresByLevel(level);
+            if (!scoreList.isEmpty()) {
+                Collections.sort(scoreList, sortScoreByValueDesc);
+                List<ScoreItem> scoreItems = createScoreItems(scoreList);
+                LevelItem levelItem = new LevelItem(level);
+                levelItem.setScoreItems(scoreItems);
+                levelItems.add(levelItem);
+            }
         }
         return levelItems;
     }

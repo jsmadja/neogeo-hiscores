@@ -93,7 +93,7 @@ public class ScoresTest {
     }
 
     @Test
-    public void should_return_two_list_item_when_there_is_two_elements_sorted_by_creation_date_desc()
+    public void should_return_one_list_item_when_adding_two_scores_with_same_game_same_level_same_player()
             throws InterruptedException {
         Player player = new Player("fullname");
         String level = "MVS";
@@ -107,10 +107,44 @@ public class ScoresTest {
         scores.add(score1);
         scores.add(score2);
 
-        List<Score> sortedScores = scores.sortByDateDesc();
+        assertEquals(1, scores.count());
+        assertTrue(scores.contains(score2));
+    }
 
-        assertEquals(2, sortedScores.size());
-        assertEquals(score2, sortedScores.get(0));
-        assertEquals(score1, sortedScores.get(1));
+    @Test
+    public void should_keep_only_best_scores_for_each_player() {
+        Player player = new Player("fullname");
+        String level = "MVS";
+        Game game = new Game("Fatal Fury");
+        String pictureUrl = "url";
+
+        Score score1 = new Score("1", player, level, game, pictureUrl);
+        Score score2 = new Score("2", player, level, game, pictureUrl);
+
+        Scores scores = new Scores();
+        scores.add(score1);
+        scores.add(score2);
+
+        assertEquals(1, scores.count());
+        Score score = scores.iterator().next();
+        assertEquals("2", score.getValue());
+    }
+
+    @Test
+    public void should_keep_only_best_scores_for_each_game() {
+        Player player = new Player("fullname");
+        String level = "MVS";
+        Game game1 = new Game("Fatal Fury");
+        Game game2 = new Game("Fatal Fury 2");
+        String pictureUrl = "url";
+
+        Score score1 = new Score("1", player, level, game1, pictureUrl);
+        Score score2 = new Score("1", player, level, game2, pictureUrl);
+
+        Scores scores = new Scores();
+        scores.add(score1);
+        scores.add(score2);
+
+        assertEquals(2, scores.count());
     }
 }

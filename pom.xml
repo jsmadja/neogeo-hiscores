@@ -275,7 +275,8 @@
             <properties>
                 <jta-data-source>jdbc/__default</jta-data-source>
                 <eclipselink.target-database>DERBY</eclipselink.target-database>
-                <eclipselink.ddl-generation>drop-and-create-tables</eclipselink.ddl-generation>
+                <eclipselink.ddl-generation>create-tables</eclipselink.ddl-generation>
+<!--                <eclipselink.ddl-generation>drop-and-create-tables</eclipselink.ddl-generation>-->
                 <javax.persistence.jdbc.driver>org.apache.derby.jdbc.ClientDriver</javax.persistence.jdbc.driver>
                 <javax.persistence.jdbc.url>jdbc:derby://localhost:1527/fluxx;create=true</javax.persistence.jdbc.url>
                 <javax.persistence.jdbc.user>APP</javax.persistence.jdbc.user>

@@ -16,16 +16,23 @@
 
 package com.anzymus.neogeo.hiscores.comparator;
 
-import java.util.Comparator;
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+import com.anzymus.neogeo.hiscores.domain.Game;
+import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 
-public class ScoreSortedByValueDescComparator implements Comparator<Score> {
-    @Override
-    public int compare(Score s1, Score s2) {
-        String value1 = s1.getValue();
-        String value2 = s2.getValue();
-        Integer score1 = Integer.parseInt(value1);
-        Integer score2 = Integer.parseInt(value2);
-        return score2.compareTo(score1);
+public class ScoreComparatorTest {
+
+    @Test
+    public void should_return_max_of_two_scores_as_int() {
+        Game game = new Game("Fatal Fury");
+        String level = "MVS";
+        String picture = "http://";
+        Player player = new Player("anz");
+        Score score1 = new Score("1", player, level, game, picture);
+        Score score2 = new Score("1", player, level, game, picture);
+        assertEquals(score2, ScoreComparator.max(score1, score2));
     }
+
 }

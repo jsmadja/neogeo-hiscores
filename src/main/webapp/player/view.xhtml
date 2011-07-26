@@ -28,36 +28,29 @@
     <ui:define name="content_right">
         <center>
             <h2>${playerBean.fullname}'s scores</h2>
-            <table style="min-width: 30%">
-                <c:forEach var="game" items="${playerBean.games}">
-                    <tr>
-                        <td>
-                            <h3>
-                                <h:link styleClass="game" outcome="game" value="${game.name}">
-                                    <f:param name="id" value="${game.id}"/>
-                                </h:link>
-                            </h3>
-                        </td>
-                        <td>
-                            <table>
-                                <c:forEach var="level" items="${game.levels}">
-                                    <tr align="right">
-                                        <td>${level.label} :</td>
-                                        <td>
-                                            <c:forEach var="score" items="${level.scores}" begin="0" end="1">
-                                                <h:link outcome="score/edit" styleClass="score" >
-                                                    <h:outputText value="${score.value}" converter="scoreConverter" />    
-                                                    <f:param name="scoreId" value="${score.id}" />
-                                                </h:link>
-                                            </c:forEach>
-                                        </td>
-                                    </tr> 
-                                </c:forEach>
-                            </table>
-                        </td>
-                    </tr>
-                </c:forEach>
-            </table>
+            <h:dataTable width="60%" id="scoreTable" value="#{playerBean.scores}" var="score" style="text-align: left">
+                <h:column>
+                    <f:facet name="header">Game</f:facet>
+                    <h:link styleClass="game" outcome="game" value="${score.game.name}">
+                        <f:param name="id" value="${score.game.id}"/>
+                    </h:link>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Level</f:facet>
+                    <h:outputText value="${score.level}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Score</f:facet>
+                    <h:link outcome="score/edit" styleClass="score" >
+                        <h:outputText value="${score.value}" converter="scoreConverter" />    
+                        <f:param name="scoreId" value="${score.id}" />
+                    </h:link>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Rank</f:facet>
+                    <h:outputText value="${score.rankNumber}" />
+                </h:column>
+            </h:dataTable>
         </center>
     </ui:define>
 </ui:composition>

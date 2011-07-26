@@ -19,27 +19,37 @@ package com.anzymus.neogeo.hiscores.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
+import com.anzymus.neogeo.hiscores.comparator.ScoreComparator;
 
 public class Scores implements Iterable<Score> {
 
     private Set<Score> scores = new HashSet<Score>();
-    private Map<String, List<Score>> scoresByLevels = new HashMap<String, List<Score>>();
 
     public void add(Score score) {
-        scores.add(score);
         String level = score.getLevel();
-        List<Score> scoreList = scoresByLevels.get(level);
-        if (scoreList == null) {
-            scoreList = new ArrayList<Score>();
-            scoresByLevels.put(level, scoreList);
+        Player player = score.getPlayer();
+        Game game = score.getGame();
+        Score bestScore = getBestScoreFor(player, level, game);
+        if (bestScore == null) {
+            scores.add(score);
+        } else {
+            Score maxScore = ScoreComparator.max(score, bestScore);
+            scores.remove(bestScore);
+            scores.add(maxScore);
         }
-        scoreList.add(score);
+    }
+
+    private Score getBestScoreFor(Player player, String level, Game game) {
+        for (Score scor : scores) {
+            if (scor.getLevel().equals(level) && scor.getPlayer().equals(player) && scor.getGame().equals(game)) {
+                return scor;
+            }
+        }
+        return null;
     }
 
     public boolean contains(Score score) {
@@ -48,10 +58,6 @@ public class Scores implements Iterable<Score> {
 
     public int count() {
         return scores.size();
-    }
-
-    public Map<String, List<Score>> getScoresByLevels() {
-        return scoresByLevels;
     }
 
     @Override
@@ -78,6 +84,7 @@ public class Scores implements Iterable<Score> {
         Collections.sort(sortedScores, comparator);
         return sortedScores;
     }
+
     private static Comparator<Score> comparatorByDateDesc = new Comparator<Score>() {
 
         @Override
@@ -85,4 +92,15 @@ public class Scores implements Iterable<Score> {
             return s2.getCreationDate().compareTo(s1.getCreationDate());
         }
     };
+
+    public List<Score> getScoresByLevel(String level) {
+        List<Score> scoresByLevel = new ArrayList<Score>();
+        for (Score score : scores) {
+            if (level.equals(score.getLevel())) {
+                scoresByLevel.add(score);
+            }
+        }
+        return scoresByLevel;
+    }
+
 }

@@ -16,6 +16,8 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
+import com.anzymus.neogeo.hiscores.domain.Game;
+
 public class ScoreItem {
     
     private String value;
@@ -23,7 +25,10 @@ public class ScoreItem {
     private String player;
     private String pictureUrl;
     private long id;
-
+    private int rankNumber;
+    private String level;
+    private Game game;
+    
     public long getId() {
         return id;
     }
@@ -63,5 +68,30 @@ public class ScoreItem {
     public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
     }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public int getRankNumber() {
+        return rankNumber;
+    }
+
+    public void setRankNumber(int rankNumber) {
+        this.rankNumber = rankNumber;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+    
     
 }

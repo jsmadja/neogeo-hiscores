@@ -16,16 +16,18 @@
 
 package com.anzymus.neogeo.hiscores.comparator;
 
-import java.util.Comparator;
 import com.anzymus.neogeo.hiscores.domain.Score;
 
-public class ScoreSortedByValueDescComparator implements Comparator<Score> {
-    @Override
-    public int compare(Score s1, Score s2) {
-        String value1 = s1.getValue();
-        String value2 = s2.getValue();
-        Integer score1 = Integer.parseInt(value1);
-        Integer score2 = Integer.parseInt(value2);
-        return score2.compareTo(score1);
+public class ScoreComparator {
+
+    public static Score max(Score score1, Score score2) {
+        return maxAsInt(score1, score2);
     }
+    
+    private static Score maxAsInt(Score score1, Score score2) {
+        Integer score1asInt = Integer.parseInt(score1.getValue());
+        Integer score2asInt = Integer.parseInt(score2.getValue());
+        return score1asInt > score2asInt ? score1 : score2;
+    }
+    
 }

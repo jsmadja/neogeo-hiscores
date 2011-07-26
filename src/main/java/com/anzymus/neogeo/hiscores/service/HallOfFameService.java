@@ -42,6 +42,8 @@ public class HallOfFameService {
     private static Comparator<Score> sortScoreByValueDesc = new ScoreSortedByValueDescComparator();
 
     private static final int[] POINTS = new int[] { 10, 8, 6, 5, 4, 3, 2, 1 };
+    
+    private static final int MIN_SCORES = 3;
 
     public List<Player> getPlayersOrderByRank(String level) {
         Map<String, Player> players = new HashMap<String, Player>();
@@ -49,12 +51,11 @@ public class HallOfFameService {
         List<Game> games = gameService.findAll();
         for (Game game : games) {
             Scores scores = scoreService.findAllByGame(game);
-            Map<String, List<Score>> scoresByLevels = scores.getScoresByLevels();
-            List<Score> mvsScores = scoresByLevels.get(level);
-            if (mvsScores != null) {
-                Collections.sort(mvsScores, sortScoreByValueDesc);
-                for (int i = 0; i < mvsScores.size() && i < 8; i++) {
-                    Score score = mvsScores.get(i);
+            List<Score> scoresByLevel = scores.getScoresByLevel(level);
+            if (scoresByLevel.size() > MIN_SCORES) {
+                Collections.sort(scoresByLevel, sortScoreByValueDesc);
+                for (int i = 0; i < scoresByLevel.size() && i < 8; i++) {
+                    Score score = scoresByLevel.get(i);
                     int point = POINTS[i];
                     Player scorePlayer = score.getPlayer();
                     String fullname = scorePlayer.getFullname();

@@ -59,10 +59,12 @@ public class ScoreServiceTest extends AbstractTest {
     public void should_not_add_same_score() {
         Scores scoresInitial = scoreService.findAll();
 
-        Score score = new Score("999", player, level, game1, pictureUrl);
+        Player newPlayer = playerService.store(new Player(RandomStringUtils.randomAlphabetic(5)));
+
+        Score score = new Score("999", newPlayer, level, game1, pictureUrl);
         scoreService.store(score);
 
-        score = new Score("999", player, level, game1, pictureUrl);
+        score = new Score("999", newPlayer, level, game1, pictureUrl);
         scoreService.store(score);
 
         Scores scoresFinal = scoreService.findAll();
@@ -71,17 +73,18 @@ public class ScoreServiceTest extends AbstractTest {
 
     @Test
     public void should_find_scores_by_player() {
-        int initialCount = scoreService.findAllByPlayer(player).count();
+        Player newPlayer = playerService.store(new Player(RandomStringUtils.randomAlphabetic(5)));
+        int initialCount = scoreService.findAllByPlayer(newPlayer).count();
 
-        Score score1 = new Score("123", player, "MVS", game1, pictureUrl);
-        Score score2 = new Score("456", player, "Normal", game1, pictureUrl);
-        Score score3 = new Score("1mn32", player, "Easy", game2, pictureUrl);
+        Score score1 = new Score("123", newPlayer, "MVS", game1, pictureUrl);
+        Score score2 = new Score("456", newPlayer, "Normal", game1, pictureUrl);
+        Score score3 = new Score("1mn32", newPlayer, "Easy", game2, pictureUrl);
 
         scoreService.store(score1);
         scoreService.store(score2);
         scoreService.store(score3);
 
-        Scores scores = scoreService.findAllByPlayer(player);
+        Scores scores = scoreService.findAllByPlayer(newPlayer);
 
         assertEquals(initialCount + 3, scores.count());
 
