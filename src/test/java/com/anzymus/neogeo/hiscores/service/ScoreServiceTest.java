@@ -98,4 +98,21 @@ public class ScoreServiceTest extends AbstractTest {
         List<Score> scores = scoreService.findLastScoresOrderByDateDesc();
         assertNotNull(scores);
     }
+
+    @Test
+    public void should_count_scores_by_game() {
+        long initialCount = scoreService.findCountByGame(game1);
+
+        Score score1 = new Score("9999", player, "MVS", game1, pictureUrl);
+        Score score2 = new Score("99991", player, "MVS", game1, pictureUrl);
+        Score score3 = new Score("99992", player, "MVS", game1, pictureUrl);
+
+        scoreService.store(score1);
+        scoreService.store(score2);
+        scoreService.store(score3);
+
+        long count = scoreService.findCountByGame(game1);
+
+        assertEquals(initialCount + 3, count);
+    }
 }

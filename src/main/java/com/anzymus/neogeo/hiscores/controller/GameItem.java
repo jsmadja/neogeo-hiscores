@@ -28,7 +28,7 @@ public class GameItem {
 
     private String name;
     private long id;
-    private int count;
+    private long count;
     private Map<String, LevelItem> levelItems = new HashMap<String, LevelItem>();
 
     public GameItem(String name, long id) {
@@ -36,7 +36,7 @@ public class GameItem {
         this.id = id;
     }
 
-    GameItem(String name, long id, int count) {
+    GameItem(String name, long id, long count) {
         this(name, id);
         this.count = count;
     }
@@ -49,7 +49,7 @@ public class GameItem {
         return id;
     }
 
-    public int getCount() {
+    public long getCount() {
         return count;
     }
 

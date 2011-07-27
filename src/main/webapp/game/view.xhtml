@@ -28,7 +28,7 @@
     <ui:define name="content_right">
         <center>
             <h2>${gameBean.name}</h2>
-            
+
             <table>
                 <tr>
                     <td>
@@ -41,27 +41,43 @@
             </table>
             <c:forEach var="level" items="${gameBean.levels}">
                 <h3>${level.label}</h3>
-                <h:dataTable id="scoreTable" value="#{level.scoreItems}" var="score" rowClasses="score_row" style="min-width: 30%">
-                    <h:column>
-                        <h:outputText value="${score.rank}" />
-                    </h:column>
-                    <h:column>
-                        <h:link styleClass="player" outcome="player" value="${score.player}">
-                            <f:param name="fullname" value="${score.player}"/>
-                        </h:link>
-                    </h:column>
-                    <h:column>
-                        <h:link outcome="score/edit" styleClass="score">
-                            <h:outputText value="${score.value}" converter="scoreConverter" />    
-                            <f:param name="scoreId" value="${score.id}" />
-                        </h:link>
-                    </h:column>
-                    <h:column>
-                        <p class="message_column">
-                            <h:outputText value="${score.message}"/>
-                        </p>
-                    </h:column>
-                </h:dataTable>
+
+                <table style="min-width: 40%;text-align: right">
+                    <c:forEach id="scoreTable" var="score" items="#{level.scoreItems}">
+                        <tr>
+                            <td style="text-align:left">
+                                <h:outputText value="${score.rank}" />
+                            </td>
+                            <td>
+                                <h:link styleClass="player" outcome="player" value="${score.player}">
+                                    <f:param name="fullname" value="${score.player}"/>
+                                </h:link>
+                            </td>
+                            <td>
+                                <h:link outcome="score/edit" styleClass="score">
+                                    <h:outputText value="${score.value}" converter="scoreConverter" />    
+                                    <f:param name="scoreId" value="${score.id}" />
+                                </h:link>
+                            </td>
+                            <td>
+                                <a class="thumbnail" href="#thumb">
+                                    <img src="${score.pictureUrl}" width="25px" border="0" />
+                                    <span>
+                                        <img src="${score.pictureUrl}" width="500px"/>
+                                    </span>
+                                </a>
+                            </td>    
+                            <td>
+                                <p class="message_column">
+                                    <h:outputText value="${score.message}"/>
+                                </p>
+                            </td>
+                            <td>
+                                <h:outputText value="${score.date}" converter="dateMMDDYYConverter" styleClass="date" />
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
             </c:forEach>
         </center>
     </ui:define>

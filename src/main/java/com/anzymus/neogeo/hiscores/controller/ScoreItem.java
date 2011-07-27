@@ -17,6 +17,7 @@
 package com.anzymus.neogeo.hiscores.controller;
 
 import com.anzymus.neogeo.hiscores.domain.Game;
+import java.util.Date;
 
 public class ScoreItem {
     
@@ -29,6 +30,7 @@ public class ScoreItem {
     private String level;
     private Game game;
     private String message;
+    private Date date;
     
     public long getId() {
         return id;
@@ -100,6 +102,14 @@ public class ScoreItem {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Date getDate() {
+        return date;
     }
     
 }

@@ -110,6 +110,7 @@ public class GameBean {
                 scoreItem.setPictureUrl(score.getPictureUrl());
                 scoreItem.setId(score.getId());
                 scoreItem.setMessage(score.getMessage());
+                scoreItem.setDate(score.getCreationDate());
             } else {
                 scoreItem.setValue("");
                 scoreItem.setPlayer("");

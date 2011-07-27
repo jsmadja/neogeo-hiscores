@@ -20,11 +20,11 @@ import com.anzymus.neogeo.hiscores.comparator.ScoreSortedByValueDescComparator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import com.anzymus.neogeo.hiscores.domain.Game;
+import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Scores;
 import com.anzymus.neogeo.hiscores.service.GameService;
@@ -56,7 +56,8 @@ public class PlayerBean {
     
     public List<ScoreItem> getScores() {
         List<ScoreItem> scoreItems = new ArrayList<ScoreItem>();
-        for(Game game:gameService.findAll()) {
+        Player player = playerService.findByFullname(fullname);
+        for(Game game:gameService.findAllGamesPlayedBy(player)) {
             Scores scores = scoreService.findAllByGame(game);
             for(String level:Levels.list()) {
                 List<Score> scoreList = scores.getScoresByLevel(level);
@@ -70,6 +71,7 @@ public class PlayerBean {
                         scoreItem.setLevel(level);
                         scoreItem.setGame(game);
                         scoreItem.setId(score.getId());
+                        scoreItem.setPictureUrl(score.getPictureUrl());
                         scoreItems.add(scoreItem);
                     }
                 }

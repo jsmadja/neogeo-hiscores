@@ -22,8 +22,10 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import com.anzymus.neogeo.hiscores.domain.Game;
+import com.anzymus.neogeo.hiscores.domain.Player;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
@@ -58,6 +60,19 @@ public class GameService {
 
     public Game findById(long gameId) {
         return em.find(Game.class, gameId);
+    }
+
+    public List<Game> findAllGamesPlayedBy(Player player) {
+        String sql = "SELECT * FROM GAME WHERE id IN (SELECT DISTINCT game_id FROM SCORE WHERE player_id = "
+                + player.getId() + ") ORDER BY name";
+        Query query = em.createNativeQuery(sql, Game.class);
+        return query.getResultList();
+    }
+
+    public List<Game> findAllPlayedGames() {
+        String sql = "SELECT * FROM GAME WHERE id IN (SELECT DISTINCT game_id FROM SCORE) ORDER BY name";
+        Query query = em.createNativeQuery(sql, Game.class);
+        return query.getResultList();
     }
 
 }

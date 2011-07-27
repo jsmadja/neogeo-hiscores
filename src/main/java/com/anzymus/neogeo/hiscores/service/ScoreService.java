@@ -22,6 +22,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
@@ -96,6 +97,16 @@ public class ScoreService {
     private boolean alreadyExist(Score score) {
         Scores scores = findAllByPlayer(score.getPlayer());
         return scores.contains(score);
+    }
+
+    public long findCountByGame(Game game) {
+        String sql = "SELECT COUNT(id) FROM SCORE WHERE game_id = " + game.getId();
+        Query query = em.createNativeQuery(sql);
+        try {
+            return (Integer) query.getSingleResult();
+        } catch (ClassCastException e) {
+            return (Long) query.getSingleResult();
+        }
     }
 
 }
