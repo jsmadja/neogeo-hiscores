@@ -39,14 +39,24 @@ public class HallOfFameBean {
         }
         List<PlayerItem> playerItems = new ArrayList<PlayerItem>();
         List<Player> players = hallOfFameService.getPlayersOrderByRank(level);
+        String oldRank = null;
+        int oldPoints = 0;
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
             PlayerItem playerItem = new PlayerItem();
-            playerItem.setRank(Integer.toString(i + 1));
+            String rank = Integer.toString(i + 1);
+            int points = player.getPoints();
+            if (oldRank != null && oldPoints == points) {
+                rank = oldRank;
+                points = oldPoints;
+            }
+            playerItem.setRank(rank);
             playerItem.setFullname(player.getFullname());
-            playerItem.setScore(player.getPoints());
+            playerItem.setScore(points);
             playerItem.setContribution(player.getContribution());
             playerItems.add(playerItem);
+            oldRank = rank;
+            oldPoints = points;
         }
         return playerItems;
     }

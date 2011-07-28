@@ -100,8 +100,11 @@ public class GameBean {
     }
 
     private List<ScoreItem> createScoreItems(List<Score> scores) {
+        Score oldScore = null;
+        String oldRank = null;
         List<ScoreItem> scoreItems = new ArrayList<ScoreItem>();
         for (int i = 0; i < 10; i++) {
+            String rank;
             ScoreItem scoreItem = new ScoreItem();
             if (i < scores.size()) {
                 Score score = scores.get(i);
@@ -111,18 +114,33 @@ public class GameBean {
                 scoreItem.setId(score.getId());
                 scoreItem.setMessage(score.getMessage());
                 scoreItem.setDate(score.getCreationDate());
+                if (oldScore != null && oldScore.getValue().equals(score.getValue())) {
+                    rank = oldRank;
+                } else {
+                    rank = getRankByIdx(i);
+                }
+                oldScore = score;
             } else {
                 scoreItem.setValue("");
                 scoreItem.setPlayer("");
+                oldScore = null;
+                rank = getRankByIdx(i);
             }
-            if (i <= 2) {
-                scoreItem.setRank(RANKS[i]);
-            } else {
-                scoreItem.setRank((i + 1) + "th");
-            }
+            scoreItem.setRank(rank);
             scoreItems.add(scoreItem);
+            oldRank = rank;
         }
         return scoreItems;
+    }
+
+    private String getRankByIdx(int i) {
+        String rank;
+        if (i <= 2) {
+            rank = RANKS[i];
+        } else {
+            rank = (i + 1) + "th";
+        }
+        return rank;
     }
 
     public String getPictureUrl() {

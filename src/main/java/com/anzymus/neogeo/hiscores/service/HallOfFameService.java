@@ -35,15 +35,10 @@ public class HallOfFameService {
 
     @EJB
     ScoreService scoreService;
-
     @EJB
     GameService gameService;
-
     private static Comparator<Score> sortScoreByValueDesc = new ScoreSortedByValueDescComparator();
-
     private static final int[] POINTS = new int[] { 10, 8, 6, 5, 4, 3, 2, 1 };
-    
-    private static final int MIN_SCORES = 1;
 
     public List<Player> getPlayersOrderByRank(String level) {
         Map<String, Player> players = new HashMap<String, Player>();
@@ -52,27 +47,33 @@ public class HallOfFameService {
         for (Game game : games) {
             Scores scores = scoreService.findAllByGame(game);
             List<Score> scoresByLevel = scores.getScoresByLevel(level);
-            if (scoresByLevel.size() >= MIN_SCORES) {
-                Collections.sort(scoresByLevel, sortScoreByValueDesc);
-                for (int i = 0; i < scoresByLevel.size() && i < 8; i++) {
-                    Score score = scoresByLevel.get(i);
-                    int point = POINTS[i];
-                    Player scorePlayer = score.getPlayer();
-                    String fullname = scorePlayer.getFullname();
-                    Player player = players.get(fullname);
-                    if (player == null) {
-                        player = new Player(fullname);
-                        players.put(fullname, player);
-                    }
-                    player.setScore(player.getPoints() + point);
-                    player.setContribution(player.getContribution() + 1);
+            Collections.sort(scoresByLevel, sortScoreByValueDesc);
+            Score oldScore = null;
+            int oldPoint = 0;
+            for (int i = 0; i < scoresByLevel.size() && i < 8; i++) {
+                Score score = scoresByLevel.get(i);
+                int point = POINTS[i];
+                if (oldScore != null && score.getValue().equals(oldScore.getValue())) {
+                    point = oldPoint;
                 }
+                Player scorePlayer = score.getPlayer();
+                String fullname = scorePlayer.getFullname();
+                Player player = players.get(fullname);
+                if (player == null) {
+                    player = new Player(fullname);
+                    players.put(fullname, player);
+                }
+                player.setScore(player.getPoints() + point);
+                player.setContribution(player.getContribution() + 1);
+                oldScore = score;
+                oldPoint = point;
             }
         }
 
         List<Player> sortedPlayers = new ArrayList<Player>();
         sortedPlayers.addAll(players.values());
         Collections.sort(sortedPlayers, new Comparator<Player>() {
+
             @Override
             public int compare(Player p1, Player p2) {
                 return p2.getPoints() - p1.getPoints();
