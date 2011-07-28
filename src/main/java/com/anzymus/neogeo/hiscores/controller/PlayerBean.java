@@ -16,13 +16,13 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
-import com.anzymus.neogeo.hiscores.comparator.ScoreSortedByValueDescComparator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import com.anzymus.neogeo.hiscores.comparator.ScoreSortedByValueDescComparator;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
@@ -39,7 +39,7 @@ public class PlayerBean {
 
     @EJB
     PlayerService playerService;
-    
+
     @EJB
     GameService gameService;
 
@@ -53,31 +53,48 @@ public class PlayerBean {
     public void setFullname(String fullname) {
         this.fullname = fullname;
     }
-    
+
     public List<ScoreItem> getScores() {
         List<ScoreItem> scoreItems = new ArrayList<ScoreItem>();
         Player player = playerService.findByFullname(fullname);
-        for(Game game:gameService.findAllGamesPlayedBy(player)) {
-            Scores scores = scoreService.findAllByGame(game);
-            for(String level:Levels.list()) {
-                List<Score> scoreList = scores.getScoresByLevel(level);
-                Collections.sort(scoreList, new ScoreSortedByValueDescComparator());
-                for (int i=0; i<scoreList.size(); i++) {
-                    Score score = scoreList.get(i);
-                    if (score.getPlayer().getFullname().equals(fullname)) {
-                        ScoreItem scoreItem = new ScoreItem();
-                        scoreItem.setRankNumber(i+1);
-                        scoreItem.setValue(score.getValue());
-                        scoreItem.setLevel(level);
-                        scoreItem.setGame(game);
-                        scoreItem.setId(score.getId());
-                        scoreItem.setPictureUrl(score.getPictureUrl());
-                        scoreItems.add(scoreItem);
-                    }
-                }
-            }
+        for (Game game : gameService.findAllGamesPlayedBy(player)) {
+            extractScoreItemsFromGame(scoreItems, game);
         }
         return scoreItems;
+    }
+
+    private void extractScoreItemsFromGame(List<ScoreItem> scoreItems, Game game) {
+        Scores scores = scoreService.findAllByGame(game);
+        for (String level : Levels.list()) {
+            extractScoreItemsFromLevels(scoreItems, game, scores, level);
+        }
+    }
+
+    private void extractScoreItemsFromLevels(List<ScoreItem> scoreItems, Game game, Scores scores, String level) {
+        List<Score> scoreList = scores.getScoresByLevel(level);
+        Collections.sort(scoreList, new ScoreSortedByValueDescComparator());
+        Score oldScore = null;
+        int oldRank = 0;
+        for (int i = 0; i < scoreList.size(); i++) {
+            Score score = scoreList.get(i);
+            int rank = i + 1;
+            if (score.getPlayer().getFullname().equals(fullname)) {
+                String value = score.getValue();
+                if (oldScore != null && oldScore.getValue().equals(value)) {
+                    rank = oldRank;
+                }
+                ScoreItem scoreItem = new ScoreItem();
+                scoreItem.setRankNumber(rank);
+                scoreItem.setValue(value);
+                scoreItem.setLevel(level);
+                scoreItem.setGame(game);
+                scoreItem.setId(score.getId());
+                scoreItem.setPictureUrl(score.getPictureUrl());
+                scoreItems.add(scoreItem);
+            }
+            oldScore = score;
+            oldRank = rank;
+        }
     }
 
 }
