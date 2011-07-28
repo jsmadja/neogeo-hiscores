@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
 
@@ -34,14 +33,14 @@ public class GamesBean {
     ScoreService scoreService;
 
     public List<GameItem> getGames() {
-        List<Game> games = gameService.findAllPlayedGames();
+        List<Object[]> scoreCounts = gameService.findAllScoreCountForEachGames();
         List<GameItem> gameItems = new ArrayList<GameItem>();
-        for (Game game : games) {
-            long count = scoreService.findCountByGame(game);
-            if (count > 0) {
-                GameItem gameItem = new GameItem(game.getName(), game.getId(), count);
-                gameItems.add(gameItem);
-            }
+        for (Object[] scoreCount : scoreCounts) {
+            Long gameId = (Long) scoreCount[0];
+            String gameName = (String) scoreCount[1];
+            Long count = (Long) scoreCount[2];  
+            GameItem gameItem = new GameItem(gameName, gameId, count);
+            gameItems.add(gameItem);
         }
         return gameItems;
     }

@@ -109,4 +109,10 @@ public class ScoreService {
         }
     }
 
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void delete(Long scoreId) {
+        Score score = findById(scoreId);
+        em.remove(score);
+    }
+
 }

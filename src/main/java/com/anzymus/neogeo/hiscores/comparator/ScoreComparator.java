@@ -21,7 +21,11 @@ import com.anzymus.neogeo.hiscores.domain.Score;
 public class ScoreComparator {
 
     public static Score max(Score score1, Score score2) {
-        return maxAsInt(score1, score2);
+        try {
+            return maxAsInt(score1, score2);
+        } catch(Throwable t) {
+            return score1;
+        }
     }
     
     private static Score maxAsInt(Score score1, Score score2) {

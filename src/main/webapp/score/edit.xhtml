@@ -52,9 +52,7 @@
                     <h:message for="password" styleClass="error" />
                     
                     <h:outputText value="Score: " />
-                    <h:inputText id="score" value="#{scoreBean.score}" maxlength="10" size="10" required="true" >
-                        <f:validateLongRange minimum="1" maximum="2147483647"/>
-                    </h:inputText>
+                    <h:inputText id="score" value="#{scoreBean.score}" maxlength="10" size="10" required="true" />
                     <h:message for="score" styleClass="error" />
                     
                     <h:outputText value="Game: " />

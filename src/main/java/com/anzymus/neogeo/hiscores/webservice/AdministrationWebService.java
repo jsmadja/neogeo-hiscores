@@ -80,4 +80,8 @@ public class AdministrationWebService {
         gameService.store(game);
     }
 
+    @WebMethod
+    public void deleteScore(Long scoreId) {
+        scoreService.delete(scoreId);
+    }
 }

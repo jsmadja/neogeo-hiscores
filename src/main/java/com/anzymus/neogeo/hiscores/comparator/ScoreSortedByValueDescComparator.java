@@ -27,16 +27,19 @@ public class ScoreSortedByValueDescComparator implements Comparator<Score> {
         String gameName = game.getName();
         String value1 = s1.getValue();
         String value2 = s2.getValue();
-
-        int comparison = 0;
-        if (isNegativeScoreGame(gameName)) {
-            comparison = compareAsNegativeInt(value1, value2);
-        } else if (isChronoGame(gameName)) {
-            comparison = compareAsChrono(value1, value2);
-        } else {
-            comparison = compareAsInt(value1, value2);
+        try {
+            int comparison = 0;
+            if (isNegativeScoreGame(gameName)) {
+                comparison = compareAsNegativeInt(value1, value2);
+            } else if (isChronoGame(gameName)) {
+                comparison = compareAsChrono(value1, value2);
+            } else {
+                comparison = compareAsInt(value1, value2);
+            }
+            return comparison;
+        } catch (Throwable t) {
+            return value1.compareTo(value2);
         }
-        return comparison;
     }
 
     private boolean isNegativeScoreGame(String gameName) {
