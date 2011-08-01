@@ -22,7 +22,7 @@ import java.util.List;
 public class Levels {
 
     public static List<String> list() {
-        return Arrays.asList("Very Easy","Easy", "Normal", "MVS", "Hard", "Very Hard", "Hardest", "Expert");
+        return Arrays.asList("MVS", "Very Easy","Easy", "Normal", "Hard", "Very Hard", "Hardest", "Expert");
     }
     
 }

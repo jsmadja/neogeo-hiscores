@@ -23,6 +23,7 @@ public class PlayerItem {
     private String fullname;
     private int score;
     private int contribution;
+    private String average;
 
     public int getContribution() {
         return contribution;
@@ -64,4 +65,11 @@ public class PlayerItem {
         this.shortname = shortname;
     }
 
+    public void setAverage(String average) {
+        this.average = average;
+    }
+
+    public String getAverage() {
+        return average;
+    }
 }

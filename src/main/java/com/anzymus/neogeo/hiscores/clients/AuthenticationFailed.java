@@ -14,17 +14,14 @@
  *     limitations under the License.
  */
 
-package com.anzymus.neogeo.hiscores.authenticator;
+package com.anzymus.neogeo.hiscores.clients;
 
-import static org.junit.Assert.assertTrue;
-import org.junit.Test;
+public class AuthenticationFailed extends Exception {
 
-public class NeoGeoFansAuthenticatorTest {
+    private static final long serialVersionUID = 6359404882802112182L;
 
-    @Test
-    public void should_authenticate_successfully() throws AuthenticationFailed {
-        NeoGeoFansAuthenticator authenticator = new NeoGeoFansAuthenticator();
-        boolean result = authenticator.authenticate("anzymus-hiscores", "12AZQSWX");
-        assertTrue(result);
+    public AuthenticationFailed(Throwable cause) {
+        super(cause);
     }
+
 }

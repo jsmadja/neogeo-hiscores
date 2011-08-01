@@ -193,6 +193,7 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>r09</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -229,6 +230,7 @@
             <artifactId>jersey-client</artifactId>
             <version>1.8</version>
             <type>jar</type>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
@@ -246,11 +248,13 @@
             <groupId>htmlunit</groupId>
             <artifactId>htmlunit</artifactId>
             <version>1.14</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -265,6 +269,8 @@
                 <javax.persistence.jdbc.url>jdbc:mysql://localhost:3306/hiscores</javax.persistence.jdbc.url>
                 <javax.persistence.jdbc.user>hiscores_db_user</javax.persistence.jdbc.user>
                 <javax.persistence.jdbc.password>hiscores</javax.persistence.jdbc.password>
+                <contextPath>http://www.neogeo-hiscores.com</contextPath>
+                <contextPathStatic>http://88.191.117.240</contextPathStatic>
             </properties>
         </profile>
         <profile>
@@ -281,6 +287,8 @@
                 <javax.persistence.jdbc.url>jdbc:derby://localhost:1527/fluxx;create=true</javax.persistence.jdbc.url>
                 <javax.persistence.jdbc.user>APP</javax.persistence.jdbc.user>
                 <javax.persistence.jdbc.password>APP</javax.persistence.jdbc.password>
+                <contextPath>http://localhost:8080</contextPath>
+                <contextPathStatic>http://localhost:8080</contextPathStatic>
             </properties>
         </profile>
     </profiles>

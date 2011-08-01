@@ -28,7 +28,12 @@
     <ui:define name="content_right">
         <center>
             <h2>Hall of Fame  - #{hallOfFameBean.level} </h2>
-            
+            <h:outputText value="Change level: " />
+            <h:selectOneMenu id="level" onchange="document.location='hallOfFame.xhtml?level='+this.value" value="#{hallOfFameBean.level}" >
+                <f:selectItems var="level" value="${hallOfFameBean.levels}" />
+            </h:selectOneMenu>
+            <br/>
+            <br/>
             <h:dataTable width="60%" id="playerTable" value="#{hallOfFameBean.players}" var="player" style="text-align: right">
                 <h:column>
                     <f:facet name="header">Rank</f:facet>
@@ -48,14 +53,11 @@
                     <f:facet name="header">Contribution</f:facet>
                     <h:outputText value="${player.contribution}" />
                 </h:column>
+                <h:column>
+                    <f:facet name="header">Average</f:facet>
+                    <h:outputText value="${player.average}" />
+                </h:column>
             </h:dataTable>
-            
-            <br/>
-            <h:outputText value="Change level: " />
-            <h:selectOneMenu id="level" onchange="document.location='hallOfFame.xhtml?level='+this.value" value="#{hallOfFameBean.level}" >
-                <f:selectItems var="level" value="${hallOfFameBean.levels}" />
-            </h:selectOneMenu>
-            
         </center>
     </ui:define>
 </ui:composition>

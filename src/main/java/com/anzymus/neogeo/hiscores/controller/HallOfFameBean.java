@@ -22,6 +22,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.service.HallOfFameService;
+import java.text.DecimalFormat;
 import javax.faces.bean.ManagedProperty;
 
 @ManagedBean
@@ -32,6 +33,9 @@ public class HallOfFameBean {
 
     @ManagedProperty(value = "#{param.level}")
     private String level;
+    
+    private String mask = new String("#0.##");
+    private DecimalFormat format = new DecimalFormat(mask); 
     
     public List<PlayerItem> getPlayers() {
         if (level == null) {
@@ -54,6 +58,11 @@ public class HallOfFameBean {
             playerItem.setFullname(player.getFullname());
             playerItem.setScore(points);
             playerItem.setContribution(player.getContribution());
+            double average = 0;
+            if (player.getContribution() != 0) {
+                average = (double)points / (double)player.getContribution();
+            }
+            playerItem.setAverage(format.format(average));
             playerItems.add(playerItem);
             oldRank = rank;
             oldPoints = points;

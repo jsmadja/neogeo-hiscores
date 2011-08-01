@@ -30,7 +30,10 @@ public class ScoreItem {
     private String level;
     private Game game;
     private String message;
+    private String longMessage;
     private Date date;
+    
+    private int MAX_MESSAGE_LENGTH = 25;
     
     public long getId() {
         return id;
@@ -101,7 +104,8 @@ public class ScoreItem {
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        setLongMessage(message);
+        this.message = cut(message);
     }
 
     public void setDate(Date date) {
@@ -110,6 +114,24 @@ public class ScoreItem {
 
     public Date getDate() {
         return date;
+    }
+
+    public String getLongMessage() {
+        return longMessage;
+    }
+
+    public void setLongMessage(String longMessage) {
+        this.longMessage = longMessage;
+    }
+
+    private String cut(String message) {
+        if (message != null) {
+            int length = message.length();
+            if (length > MAX_MESSAGE_LENGTH) {
+                message = message.substring(0, MAX_MESSAGE_LENGTH)+" ...";
+            }
+        }
+        return message;
     }
     
 }
