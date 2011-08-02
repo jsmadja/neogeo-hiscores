@@ -18,7 +18,10 @@ package com.anzymus.neogeo.hiscores.clients;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import com.anzymus.neogeo.hiscores.domain.Score;
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
@@ -38,6 +41,8 @@ public class NeoGeoFansClient {
     private String password;
     private WebClient webClient;
 
+    private static final Logger LOG = Logger.getLogger(NeoGeoFansClient.class.getName());
+
     public boolean authenticate(String login, String password) throws AuthenticationFailed {
         Preconditions.checkNotNull(login, "login is mandatory");
         Preconditions.checkNotNull(password, "password is mandatory");
@@ -50,6 +55,7 @@ public class NeoGeoFansClient {
             String contentResult = submitForm(loginForm);
             return contentResult.contains("Merci de vous être identifié, " + login + ".");
         } catch (IOException e) {
+            LOG.log(Level.SEVERE, login + " has not successfully logged in", e);
             throw new AuthenticationFailed(e);
         }
     }
@@ -79,7 +85,7 @@ public class NeoGeoFansClient {
             removeSignature(topicPage);
             submitPost(topicPage);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.log(Level.SEVERE, "Can't post message:'" + message + "' in postId:" + postId + " by " + login, e);
         }
     }
 
@@ -105,16 +111,24 @@ public class NeoGeoFansClient {
     }
 
     private void removeSignature(HtmlPage topicPage) throws IOException {
-        HtmlCheckBoxInput signature = (HtmlCheckBoxInput) topicPage.getHtmlElementById("cb_signature");
-        if (signature.isChecked()) {
-            signature.click();
+        try {
+            HtmlCheckBoxInput signature = (HtmlCheckBoxInput) topicPage.getHtmlElementById("cb_signature");
+            if (signature.isChecked()) {
+                signature.click();
+            }
+        } catch (ElementNotFoundException e) {
+            LOG.log(Level.SEVERE, "Can't find signature check box in:\n" + topicPage.asXml());
         }
     }
 
     private void submitPost(HtmlPage topicPage) throws IOException {
-        HtmlForm postForm = (HtmlForm) topicPage.getForms().get(2);
-        HtmlSubmitInput submitButton = (HtmlSubmitInput) postForm.getInputsByName("sbutton").get(0);
-        submitButton.click();
+        try {
+            HtmlForm postForm = (HtmlForm) topicPage.getForms().get(2);
+            HtmlSubmitInput submitButton = (HtmlSubmitInput) postForm.getInputsByName("sbutton").get(0);
+            submitButton.click();
+        } catch (ElementNotFoundException e) {
+            LOG.log(Level.SEVERE, "Can't find post button in:\n" + topicPage.asXml());
+        }
     }
 
     public static String toMessage(Score score) {

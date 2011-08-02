@@ -35,4 +35,11 @@ public class ScoreComparatorTest {
         assertEquals(score2, ScoreComparator.max(score1, score2));
     }
 
+    @Test
+    public void should_find_gap_for_int() {
+        String score1 = "123";
+        String score2 = "345";
+        assertEquals("222", ScoreComparator.gap(score1, score2));
+    }
+
 }

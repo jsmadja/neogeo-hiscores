@@ -27,12 +27,14 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import com.anzymus.neogeo.hiscores.clients.AuthenticationFailed;
 import com.anzymus.neogeo.hiscores.clients.NeoGeoFansClient;
+import com.anzymus.neogeo.hiscores.clients.NeoGeoFansClientFactory;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
+import com.google.common.annotations.VisibleForTesting;
 
 @ManagedBean
 public class ScoreBean {
@@ -58,6 +60,12 @@ public class ScoreBean {
     private String currentLevel = "MVS";
     private static final int MAX_MESSAGE_LENGTH = 255;
 
+    @VisibleForTesting
+    NeoGeoFansClientFactory neoGeoFansClientFactory = new NeoGeoFansClientFactory();
+
+    @VisibleForTesting
+    FacesContext facesContext = FacesContext.getCurrentInstance();
+
     @PostConstruct
     public void init() {
         if (id != null) {
@@ -73,7 +81,7 @@ public class ScoreBean {
 
     public String add() {
         try {
-            NeoGeoFansClient ngfClient = new NeoGeoFansClient();
+            NeoGeoFansClient ngfClient = neoGeoFansClientFactory.create();
             boolean isAuthenticated = ngfClient.authenticate(fullname, password);
             if (isAuthenticated) {
                 Game game = gameService.findById(currentGame);
@@ -95,19 +103,19 @@ public class ScoreBean {
                 }
                 return "home";
             } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Your NGF is invalid"));
+                facesContext.addMessage(null, new FacesMessage("Your NGF account is invalid"));
                 return "score/create";
             }
         } catch (AuthenticationFailed ex) {
             Logger.getLogger(ScoreBean.class.getName()).log(Level.SEVERE, null, ex);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
+            facesContext.addMessage(null, new FacesMessage(ex.getMessage()));
             return "score/create";
         }
     }
 
     public String edit() {
         try {
-            NeoGeoFansClient authenticator = new NeoGeoFansClient();
+            NeoGeoFansClient authenticator = neoGeoFansClientFactory.create();
             boolean isAuthenticated = authenticator.authenticate(fullname, password);
             if (isAuthenticated) {
                 Game game = gameService.findById(currentGame);
@@ -120,13 +128,12 @@ public class ScoreBean {
                 scoreService.store(scoreFromDb);
                 return "home";
             } else {
-                FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage("The password is not a valid NGF password"));
+                facesContext.addMessage(null, new FacesMessage("The password is not a valid NGF password"));
                 return "score/edit";
             }
         } catch (AuthenticationFailed ex) {
             Logger.getLogger(ScoreBean.class.getName()).log(Level.SEVERE, null, ex);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
+            facesContext.addMessage(null, new FacesMessage(ex.getMessage()));
             return "score/edit";
         }
     }

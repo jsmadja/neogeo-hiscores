@@ -23,15 +23,29 @@ public class ScoreComparator {
     public static Score max(Score score1, Score score2) {
         try {
             return maxAsInt(score1, score2);
-        } catch(Throwable t) {
+        } catch (Throwable t) {
             return score1;
         }
     }
-    
+
     private static Score maxAsInt(Score score1, Score score2) {
         Integer score1asInt = Integer.parseInt(score1.getValue());
         Integer score2asInt = Integer.parseInt(score2.getValue());
         return score1asInt > score2asInt ? score1 : score2;
     }
-    
+
+    public static String gap(String score1, String score2) {
+        try {
+            return gapAsInt(score1, score2);
+        } catch (Throwable t) {
+            return "";
+        }
+    }
+
+    private static String gapAsInt(String score1, String score2) {
+        Integer score1asInt = Integer.parseInt(score1);
+        Integer score2asInt = Integer.parseInt(score2);
+        return Integer.toString(Math.abs(score1asInt - score2asInt));
+    }
+
 }

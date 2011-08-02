@@ -75,6 +75,18 @@
     font-size: 48pt;
 }
 
+.positive-gap {
+    color: green;
+    font-weight: bolder;
+    font-size:10pt;
+}
+
+.negative-gap {
+    color: red;
+    font-weight: bolder;
+    font-size:10pt;
+}
+
 .thumbnail{
     position: relative;
     z-index: 0;

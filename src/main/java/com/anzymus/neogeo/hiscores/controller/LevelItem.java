@@ -16,13 +16,13 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
-import com.anzymus.neogeo.hiscores.domain.Score;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import com.anzymus.neogeo.hiscores.domain.Score;
 
 public class LevelItem {
 
@@ -48,6 +48,7 @@ public class LevelItem {
         Collections.sort(sortedScores, sortByValueDescComparator);
         return sortedScores;
     }
+
     private static Comparator<Score> sortByValueDescComparator = new Comparator<Score>() {
         @Override
         public int compare(Score s1, Score s2) {
@@ -62,5 +63,5 @@ public class LevelItem {
     public List<ScoreItem> getScoreItems() {
         return scoreItems;
     }
-    
+
 }

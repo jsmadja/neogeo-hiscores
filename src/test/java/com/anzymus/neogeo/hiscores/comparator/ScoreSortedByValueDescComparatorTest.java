@@ -69,7 +69,7 @@ public class ScoreSortedByValueDescComparatorTest {
         int comparison = comparator.compare(score1, score2);
         assertTrue(comparison < 0);
     }
-    
+
     @Test
     public void should_return_sorted_score_for_samsho4() {
         Game gameSamsho4 = new Game("Samurai Shodown IV: Amakusa's Revenge / Samurai Spirits: Amakusa Kourin");
@@ -78,6 +78,18 @@ public class ScoreSortedByValueDescComparatorTest {
 
         int comparison = comparator.compare(score1, score2);
         assertTrue(comparison < 0);
-    }            
-            
+    }
+
+    @Test
+    public void for_same_score_order_by_player_name_asc() {
+        Player playerA = new Player("playerA");
+        Player playerB = new Player("playerB");
+
+        Game game = new Game("game");
+        Score score1 = new Score("1", playerA, level, game, pictureUrl);
+        Score score2 = new Score("1", playerB, level, game, pictureUrl);
+
+        int comparison = comparator.compare(score1, score2);
+        assertTrue(comparison < 0);
+    }
 }

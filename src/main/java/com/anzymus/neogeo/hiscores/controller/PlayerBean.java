@@ -22,6 +22,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import com.anzymus.neogeo.hiscores.comparator.ScoreComparator;
 import com.anzymus.neogeo.hiscores.comparator.ScoreSortedByValueDescComparator;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
@@ -73,28 +74,56 @@ public class PlayerBean {
     private void extractScoreItemsFromLevels(List<ScoreItem> scoreItems, Game game, Scores scores, String level) {
         List<Score> scoreList = scores.getScoresByLevel(level);
         Collections.sort(scoreList, new ScoreSortedByValueDescComparator());
-        Score oldScore = null;
-        int oldRank = 0;
+        Score previousScore = null;
+        Score nextScore = null;
+        int previousRank = 0;
         for (int i = 0; i < scoreList.size(); i++) {
             Score score = scoreList.get(i);
+            nextScore = (i + 1) < scoreList.size() ? scoreList.get(i + 1) : null;
             int rank = i + 1;
-            if (score.getPlayer().getFullname().equals(fullname)) {
+            if (isCurrentPlayer(score)) {
                 String value = score.getValue();
-                if (oldScore != null && oldScore.getValue().equals(value)) {
-                    rank = oldRank;
+                if (isSameRankAsPreviousScore(previousScore, value)) {
+                    rank = previousRank;
                 }
-                ScoreItem scoreItem = new ScoreItem();
-                scoreItem.setRankNumber(rank);
-                scoreItem.setValue(value);
-                scoreItem.setLevel(level);
-                scoreItem.setGame(game);
-                scoreItem.setId(score.getId());
-                scoreItem.setPictureUrl(score.getPictureUrl());
+                Long scoreId = score.getId();
+                String scorePictureUrl = score.getPictureUrl();
+                ScoreItem scoreItem = createScoreItem(game, level, rank, value, scoreId, scorePictureUrl);
+                scoreItem.setPositiveGap(computeGap(value, nextScore));
+                scoreItem.setNegativeGap(computeGap(value, previousScore));
                 scoreItems.add(scoreItem);
             }
-            oldScore = score;
-            oldRank = rank;
+            previousScore = score;
+            previousRank = rank;
         }
+    }
+
+    private boolean isCurrentPlayer(Score score) {
+        return score.getPlayer().getFullname().equals(fullname);
+    }
+
+    private ScoreItem createScoreItem(Game game, String level, int rank, String value, Long scoreId,
+            String scorePictureUrl) {
+        ScoreItem scoreItem = new ScoreItem();
+        scoreItem.setRankNumber(rank);
+        scoreItem.setValue(value);
+        scoreItem.setLevel(level);
+        scoreItem.setGame(game);
+        scoreItem.setId(scoreId);
+        scoreItem.setPictureUrl(scorePictureUrl);
+        return scoreItem;
+    }
+
+    private String computeGap(String value, Score score) {
+        String gap = "";
+        if (score != null) {
+            gap = ScoreComparator.gap(value, score.getValue());
+        }
+        return gap;
+    }
+
+    private boolean isSameRankAsPreviousScore(Score previousScore, String scoreValue) {
+        return previousScore != null && previousScore.getValue().equals(scoreValue);
     }
 
 }

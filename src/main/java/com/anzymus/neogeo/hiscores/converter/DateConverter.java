@@ -33,29 +33,32 @@ public class DateConverter implements Converter {
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         Date date = (Date) value;
-        
+        return toFormattedDate(date);
+    }
+
+    String toFormattedDate(Date date) {
         long current = System.currentTimeMillis();
         long event = date.getTime();
-        
-        long durationInSeconds = (current - event)/1000;
+
+        long durationInSeconds = (current - event) / 1000;
         long durationInMinutes = durationInSeconds / 60;
         long durationInHours = durationInMinutes / 60;
         long durationInDays = durationInHours / 24;
         long durationInWeeks = durationInDays / 7;
-        
+
         if (durationInWeeks >= 1)
-            return durationInWeeks+" week(s) ago";
-        
+            return durationInWeeks + " week(s) ago";
+
         if (durationInDays >= 1)
-            return durationInDays+" day(s) ago";
-        
+            return durationInDays + " day(s) ago";
+
         if (durationInHours >= 1)
-            return durationInHours+" hour(s) ago";
-        
+            return durationInHours + " hour(s) ago";
+
         if (durationInMinutes >= 1)
-            return durationInMinutes+" minute(s) ago";
-        
-        return durationInSeconds+" second(s) ago";
+            return durationInMinutes + " minute(s) ago";
+
+        return durationInSeconds + " second(s) ago";
     }
-    
+
 }

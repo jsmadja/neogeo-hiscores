@@ -36,6 +36,10 @@ public class ScoreSortedByValueDescComparator implements Comparator<Score> {
             } else {
                 comparison = compareAsInt(value1, value2);
             }
+
+            if (comparison == 0) {
+                comparison = s1.getPlayer().getFullname().compareTo(s2.getPlayer().getFullname());
+            }
             return comparison;
         } catch (Throwable t) {
             return value1.compareTo(value2);
@@ -47,7 +51,8 @@ public class ScoreSortedByValueDescComparator implements Comparator<Score> {
     }
 
     private boolean isChronoGame(String gameName) {
-        return gameName.equals("Thrash Rally") || gameName.equals("Neo Drift Out: New Technology") || gameName.equals("Samurai Shodown IV: Amakusa's Revenge / Samurai Spirits: Amakusa Kourin");
+        return gameName.equals("Thrash Rally") || gameName.equals("Neo Drift Out: New Technology")
+                || gameName.equals("Samurai Shodown IV: Amakusa's Revenge / Samurai Spirits: Amakusa Kourin");
     }
 
     private int compareAsChrono(String value1, String value2) {

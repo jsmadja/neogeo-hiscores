@@ -16,11 +16,11 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
-import com.anzymus.neogeo.hiscores.domain.Game;
 import java.util.Date;
+import com.anzymus.neogeo.hiscores.domain.Game;
 
 public class ScoreItem {
-    
+
     private String value;
     private String rank;
     private String player;
@@ -32,9 +32,11 @@ public class ScoreItem {
     private String message;
     private String longMessage;
     private Date date;
-    
+    private String positiveGap;
+    private String negativeGap;
+
     private int MAX_MESSAGE_LENGTH = 25;
-    
+
     public long getId() {
         return id;
     }
@@ -42,7 +44,7 @@ public class ScoreItem {
     public void setId(long id) {
         this.id = id;
     }
-    
+
     public String getPlayer() {
         return player;
     }
@@ -124,14 +126,30 @@ public class ScoreItem {
         this.longMessage = longMessage;
     }
 
+    public String getPositiveGap() {
+        return positiveGap;
+    }
+
+    public void setPositiveGap(String positiveGap) {
+        this.positiveGap = positiveGap;
+    }
+
+    public String getNegativeGap() {
+        return negativeGap;
+    }
+
+    public void setNegativeGap(String negativeGap) {
+        this.negativeGap = negativeGap;
+    }
+
     private String cut(String message) {
         if (message != null) {
             int length = message.length();
             if (length > MAX_MESSAGE_LENGTH) {
-                message = message.substring(0, MAX_MESSAGE_LENGTH)+" ...";
+                message = message.substring(0, MAX_MESSAGE_LENGTH) + " ...";
             }
         }
         return message;
     }
-    
+
 }

@@ -56,7 +56,6 @@ public class AdministrationWebService {
                 scoreValue[i] = scoreValue[i].replaceAll("\"", "").trim();
             }
             String fullname = scoreValue[1];
-            System.err.println(Arrays.toString(scoreValue));
             String message = scoreValue.length >= 5 ? scoreValue[4] : "";
             addScore(scoreValue[0], "MVS", fullname, scoreValue[2], scoreValue[3], message);
         }
