@@ -16,14 +16,14 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import com.anzymus.neogeo.hiscores.domain.Player;
-import com.anzymus.neogeo.hiscores.service.HallOfFameService;
-import java.text.DecimalFormat;
 import javax.faces.bean.ManagedProperty;
+import com.anzymus.neogeo.hiscores.domain.Player;
+import com.anzymus.neogeo.hiscores.service.halloffame.HallOfFameService;
 
 @ManagedBean
 public class HallOfFameBean {
@@ -33,16 +33,25 @@ public class HallOfFameBean {
 
     @ManagedProperty(value = "#{param.level}")
     private String level;
-    
+
     private String mask = new String("#0.##");
-    private DecimalFormat format = new DecimalFormat(mask); 
-    
+    private DecimalFormat format = new DecimalFormat(mask);
+
     public List<PlayerItem> getPlayers() {
+        List<Player> players = hallOfFameService.getPlayersOrderByRank(level);
+        return createPlayerItems(players);
+    }
+
+    public List<PlayerItem> getPlayersV2() {
+        List<Player> players = hallOfFameService.getPlayersOrderByRankV2(level);
+        return createPlayerItems(players);
+    }
+
+    private List<PlayerItem> createPlayerItems(List<Player> players) {
         if (level == null) {
             level = "MVS";
         }
         List<PlayerItem> playerItems = new ArrayList<PlayerItem>();
-        List<Player> players = hallOfFameService.getPlayersOrderByRank(level);
         String oldRank = null;
         int oldPoints = 0;
         for (int i = 0; i < players.size(); i++) {
@@ -60,7 +69,7 @@ public class HallOfFameBean {
             playerItem.setContribution(player.getContribution());
             double average = 0;
             if (player.getContribution() != 0) {
-                average = (double)points / (double)player.getContribution();
+                average = (double) points / (double) player.getContribution();
             }
             playerItem.setAverage(format.format(average));
             playerItems.add(playerItem);
@@ -77,9 +86,9 @@ public class HallOfFameBean {
     public String getLevel() {
         return level;
     }
-    
+
     public List<String> getLevels() {
         return Levels.list();
     }
-    
+
 }

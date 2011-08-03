@@ -1,0 +1,63 @@
+<!--
+
+        Copyright (C) 2011 Julien SMADJA <julien dot smadja at gmail dot com>
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at
+
+                http://www.apache.org/licenses/LICENSE-2.0
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:emcomp="http://java.sun.com/jsf/composite/emcomp"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="content_right">
+        <center>
+            <h2>Hall of Fame  - #{hallOfFameBean.level} </h2>
+            <h:outputText value="Change level: " />
+            <h:selectOneMenu id="level" onchange="document.location='hallOfFame.xhtml?level='+this.value" value="#{hallOfFameBean.level}" >
+                <f:selectItems var="level" value="${hallOfFameBean.levels}" />
+            </h:selectOneMenu>
+            <br/>
+            <br/>
+            <h:dataTable width="60%" id="playerTable" value="#{hallOfFameBean.playersV2}" var="player" style="text-align: right">
+                <h:column>
+                    <f:facet name="header">Rank</f:facet>
+                    <h:outputText value="${player.rank}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Fullname</f:facet>
+                    <h:link styleClass="player" outcome="player" value="${player.fullname}">
+                        <f:param name="fullname" value="${player.fullname}"/>
+                    </h:link>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Score</f:facet>
+                    <h:outputText value="${player.score}" converter="scoreConverter" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Contribution</f:facet>
+                    <h:outputText value="${player.contribution}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Average</f:facet>
+                    <h:outputText value="${player.average}" />
+                </h:column>
+            </h:dataTable>
+        </center>
+    </ui:define>
+</ui:composition>

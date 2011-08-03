@@ -14,7 +14,7 @@
  *     limitations under the License.
  */
 
-package com.anzymus.neogeo.hiscores.service;
+package com.anzymus.neogeo.hiscores.service.halloffame;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,11 +24,14 @@ import java.util.List;
 import java.util.Map;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import com.anzymus.neogeo.hiscores.comparator.PlayerSortedByPointsDescComparator;
 import com.anzymus.neogeo.hiscores.comparator.ScoreSortedByValueDescComparator;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Scores;
+import com.anzymus.neogeo.hiscores.service.GameService;
+import com.anzymus.neogeo.hiscores.service.ScoreService;
 
 @Stateless
 public class HallOfFameService {
@@ -38,21 +41,32 @@ public class HallOfFameService {
     @EJB
     GameService gameService;
     private static Comparator<Score> sortScoreByValueDesc = new ScoreSortedByValueDescComparator();
-    private static final int[] POINTS = new int[] { 10, 8, 6, 5, 4, 3, 2, 1 };
+
+    private Comparator<Player> sortByPlayerPointsComparator = new PlayerSortedByPointsDescComparator();
 
     public List<Player> getPlayersOrderByRank(String level) {
-        Map<String, Player> players = new HashMap<String, Player>();
+        PointCalculator pointCalculator = new NgfPointCalculator();
+        return createPlayerList(level, pointCalculator);
+    }
 
+    public List<Player> getPlayersOrderByRankV2(String level) {
+        PointCalculator pointCalculator = new RedemslugPointCalculator();
+        return createPlayerList(level, pointCalculator);
+    }
+
+    private List<Player> createPlayerList(String level, PointCalculator pointCalculator) {
+        Map<String, Player> players = new HashMap<String, Player>();
         List<Game> games = gameService.findAll();
         for (Game game : games) {
             Scores scores = scoreService.findAllByGame(game);
             List<Score> scoresByLevel = scores.getScoresByLevel(level);
+            int maxPoints = scoresByLevel.size() >= 10 ? 10 : scoresByLevel.size();
             Collections.sort(scoresByLevel, sortScoreByValueDesc);
             Score oldScore = null;
             int oldPoint = 0;
             for (int i = 0; i < scoresByLevel.size() && i < 8; i++) {
                 Score score = scoresByLevel.get(i);
-                int point = POINTS[i];
+                int point = pointCalculator.getPointsByIndex(i, maxPoints);
                 if (oldScore != null && score.getValue().equals(oldScore.getValue())) {
                     point = oldPoint;
                 }
@@ -72,13 +86,8 @@ public class HallOfFameService {
 
         List<Player> sortedPlayers = new ArrayList<Player>();
         sortedPlayers.addAll(players.values());
-        Collections.sort(sortedPlayers, new Comparator<Player>() {
-
-            @Override
-            public int compare(Player p1, Player p2) {
-                return p2.getPoints() - p1.getPoints();
-            }
-        });
+        Collections.sort(sortedPlayers, sortByPlayerPointsComparator);
         return sortedPlayers;
     }
+
 }

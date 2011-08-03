@@ -66,6 +66,13 @@
             <to-view-id>/hallOfFame.xhtml</to-view-id> 
         </navigation-case> 
     </navigation-rule>
+	<navigation-rule> 
+        <from-view-id>*</from-view-id> 
+        <navigation-case> 
+            <from-outcome>hallOfFame2</from-outcome> 
+            <to-view-id>/hallOfFame2.xhtml</to-view-id> 
+        </navigation-case> 
+    </navigation-rule>
 
     <navigation-rule> 
         <from-view-id>*</from-view-id> 
