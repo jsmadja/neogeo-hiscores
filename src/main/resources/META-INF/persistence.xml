@@ -31,13 +31,13 @@
 			<property name="javax.persistence.jdbc.url" value="${javax.persistence.jdbc.url}" />
 			<property name="javax.persistence.jdbc.user" value="${javax.persistence.jdbc.user}" />
 			<property name="javax.persistence.jdbc.password" value="${javax.persistence.jdbc.password}" />
-<!--
+
 			<property name="eclipselink.logging.level" value="FINE" />
 			<property name="eclipselink.logging.logger" value="DefaultLogger" />
 			<property name="eclipselink.logging.timestamp" value="false" />
 			<property name="eclipselink.logging.session" value="false" />
 			<property name="eclipselink.logging.thread" value="false" />
--->
+
 		</properties>
 
 	</persistence-unit>

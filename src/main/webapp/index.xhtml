@@ -28,35 +28,61 @@
 
         <f:view>
             <center>
-                <h:dataTable  id="timelineTable" value="#{timelineBean.items}" var="item" style="margin-left: 300px;max-width:40%" >
-                    <h:column>
-                        <a class="thumbnail" href="#thumb">
-                            <img src="${item.pictureUrl}" width="100px" border="0" />
-                            <span>
-                                <img src="${item.pictureUrl}" width="500px"/>
-                            </span>
-                        </a>
-                    </h:column>
-                    <h:column>
-                        <p style="font-size:10pt;margin:0">
-                            <h:link styleClass="player" outcome="player" value="${item.score.player.fullname}">
-                                <f:param name="fullname" value="${item.score.player.fullname}"/>
-                            </h:link><br/>
-                            <h:link outcome="score/edit" styleClass="score" >
-                                <h:outputText value="${item.score.value}" converter="scoreConverter" />    
-                                <f:param name="scoreId" value="${item.score.id}" />
-                            </h:link>
-                             on 
-                            <h:link styleClass="game" outcome="game" value="${item.score.game.name}">
-                                <f:param name="id" value="${item.score.game.id}"/>
-                            </h:link> (${item.score.level})
-                            <br/>
-                            <h:outputText value="${item.score.message}" style="font-size:10pt;font-style: italic"/>
-                            <br/>
-                            <h:outputText value="${item.score.creationDate}" style="font-size:10pt" converter="dateConverter"/>
-                        </p>
-                    </h:column>
-                </h:dataTable>
+                <table style="margin-left: 300px;max-width:40%">
+                    <c:forEach var="item" items="${timelineBean.items}" >
+                        <tr>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${item.unlockedTitle != null}">
+                                        <img src="${contextPathStatic}/${item.pictureUrl}" width="100px" border="0" />
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a class="thumbnail" href="#thumb">
+                                            <img src="${item.pictureUrl}" width="100px" border="0" />
+                                            <span>
+                                                <img src="${item.pictureUrl}" width="500px"/>
+                                            </span>
+                                        </a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                            <td>
+                                <p style="font-size:10pt">
+                                    <c:choose>
+                                        <c:when test="${item.unlockedTitle != null}">
+                                            <h:link styleClass="player" outcome="player" value="${item.unlockedTitle.player.fullname}">
+                                                <f:param name="fullname" value="${item.unlockedTitle.player.fullname}"/>
+                                            </h:link><br/>
+                                            unlocked the title <h:outputText value="${item.unlockedTitle.title.label}" styleClass="score" />
+                                            <br/>
+                                            <h:outputText value="${item.unlockedTitle.title.description}" style="font-size:10pt;font-style: italic"/>
+                                            <br/>
+                                            <h:outputText value="${item.unlockedTitle.unlockDate}" style="font-size:10pt" converter="dateConverter"/>
+
+                                        </c:when>
+                                        <c:otherwise>
+                                            <h:link styleClass="player" outcome="player" value="${item.score.player.fullname}">
+                                                <f:param name="fullname" value="${item.score.player.fullname}"/>
+                                            </h:link><br/>
+                                            <h:link outcome="score/edit" styleClass="score" >
+                                                <h:outputText value="${item.score.value}" converter="scoreConverter" />    
+                                                <f:param name="scoreId" value="${item.score.id}" />
+                                            </h:link>
+                                            on 
+                                            <h:link styleClass="game" outcome="game" value="${item.score.game.name}">
+                                                <f:param name="id" value="${item.score.game.id}"/>
+                                            </h:link> (${item.score.level})
+                                            <br/>
+                                            <h:outputText value="${item.score.message}" style="font-size:10pt;font-style: italic"/>
+                                            <br/>
+                                            <h:outputText value="${item.score.creationDate}" style="font-size:10pt" converter="dateConverter"/>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </p>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
 
             </center>
         </f:view>

@@ -17,8 +17,10 @@
 package com.anzymus.neogeo.hiscores.controller;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -28,9 +30,12 @@ import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Scores;
+import com.anzymus.neogeo.hiscores.domain.Title;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
+import com.anzymus.neogeo.hiscores.service.TitleService;
+import java.util.TreeSet;
 
 @ManagedBean
 public class PlayerBean {
@@ -44,8 +49,24 @@ public class PlayerBean {
     @EJB
     GameService gameService;
 
+    @EJB
+    TitleService unlockingTitleService;
+
     @ManagedProperty(value = "#{param.fullname}")
     private String fullname;
+
+    public Collection<TitleItem> getTitles() {
+        Player player = playerService.findByFullname(fullname);
+
+        Collection<TitleItem> titleItems = new ArrayList<TitleItem>();
+        Set<Title> titles = new TreeSet<Title>(unlockingTitleService.findAllStrategies().keySet());
+        for (Title title : titles) {
+            boolean isUnlocked = player.hasUnlocked(title);
+            TitleItem titleItem = new TitleItem(title, isUnlocked);
+            titleItems.add(titleItem);
+        }
+        return titleItems;
+    }
 
     public String getFullname() {
         return fullname;

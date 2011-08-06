@@ -77,7 +77,7 @@ public class HallOfFameService {
                     player = new Player(fullname);
                     players.put(fullname, player);
                 }
-                player.setScore(player.getPoints() + point);
+                player.setPoints(player.getPoints() + point);
                 player.setContribution(player.getContribution() + 1);
                 oldScore = score;
                 oldPoint = point;

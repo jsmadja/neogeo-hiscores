@@ -17,20 +17,30 @@
 package com.anzymus.neogeo.hiscores.controller;
 
 import com.anzymus.neogeo.hiscores.domain.Score;
+import com.anzymus.neogeo.hiscores.domain.UnlockedTitle;
 
 public class TimelineItem {
     
-    private final Score score;
+    private Score score;
     private String pictureUrl;
+    private UnlockedTitle unlockedTitle;
 
     public TimelineItem(Score score) {
         this.score = score;
+    }
+
+    public TimelineItem(UnlockedTitle unlockedTitle) {
+        this.unlockedTitle = unlockedTitle;
     }
     
     public Score getScore() {
         return score;
     }
 
+    public UnlockedTitle getUnlockedTitle() {
+        return unlockedTitle;
+    }
+    
     public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
     }

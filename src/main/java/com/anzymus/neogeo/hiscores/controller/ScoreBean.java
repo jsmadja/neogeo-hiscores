@@ -34,6 +34,7 @@ import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
+import com.anzymus.neogeo.hiscores.service.TitleUnlockingService;
 import com.google.common.annotations.VisibleForTesting;
 
 @ManagedBean
@@ -47,6 +48,9 @@ public class ScoreBean {
 
     @EJB
     PlayerService playerService;
+
+    @EJB
+    TitleUnlockingService titleUnlockingService;
 
     @ManagedProperty(value = "#{param.scoreId}")
     private String id;
@@ -101,6 +105,7 @@ public class ScoreBean {
                     }
                     ngfClient.post(message, postId);
                 }
+                titleUnlockingService.searchUnlockedTitlesFor(player);
                 return "home";
             } else {
                 facesContext.addMessage(null, new FacesMessage("Your NGF account is invalid"));

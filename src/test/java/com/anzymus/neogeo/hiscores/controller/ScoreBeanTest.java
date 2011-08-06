@@ -37,6 +37,7 @@ import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
+import com.anzymus.neogeo.hiscores.service.TitleUnlockingService;
 
 public class ScoreBeanTest {
 
@@ -51,6 +52,9 @@ public class ScoreBeanTest {
 
     @Mock
     NeoGeoFansClientFactory neoGeoFansClientFactory;
+
+    @Mock
+    TitleUnlockingService titleUnlockingService;
 
     @Mock
     NeoGeoFansClient neoGeoFansClient;
@@ -71,6 +75,7 @@ public class ScoreBeanTest {
         scoreBean.gameService = gameService;
         scoreBean.playerService = playerService;
         scoreBean.scoreService = scoreService;
+        scoreBean.titleUnlockingService = titleUnlockingService;
         scoreBean.neoGeoFansClientFactory = neoGeoFansClientFactory;
         scoreBean.facesContext = facesContext;
 

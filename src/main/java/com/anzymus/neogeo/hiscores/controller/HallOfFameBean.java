@@ -38,45 +38,53 @@ public class HallOfFameBean {
     private DecimalFormat format = new DecimalFormat(mask);
 
     public List<PlayerItem> getPlayers() {
+        if (level == null) {
+            level = "MVS";
+        }
         List<Player> players = hallOfFameService.getPlayersOrderByRank(level);
         return createPlayerItems(players);
     }
 
     public List<PlayerItem> getPlayersV2() {
+        if (level == null) {
+            level = "MVS";
+        }
         List<Player> players = hallOfFameService.getPlayersOrderByRankV2(level);
         return createPlayerItems(players);
     }
 
     private List<PlayerItem> createPlayerItems(List<Player> players) {
-        if (level == null) {
-            level = "MVS";
-        }
         List<PlayerItem> playerItems = new ArrayList<PlayerItem>();
         String oldRank = null;
         int oldPoints = 0;
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
-            PlayerItem playerItem = new PlayerItem();
             String rank = Integer.toString(i + 1);
             int points = player.getPoints();
             if (oldRank != null && oldPoints == points) {
                 rank = oldRank;
                 points = oldPoints;
             }
-            playerItem.setRank(rank);
-            playerItem.setFullname(player.getFullname());
-            playerItem.setScore(points);
-            playerItem.setContribution(player.getContribution());
-            double average = 0;
-            if (player.getContribution() != 0) {
-                average = (double) points / (double) player.getContribution();
-            }
-            playerItem.setAverage(format.format(average));
+            PlayerItem playerItem = createPlayerItem(player, rank, points);
             playerItems.add(playerItem);
             oldRank = rank;
             oldPoints = points;
         }
         return playerItems;
+    }
+
+    private PlayerItem createPlayerItem(Player player, String rank, int points) {
+        PlayerItem playerItem = new PlayerItem();
+        playerItem.setRank(rank);
+        playerItem.setFullname(player.getFullname());
+        playerItem.setScore(points);
+        playerItem.setContribution(player.getContribution());
+        double average = 0;
+        if (player.getContribution() != 0) {
+            average = (double) points / (double) player.getContribution();
+        }
+        playerItem.setAverage(format.format(average));
+        return playerItem;
     }
 
     public void setLevel(String level) {

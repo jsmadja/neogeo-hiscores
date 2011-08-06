@@ -262,23 +262,25 @@
         <profile>
             <id>production</id>
             <properties>
+                <skipTests>true</skipTests>
                 <jta-data-source>jdbc/__default</jta-data-source>
                 <eclipselink.target-database>MYSQL</eclipselink.target-database>
                 <eclipselink.ddl-generation>create-tables</eclipselink.ddl-generation>
-                <javax.persistence.jdbc.driver>com.mysql.jdbc.Driver</javax.persistence.jdbc.driver>
-                <javax.persistence.jdbc.url>jdbc:mysql://localhost:3306/hiscores</javax.persistence.jdbc.url>
-                <javax.persistence.jdbc.user>hiscores_db_user</javax.persistence.jdbc.user>
-                <javax.persistence.jdbc.password>hiscores</javax.persistence.jdbc.password>
+                <javax.persistence.jdbc.driver></javax.persistence.jdbc.driver>
+                <javax.persistence.jdbc.url></javax.persistence.jdbc.url>
+                <javax.persistence.jdbc.user></javax.persistence.jdbc.user>
+                <javax.persistence.jdbc.password></javax.persistence.jdbc.password>
                 <contextPath>http://www.neogeo-hiscores.com</contextPath>
                 <contextPathStatic>http://88.191.117.240</contextPathStatic>
             </properties>
         </profile>
         <profile>
-            <id>development</id>
+            <id>unit-test</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
+                <skipTests>false</skipTests>
                 <jta-data-source>jdbc/__default</jta-data-source>
                 <eclipselink.target-database>DERBY</eclipselink.target-database>
                 <eclipselink.ddl-generation>create-tables</eclipselink.ddl-generation>
@@ -291,5 +293,21 @@
                 <contextPathStatic>http://localhost:8080</contextPathStatic>
             </properties>
         </profile>
+        <profile>
+            <id>development</id>
+            <properties>
+                <skipTests>true</skipTests>
+                <jta-data-source>jdbc/__mysql</jta-data-source>
+                <eclipselink.target-database>MYSQL</eclipselink.target-database>
+                <eclipselink.ddl-generation>create-tables</eclipselink.ddl-generation>
+                <javax.persistence.jdbc.driver>com.mysql.jdbc.Driver</javax.persistence.jdbc.driver>
+                <javax.persistence.jdbc.url></javax.persistence.jdbc.url>
+                <javax.persistence.jdbc.user></javax.persistence.jdbc.user>
+                <javax.persistence.jdbc.password></javax.persistence.jdbc.password>
+                <contextPath>http://localhost:8080</contextPath>
+                <contextPathStatic>http://localhost:8080</contextPathStatic>
+            </properties>
+        </profile>
+
     </profiles>
 </project>

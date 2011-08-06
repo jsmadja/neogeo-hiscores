@@ -16,19 +16,21 @@
 
 package com.anzymus.neogeo.hiscores.service;
 
-import com.anzymus.neogeo.hiscores.domain.Player;
 import java.util.List;
+import java.util.Set;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
+import com.anzymus.neogeo.hiscores.domain.Player;
+import com.anzymus.neogeo.hiscores.domain.Title;
+import com.anzymus.neogeo.hiscores.domain.UnlockedTitle;
 
 @Stateless
 public class PlayerService {
-    
+
     @PersistenceContext
     EntityManager em;
 
@@ -38,8 +40,13 @@ public class PlayerService {
         List<Player> player = query.getResultList();
         if (player.isEmpty()) {
             return null;
-        } 
+        }
         return player.get(0);
+    }
+    
+    public List<Player> findAll() {
+        TypedQuery<Player> query = em.createNamedQuery("player_findAll", Player.class);
+        return query.getResultList();
     }
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -54,5 +61,13 @@ public class PlayerService {
         em.flush();
         return storedPlayer;
     }
-    
+
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void unlockTitle(Player player, Title title) {
+        Set<UnlockedTitle> unlockedTitles = player.getUnlockedTitles();
+        UnlockedTitle unlockedTitle = new UnlockedTitle(player, title);
+        unlockedTitles.add(unlockedTitle);
+        store(player);
+    }
+
 }

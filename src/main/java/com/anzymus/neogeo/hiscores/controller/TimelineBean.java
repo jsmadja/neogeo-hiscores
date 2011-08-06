@@ -16,13 +16,18 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
+import com.anzymus.neogeo.hiscores.comparator.TimelineSortedByDateDescComparator;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import com.anzymus.neogeo.hiscores.domain.Score;
+import com.anzymus.neogeo.hiscores.domain.UnlockedTitle;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
+import com.anzymus.neogeo.hiscores.service.TitleUnlockingService;
+import java.util.Collections;
+import java.util.Comparator;
 
 @ManagedBean
 @SessionScoped
@@ -30,10 +35,20 @@ public class TimelineBean {
 
     @EJB
     ScoreService scoreService;
+    
+    @EJB
+    TitleUnlockingService titleUnlockingService;
 
     public List<TimelineItem> getItems() {
-        List<Score> scores = scoreService.findLastScoresOrderByDateDesc();
         List<TimelineItem> items = new ArrayList<TimelineItem>();
+        addLastScores(items);
+        addLastUnlockedTitles(items);
+        sortItemsByDateDesc(items);
+        return items;
+    }
+
+    private void addLastScores(List<TimelineItem> items) {
+        List<Score> scores = scoreService.findLastScoresOrderByDateDesc();
         for (Score score : scores) {
             TimelineItem item = new TimelineItem(score);
             if (score.getPictureUrl() == null || score.getPictureUrl().length()==0) {
@@ -43,7 +58,20 @@ public class TimelineBean {
             }
             items.add(item);
         }
-        return items;
     }
 
+    private void addLastUnlockedTitles(List<TimelineItem> items) {
+        List<UnlockedTitle> unlockedTitles = titleUnlockingService.findLastUnlockedTitlesOrderByDateDesc();
+        for (UnlockedTitle unlockTitle:unlockedTitles) {
+            TimelineItem item = new TimelineItem(unlockTitle);
+            item.setPictureUrl("myimages/success.png");
+            items.add(item);
+        }
+    }
+
+    private void sortItemsByDateDesc(List<TimelineItem> items) {
+        Collections.sort(items, timelineSortedByDateDescComparator);
+    }
+
+    private static final Comparator<TimelineItem> timelineSortedByDateDescComparator = new TimelineSortedByDateDescComparator();
 }

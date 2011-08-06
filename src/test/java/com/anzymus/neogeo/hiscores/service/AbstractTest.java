@@ -22,6 +22,10 @@ import java.util.Map;
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
 import javax.naming.NamingException;
+import org.apache.commons.lang.RandomStringUtils;
+import com.anzymus.neogeo.hiscores.domain.Game;
+import com.anzymus.neogeo.hiscores.domain.Player;
+import com.anzymus.neogeo.hiscores.domain.Score;
 
 public abstract class AbstractTest {
 
@@ -32,6 +36,8 @@ public abstract class AbstractTest {
     protected static PlayerService playerService;
     protected static ScoreService scoreService;
     protected static GameService gameService;
+    protected static TitleService titleService;
+    protected static TitleUnlockingService titleUnlockingService;
 
     static {
         try {
@@ -44,6 +50,8 @@ public abstract class AbstractTest {
             playerService = (PlayerService) lookup("PlayerService");
             scoreService = (ScoreService) lookup("ScoreService");
             gameService = (GameService) lookup("GameService");
+            titleService = (TitleService) lookup("TitleService");
+            titleUnlockingService = (TitleUnlockingService) lookup("TitleUnlockingService");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -51,6 +59,29 @@ public abstract class AbstractTest {
 
     private static Object lookup(String key) throws NamingException {
         return namingContext.lookup("java:global/classes/" + key);
+    }
+
+    protected Score createScore(Player player, Game game) {
+        String value = RandomStringUtils.randomNumeric(7);
+        String level = "MVS";
+        String pictureUrl = "http://";
+        Score score = new Score(value, player, level, game, pictureUrl);
+        score = scoreService.store(score);
+        return score;
+    }
+
+    protected Game createGame() {
+        String name = RandomStringUtils.randomAlphabetic(10);
+        Game game = new Game(name);
+        game = gameService.store(game);
+        return game;
+    }
+
+    protected Player createPlayer() {
+        String fullname = RandomStringUtils.randomAlphabetic(10);
+        Player player = new Player(fullname);
+        player = playerService.store(player);
+        return player;
     }
 
 }

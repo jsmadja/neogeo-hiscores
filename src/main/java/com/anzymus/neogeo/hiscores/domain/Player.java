@@ -17,34 +17,42 @@
 package com.anzymus.neogeo.hiscores.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import com.google.common.base.Objects;
 
 @Entity
-@Table(name = "PLAYER", uniqueConstraints = @UniqueConstraint(columnNames = { "fullname" }))
-@NamedQueries({ @NamedQuery(name = "player_findByFullname", query = "SELECT p FROM Player p WHERE p.fullname = :fullname") })
+@Table(name = "PLAYER", uniqueConstraints =
+@UniqueConstraint(columnNames = {"fullname"}))
+@NamedQueries({ //
+    
+    @NamedQuery(name = "player_findByFullname", query = "SELECT p FROM Player p WHERE p.fullname = :fullname"),
+    @NamedQuery(name = "player_findAll", query = "SELECT p FROM Player p")//
+})
 public class Player implements Serializable {
 
     @Id
     @GeneratedValue
     private Long id;
-
     @Column(nullable = false)
     private String fullname;
-
     @Transient
     private int points;
-
     @Transient
     private int contribution;
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
+    private Set<UnlockedTitle> unlockedTitles = new HashSet<UnlockedTitle>();
 
     public Player() {
     }
@@ -80,8 +88,8 @@ public class Player implements Serializable {
         return points;
     }
 
-    public void setScore(int score) {
-        this.points = score;
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     public int getContribution() {
@@ -98,5 +106,26 @@ public class Player implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Set<UnlockedTitle> getUnlockedTitles() {
+        return unlockedTitles;
+    }
+
+    public void setUnlockedTitles(Set<UnlockedTitle> unlockedTitles) {
+        this.unlockedTitles = unlockedTitles;
+    }
+
+    public boolean hasNotUnlocked(Title title) {
+        for(UnlockedTitle unlockedTitle:unlockedTitles) {
+            if (unlockedTitle.getTitle().equals(title)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean hasUnlocked(Title title) {
+        return !hasNotUnlocked(title);
     }
 }

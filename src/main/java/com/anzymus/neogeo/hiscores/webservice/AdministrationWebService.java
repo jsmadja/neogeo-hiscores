@@ -25,7 +25,8 @@ import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
-import java.util.Arrays;
+import com.anzymus.neogeo.hiscores.service.TitleUnlockingService;
+import java.util.List;
 
 @WebService
 public class AdministrationWebService {
@@ -38,6 +39,9 @@ public class AdministrationWebService {
 
     @EJB
     PlayerService playerService;
+    
+    @EJB
+    TitleUnlockingService titleUnlockingService;
 
     @WebMethod
     public void initializeGameList(String list) {
@@ -82,5 +86,13 @@ public class AdministrationWebService {
     @WebMethod
     public void deleteScore(Long scoreId) {
         scoreService.delete(scoreId);
+    }
+    
+    @WebMethod
+    public void unlockNewTitles() {
+        List<Player> players = playerService.findAll();
+        for (Player player:players) {
+            titleUnlockingService.searchUnlockedTitlesFor(player);
+        }
     }
 }

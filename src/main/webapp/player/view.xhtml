@@ -28,6 +28,18 @@
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
     <ui:define name="content_right">
         <center>
+            <h2>${playerBean.fullname}'s titles</h2>
+            <div class="wrapper">
+                <ul>
+                    <c:forEach var="titleItem" items="#{playerBean.titles}">
+                        <li>
+                            <h:link styleClass="button small black" rendered="${!titleItem.unlocked}" outcome="player/view" ><img src="${contextPathStatic}/myimages/lock_title.gif" /><h:outputText value=" ${titleItem.title.label}" title="${titleItem.title.description}"  /></h:link>
+                            <h:link styleClass="button small blue" rendered="${titleItem.unlocked}" outcome="player/view" ><img src="${contextPathStatic}/myimages/unlocked_title.png" /><h:outputText value=" ${titleItem.title.label}" title="${titleItem.title.description}"  /></h:link>
+                        </li>
+                    </c:forEach>
+                </ul> 
+            </div>
+            <br/>            
             <h2>${playerBean.fullname}'s scores</h2>
             <table style="text-align: right; min-width:60%">
                 <tr>
