@@ -28,9 +28,9 @@ import com.anzymus.neogeo.hiscores.service.ScoreService;
 import com.anzymus.neogeo.hiscores.service.TitleUnlockingService;
 import java.util.Collections;
 import java.util.Comparator;
+import javax.annotation.PostConstruct;
 
 @ManagedBean
-@SessionScoped
 public class TimelineBean {
 
     @EJB
@@ -38,12 +38,17 @@ public class TimelineBean {
     
     @EJB
     TitleUnlockingService titleUnlockingService;
-
-    public List<TimelineItem> getItems() {
-        List<TimelineItem> items = new ArrayList<TimelineItem>();
+    
+    private List<TimelineItem> items = new ArrayList<TimelineItem>();
+    
+    @PostConstruct
+    public void init() {
         addLastScores(items);
         addLastUnlockedTitles(items);
         sortItemsByDateDesc(items);
+    }
+
+    public List<TimelineItem> getItems() {
         return items;
     }
 

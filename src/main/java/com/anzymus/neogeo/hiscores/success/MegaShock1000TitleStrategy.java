@@ -16,11 +16,11 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
-public class FirstScoreTitleStrategy extends MinimumScoreTitleStrategy {
+public class MegaShock1000TitleStrategy extends MinimumScoreTitleStrategy {
 
     @Override
     protected long getNumScoresToUnlock() {
-        return 1;
+        return 1000;
     }
 
 }

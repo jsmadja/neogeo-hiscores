@@ -55,12 +55,28 @@ public class GameBean {
 
     private static Comparator<Score> sortScoreByValueDesc = new ScoreSortedByValueDescComparator();
 
+    private List<LevelItem> levelItems = new ArrayList<LevelItem>();
+    
     @PostConstruct
     public void init() {
         long gameId = Long.parseLong(id);
         Game game = gameService.findById(gameId);
         name = game.getName();
         scores = scoreService.findAllByGame(game);
+        loadLevelItems();
+    }
+
+    private void loadLevelItems() {
+        for (String level : Levels.list()) {
+            List<Score> scoreList = scores.getScoresByLevel(level);
+            if (!scoreList.isEmpty()) {
+                Collections.sort(scoreList, sortScoreByValueDesc);
+                List<ScoreItem> scoreItems = createScoreItems(scoreList);
+                LevelItem levelItem = new LevelItem(level);
+                levelItem.setScoreItems(scoreItems);
+                levelItems.add(levelItem);
+            }
+        }
     }
 
     public String edit() {
@@ -85,17 +101,6 @@ public class GameBean {
     }
 
     public List<LevelItem> getLevels() {
-        List<LevelItem> levelItems = new ArrayList<LevelItem>();
-        for (String level : Levels.list()) {
-            List<Score> scoreList = scores.getScoresByLevel(level);
-            if (!scoreList.isEmpty()) {
-                Collections.sort(scoreList, sortScoreByValueDesc);
-                List<ScoreItem> scoreItems = createScoreItems(scoreList);
-                LevelItem levelItem = new LevelItem(level);
-                levelItem.setScoreItems(scoreItems);
-                levelItems.add(levelItem);
-            }
-        }
         return levelItems;
     }
 

@@ -24,6 +24,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.service.halloffame.HallOfFameService;
+import javax.annotation.PostConstruct;
 
 @ManagedBean
 public class HallOfFameBean {
@@ -34,27 +35,30 @@ public class HallOfFameBean {
     @ManagedProperty(value = "#{param.level}")
     private String level;
 
-    private String mask = new String("#0.##");
-    private DecimalFormat format = new DecimalFormat(mask);
+    private DecimalFormat format = new DecimalFormat("#0.##");
 
-    public List<PlayerItem> getPlayers() {
+    private List<PlayerItem> playerItems;
+
+    @PostConstruct
+    public void init() {
         if (level == null) {
             level = "MVS";
         }
         List<Player> players = hallOfFameService.getPlayersOrderByRank(level);
-        return createPlayerItems(players);
+        playerItems = createPlayerItems(players);
+    }
+    
+    public List<PlayerItem> getPlayers() {
+        return playerItems;
     }
 
     public List<PlayerItem> getPlayersV2() {
-        if (level == null) {
-            level = "MVS";
-        }
         List<Player> players = hallOfFameService.getPlayersOrderByRankV2(level);
         return createPlayerItems(players);
     }
 
     private List<PlayerItem> createPlayerItems(List<Player> players) {
-        List<PlayerItem> playerItems = new ArrayList<PlayerItem>();
+        List<PlayerItem> items = new ArrayList<PlayerItem>();
         String oldRank = null;
         int oldPoints = 0;
         for (int i = 0; i < players.size(); i++) {
@@ -66,11 +70,11 @@ public class HallOfFameBean {
                 points = oldPoints;
             }
             PlayerItem playerItem = createPlayerItem(player, rank, points);
-            playerItems.add(playerItem);
+            items.add(playerItem);
             oldRank = rank;
             oldPoints = points;
         }
-        return playerItems;
+        return items;
     }
 
     private PlayerItem createPlayerItem(Player player, String rank, int points) {

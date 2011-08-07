@@ -22,6 +22,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
+import javax.annotation.PostConstruct;
 
 @ManagedBean
 public class GamesBean {
@@ -32,9 +33,15 @@ public class GamesBean {
     @EJB
     ScoreService scoreService;
 
-    public List<GameItem> getGames() {
+    List<GameItem> gameItems = new ArrayList<GameItem>();
+        
+    @PostConstruct
+    public void init() {
+        loadGameItems();
+    }
+
+    private void loadGameItems() {
         List<Object[]> scoreCounts = gameService.findAllScoreCountForEachGames();
-        List<GameItem> gameItems = new ArrayList<GameItem>();
         for (Object[] scoreCount : scoreCounts) {
             Long gameId = (Long) scoreCount[0];
             String gameName = (String) scoreCount[1];
@@ -42,6 +49,9 @@ public class GamesBean {
             GameItem gameItem = new GameItem(gameName, gameId, count);
             gameItems.add(gameItem);
         }
+    }
+    
+    public List<GameItem> getGames() {
         return gameItems;
     }
 

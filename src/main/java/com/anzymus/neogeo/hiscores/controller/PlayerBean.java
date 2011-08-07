@@ -13,7 +13,6 @@
  *     See the License for the specific language governing permissions and
  *     limitations under the License.
  */
-
 package com.anzymus.neogeo.hiscores.controller;
 
 import java.util.ArrayList;
@@ -36,35 +35,55 @@ import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
 import com.anzymus.neogeo.hiscores.service.TitleService;
 import java.util.TreeSet;
+import javax.annotation.PostConstruct;
 
 @ManagedBean
 public class PlayerBean {
 
     @EJB
     ScoreService scoreService;
-
+    
     @EJB
     PlayerService playerService;
-
+    
     @EJB
     GameService gameService;
-
+    
     @EJB
     TitleService unlockingTitleService;
-
+    
     @ManagedProperty(value = "#{param.fullname}")
     private String fullname;
+    
+    private Collection<TitleItem> titleItems = new ArrayList<TitleItem>();
+    
+    private List<ScoreItem> scoreItems = new ArrayList<ScoreItem>();
 
-    public Collection<TitleItem> getTitles() {
-        Player player = playerService.findByFullname(fullname);
+    private Player player;
+    
+    @PostConstruct
+    public void init() {
+        player = playerService.findByFullname(fullname);
+        loadTitleItems();
+        loadScoreItems();
+    }
 
-        Collection<TitleItem> titleItems = new ArrayList<TitleItem>();
+    private void loadScoreItems() {
+        for (Game game : gameService.findAllGamesPlayedBy(player)) {
+            extractScoreItemsFromGame(scoreItems, game);
+        }
+    }
+
+    private void loadTitleItems() {
         Set<Title> titles = new TreeSet<Title>(unlockingTitleService.findAllStrategies().keySet());
         for (Title title : titles) {
             boolean isUnlocked = player.hasUnlocked(title);
             TitleItem titleItem = new TitleItem(title, isUnlocked);
             titleItems.add(titleItem);
         }
+    }
+
+    public Collection<TitleItem> getTitles() {
         return titleItems;
     }
 
@@ -77,11 +96,6 @@ public class PlayerBean {
     }
 
     public List<ScoreItem> getScores() {
-        List<ScoreItem> scoreItems = new ArrayList<ScoreItem>();
-        Player player = playerService.findByFullname(fullname);
-        for (Game game : gameService.findAllGamesPlayedBy(player)) {
-            extractScoreItemsFromGame(scoreItems, game);
-        }
         return scoreItems;
     }
 
@@ -146,5 +160,4 @@ public class PlayerBean {
     private boolean isSameRankAsPreviousScore(Score previousScore, String scoreValue) {
         return previousScore != null && previousScore.getValue().equals(scoreValue);
     }
-
 }

@@ -28,7 +28,8 @@
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
     <ui:define name="content_right">
         <center>
-            <h2>${playerBean.fullname}'s titles</h2>
+            <h2>${playerBean.fullname}</h2>
+            
             <div class="wrapper">
                 <ul>
                     <c:forEach var="titleItem" items="#{playerBean.titles}">
@@ -40,7 +41,7 @@
                 </ul> 
             </div>
             <br/>            
-            <h2>${playerBean.fullname}'s scores</h2>
+            <br/>            
             <table style="text-align: right; min-width:60%">
                 <tr>
                     <td></td>
