@@ -50,7 +50,7 @@ public class PlayerBean {
     GameService gameService;
     
     @EJB
-    TitleService unlockingTitleService;
+    TitleService titleService;
     
     @ManagedProperty(value = "#{param.fullname}")
     private String fullname;
@@ -75,7 +75,7 @@ public class PlayerBean {
     }
 
     private void loadTitleItems() {
-        Set<Title> titles = new TreeSet<Title>(unlockingTitleService.findAllStrategies().keySet());
+        Set<Title> titles = new TreeSet<Title>(titleService.findAllStrategies().keySet());
         for (Title title : titles) {
             boolean isUnlocked = player.hasUnlocked(title);
             TitleItem titleItem = new TitleItem(title, isUnlocked);

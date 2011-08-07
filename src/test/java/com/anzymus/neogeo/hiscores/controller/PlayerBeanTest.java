@@ -30,9 +30,13 @@ import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Scores;
+import com.anzymus.neogeo.hiscores.domain.Title;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
+import com.anzymus.neogeo.hiscores.service.TitleService;
+import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
+import java.util.HashMap;
 
 public class PlayerBeanTest {
 
@@ -44,6 +48,9 @@ public class PlayerBeanTest {
 
     @Mock
     GameService gameService;
+    
+    @Mock
+    TitleService titleService;
 
     PlayerBean playerBean;
 
@@ -54,6 +61,9 @@ public class PlayerBeanTest {
         playerBean.gameService = gameService;
         playerBean.playerService = playerService;
         playerBean.scoreService = scoreService;
+        playerBean.titleService = titleService;
+        
+        when(titleService.findAllStrategies()).thenReturn(new HashMap<Title, TitleUnlockingStrategy>());
     }
 
     @Test
@@ -80,6 +90,7 @@ public class PlayerBeanTest {
         scores.add(score);
         when(scoreService.findAllByGame(game)).thenReturn(scores);
 
+        playerBean.init();
         List<ScoreItem> scoreItems = playerBean.getScores();
         assertEquals(1, scoreItems.size());
         ScoreItem scoreItem = scoreItems.get(0);
@@ -118,6 +129,7 @@ public class PlayerBeanTest {
 
         playerBean.setFullname("fullname2");
 
+        playerBean.init();
         List<ScoreItem> scoreItems = playerBean.getScores();
 
         assertEquals(1, scoreItems.size());

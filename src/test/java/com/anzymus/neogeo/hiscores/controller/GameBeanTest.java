@@ -73,13 +73,13 @@ public class GameBeanTest {
         when(gameService.findById(anyLong())).thenReturn(game);
         when(scoreService.findAllByGame(any(Game.class))).thenReturn(scores);
         gameBean.setId("13");
-        gameBean.init();
 
         Player player = new Player("fullname");
         Score score = new Score("123", player, "MVS", game, "http://");
         score.setId(0L);
         scores.add(score);
 
+        gameBean.init();
         List<LevelItem> levelItems = gameBean.getLevels();
 
         LevelItem levelItem = levelItems.get(0);
@@ -95,8 +95,7 @@ public class GameBeanTest {
         when(gameService.findById(anyLong())).thenReturn(game);
         when(scoreService.findAllByGame(any(Game.class))).thenReturn(scores);
         gameBean.setId("13");
-        gameBean.init();
-
+        
         Player player1 = new Player("fullname1");
         Score score1 = new Score("123", player1, "MVS", game, "http://");
         score1.setId(0L);
@@ -107,6 +106,7 @@ public class GameBeanTest {
         score2.setId(0L);
         scores.add(score2);
 
+        gameBean.init();
         List<LevelItem> levelItems = gameBean.getLevels();
 
         LevelItem levelItem = levelItems.get(0);

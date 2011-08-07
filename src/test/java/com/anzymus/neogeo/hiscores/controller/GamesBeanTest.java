@@ -54,6 +54,7 @@ public class GamesBeanTest {
 
         when(gameService.findAllScoreCountForEachGames()).thenReturn(scoreCount);
 
+        gamesBean.init();
         List<GameItem> games = gamesBean.getGames();
         GameItem gameItem = games.get(0);
         assertEquals(0, gameItem.getId());
