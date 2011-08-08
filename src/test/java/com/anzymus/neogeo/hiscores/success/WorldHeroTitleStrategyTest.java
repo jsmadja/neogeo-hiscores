@@ -44,7 +44,8 @@ public class WorldHeroTitleStrategyTest {
     public void should_detect_unlocked_title() {
         Player player = new Player();
 
-        when(titleService.hasScoreInGame(player, "World Heroes")).thenReturn(true);
+        when(titleService.hasScoreInGame(player, "World Heroes (Normal)")).thenReturn(true);
+        when(titleService.hasScoreInGame(player, "World Heroes (Death Match)")).thenReturn(true);
         when(titleService.hasScoreInGame(player, "World Heroes 2 (Death Match)")).thenReturn(true);
         when(titleService.hasScoreInGame(player, "World Heroes 2 (Normal Game)")).thenReturn(true);
         when(titleService.hasScoreInGame(player, "World Heroes 2 Jet")).thenReturn(true);

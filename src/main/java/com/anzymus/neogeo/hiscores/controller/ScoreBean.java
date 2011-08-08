@@ -80,6 +80,8 @@ public class ScoreBean {
             message = scoreFromDb.getMessage();
             currentLevel = scoreFromDb.getLevel();
             currentGame = scoreFromDb.getGame().getId();
+        } else {
+            currentGame = gameService.findByName("3 Count Bout").getId();
         }
     }
 

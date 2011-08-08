@@ -58,11 +58,10 @@ public class NeoGeoFansClientTest {
         Score score = new Score(value, player, level, game, pictureUrl);
         score.setMessage("(stage 5)");
 
-        String expected = "[SIZE=\"3\"]12345[/SIZE]\n"
+        String expected = "game - [SIZE=\"3\"]12345[/SIZE]\n"
                 + "[I](stage 5)[/I]\n"
                 + "[IMG]http://desmond.imageshack.us/Himg199/scaled.php?server=199&filename=photo0008uz.jpg&res=medium[/IMG]\n"
                 + "[SIZE=\"1\"]posté depuis [url]www.neogeo-hiscores.com[/url][/SIZE]";
-
         assertEquals(expected, NeoGeoFansClient.toMessage(score));
     }
 }

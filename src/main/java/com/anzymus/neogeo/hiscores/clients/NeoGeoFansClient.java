@@ -136,7 +136,7 @@ public class NeoGeoFansClient {
         String message = score.getMessage();
         String url = score.getPictureUrl();
 
-        String postMessage = "";
+        String postMessage = score.getGame().getName()+" - ";
         postMessage += "[SIZE=\"3\"]" + scoreValue + "[/SIZE]\n";
         postMessage += "[I]" + message + "[/I]\n";
         postMessage += "[IMG]" + url + "[/IMG]\n";
