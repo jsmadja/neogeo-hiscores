@@ -79,8 +79,11 @@ public class TitleService {
         return storedTitle;
     }
 
-    public boolean hasScoreInGame(Player player, String gameName) {
-        return false;
+    public boolean hasScoreInGame(Player player, String game) {
+        Query query = em.createQuery("SELECT COUNT(s) FROM Score s WHERE s.player = :player AND s.game = :game");
+        query.setParameter("player", player);
+        query.setParameter("game", game);
+        return (Long) query.getSingleResult() > 0;
     }
 
 }

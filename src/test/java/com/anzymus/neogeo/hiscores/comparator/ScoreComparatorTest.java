@@ -42,4 +42,32 @@ public class ScoreComparatorTest {
         assertEquals("222", ScoreComparator.gap(score1, score2));
     }
 
+    @Test
+    public void should_find_gap_for_chrono() {
+        String score1 = "6:55:78";
+        String score2 = "7:28:10";
+        assertEquals("0:32:32", ScoreComparator.gap(score1, score2));
+    }
+
+    @Test
+    public void should_find_gap_for_chrono_10_minutes() {
+        String score1 = "6:00:00";
+        String score2 = "16:00:00";
+        assertEquals("10:00:00", ScoreComparator.gap(score1, score2));
+    }
+
+    @Test
+    public void should_find_gap_for_chrono_same_titme() {
+        String score1 = "6:00:00";
+        String score2 = "6:00:00";
+        assertEquals("0:00:00", ScoreComparator.gap(score1, score2));
+    }
+
+    @Test
+    public void should_find_gap_for_big_length() {
+        String score1 = "0:00:00";
+        String score2 = "16:00:00";
+        assertEquals("16:00:00", ScoreComparator.gap(score1, score2));
+    }
+
 }
