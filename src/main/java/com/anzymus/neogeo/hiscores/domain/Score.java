@@ -103,6 +103,10 @@ public class Score implements Serializable {
         return creationDate;
     }
 
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
     public String getPictureUrl() {
         return pictureUrl;
     }

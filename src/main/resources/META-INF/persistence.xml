@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--
 
         Copyright (C) 2011 Julien SMADJA <julien dot smadja at gmail dot com>
@@ -17,26 +17,24 @@
 
 -->
 
-<persistence version="2.0"
-	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<persistence-unit name="hiscoresPU" transaction-type="JTA">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<jta-data-source>${jta-data-source}</jta-data-source>
 		<properties>
-			<property name="eclipselink.target-database" value="${eclipselink.target-database}" />
-			<property name="eclipselink.ddl-generation" value="${eclipselink.ddl-generation}" />
-			<property name="eclipselink.weaving.fetchgroups" value="false" />
-			<property name="javax.persistence.jdbc.driver" value="${javax.persistence.jdbc.driver}" />
-			<property name="javax.persistence.jdbc.url" value="${javax.persistence.jdbc.url}" />
-			<property name="javax.persistence.jdbc.user" value="${javax.persistence.jdbc.user}" />
-			<property name="javax.persistence.jdbc.password" value="${javax.persistence.jdbc.password}" />
+			<property name="eclipselink.target-database" value="${eclipselink.target-database}"/>
+			<property name="eclipselink.ddl-generation" value="${eclipselink.ddl-generation}"/>
+			<property name="eclipselink.weaving.fetchgroups" value="false"/>
+			<property name="javax.persistence.jdbc.driver" value="${javax.persistence.jdbc.driver}"/>
+			<property name="javax.persistence.jdbc.url" value="${javax.persistence.jdbc.url}"/>
+			<property name="javax.persistence.jdbc.user" value="${javax.persistence.jdbc.user}"/>
+			<property name="javax.persistence.jdbc.password" value="${javax.persistence.jdbc.password}"/>
 
-			<property name="eclipselink.logging.level" value="FINE" />
-			<property name="eclipselink.logging.logger" value="DefaultLogger" />
-			<property name="eclipselink.logging.timestamp" value="false" />
-			<property name="eclipselink.logging.session" value="false" />
-			<property name="eclipselink.logging.thread" value="false" />
+			<property name="eclipselink.logging.level" value="FINE"/>
+			<property name="eclipselink.logging.logger" value="DefaultLogger"/>
+			<property name="eclipselink.logging.timestamp" value="false"/>
+			<property name="eclipselink.logging.session" value="false"/>
+			<property name="eclipselink.logging.thread" value="false"/>
 
 		</properties>
 

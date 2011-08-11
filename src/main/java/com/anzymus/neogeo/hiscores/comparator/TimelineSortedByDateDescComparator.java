@@ -16,7 +16,7 @@
 
 package com.anzymus.neogeo.hiscores.comparator;
 
-import com.anzymus.neogeo.hiscores.controller.TimelineItem;
+import com.anzymus.neogeo.hiscores.domain.TimelineItem;
 import java.util.Comparator;
 import java.util.Date;
 
