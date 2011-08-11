@@ -2,3 +2,5 @@
 - fix bug: In "Add new score", the pre-selected game was not 3 Count Bout.
 - feature: Score Comparator can compare chrono scores.
 - feature: RSS timeline
+- feature: Twitter timeline
+- post scores in dedicated topics on NGF
