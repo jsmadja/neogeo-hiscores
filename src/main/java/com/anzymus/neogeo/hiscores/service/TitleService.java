@@ -80,7 +80,7 @@ public class TitleService {
     }
 
     public boolean hasScoreInGame(Player player, String game) {
-        Query query = em.createQuery("SELECT COUNT(s) FROM Score s WHERE s.player = :player AND s.game = :game");
+        Query query = em.createQuery("SELECT COUNT(s) FROM Score s WHERE s.player = :player AND s.game.name = :game");
         query.setParameter("player", player);
         query.setParameter("game", game);
         return (Long) query.getSingleResult() > 0;

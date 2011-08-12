@@ -20,6 +20,7 @@ import static org.junit.Assert.assertEquals;
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
@@ -59,6 +60,15 @@ public class TitleServiceITest extends AbstractTest {
         long scoreCount = titleService.getNumScoresByPlayer(player);
 
         assertEquals(0, scoreCount);
+    }
+    
+    @Test
+    public void should_find_score_in_game() {
+        Score score = new Score("1234", player, "MVS", game, "http://");
+        scoreService.store(score);
+        
+        boolean hasScoreInGame = titleService.hasScoreInGame(player, game.getName());
+        assertTrue(hasScoreInGame);
     }
 
 }
