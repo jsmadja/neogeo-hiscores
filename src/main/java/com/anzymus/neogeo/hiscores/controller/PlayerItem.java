@@ -22,14 +22,14 @@ public class PlayerItem {
     private String shortname;
     private String fullname;
     private int score;
-    private int contribution;
+    private Integer contribution;
     private String average;
 
-    public int getContribution() {
+    public Integer getContribution() {
         return contribution;
     }
 
-    public void setContribution(int contribution) {
+    public void setContribution(Integer contribution) {
         this.contribution = contribution;
     }
 

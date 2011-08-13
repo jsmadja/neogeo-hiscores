@@ -20,6 +20,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import javax.faces.application.FacesMessage;
@@ -164,11 +165,37 @@ public class ScoreBeanTest {
         scoreBean.setFullname("fullname");
         scoreBean.setPassword(password);
         scoreBean.setPictureUrl(pictureUrl);
+        scoreBean.setPostOnNgf(true);
 
         String redirection = scoreBean.add();
         assertEquals("home", redirection);
 
         verify(neoGeoFansClient).post(anyString(), anyInt());
+    }
+
+    @Test
+    public void should_not_post_in_ngf_if_boolean_is_false() throws AuthenticationFailed {
+        when(neoGeoFansClient.authenticate(anyString(), anyString())).thenReturn(true);
+
+        String scoreValue = "12432";
+        String pictureUrl = "http://";
+        String level = "MVS";
+        String message = "mon message";
+        String password = "mypassword";
+
+        scoreBean.setScore(scoreValue);
+        scoreBean.setCurrentGame(game.getId());
+        scoreBean.setCurrentLevel(level);
+        scoreBean.setMessage(message);
+        scoreBean.setFullname("fullname");
+        scoreBean.setPassword(password);
+        scoreBean.setPictureUrl(pictureUrl);
+        scoreBean.setPostOnNgf(false);
+
+        String redirection = scoreBean.add();
+        assertEquals("home", redirection);
+
+        verify(neoGeoFansClient, never()).post(anyString(), anyInt());
     }
 
     @Test

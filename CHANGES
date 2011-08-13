@@ -1,3 +1,8 @@
+1.1.0
+- feature: Checkbox to post on NGF, or not
+- feature: Picture is not post but put in score's URL
+- fix bug: In HoF, when two players have same rank, the best "average" is the first one
+
 1.0.1
 - fix bug: titleService.hasScoreInGame
 

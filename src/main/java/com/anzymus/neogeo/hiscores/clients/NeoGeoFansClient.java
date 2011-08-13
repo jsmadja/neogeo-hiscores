@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import com.anzymus.neogeo.hiscores.converter.ScoreConverter;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -40,6 +41,8 @@ public class NeoGeoFansClient {
     private String login;
     private String password;
     private WebClient webClient;
+
+    private static final ScoreConverter SCORE_CONVERTER = new ScoreConverter();
 
     private static final Logger LOG = Logger.getLogger(NeoGeoFansClient.class.getName());
 
@@ -133,13 +136,13 @@ public class NeoGeoFansClient {
 
     public static String toMessage(Score score) {
         String scoreValue = score.getValue();
+        scoreValue = SCORE_CONVERTER.getAsString(scoreValue);
         String message = score.getMessage();
         String url = score.getPictureUrl();
 
-        String postMessage = score.getGame().getName()+" - ";
-        postMessage += "[SIZE=\"3\"]" + scoreValue + "[/SIZE]\n";
+        String postMessage = score.getGame().getName() + " - ";
+        postMessage += "[URL=\"" + url + "\"][SIZE=\"3\"]" + scoreValue + "[/SIZE][/URL]\n";
         postMessage += "[I]" + message + "[/I]\n";
-        postMessage += "[IMG]" + url + "[/IMG]\n";
         postMessage += "[SIZE=\"1\"]posté depuis [url]www.neogeo-hiscores.com[/url][/SIZE]";
         return postMessage;
     }

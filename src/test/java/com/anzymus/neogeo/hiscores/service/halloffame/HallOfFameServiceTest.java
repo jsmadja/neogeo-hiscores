@@ -30,7 +30,6 @@ import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Scores;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
-import com.anzymus.neogeo.hiscores.service.halloffame.HallOfFameService;
 
 public class HallOfFameServiceTest {
 
@@ -141,4 +140,5 @@ public class HallOfFameServiceTest {
         assertEquals(8, players.get(2).getPoints());
         assertEquals(7, players.get(3).getPoints());
     }
+
 }

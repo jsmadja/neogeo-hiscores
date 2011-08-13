@@ -62,7 +62,10 @@ public class ScoreBean {
     private String message;
     private long currentGame;
     private String currentLevel = "MVS";
+    private Boolean postOnNgf = false;
+    
     private static final int MAX_MESSAGE_LENGTH = 255;
+    
 
     @VisibleForTesting
     NeoGeoFansClientFactory neoGeoFansClientFactory = new NeoGeoFansClientFactory();
@@ -81,7 +84,7 @@ public class ScoreBean {
             currentLevel = scoreFromDb.getLevel();
             currentGame = scoreFromDb.getGame().getId();
         } else {
-            currentGame = gameService.findByName("3 Count Bout").getId();
+            currentGame = gameService.findByName("3 Count Bout (3 minutes)").getId();
         }
     }
 
@@ -90,24 +93,7 @@ public class ScoreBean {
             NeoGeoFansClient ngfClient = neoGeoFansClientFactory.create();
             boolean isAuthenticated = ngfClient.authenticate(fullname, password);
             if (isAuthenticated) {
-                Game game = gameService.findById(currentGame);
-                Player player = playerService.findByFullname(fullname);
-                if (player == null) {
-                    player = playerService.store(new Player(fullname));
-                }
-                Score scoreToAdd = new Score(score, player, currentLevel, game, pictureUrl);
-                int end = message.length() > MAX_MESSAGE_LENGTH ? MAX_MESSAGE_LENGTH : message.length();
-                scoreToAdd.setMessage(message.substring(0, end));
-                scoreService.store(scoreToAdd);
-                if ("MVS".equals(currentLevel)) {
-                    String message = NeoGeoFansClient.toMessage(scoreToAdd);
-                    Long postId = game.getPostId();
-                    if (postId == null) {
-                        postId = 41930L;
-                    }
-                    ngfClient.post(message, postId);
-                }
-                titleUnlockingService.searchUnlockedTitlesFor(player);
+                acceptScore(ngfClient);
                 return "home";
             } else {
                 facesContext.addMessage(null, new FacesMessage("Your NGF account is invalid"));
@@ -117,6 +103,32 @@ public class ScoreBean {
             Logger.getLogger(ScoreBean.class.getName()).log(Level.SEVERE, null, ex);
             facesContext.addMessage(null, new FacesMessage(ex.getMessage()));
             return "score/create";
+        }
+    }
+
+    private void acceptScore(NeoGeoFansClient ngfClient) {
+        Game game = gameService.findById(currentGame);
+        Player player = playerService.findByFullname(fullname);
+        if (player == null) {
+            player = playerService.store(new Player(fullname));
+        }
+        Score scoreToAdd = new Score(score, player, currentLevel, game, pictureUrl);
+        int end = message.length() > MAX_MESSAGE_LENGTH ? MAX_MESSAGE_LENGTH : message.length();
+        scoreToAdd.setMessage(message.substring(0, end));
+        scoreService.store(scoreToAdd);
+        postOnNgf(scoreToAdd, game, ngfClient);
+        titleUnlockingService.searchUnlockedTitlesFor(player);
+    }
+
+    private void postOnNgf(Score scoreToAdd, Game game, NeoGeoFansClient ngfClient) {
+        if (postOnNgf) {
+            if ("MVS".equals(currentLevel)) {
+                Long postId = game.getPostId();
+                if (postId == null) {
+                    postId = 41930L;
+                }
+                ngfClient.post(NeoGeoFansClient.toMessage(scoreToAdd), postId);
+            }
         }
     }
 
@@ -232,4 +244,13 @@ public class ScoreBean {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public Boolean getPostOnNgf() {
+        return postOnNgf;
+    }
+
+    public void setPostOnNgf(Boolean postOnNgf) {
+        this.postOnNgf = postOnNgf;
+    }
+    
 }

@@ -18,13 +18,16 @@ package com.anzymus.neogeo.hiscores.controller;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import com.anzymus.neogeo.hiscores.comparator.PlayerItemsSortedWithAverageComparator;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.service.halloffame.HallOfFameService;
-import javax.annotation.PostConstruct;
 
 @ManagedBean
 public class HallOfFameBean {
@@ -39,6 +42,8 @@ public class HallOfFameBean {
 
     private List<PlayerItem> playerItems;
 
+    private Comparator<PlayerItem> sortPlayerItemsWithAverageComparator = new PlayerItemsSortedWithAverageComparator();
+
     @PostConstruct
     public void init() {
         if (level == null) {
@@ -47,7 +52,7 @@ public class HallOfFameBean {
         List<Player> players = hallOfFameService.getPlayersOrderByRank(level);
         playerItems = createPlayerItems(players);
     }
-    
+
     public List<PlayerItem> getPlayers() {
         return playerItems;
     }
@@ -74,6 +79,7 @@ public class HallOfFameBean {
             oldRank = rank;
             oldPoints = points;
         }
+        Collections.sort(items, sortPlayerItemsWithAverageComparator);
         return items;
     }
 
