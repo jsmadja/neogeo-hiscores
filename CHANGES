@@ -1,3 +1,6 @@
+1.1.1
+- fix bug: Timeline RSS has not anymore same guid for all items.
+
 1.1.0
 - feature: Checkbox to post on NGF, or not
 - feature: Picture is not post but put in score's URL

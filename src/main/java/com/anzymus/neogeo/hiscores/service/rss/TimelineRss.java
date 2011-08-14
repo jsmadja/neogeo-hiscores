@@ -104,7 +104,7 @@ public class TimelineRss {
         title += " on " + score.getGame().getName();
         title += " (" + score.getLevel() + ")";
         entry.setTitle(title);
-        entry.setLink("http://www.neogeo-hiscores.com");
+        entry.setLink("http://www.neogeo-hiscores.com/faces/score/edit.xhtml?scoreId=" + score.getId());
         entry.setPublishedDate(score.getCreationDate());
         description.setType(DESCRIPTION_TYPE);
         description.setValue(title);
@@ -124,7 +124,7 @@ public class TimelineRss {
         SyndEntry entry = new SyndEntryImpl();
         SyndContent description = new SyndContentImpl();
         entry.setTitle(title);
-        entry.setLink("http://www.neogeo-hiscores.com");
+        entry.setLink("http://www.neogeo-hiscores.com/faces/player/view.xhtml?fullname=" + playerName);
         entry.setPublishedDate(unlockedTitle.getUnlockDate());
         description.setType(DESCRIPTION_TYPE);
         description.setValue(title);
