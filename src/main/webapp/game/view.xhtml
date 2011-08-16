@@ -26,51 +26,49 @@
                 xmlns:emcomp="http://java.sun.com/jsf/composite/emcomp"
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
     <ui:define name="content_right">
-        <center>
-            <h2>${gameBean.name}</h2>
+        <h2>${gameBean.name}</h2>
 
-            <table>
-                <tr>
-                    <td>
-                        <img src="#{gameBean.pictureUrl}" />
-                    </td>
-                    <td>
-                        #{gameBean.rules}
-                    </td>
-                </tr>
+        <table>
+            <tr>
+                <td>
+                    <img src="#{gameBean.pictureUrl}" />
+                </td>
+                <td>
+                    #{gameBean.rules}
+                </td>
+            </tr>
+        </table>
+        <c:forEach var="level" items="${gameBean.levels}">
+            <h3>${level.label}</h3>
+
+            <table style="min-width: 50%;text-align: right">
+                <c:forEach id="scoreTable" var="score" items="#{level.scoreItems}">
+                    <tr>
+                        <td style="text-align:right">
+                            <h:outputText value="${score.rank}" />
+                        </td>
+                        <td>
+                            <h:link styleClass="player" outcome="player" value="${score.player}">
+                                <f:param name="fullname" value="${score.player}"/>
+                            </h:link>
+                        </td>
+                        <td>
+                            <h:link outcome="score/edit" styleClass="score">
+                                <h:outputText value="${score.value}" converter="scoreConverter" />    
+                                <f:param name="scoreId" value="${score.id}" />
+                            </h:link>
+                        </td>
+                        <td>
+                            <p class="message_column">
+                                <h:outputText value="${score.message}" title="${score.longMessage}" />
+                            </p>
+                        </td>
+                        <td>
+                            <h:outputText value="${score.date}" converter="dateMMDDYYConverter" styleClass="date" />
+                        </td>
+                    </tr>
+                </c:forEach>
             </table>
-            <c:forEach var="level" items="${gameBean.levels}">
-                <h3>${level.label}</h3>
-
-                <table style="min-width: 50%;text-align: right">
-                    <c:forEach id="scoreTable" var="score" items="#{level.scoreItems}">
-                        <tr>
-                            <td style="text-align:right">
-                                <h:outputText value="${score.rank}" />
-                            </td>
-                            <td>
-                                <h:link styleClass="player" outcome="player" value="${score.player}">
-                                    <f:param name="fullname" value="${score.player}"/>
-                                </h:link>
-                            </td>
-                            <td>
-                                <h:link outcome="score/edit" styleClass="score">
-                                    <h:outputText value="${score.value}" converter="scoreConverter" />    
-                                    <f:param name="scoreId" value="${score.id}" />
-                                </h:link>
-                            </td>
-                            <td>
-                                <p class="message_column">
-                                    <h:outputText value="${score.message}" title="${score.longMessage}" />
-                                </p>
-                            </td>
-                            <td>
-                                <h:outputText value="${score.date}" converter="dateMMDDYYConverter" styleClass="date" />
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </table>
-            </c:forEach>
-        </center>
+        </c:forEach>
     </ui:define>
 </ui:composition>

@@ -44,39 +44,31 @@
         <link rel="alternate" title="Neo Geo Hi-Scores - Timeline" href="${contextPathStatic}/rss/timeline.xml" type="application/rss+xml" />
     </h:head>
     <h:body>
-        <div id="top_bg">
-            <div class="container">
-                <div id="content">
-                    <div id="content_left">
-                        <div class="post">
-                            <center>
-                                <a href="${contextPath}"> <img width="100px" style="border-style: none" src="${contextPathStatic}/myimages/logo.png" alt="logo" /> </a> <span class="title_neogeo">Neo Geo</span> <span class="title_hiscore">Hi-Scores</span>
+        <center>
+            <div id="content">
+                <div>
+                    <a href="${contextPath}"> <img width="100px" style="border-style: none" src="${contextPathStatic}/myimages/logo.png" alt="logo" /> </a> <span class="title_neogeo">Neo Geo</span> <span class="title_hiscore">Hi-Scores</span>
 
-                                <p style="color: rgb(118, 118, 118); font-size: 14px;">
-                                    <a class="link" href="${contextPath}">Home</a> |
-                                    <h:link styleClass="link" value="Add New Score" outcome="score/create" />
+                    <p style="color: rgb(118, 118, 118); font-size: 14px;">
+                        <a class="link" href="${contextPath}">Home</a> |
+                        <h:link styleClass="link" value="Add New Score" outcome="score/create" />
 								|
-                                    <h:link styleClass="link" value="Games" outcome="games" />
+                        <h:link styleClass="link" value="Games" outcome="games" />
 								|
-                                    <h:link styleClass="link" value="Hall of Fame" outcome="hallOfFame">
-                                        <f:param name="level" value="MVS" />
-                                    </h:link>
+                        <h:link styleClass="link" value="Hall of Fame" outcome="hallOfFame">
+                            <f:param name="level" value="MVS" />
+                        </h:link>
 								|
-                                    <h:link styleClass="link" value="Credits" outcome="credits" />
-                                </p>
-                            </center>
-
-                            <ui:insert name="content_right" />
-                        </div>
-                    </div>
-                    <div class="cleaner_with_height"></div>
+                        <h:link styleClass="link" value="Credits" outcome="credits" />
+                    </p>
+                    <ui:insert name="content_right" />
                 </div>
-                <div class="cleaner_with_height"></div>
             </div>
-        </div>
-        <div id="footer">
-            <p style="color: rgb(118, 118, 118); font-size: 8pt;">Neo Geo Hi Scores version ${msgs.version} | ©2011</p>
-        </div>
+            <div id="footer">
+                <p style="color: rgb(118, 118, 118); font-size: 8pt;">Neo Geo Hi-Scores version ${msgs.version} | ©2011</p>
+            </div>
+        </center>
     </h:body>
+
 
 </html>

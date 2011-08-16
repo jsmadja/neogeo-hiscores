@@ -18,42 +18,24 @@ html {
 }
 
 body {
-    margin: 0;
-    padding:0;
-    font-family: Verdana,Arial, Helvetica, sans-serif;
+    font-family: Verdana,Arial, Helvetica, Sans-Serif;
     font-size: 14pt;
     color: white;
     background-color: black;
     width: 100%;
-    display: table;
 }
 
 a:link, a:visited {text-decoration: none; }
 
 a:active, a:hover { color: orange; text-decoration: none; }
 
-.container {
-    margin: auto;
-}
-
 #header {
     width: 100%;
     height: 280px;
 }
 
-
 #content {
-    margin: 15px;
-    padding: 0;
-}
-
-* html #content {
-
-    margin: 20px 0 20px 20px;
-
 }
 
 #footer {
-    margin-top: 40px;
-    text-align:center;	
 }
