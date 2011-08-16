@@ -22,6 +22,7 @@ public class TimelineItem {
     private Score score;
     private String pictureUrl;
     private UnlockedTitle unlockedTitle;
+    private String avatarUrl;
 
     public TimelineItem(Score score) {
         this.score = score;
@@ -46,5 +47,14 @@ public class TimelineItem {
     public String getPictureUrl() {
         return pictureUrl;
     }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+    
     
 }

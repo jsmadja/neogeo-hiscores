@@ -48,11 +48,19 @@ public class TimelineService {
         List<Score> scores = scoreService.findLastScoresOrderByDateDesc();
         for (Score score : scores) {
             TimelineItem item = new TimelineItem(score);
-            if (score.getPictureUrl() == null || score.getPictureUrl().length() == 0) {
+            final String pictureUrl = score.getPictureUrl();
+            if (pictureUrl == null || pictureUrl.length() == 0) {
                 item.setPictureUrl("myimages/nopic.jpg");
             } else {
-                item.setPictureUrl(score.getPictureUrl());
+                item.setPictureUrl(pictureUrl);
             }
+            Long avatarId = score.getPlayer().getAvatarId();
+            if (avatarId == null || avatarId == 0) {
+                item.setAvatarUrl(item.getPictureUrl());
+            } else {
+                item.setAvatarUrl("http://www.neogeofans.com/leforum/image.php?u="+avatarId);
+            }
+            
             timeline.getItems().add(item);
         }
     }
