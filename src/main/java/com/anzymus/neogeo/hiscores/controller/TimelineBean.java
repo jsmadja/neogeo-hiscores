@@ -29,9 +29,9 @@ public class TimelineBean {
 
     @EJB
     TimelineService timelineService;
-    
+
     private List<TimelineItem> items;
-    
+
     @PostConstruct
     public void init() {
         Timeline timeline = timelineService.createTimeline();

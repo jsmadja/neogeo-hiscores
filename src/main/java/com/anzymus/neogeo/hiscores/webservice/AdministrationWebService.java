@@ -16,6 +16,7 @@
 
 package com.anzymus.neogeo.hiscores.webservice;
 
+import java.util.List;
 import javax.ejb.EJB;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -26,7 +27,6 @@ import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
 import com.anzymus.neogeo.hiscores.service.TitleUnlockingService;
-import java.util.List;
 
 @WebService
 public class AdministrationWebService {
@@ -39,7 +39,7 @@ public class AdministrationWebService {
 
     @EJB
     PlayerService playerService;
-    
+
     @EJB
     TitleUnlockingService titleUnlockingService;
 
@@ -66,7 +66,8 @@ public class AdministrationWebService {
     }
 
     @WebMethod
-    public void addScore(String gameName, String level, String fullname, String scorePoints, String pictureUrl, String message) {
+    public void addScore(String gameName, String level, String fullname, String scorePoints, String pictureUrl,
+            String message) {
         Game game = gameService.findByName(gameName);
         Player player = playerService.findByFullname(fullname);
         if (player == null) {
@@ -87,12 +88,29 @@ public class AdministrationWebService {
     public void deleteScore(Long scoreId) {
         scoreService.delete(scoreId);
     }
-    
+
     @WebMethod
     public void unlockNewTitles() {
         List<Player> players = playerService.findAll();
-        for (Player player:players) {
+        for (Player player : players) {
             titleUnlockingService.searchUnlockedTitlesFor(player);
         }
     }
+
+    public void setGameService(GameService gameService) {
+        this.gameService = gameService;
+    }
+
+    public void setScoreService(ScoreService scoreService) {
+        this.scoreService = scoreService;
+    }
+
+    public void setPlayerService(PlayerService playerService) {
+        this.playerService = playerService;
+    }
+
+    public void setTitleUnlockingService(TitleUnlockingService titleUnlockingService) {
+        this.titleUnlockingService = titleUnlockingService;
+    }
+
 }

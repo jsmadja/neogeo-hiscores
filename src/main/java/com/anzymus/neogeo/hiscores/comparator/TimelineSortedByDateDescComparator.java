@@ -30,10 +30,10 @@ public class TimelineSortedByDateDescComparator implements Comparator<TimelineIt
     }
 
     private Date getDate(TimelineItem timelineItem) {
-        if(timelineItem.getScore() != null) {
+        if (timelineItem.getScore() != null) {
             return timelineItem.getScore().getCreationDate();
         }
         return timelineItem.getUnlockedTitle().getUnlockDate();
     }
-    
+
 }

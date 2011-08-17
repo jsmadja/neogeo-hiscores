@@ -30,12 +30,12 @@ public class DateMMDDYYConverterTest {
         cal.set(Calendar.DAY_OF_MONTH, 7);
         cal.set(Calendar.MONTH, 2);
         cal.set(Calendar.YEAR, 2010);
-        
+
         Date date = cal.getTime();
-        
-        String strDate =converter.getAsString(null, null, date);
-        
+
+        String strDate = converter.getAsString(null, null, date);
+
         Assert.assertEquals("03/07/10", strDate);
     }
-    
+
 }

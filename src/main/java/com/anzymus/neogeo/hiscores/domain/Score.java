@@ -39,6 +39,8 @@ import com.google.common.base.Objects;
         @NamedQuery(name = "score_findAllOrderByDateDesc", query = "SELECT s FROM Score s ORDER BY s.creationDate DESC") })
 public class Score implements Serializable {
 
+    private static final long serialVersionUID = -5889253204083818192L;
+
     @Id
     @GeneratedValue
     private Long id;

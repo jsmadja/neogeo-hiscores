@@ -61,12 +61,12 @@ public class TitleServiceITest extends AbstractTest {
 
         assertEquals(0, scoreCount);
     }
-    
+
     @Test
     public void should_find_score_in_game() {
         Score score = new Score("1234", player, "MVS", game, "http://");
         scoreService.store(score);
-        
+
         boolean hasScoreInGame = titleService.hasScoreInGame(player, game.getName());
         assertTrue(hasScoreInGame);
     }

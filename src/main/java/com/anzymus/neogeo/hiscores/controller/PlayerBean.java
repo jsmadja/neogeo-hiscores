@@ -43,25 +43,25 @@ public class PlayerBean {
 
     @EJB
     ScoreService scoreService;
-    
+
     @EJB
     PlayerService playerService;
-    
+
     @EJB
     GameService gameService;
-    
+
     @EJB
     TitleService titleService;
-    
+
     @ManagedProperty(value = "#{param.fullname}")
     private String fullname;
-    
+
     private Collection<TitleItem> titleItems = new ArrayList<TitleItem>();
-    
+
     private List<ScoreItem> scoreItems = new ArrayList<ScoreItem>();
 
     private Player player;
-    
+
     @PostConstruct
     public void init() {
         player = playerService.findByFullname(fullname);

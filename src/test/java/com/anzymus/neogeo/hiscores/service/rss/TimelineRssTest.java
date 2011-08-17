@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Calendar;
 import java.util.Date;
-import org.junit.Ignore;
 import org.junit.Test;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
@@ -32,7 +31,6 @@ import com.anzymus.neogeo.hiscores.domain.Title;
 import com.anzymus.neogeo.hiscores.domain.UnlockedTitle;
 import com.google.common.io.ByteStreams;
 
-@Ignore
 public class TimelineRssTest {
 
     @Test
@@ -41,8 +39,9 @@ public class TimelineRssTest {
         TimelineRss timelineRss = new TimelineRss(timeline);
 
         String expectedRss = getFileContent("empty-timeline.rss");
+        String rssTimelineAsString = clean(timelineRss.toString());
 
-        assertEquals(expectedRss, timelineRss.toString());
+        assertEquals(expectedRss, rssTimelineAsString);
     }
 
     @Test
@@ -61,7 +60,7 @@ public class TimelineRssTest {
 
         String expectedRss = getFileContent("one-score-timeline.rss");
 
-        assertEquals(expectedRss, timelineRss.toString());
+        assertEquals(expectedRss, clean(timelineRss.toString()));
     }
 
     @Test
@@ -86,7 +85,7 @@ public class TimelineRssTest {
 
         String expectedRss = getFileContent("one-unlocked-title-timeline.rss");
 
-        assertEquals(expectedRss, timelineRss.toString());
+        assertEquals(expectedRss, clean(timelineRss.toString()));
     }
 
     private Date createDate() {
@@ -106,7 +105,13 @@ public class TimelineRssTest {
         ClassLoader classloader = clazz.getClassLoader();
         InputStream stream = classloader.getResourceAsStream("rss/timeline/" + filename);
         byte[] content = ByteStreams.toByteArray(stream);
-        return new String(content);
+        return clean(new String(content));
+    }
+
+    private String clean(String string) {
+        string = string.replaceAll("\r", "");
+        string = string.replaceAll("\n", "");
+        return string;
     }
 
 }

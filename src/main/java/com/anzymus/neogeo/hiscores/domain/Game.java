@@ -34,6 +34,8 @@ import com.google.common.base.Objects;
         @NamedQuery(name = "game_findByName", query = "SELECT g FROM Game g WHERE g.name = :name") })
 public class Game implements Comparable<Game>, Serializable {
 
+    private static final long serialVersionUID = -8252960983109413218L;
+
     @Id
     @GeneratedValue
     private Long id;

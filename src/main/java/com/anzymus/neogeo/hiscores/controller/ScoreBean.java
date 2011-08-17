@@ -63,9 +63,8 @@ public class ScoreBean {
     private long currentGame;
     private String currentLevel = "MVS";
     private Boolean postOnNgf = false;
-    
+
     private static final int MAX_MESSAGE_LENGTH = 255;
-    
 
     @VisibleForTesting
     NeoGeoFansClientFactory neoGeoFansClientFactory = new NeoGeoFansClientFactory();
@@ -252,5 +251,5 @@ public class ScoreBean {
     public void setPostOnNgf(Boolean postOnNgf) {
         this.postOnNgf = postOnNgf;
     }
-    
+
 }

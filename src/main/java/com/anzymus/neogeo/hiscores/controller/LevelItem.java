@@ -38,10 +38,6 @@ public class LevelItem {
         return label;
     }
 
-    public void addScore(Score score) {
-        scores.add(score);
-    }
-
     public List<Score> getScores() {
         List<Score> sortedScores = new ArrayList<Score>();
         sortedScores.addAll(scores);

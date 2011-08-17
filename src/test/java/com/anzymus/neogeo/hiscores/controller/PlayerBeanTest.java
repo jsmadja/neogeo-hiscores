@@ -48,7 +48,7 @@ public class PlayerBeanTest {
 
     @Mock
     GameService gameService;
-    
+
     @Mock
     TitleService titleService;
 
@@ -62,7 +62,7 @@ public class PlayerBeanTest {
         playerBean.playerService = playerService;
         playerBean.scoreService = scoreService;
         playerBean.titleService = titleService;
-        
+
         when(titleService.findAllStrategies()).thenReturn(new HashMap<Title, TitleUnlockingStrategy>());
     }
 

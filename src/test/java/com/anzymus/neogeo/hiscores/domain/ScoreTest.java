@@ -59,5 +59,5 @@ public class ScoreTest {
 
         assertEquals(score1, score2);
     }
-    
+
 }

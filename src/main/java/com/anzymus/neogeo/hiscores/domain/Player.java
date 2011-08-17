@@ -33,14 +33,15 @@ import javax.persistence.UniqueConstraint;
 import com.google.common.base.Objects;
 
 @Entity
-@Table(name = "PLAYER", uniqueConstraints =
-@UniqueConstraint(columnNames = {"fullname"}))
+@Table(name = "PLAYER", uniqueConstraints = @UniqueConstraint(columnNames = { "fullname" }))
 @NamedQueries({ //
-    
-    @NamedQuery(name = "player_findByFullname", query = "SELECT p FROM Player p WHERE p.fullname = :fullname"),
-    @NamedQuery(name = "player_findAll", query = "SELECT p FROM Player p")//
+
+@NamedQuery(name = "player_findByFullname", query = "SELECT p FROM Player p WHERE p.fullname = :fullname"),
+        @NamedQuery(name = "player_findAll", query = "SELECT p FROM Player p") //
 })
 public class Player implements Serializable {
+
+    private static final long serialVersionUID = 2067603406910806588L;
 
     @Id
     @GeneratedValue
@@ -55,7 +56,7 @@ public class Player implements Serializable {
     private Set<UnlockedTitle> unlockedTitles = new HashSet<UnlockedTitle>();
 
     private Long avatarId;
-    
+
     public Player() {
     }
 
@@ -119,7 +120,7 @@ public class Player implements Serializable {
     }
 
     public boolean hasNotUnlocked(Title title) {
-        for(UnlockedTitle unlockedTitle:unlockedTitles) {
+        for (UnlockedTitle unlockedTitle : unlockedTitles) {
             if (unlockedTitle.getTitle().equals(title)) {
                 return false;
             }
@@ -138,5 +139,5 @@ public class Player implements Serializable {
     public void setAvatarId(Long avatarId) {
         this.avatarId = avatarId;
     }
-    
+
 }

@@ -58,9 +58,9 @@ public class TimelineService {
             if (avatarId == null || avatarId == 0) {
                 item.setAvatarUrl(item.getPictureUrl());
             } else {
-                item.setAvatarUrl("http://www.neogeofans.com/leforum/image.php?u="+avatarId);
+                item.setAvatarUrl("http://www.neogeofans.com/leforum/image.php?u=" + avatarId);
             }
-            
+
             timeline.getItems().add(item);
         }
     }

@@ -16,9 +16,8 @@
 
 package com.anzymus.neogeo.hiscores.domain;
 
-
 public class TimelineItem {
-    
+
     private Score score;
     private String pictureUrl;
     private UnlockedTitle unlockedTitle;
@@ -31,7 +30,7 @@ public class TimelineItem {
     public TimelineItem(UnlockedTitle unlockedTitle) {
         this.unlockedTitle = unlockedTitle;
     }
-    
+
     public Score getScore() {
         return score;
     }
@@ -39,7 +38,7 @@ public class TimelineItem {
     public UnlockedTitle getUnlockedTitle() {
         return unlockedTitle;
     }
-    
+
     public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
     }
@@ -55,6 +54,5 @@ public class TimelineItem {
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
     }
-    
-    
+
 }

@@ -86,4 +86,10 @@ public class TitleService {
         return (Long) query.getSingleResult() > 0;
     }
 
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void addStrategy(Title title, TitleUnlockingStrategy titleUnlockingStrategy) {
+        title.setClassname(titleUnlockingStrategy.getClass().getName());
+        store(title);
+    }
+
 }

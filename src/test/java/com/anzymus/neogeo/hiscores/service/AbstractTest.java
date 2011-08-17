@@ -26,6 +26,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
+import com.anzymus.neogeo.hiscores.webservice.AdministrationWebService;
 
 public abstract class AbstractTest {
 
@@ -38,6 +39,7 @@ public abstract class AbstractTest {
     protected static GameService gameService;
     protected static TitleService titleService;
     protected static TitleUnlockingService titleUnlockingService;
+    protected static AdministrationWebService administrationWebService;
 
     static {
         try {
@@ -52,6 +54,12 @@ public abstract class AbstractTest {
             gameService = (GameService) lookup("GameService");
             titleService = (TitleService) lookup("TitleService");
             titleUnlockingService = (TitleUnlockingService) lookup("TitleUnlockingService");
+
+            administrationWebService = new AdministrationWebService();
+            administrationWebService.setGameService(gameService);
+            administrationWebService.setPlayerService(playerService);
+            administrationWebService.setScoreService(scoreService);
+            administrationWebService.setTitleUnlockingService(titleUnlockingService);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -26,7 +26,6 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
-import javax.persistence.criteria.CriteriaBuilder;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
@@ -79,7 +78,7 @@ public class GameService {
     public List<Object[]> findAllScoreCountForEachGames() {
         String sql = "SELECT g.id, g.name, COUNT(s.id) FROM SCORE s, GAME g WHERE s.game_id = g.id GROUP BY g.id ORDER BY g.name";
         Query query = em.createNativeQuery(sql);
-        
+
         //String sql = "SELECT g.id, g.name, COUNT(s.id) FROM Score s, Game g WHERE s.game = g GROUP BY g ORDER BY g.name";
         //Query query = em.createQuery(sql);
         return query.getResultList();

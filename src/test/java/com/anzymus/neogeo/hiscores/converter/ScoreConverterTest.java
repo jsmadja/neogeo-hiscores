@@ -22,7 +22,7 @@ import org.junit.Test;
 public class ScoreConverterTest {
 
     ScoreConverter converter = new ScoreConverter();
-        
+
     @Test
     public void should_add_dot_to_score() {
         String[] scores = { "1", "12", "123", "1234", "12345", "123456", "1234567", };
@@ -32,9 +32,9 @@ public class ScoreConverterTest {
             assertEquals(scoresWithDots[i], result);
         }
     }
-    
+
     @Test
-    public void should_not_format_chorno_score() {  
+    public void should_not_format_chorno_score() {
         String result = converter.getAsString(null, null, "12:55:50");
         assertEquals("12:55:50", result);
     }

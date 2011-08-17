@@ -34,7 +34,7 @@ public class GamesBean {
     ScoreService scoreService;
 
     List<GameItem> gameItems = new ArrayList<GameItem>();
-        
+
     @PostConstruct
     public void init() {
         loadGameItems();
@@ -45,12 +45,12 @@ public class GamesBean {
         for (Object[] scoreCount : scoreCounts) {
             Long gameId = (Long) scoreCount[0];
             String gameName = (String) scoreCount[1];
-            Long count = (Long) scoreCount[2];  
+            Long count = (Long) scoreCount[2];
             GameItem gameItem = new GameItem(gameName, gameId, count);
             gameItems.add(gameItem);
         }
     }
-    
+
     public List<GameItem> getGames() {
         return gameItems;
     }

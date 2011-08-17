@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 public class GameTest {
-    
+
     @Test
     public void should_be_equal() {
         Game game1 = new Game("game");

@@ -16,6 +16,7 @@
 
 package com.anzymus.neogeo.hiscores.domain;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -25,11 +26,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.google.common.base.Objects;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "TITLE")
 public class Title implements Serializable, Comparable<Title> {
+
+    private static final long serialVersionUID = -4525267232614553107L;
 
     @Id
     @GeneratedValue

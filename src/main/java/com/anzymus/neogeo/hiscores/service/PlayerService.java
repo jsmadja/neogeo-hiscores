@@ -43,7 +43,7 @@ public class PlayerService {
         }
         return player.get(0);
     }
-    
+
     public List<Player> findAll() {
         TypedQuery<Player> query = em.createNamedQuery("player_findAll", Player.class);
         return query.getResultList();

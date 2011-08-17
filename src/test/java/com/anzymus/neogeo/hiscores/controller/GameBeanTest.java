@@ -95,7 +95,7 @@ public class GameBeanTest {
         when(gameService.findById(anyLong())).thenReturn(game);
         when(scoreService.findAllByGame(any(Game.class))).thenReturn(scores);
         gameBean.setId("13");
-        
+
         Player player1 = new Player("fullname1");
         Score score1 = new Score("123", player1, "MVS", game, "http://");
         score1.setId(0L);

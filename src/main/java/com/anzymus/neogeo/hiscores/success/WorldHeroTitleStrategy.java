@@ -23,8 +23,8 @@ public class WorldHeroTitleStrategy extends UnlockingByScoringInManyGamesStrateg
 
     @Override
     List<String> getGameNamesToScore() {
-        return Arrays.asList("World Heroes (Normal)", "World Heroes (Death Match)", "World Heroes 2 (Death Match)", "World Heroes 2 (Normal Game)",
-                "World Heroes 2 Jet", "World Heroes Perfect");
+        return Arrays.asList("World Heroes (Normal)", "World Heroes (Death Match)", "World Heroes 2 (Death Match)",
+                "World Heroes 2 (Normal Game)", "World Heroes 2 Jet", "World Heroes Perfect");
     }
 
 }

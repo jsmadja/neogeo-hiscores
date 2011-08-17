@@ -22,7 +22,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.anzymus.neogeo.hiscores.domain.Score;
 
 public class GameItem {
 
@@ -51,15 +50,6 @@ public class GameItem {
 
     public long getCount() {
         return count;
-    }
-
-    public void addScore(String level, Score score) {
-        LevelItem levelItem = levelItems.get(level);
-        if (levelItem == null) {
-            levelItem = new LevelItem(level);
-            levelItems.put(level, levelItem);
-        }
-        levelItem.addScore(score);
     }
 
     public List<LevelItem> getLevels() {

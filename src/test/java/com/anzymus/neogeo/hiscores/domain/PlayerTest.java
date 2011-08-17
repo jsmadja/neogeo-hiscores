@@ -27,5 +27,5 @@ public class PlayerTest {
         Player player2 = new Player("a");
         assertEquals(player1, player2);
     }
-    
+
 }

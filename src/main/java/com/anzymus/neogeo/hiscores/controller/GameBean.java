@@ -56,7 +56,7 @@ public class GameBean {
     private static Comparator<Score> sortScoreByValueDesc = new ScoreSortedByValueDescComparator();
 
     private List<LevelItem> levelItems = new ArrayList<LevelItem>();
-    
+
     @PostConstruct
     public void init() {
         long gameId = Long.parseLong(id);

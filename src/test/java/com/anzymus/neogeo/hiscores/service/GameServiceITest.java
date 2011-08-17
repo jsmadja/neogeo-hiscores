@@ -91,11 +91,11 @@ public class GameServiceITest extends AbstractTest {
         scoreService.store(score3);
 
         List<Object[]> scoreCounts = gameService.findAllScoreCountForEachGames();
-        Object[] scoreCount = scoreCounts.get(scoreCounts.size()-1);
+        Object[] scoreCount = scoreCounts.get(scoreCounts.size() - 1);
         Long gameId = (Long) scoreCount[0];
         String gameName = (String) scoreCount[1];
-        Long count = (Long) scoreCount[2];  
-            
+        Long count = (Long) scoreCount[2];
+
         assertEquals(game2.getId(), gameId);
         assertEquals("Fatal Fury 5", gameName);
         assertEquals(2L, count.longValue());

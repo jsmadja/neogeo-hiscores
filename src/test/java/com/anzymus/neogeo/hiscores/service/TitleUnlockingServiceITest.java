@@ -21,7 +21,6 @@ import java.util.HashMap;
 import org.junit.Test;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
-import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Title;
 import com.anzymus.neogeo.hiscores.success.FirstScoreTitleStrategy;
 import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
@@ -32,7 +31,7 @@ public class TitleUnlockingServiceITest extends AbstractTest {
     public void should_unlock_title() {
         Player player = createPlayer();
         Game game = createGame();
-        Score score = createScore(player, game);
+        createScore(player, game);
         Title title = new Title();
         title.setClassname(FirstScoreTitleStrategy.class.getName());
         title.setDescription("add one score");

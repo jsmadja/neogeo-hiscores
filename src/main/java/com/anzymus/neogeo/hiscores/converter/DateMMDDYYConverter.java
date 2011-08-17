@@ -27,7 +27,7 @@ import javax.faces.convert.FacesConverter;
 public class DateMMDDYYConverter implements Converter {
 
     private static final SimpleDateFormat MM_DD_YY = new SimpleDateFormat("MM/dd/yy");
-    
+
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -38,5 +38,5 @@ public class DateMMDDYYConverter implements Converter {
         Date date = (Date) value;
         return MM_DD_YY.format(date);
     }
-    
+
 }
