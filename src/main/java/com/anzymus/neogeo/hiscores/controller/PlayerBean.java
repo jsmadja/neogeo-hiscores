@@ -58,7 +58,7 @@ public class PlayerBean {
     @ManagedProperty(value = "#{param.fullname}")
     private String fullname;
 
-    private Collection<TitleItem> titleItems = new ArrayList<TitleItem>();
+    private List<TitleItem> titleItems = new ArrayList<TitleItem>();
 
     private List<ScoreItem> scoreItems = new ArrayList<ScoreItem>();
 
@@ -86,6 +86,7 @@ public class PlayerBean {
             TitleItem titleItem = new TitleItem(title, isUnlocked);
             titleItems.add(titleItem);
         }
+        Collections.sort(titleItems);
     }
 
     public Collection<TitleItem> getTitles() {

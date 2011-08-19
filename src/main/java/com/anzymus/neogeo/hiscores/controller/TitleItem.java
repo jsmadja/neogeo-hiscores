@@ -18,7 +18,7 @@ package com.anzymus.neogeo.hiscores.controller;
 
 import com.anzymus.neogeo.hiscores.domain.Title;
 
-public class TitleItem {
+public class TitleItem implements Comparable<TitleItem> {
 
     private Title title;
     private boolean unlocked;
@@ -34,6 +34,11 @@ public class TitleItem {
 
     public boolean isUnlocked() {
         return unlocked;
+    }
+
+    @Override
+    public int compareTo(TitleItem titleItem) {
+        return title.compareTo(titleItem.title);
     }
 
 }

@@ -122,7 +122,7 @@
 
 .button {
     padding: 5px 10px;
-    display: inline;
+    display: block;
     background: #777 url(button.png) repeat-x bottom;
     border: none;
     color: #fff;
@@ -156,25 +156,3 @@
 .button.large { font-size: 125%; padding: 7px 12px; }
 .button.large:hover { background-position: 0 -35px; }
 .button.large:active { padding: 8px 12px 6px; background-position: 0 top; }
-
-/* allow room for 5 columns */
-ul {
-    width: 50em;
-}
-
-/* float & allow room for the widest item */
-ul li {
-    float: left;
-   /* width: 10em; */
-    list-style-type: none;
-}
-
-/* stop the float */
-br {
-    clear: left;
-}
-
-/* separate the list from subsequent markup */
-div.wrapper {
-    margin-bottom: 1em;
-}

@@ -2,6 +2,7 @@
 - graphic: no more score thumbnail in player page and game page
 - graphic: use avatar of NGF if avatar_id is setted in database
 - feature: soccer score are now handled
+- graphic: unlock titles are sorted to the left of player page
 
 1.1.1
 - fix bug: Timeline RSS has not anymore same guid for all items.

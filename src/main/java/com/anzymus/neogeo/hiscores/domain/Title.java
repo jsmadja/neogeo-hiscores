@@ -37,6 +37,8 @@ public class Title implements Serializable, Comparable<Title> {
     @GeneratedValue
     private Long id;
 
+    private Long position;
+
     private String label;
 
     private String description;
@@ -70,6 +72,14 @@ public class Title implements Serializable, Comparable<Title> {
         this.classname = classname;
     }
 
+    public Long getPosition() {
+        return position;
+    }
+
+    public void setPosition(Long position) {
+        this.position = position;
+    }
+
     public Long getId() {
         return id;
     }
@@ -92,6 +102,7 @@ public class Title implements Serializable, Comparable<Title> {
                 .add("label", label) //
                 .add("description", description) //
                 .add("classname", classname) //
+                .add("position", position) //
                 .toString();
     }
 
@@ -111,9 +122,9 @@ public class Title implements Serializable, Comparable<Title> {
 
     @Override
     public int compareTo(Title t) {
-        if (label == null || t.label == null) {
+        if (position == null || t.position == null) {
             return 0;
         }
-        return label.compareTo(t.label);
+        return position.compareTo(t.position);
     }
 }

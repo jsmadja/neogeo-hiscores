@@ -153,9 +153,11 @@ public class PlayerBeanTest {
         Title title1 = new Title();
         title1.setId(1L);
         title1.setLabel("title1");
+        title1.setPosition(1L);
         Title title2 = new Title();
         title2.setId(2L);
         title2.setLabel("title2");
+        title2.setPosition(2L);
 
         Player player = new Player("fullname");
         UnlockedTitle unlockedTitle1 = new UnlockedTitle(player, title1);
