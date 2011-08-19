@@ -19,7 +19,7 @@ package com.anzymus.neogeo.hiscores.success;
 import java.util.Arrays;
 import java.util.List;
 
-public class WorldHeroTitleStrategy extends UnlockingByScoringInManyGamesStrategy {
+public class WorldHeroTitleStrategy extends AbstractUnlockingByScoringInManyGamesStrategy {
 
     @Override
     List<String> getGameNamesToScore() {

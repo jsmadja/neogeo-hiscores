@@ -16,7 +16,7 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
-public class FirstScoreTitleStrategy extends MinimumScoreTitleStrategy {
+public class FirstScoreTitleStrategy extends AbstractMinimumScoreTitleStrategy {
 
     @Override
     protected long getNumScoresToUnlock() {

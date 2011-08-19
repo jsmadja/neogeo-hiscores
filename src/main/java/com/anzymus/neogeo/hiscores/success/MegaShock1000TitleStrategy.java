@@ -16,7 +16,7 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
-public class MegaShock1000TitleStrategy extends MinimumScoreTitleStrategy {
+public class MegaShock1000TitleStrategy extends AbstractMinimumScoreTitleStrategy {
 
     @Override
     protected long getNumScoresToUnlock() {

@@ -56,6 +56,18 @@ public class AdministrationWebServiceITest extends AbstractTest {
     }
 
     @Test
+    public void should_initialize_score_list_with_no_message() {
+        Game game = createGame();
+
+        String scoreList = game.getName() + ";terry;123;http://www.google.fr";
+
+        administrationWebService.initializeScoreList(scoreList);
+
+        Scores scores = scoreService.findAllByGame(game);
+        assertEquals(1, scores.count());
+    }
+
+    @Test
     public void should_delete_score() {
         Player player = createPlayer();
         Game game = createGame();
@@ -86,4 +98,5 @@ public class AdministrationWebServiceITest extends AbstractTest {
 
         assertEquals(1, countUnlockedTitles);
     }
+
 }

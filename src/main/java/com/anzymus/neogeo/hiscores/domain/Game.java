@@ -30,9 +30,15 @@ import com.google.common.base.Objects;
 
 @Entity
 @Table(name = "GAME", uniqueConstraints = @UniqueConstraint(columnNames = { "NAME" }))
-@NamedQueries({ @NamedQuery(name = "game_findAll", query = "SELECT g FROM Game g ORDER BY g.name ASC"),
-        @NamedQuery(name = "game_findByName", query = "SELECT g FROM Game g WHERE g.name = :name") })
+@NamedQueries({ //
+@NamedQuery(name = "game_findAll", query = "SELECT g FROM Game g ORDER BY g.name ASC"), //
+        @NamedQuery(name = "game_findByName", query = "SELECT g FROM Game g WHERE g.name = :name") //
+})
 public class Game implements Comparable<Game>, Serializable {
+
+    public static final String findAllPlayedGames = "SELECT * FROM GAME WHERE id IN (SELECT DISTINCT game_id FROM SCORE) ORDER BY name";
+    public static final String findAllGamesPlayedBy = "SELECT * FROM GAME WHERE id IN (SELECT DISTINCT game_id FROM SCORE WHERE player_id = ? ) ORDER BY name";
+    public static final String findAllScoreCountForEachGames = "SELECT g.id, g.name, COUNT(s.id) FROM SCORE s, GAME g WHERE s.game_id = g.id GROUP BY g.id ORDER BY g.name";
 
     private static final long serialVersionUID = -8252960983109413218L;
 

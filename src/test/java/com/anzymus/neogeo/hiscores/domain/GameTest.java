@@ -17,6 +17,7 @@
 package com.anzymus.neogeo.hiscores.domain;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import org.junit.Test;
 
 public class GameTest {
@@ -26,5 +27,23 @@ public class GameTest {
         Game game1 = new Game("game");
         Game game2 = new Game("game");
         assertEquals(game1, game2);
+    }
+
+    @Test
+    public void should_compare_by_name_asc() {
+        Game gameA = new Game("a");
+        Game gameB = new Game("b");
+        assertEquals("a".compareTo("b"), gameA.compareTo(gameB));
+    }
+
+    @Test
+    public void should_print_name() {
+        Game game = new Game("a");
+        assertEquals("a", game.toString());
+    }
+
+    @Test
+    public void should_be_false_when_equal_to_null() {
+        assertFalse(new Game("a").equals(null));
     }
 }

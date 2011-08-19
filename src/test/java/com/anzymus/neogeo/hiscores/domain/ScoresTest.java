@@ -147,4 +147,5 @@ public class ScoresTest {
 
         assertEquals(2, scores.count());
     }
+
 }

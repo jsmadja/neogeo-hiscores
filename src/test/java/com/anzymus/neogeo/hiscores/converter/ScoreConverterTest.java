@@ -28,14 +28,31 @@ public class ScoreConverterTest {
         String[] scores = { "1", "12", "123", "1234", "12345", "123456", "1234567", };
         String[] scoresWithDots = { "1", "12", "123", "1.234", "12.345", "123.456", "1.234.567" };
         for (int i = 0; i < scores.length; i++) {
-            String result = converter.getAsString(null, null, scores[i]);
+            String result = converter.getAsString(scores[i]);
             assertEquals(scoresWithDots[i], result);
         }
     }
 
     @Test
-    public void should_not_format_chorno_score() {
-        String result = converter.getAsString(null, null, "12:55:50");
+    public void should_not_format_chrono_score() {
+        String result = converter.getAsString("12:55:50");
         assertEquals("12:55:50", result);
+    }
+
+    @Test
+    public void should_not_format_soccer_score() {
+        String result = converter.getAsString("6-13-2");
+        assertEquals("6-13-2", result);
+    }
+
+    @Test
+    public void should_not_format_soccer_score_with_overriden_method() {
+        String result = converter.getAsString(null, null, "6-13-2");
+        assertEquals("6-13-2", result);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void should_throw_exception() {
+        converter.getAsObject(null, null, null);
     }
 }

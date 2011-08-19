@@ -60,4 +60,16 @@ public class ScoreTest {
         assertEquals(score1, score2);
     }
 
+    @Test
+    public void should_not_be_equal_when_passing_null() {
+        Score score = new Score();
+        assertFalse(score.equals(null));
+    }
+
+    @Test
+    public void should_print_value() {
+        Score score = new Score("123");
+        assertEquals("123", score.toString());
+    }
+
 }

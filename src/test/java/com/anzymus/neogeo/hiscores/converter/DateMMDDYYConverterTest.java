@@ -23,9 +23,10 @@ import org.junit.Test;
 
 public class DateMMDDYYConverterTest {
 
+    DateMMDDYYConverter converter = new DateMMDDYYConverter();
+
     @Test
     public void should_format_correctly() {
-        DateMMDDYYConverter converter = new DateMMDDYYConverter();
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.DAY_OF_MONTH, 7);
         cal.set(Calendar.MONTH, 2);
@@ -38,4 +39,8 @@ public class DateMMDDYYConverterTest {
         Assert.assertEquals("03/07/10", strDate);
     }
 
+    @Test(expected = UnsupportedOperationException.class)
+    public void should_throw_exception() {
+        converter.getAsObject(null, null, null);
+    }
 }

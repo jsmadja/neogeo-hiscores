@@ -17,6 +17,7 @@
 package com.anzymus.neogeo.hiscores.clients;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,13 +39,17 @@ public class NeoGeoFansClient {
 
     private HtmlTextInput loginTextfield;
     private HtmlPasswordInput passwordTextfield;
-    private String login;
+    protected String login;
     private String password;
-    private WebClient webClient;
+    protected WebClient webClient;
 
     private static final ScoreConverter SCORE_CONVERTER = new ScoreConverter();
 
     private static final Logger LOG = Logger.getLogger(NeoGeoFansClient.class.getName());
+
+    protected void init() {
+
+    }
 
     public boolean authenticate(String login, String password) throws AuthenticationFailed {
         Preconditions.checkNotNull(login, "login is mandatory");
@@ -53,7 +58,7 @@ public class NeoGeoFansClient {
         this.password = password;
         try {
             webClient = new WebClient();
-            HtmlPage loginPage = (HtmlPage) webClient.getPage("http://www.neogeofans.com/leforum/index.php");
+            HtmlPage loginPage = getLoginPage();
             HtmlForm loginForm = fillForm(loginPage);
             String contentResult = submitForm(loginForm);
             return contentResult.contains("Merci de vous être identifié, " + login + ".");
@@ -61,6 +66,10 @@ public class NeoGeoFansClient {
             LOG.log(Level.SEVERE, login + " has not successfully logged in", e);
             throw new AuthenticationFailed(e);
         }
+    }
+
+    protected HtmlPage getLoginPage() throws IOException, MalformedURLException {
+        return (HtmlPage) webClient.getPage("http://www.neogeofans.com/leforum/index.php");
     }
 
     private HtmlForm fillForm(HtmlPage loginPage) {
@@ -72,7 +81,7 @@ public class NeoGeoFansClient {
         return loginForm;
     }
 
-    private String submitForm(HtmlForm loginForm) throws IOException {
+    protected String submitForm(HtmlForm loginForm) throws IOException {
         HtmlSubmitInput submitButton = (HtmlSubmitInput) loginForm.getInputByValue("S'identifier");
         HtmlPage resultPage = (HtmlPage) submitButton.click();
         String contentResult = resultPage.asText();

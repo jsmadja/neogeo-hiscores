@@ -20,6 +20,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import com.anzymus.neogeo.hiscores.domain.Score;
 
 @FacesConverter(value = "scoreConverter")
 public class ScoreConverter implements Converter {
@@ -48,15 +49,14 @@ public class ScoreConverter implements Converter {
         return score;
     }
 
-    private boolean isNotChrono(String score) {
-        return !score.contains(":");
-    }
+    public String getAsString(String scoreValue) {
+        Score score = new Score();
+        score.setValue(scoreValue);
 
-    public String getAsString(String score) {
-        if (isNotChrono(score)) {
-            score = addDots(score);
+        if (!score.isChrono() && !score.isSoccer()) {
+            scoreValue = addDots(scoreValue);
         }
-        return score;
+        return scoreValue;
     }
 
 }

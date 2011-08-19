@@ -19,11 +19,11 @@ package com.anzymus.neogeo.hiscores.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import java.util.List;
+import org.junit.Ignore;
 import org.junit.Test;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
-import org.junit.Ignore;
 
 public class GameServiceITest extends AbstractTest {
     @Test
@@ -99,6 +99,32 @@ public class GameServiceITest extends AbstractTest {
         assertEquals(game2.getId(), gameId);
         assertEquals("Fatal Fury 5", gameName);
         assertEquals(2L, count.longValue());
+    }
+
+    @Test
+    public void should_find_all_played_games() {
+        int initialCount = gameService.findAllPlayedGames().size();
+
+        Player player = createPlayer();
+        Game game = createGame();
+        createScore(player, game);
+
+        List<Game> playedGames = gameService.findAllPlayedGames();
+
+        assertEquals(initialCount + 1, playedGames.size());
+    }
+
+    @Test
+    public void should_find_all_games_played_by_player() {
+        Player player = createPlayer();
+        Game game = createGame();
+        createScore(player, game);
+
+        List<Game> playedGames = gameService.findAllGamesPlayedBy(player);
+
+        Game playedGame = playedGames.get(0);
+
+        assertEquals(game, playedGame);
     }
 
 }

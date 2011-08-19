@@ -77,6 +77,10 @@ public class Score implements Serializable {
         this.creationDate = new Date();
     }
 
+    public Score(String value) {
+        this.value = value;
+    }
+
     public Long getId() {
         return id;
     }
@@ -154,4 +158,26 @@ public class Score implements Serializable {
         return Objects.hashCode(game, value, player, level, pictureUrl);
     }
 
+    @Override
+    public String toString() {
+        return value;
+    }
+
+    /***
+     * Soccer are like : 6-13-2
+     */
+    private static final String SOCCER_PATTERN = "\\d+-\\d+-\\d+";
+
+    /***
+     * Chrono are like 12:55:50
+     */
+    private static final String CHRONO_PATTERN = "\\d+:\\d+:\\d+";
+
+    public boolean isSoccer() {
+        return value.matches(SOCCER_PATTERN);
+    }
+
+    public boolean isChrono() {
+        return value.matches(CHRONO_PATTERN);
+    }
 }

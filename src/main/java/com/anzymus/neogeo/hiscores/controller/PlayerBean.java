@@ -21,6 +21,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -35,8 +37,6 @@ import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
 import com.anzymus.neogeo.hiscores.service.TitleService;
-import java.util.TreeSet;
-import javax.annotation.PostConstruct;
 
 @ManagedBean
 public class PlayerBean {
@@ -125,8 +125,8 @@ public class PlayerBean {
                 Long scoreId = score.getId();
                 String scorePictureUrl = score.getPictureUrl();
                 ScoreItem scoreItem = createScoreItem(game, level, rank, value, scoreId, scorePictureUrl);
-                scoreItem.setPositiveGap(computeGap(value, nextScore));
-                scoreItem.setNegativeGap(computeGap(value, previousScore));
+                scoreItem.setPositiveGap(computeGap(score, nextScore));
+                scoreItem.setNegativeGap(computeGap(score, previousScore));
                 scoreItems.add(scoreItem);
             }
             previousScore = score;
@@ -150,10 +150,10 @@ public class PlayerBean {
         return scoreItem;
     }
 
-    private String computeGap(String value, Score score) {
+    private String computeGap(Score score1, Score score2) {
         String gap = "";
-        if (score != null) {
-            gap = ScoreComparator.gap(value, score.getValue());
+        if (score2 != null) {
+            gap = ScoreComparator.gap(score1, score2);
         }
         return gap;
     }

@@ -73,4 +73,9 @@ public class DateConverterTest {
         cal.add(Calendar.SECOND, -2);
         assertEquals("3 second(s) ago", dateConverter.getAsString(null, null, cal.getTime()));
     }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void should_throw_exception() {
+        dateConverter.getAsObject(null, null, null);
+    }
 }

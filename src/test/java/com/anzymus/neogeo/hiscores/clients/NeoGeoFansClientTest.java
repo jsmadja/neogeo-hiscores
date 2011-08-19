@@ -17,12 +17,39 @@
 package com.anzymus.neogeo.hiscores.clients;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import java.net.URL;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.MockitoAnnotations;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 public class NeoGeoFansClientTest {
+
+    NeoGeoFansClient neoGeoFansClient;
+
+    @Before
+    public void init() {
+        MockitoAnnotations.initMocks(this);
+        neoGeoFansClient = new NeoGeoFansClient() {
+
+            protected void init() {
+            }
+
+            protected HtmlPage getLoginPage() throws java.io.IOException, java.net.MalformedURLException {
+                URL url = NeoGeoFansClientTest.class.getClassLoader().getResource("ngf/login-page.html");
+                return (HtmlPage) webClient.getPage(url);
+            };
+
+            protected String submitForm(HtmlForm loginForm) {
+                return "Merci de vous être identifié, " + login + ".";
+            }
+        };
+    }
 
     @Test
     public void should_format_score() {
@@ -39,4 +66,12 @@ public class NeoGeoFansClientTest {
                 + "[SIZE=\"1\"]posté depuis [url]www.neogeo-hiscores.com[/url][/SIZE]";
         assertEquals(expected, NeoGeoFansClient.toMessage(score));
     }
+
+    @Test
+    public void should_authenticate() throws AuthenticationFailed {
+        boolean authenticated = neoGeoFansClient.authenticate("login", "password");
+
+        assertTrue(authenticated);
+    }
+
 }

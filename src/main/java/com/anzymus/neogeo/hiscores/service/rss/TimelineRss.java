@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.anzymus.neogeo.hiscores.converter.ScoreConverter;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Timeline;
@@ -48,6 +50,8 @@ public class TimelineRss {
 
     private ScoreConverter scoreConverter = new ScoreConverter();
 
+    private static final Logger LOG = LoggerFactory.getLogger(TimelineRss.class);
+
     public TimelineRss(Timeline timeline) {
         this.timeline = timeline;
     }
@@ -59,9 +63,9 @@ public class TimelineRss {
         try {
             return buildXmlContent(encoding).trim();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.warn("Can't build xml content", e);
         } catch (FeedException e) {
-            e.printStackTrace();
+            LOG.warn("Can't build xml content", e);
         }
         return "";
     }

@@ -63,24 +63,18 @@ public class GameService {
     }
 
     public List<Game> findAllGamesPlayedBy(Player player) {
-        String sql = "SELECT * FROM GAME WHERE id IN (SELECT DISTINCT game_id FROM SCORE WHERE player_id = "
-                + player.getId() + ") ORDER BY name";
-        Query query = em.createNativeQuery(sql, Game.class);
+        Query query = em.createNativeQuery(Game.findAllGamesPlayedBy, Game.class);
+        query = query.setParameter(1, player.getId());
         return query.getResultList();
     }
 
     public List<Game> findAllPlayedGames() {
-        String sql = "SELECT * FROM GAME WHERE id IN (SELECT DISTINCT game_id FROM SCORE) ORDER BY name";
-        Query query = em.createNativeQuery(sql, Game.class);
+        Query query = em.createNativeQuery(Game.findAllPlayedGames, Game.class);
         return query.getResultList();
     }
 
     public List<Object[]> findAllScoreCountForEachGames() {
-        String sql = "SELECT g.id, g.name, COUNT(s.id) FROM SCORE s, GAME g WHERE s.game_id = g.id GROUP BY g.id ORDER BY g.name";
-        Query query = em.createNativeQuery(sql);
-
-        //String sql = "SELECT g.id, g.name, COUNT(s.id) FROM Score s, Game g WHERE s.game = g GROUP BY g ORDER BY g.name";
-        //Query query = em.createQuery(sql);
+        Query query = em.createNativeQuery(Game.findAllScoreCountForEachGames);
         return query.getResultList();
     }
 
