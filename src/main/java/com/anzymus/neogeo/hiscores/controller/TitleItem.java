@@ -32,16 +32,8 @@ public class TitleItem {
         return title;
     }
 
-    public void setTitle(Title title) {
-        this.title = title;
-    }
-
     public boolean isUnlocked() {
         return unlocked;
-    }
-
-    public void setUnlocked(boolean unlocked) {
-        this.unlocked = unlocked;
     }
 
 }

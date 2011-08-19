@@ -111,6 +111,9 @@ public class Title implements Serializable, Comparable<Title> {
 
     @Override
     public int compareTo(Title t) {
+        if (label == null || t.label == null) {
+            return 0;
+        }
         return label.compareTo(t.label);
     }
 }

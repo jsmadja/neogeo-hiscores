@@ -16,19 +16,12 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class GameItem {
 
     private String name;
     private long id;
     private long count;
-    private Map<String, LevelItem> levelItems = new HashMap<String, LevelItem>();
 
     public GameItem(String name, long id) {
         this.name = name;
@@ -52,17 +45,4 @@ public class GameItem {
         return count;
     }
 
-    public List<LevelItem> getLevels() {
-        List<LevelItem> levels = new ArrayList<LevelItem>();
-        levels.addAll(levelItems.values());
-        Collections.sort(levels, sortByLabelComparator);
-        return levels;
-    }
-
-    private static Comparator<LevelItem> sortByLabelComparator = new Comparator<LevelItem>() {
-        @Override
-        public int compare(LevelItem item1, LevelItem item2) {
-            return item1.getLabel().compareTo(item2.getLabel());
-        }
-    };
 }

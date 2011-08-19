@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import javax.annotation.PostConstruct;
@@ -37,6 +38,7 @@ import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
 import com.anzymus.neogeo.hiscores.service.TitleService;
+import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
 
 @ManagedBean
 public class PlayerBean {
@@ -76,7 +78,9 @@ public class PlayerBean {
     }
 
     private void loadTitleItems() {
-        Set<Title> titles = new TreeSet<Title>(titleService.findAllStrategies().keySet());
+        Map<Title, TitleUnlockingStrategy> strategies = titleService.findAllStrategies();
+        Set<Title> allTitles = strategies.keySet();
+        Set<Title> titles = new TreeSet<Title>(allTitles);
         for (Title title : titles) {
             boolean isUnlocked = player.hasUnlocked(title);
             TitleItem titleItem = new TitleItem(title, isUnlocked);

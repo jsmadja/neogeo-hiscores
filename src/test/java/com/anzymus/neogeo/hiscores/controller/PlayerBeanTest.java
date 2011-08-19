@@ -17,10 +17,15 @@
 package com.anzymus.neogeo.hiscores.controller;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -31,12 +36,12 @@ import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Scores;
 import com.anzymus.neogeo.hiscores.domain.Title;
+import com.anzymus.neogeo.hiscores.domain.UnlockedTitle;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
 import com.anzymus.neogeo.hiscores.service.TitleService;
 import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
-import java.util.HashMap;
 
 public class PlayerBeanTest {
 
@@ -54,6 +59,8 @@ public class PlayerBeanTest {
 
     PlayerBean playerBean;
 
+    Map<Title, TitleUnlockingStrategy> strategies;
+
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
@@ -63,7 +70,8 @@ public class PlayerBeanTest {
         playerBean.scoreService = scoreService;
         playerBean.titleService = titleService;
 
-        when(titleService.findAllStrategies()).thenReturn(new HashMap<Title, TitleUnlockingStrategy>());
+        strategies = new HashMap<Title, TitleUnlockingStrategy>();
+        when(titleService.findAllStrategies()).thenReturn(strategies);
     }
 
     @Test
@@ -138,5 +146,40 @@ public class PlayerBeanTest {
         assertEquals("500", scoreItem.getValue());
         assertEquals("500", scoreItem.getNegativeGap());
         assertEquals("450", scoreItem.getPositiveGap());
+    }
+
+    @Test
+    public void should_load_titles() {
+        Title title1 = new Title();
+        title1.setId(1L);
+        title1.setLabel("title1");
+        Title title2 = new Title();
+        title2.setId(2L);
+        title2.setLabel("title2");
+
+        Player player = new Player("fullname");
+        UnlockedTitle unlockedTitle1 = new UnlockedTitle(player, title1);
+
+        player.getUnlockedTitles().add(unlockedTitle1);
+        when(playerService.findByFullname("fullname")).thenReturn(player);
+
+        TitleUnlockingStrategy titleUnlockingStrategy = null;
+        strategies.put(title1, titleUnlockingStrategy);
+        strategies.put(title2, titleUnlockingStrategy);
+
+        playerBean.setFullname("fullname");
+        playerBean.init();
+
+        Collection<TitleItem> titleItems = playerBean.getTitles();
+
+        Iterator<TitleItem> iterator = titleItems.iterator();
+        TitleItem titleItem = iterator.next();
+        assertEquals(title1, titleItem.getTitle());
+        assertTrue(titleItem.isUnlocked());
+
+        titleItem = iterator.next();
+        assertEquals(title2, titleItem.getTitle());
+        assertFalse(titleItem.isUnlocked());
+
     }
 }
