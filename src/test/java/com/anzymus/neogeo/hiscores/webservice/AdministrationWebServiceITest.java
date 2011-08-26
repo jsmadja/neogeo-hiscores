@@ -20,6 +20,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import java.util.Set;
 import org.apache.commons.lang.RandomStringUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
@@ -76,6 +77,7 @@ public class AdministrationWebServiceITest extends AbstractTest {
         administrationWebService.deleteScore(score.getId());
     }
 
+    @Ignore
     @Test
     public void should_unlock_new_titles() {
         Title title = new Title();
