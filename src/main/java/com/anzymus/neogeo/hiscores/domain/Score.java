@@ -34,6 +34,7 @@ import com.google.common.base.Objects;
 @Table(name = "SCORE")
 @NamedQueries({
         @NamedQuery(name = "score_findAllByGame", query = "SELECT s FROM Score s WHERE s.game = :game"),
+        @NamedQuery(name = "score_findAllOneCreditScoresByGame", query = "SELECT s FROM Score s WHERE s.game = :game AND s.allClear = true"),
         @NamedQuery(name = "score_findAllByPlayer", query = "SELECT s FROM Score s WHERE s.player = :player"),
         @NamedQuery(name = "score_findAll", query = "SELECT s FROM Score s"),
         @NamedQuery(name = "score_findAllOrderByDateDesc", query = "SELECT s FROM Score s ORDER BY s.creationDate DESC") })
@@ -64,6 +65,9 @@ public class Score implements Serializable {
     private String pictureUrl;
 
     private String message;
+
+    @Column(name = "ALL_CLEAR")
+    private boolean allClear;
 
     public Score() {
     }
@@ -141,6 +145,14 @@ public class Score implements Serializable {
         this.value = value;
     }
 
+    public boolean getAllClear() {
+        return allClear;
+    }
+
+    public void setAllClear(boolean allClear) {
+        this.allClear = allClear;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Score) {
@@ -148,6 +160,7 @@ public class Score implements Serializable {
             return Objects.equal(value, score.value) && //
                     Objects.equal(game, score.game) && //
                     Objects.equal(player, score.player) && //
+                    Objects.equal(allClear, score.allClear) && //
                     Objects.equal(level, score.level);
         }
         return false;

@@ -119,6 +119,7 @@ public class GameBean {
                 scoreItem.setId(score.getId());
                 scoreItem.setMessage(score.getMessage());
                 scoreItem.setDate(score.getCreationDate());
+                scoreItem.setAllClear(score.getAllClear());
                 if (oldScore != null && oldScore.getValue().equals(score.getValue())) {
                     rank = oldRank;
                 } else {

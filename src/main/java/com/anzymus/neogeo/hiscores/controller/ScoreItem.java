@@ -34,6 +34,7 @@ public class ScoreItem {
     private Date date;
     private String positiveGap;
     private String negativeGap;
+    private boolean allClear;
 
     private int MAX_MESSAGE_LENGTH = 25;
 
@@ -150,6 +151,14 @@ public class ScoreItem {
             }
         }
         return message;
+    }
+
+    public void setAllClear(boolean allClear) {
+        this.allClear = allClear;
+    }
+    
+    public boolean getAllClear() {
+        return allClear;
     }
 
 }

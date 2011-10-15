@@ -78,4 +78,10 @@ public class GameService {
         return query.getResultList();
     }
 
+    public List<Game> findAllGamesOneCreditedBy(Player player) {
+        Query query = em.createNativeQuery(Game.findAllGamesOneCreditedBy, Game.class);
+        query = query.setParameter(1, player.getId());
+        return query.getResultList();
+    }
+
 }

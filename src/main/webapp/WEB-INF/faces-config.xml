@@ -47,6 +47,14 @@
     <navigation-rule> 
         <from-view-id>*</from-view-id> 
         <navigation-case> 
+            <from-outcome>playerOneCreditWall</from-outcome> 
+            <to-view-id>/player/viewOneCreditWall.xhtml</to-view-id> 
+        </navigation-case> 
+    </navigation-rule> 
+    
+    <navigation-rule> 
+        <from-view-id>*</from-view-id> 
+        <navigation-case> 
             <from-outcome>game</from-outcome> 
             <to-view-id>/game/view.xhtml</to-view-id> 
         </navigation-case> 
@@ -66,7 +74,7 @@
             <to-view-id>/hallOfFame.xhtml</to-view-id> 
         </navigation-case> 
     </navigation-rule>
-	<navigation-rule> 
+    <navigation-rule> 
         <from-view-id>*</from-view-id> 
         <navigation-case> 
             <from-outcome>hallOfFame2</from-outcome> 
@@ -74,6 +82,14 @@
         </navigation-case> 
     </navigation-rule>
 
+    <navigation-rule> 
+        <from-view-id>*</from-view-id> 
+        <navigation-case> 
+            <from-outcome>hallOf1cc</from-outcome> 
+            <to-view-id>/hallOf1cc.xhtml</to-view-id> 
+        </navigation-case> 
+    </navigation-rule>
+    
     <navigation-rule> 
         <from-view-id>*</from-view-id> 
         <navigation-case> 

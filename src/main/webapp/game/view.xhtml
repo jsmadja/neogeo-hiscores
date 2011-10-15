@@ -59,6 +59,11 @@
                             </h:link>
                         </td>
                         <td>
+                            <c:if test="${score.allClear}">
+                                <span class="button small blue">all clear!</span>
+                            </c:if>
+                        </td>
+                        <td>
                             <p class="message_column">
                                 <h:outputText value="${score.message}" title="${score.longMessage}" />
                             </p>

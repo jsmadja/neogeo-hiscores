@@ -63,6 +63,7 @@ public class ScoreBean {
     private long currentGame;
     private String currentLevel = "MVS";
     private Boolean postOnNgf = false;
+    private Boolean allClear = false;
 
     private static final int MAX_MESSAGE_LENGTH = 255;
 
@@ -82,6 +83,7 @@ public class ScoreBean {
             message = scoreFromDb.getMessage();
             currentLevel = scoreFromDb.getLevel();
             currentGame = scoreFromDb.getGame().getId();
+            allClear = scoreFromDb.getAllClear();
         } else {
             currentGame = gameService.findByName("3 Count Bout (3 minutes)").getId();
         }
@@ -112,6 +114,7 @@ public class ScoreBean {
             player = playerService.store(new Player(fullname));
         }
         Score scoreToAdd = new Score(score, player, currentLevel, game, pictureUrl);
+        scoreToAdd.setAllClear(allClear);
         int end = message.length() > MAX_MESSAGE_LENGTH ? MAX_MESSAGE_LENGTH : message.length();
         scoreToAdd.setMessage(message.substring(0, end));
         scoreService.store(scoreToAdd);
@@ -143,6 +146,7 @@ public class ScoreBean {
                 scoreFromDb.setPictureUrl(pictureUrl);
                 scoreFromDb.setLevel(currentLevel);
                 scoreFromDb.setValue(score);
+                scoreFromDb.setAllClear(allClear);
                 scoreService.store(scoreFromDb);
                 return "home";
             } else {
@@ -250,6 +254,14 @@ public class ScoreBean {
 
     public void setPostOnNgf(Boolean postOnNgf) {
         this.postOnNgf = postOnNgf;
+    }
+
+    public Boolean getAllClear() {
+        return allClear;
+    }
+
+    public void setAllClear(Boolean allClear) {
+        this.allClear = allClear;
     }
 
 }

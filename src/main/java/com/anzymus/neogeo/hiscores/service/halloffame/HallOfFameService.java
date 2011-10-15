@@ -38,6 +38,7 @@ public class HallOfFameService {
 
     @EJB
     ScoreService scoreService;
+    
     @EJB
     GameService gameService;
     private static Comparator<Score> sortScoreByValueDesc = new ScoreSortedByValueDescComparator();

@@ -26,6 +26,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
+import com.anzymus.neogeo.hiscores.service.halloffame.HallOfOneCreditService;
 import com.anzymus.neogeo.hiscores.webservice.AdministrationWebService;
 
 public abstract class AbstractTest {
@@ -40,7 +41,8 @@ public abstract class AbstractTest {
     protected static TitleService titleService;
     protected static TitleUnlockingService titleUnlockingService;
     protected static AdministrationWebService administrationWebService;
-
+    protected static HallOfOneCreditService hallOfOneCreditService;
+    
     static {
         try {
             Map<String, Object> properties = new HashMap<String, Object>();
@@ -54,7 +56,8 @@ public abstract class AbstractTest {
             gameService = (GameService) lookup("GameService");
             titleService = (TitleService) lookup("TitleService");
             titleUnlockingService = (TitleUnlockingService) lookup("TitleUnlockingService");
-
+            hallOfOneCreditService = (HallOfOneCreditService) lookup("HallOfOneCreditService");
+            
             administrationWebService = new AdministrationWebService();
             administrationWebService.setGameService(gameService);
             administrationWebService.setPlayerService(playerService);

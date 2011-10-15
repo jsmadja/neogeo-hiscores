@@ -30,6 +30,14 @@ public class ScoreComparatorTest {
     }
 
     @Test
+    public void should_return_max_of_two_scores_as_int_with_all_clear_value() {
+        Score score1 = new Score("1");
+        score1.setAllClear(true);
+        Score score2 = new Score("2");
+        assertEquals(score1, ScoreComparator.max(score1, score2));
+    }
+
+    @Test
     public void should_return_max_of_two_scores_as_int_inverse() {
         Score score1 = new Score("2");
         Score score2 = new Score("1");
@@ -41,6 +49,14 @@ public class ScoreComparatorTest {
         Score score1 = new Score("6-13-2");
         Score score2 = new Score("7-5-4");
         assertEquals(score2, ScoreComparator.max(score1, score2));
+    }
+
+    @Test
+    public void should_return_max_of_two_scores_as_soccer_with_max_won_with_all_clear_value() {
+        Score score1 = new Score("6-13-2");
+        score1.setAllClear(true);
+        Score score2 = new Score("7-5-4");
+        assertEquals(score1, ScoreComparator.max(score1, score2));
     }
 
     @Test

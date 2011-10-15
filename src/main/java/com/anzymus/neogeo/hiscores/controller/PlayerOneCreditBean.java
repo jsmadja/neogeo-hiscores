@@ -17,12 +17,7 @@
 package com.anzymus.neogeo.hiscores.controller;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -30,15 +25,13 @@ import javax.faces.bean.ManagedProperty;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Scores;
-import com.anzymus.neogeo.hiscores.domain.Title;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
 import com.anzymus.neogeo.hiscores.service.TitleService;
-import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
 
 @ManagedBean
-public class PlayerBean {
+public class PlayerOneCreditBean {
 
     @EJB
     ScoreService scoreService;
@@ -55,10 +48,6 @@ public class PlayerBean {
     @ManagedProperty(value = "#{param.fullname}")
     private String fullname;
 
-    private List<TitleItem> titleItems = new ArrayList<TitleItem>();
-
-    private List<ScoreItem> scoreItems = new ArrayList<ScoreItem>();
-
     private List<ScoreItem> scoreItemsOneCredit = new ArrayList<ScoreItem>();
 
     private Player player;
@@ -66,30 +55,13 @@ public class PlayerBean {
     @PostConstruct
     public void init() {
         player = playerService.findByFullname(fullname);
-        loadTitleItems();
-        loadScoreItems();
+        loadScoreItemsOneCredit();
     }
 
-    private void loadScoreItems() {
-        for (Game game : gameService.findAllGamesPlayedBy(player)) {
-            extractScoreItemsFromGame(scoreItems, game);
+    private void loadScoreItemsOneCredit() {
+        for (Game game : gameService.findAllGamesOneCreditedBy(player)) {
+            extractScoreItemsFromGame(scoreItemsOneCredit, game);
         }
-    }
-
-    private void loadTitleItems() {
-        Map<Title, TitleUnlockingStrategy> strategies = titleService.findAllStrategies();
-        Set<Title> allTitles = strategies.keySet();
-        Set<Title> titles = new TreeSet<Title>(allTitles);
-        for (Title title : titles) {
-            boolean isUnlocked = player.hasUnlocked(title);
-            TitleItem titleItem = new TitleItem(title, isUnlocked);
-            titleItems.add(titleItem);
-        }
-        Collections.sort(titleItems);
-    }
-
-    public Collection<TitleItem> getTitles() {
-        return titleItems;
     }
 
     public String getFullname() {
@@ -100,19 +72,15 @@ public class PlayerBean {
         this.fullname = fullname;
     }
 
-    public List<ScoreItem> getScores() {
-        return scoreItems;
-    }
-    
     public List<ScoreItem> getScoresOneCredit() {
         return scoreItemsOneCredit;
     }
 
     private void extractScoreItemsFromGame(List<ScoreItem> scoreItems, Game game) {
-        Scores scores = scoreService.findAllByGame(game);
+        Scores scores = scoreService.findAllOneCreditScoresByGame(game);
         for (String level : Levels.list()) {
             Players.extractScoreItemsFromLevels(scoreItems, game, scores, level, fullname);
         }
     }
-
+    
 }

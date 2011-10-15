@@ -44,6 +44,13 @@ public class ScoreService {
         List<Score> scores = query.getResultList();
         return toScores(scores);
     }
+    
+    public Scores findAllOneCreditScoresByGame(Game game) {
+        TypedQuery<Score> query = em.createNamedQuery("score_findAllOneCreditScoresByGame", Score.class);
+        query.setParameter("game", game);
+        List<Score> scores = query.getResultList();
+        return toScores(scores);
+    }
 
     public Scores findAllByPlayer(Player player) {
         TypedQuery<Score> query = em.createNamedQuery("score_findAllByPlayer", Score.class);
@@ -114,5 +121,6 @@ public class ScoreService {
         Score score = findById(scoreId);
         em.remove(score);
     }
+
 
 }
