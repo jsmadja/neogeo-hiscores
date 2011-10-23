@@ -36,7 +36,7 @@ public class HallOfOneCreditService {
     @EJB
     PlayerService playerService;
 
-    private static final String ONE_CREDIT_QUERY = "SELECT s.PLAYER_ID, COUNT(s.PLAYER_ID) FROM SCORE s, Player p WHERE s.ALL_CLEAR = 1 AND s.PLAYER_ID=p.ID GROUP BY PLAYER_ID ORDER BY COUNT(s.PLAYER_ID) DESC, p.FULLNAME ASC";
+    private static final String ONE_CREDIT_QUERY = "SELECT s.PLAYER_ID, COUNT(s.PLAYER_ID) FROM SCORE s, PLAYER p WHERE s.ALL_CLEAR = 1 AND s.PLAYER_ID=p.ID GROUP BY PLAYER_ID ORDER BY COUNT(s.PLAYER_ID) DESC, p.FULLNAME ASC";
     
     public List<Player> getPlayersOrderByAllClearCount() {
         List<Player> players = new ArrayList<Player>();
