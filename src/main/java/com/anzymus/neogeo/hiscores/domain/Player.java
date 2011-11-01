@@ -19,6 +19,7 @@ package com.anzymus.neogeo.hiscores.domain;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,114 +31,115 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
+
 import com.google.common.base.Objects;
 
 @Entity
 @Table(name = "PLAYER", uniqueConstraints = @UniqueConstraint(columnNames = { "fullname" }))
 @NamedQueries({ //
 
-@NamedQuery(name = "player_findByFullname", query = "SELECT p FROM Player p WHERE p.fullname = :fullname"),
-        @NamedQuery(name = "player_findAll", query = "SELECT p FROM Player p") //
+		@NamedQuery(name = "player_findByFullname", query = "SELECT p FROM Player p WHERE p.fullname = :fullname"),
+		@NamedQuery(name = "player_findAll", query = "SELECT p FROM Player p") //
 })
 public class Player implements Serializable {
 
-    private static final long serialVersionUID = 2067603406910806588L;
+	private static final long serialVersionUID = 2067603406910806588L;
 
-    @Id
-    @GeneratedValue
-    private Long id;
-    @Column(nullable = false)
-    private String fullname;
-    @Transient
-    private int points;
-    @Transient
-    private int contribution;
-    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
-    private Set<UnlockedTitle> unlockedTitles = new HashSet<UnlockedTitle>();
+	@Id
+	@GeneratedValue
+	private Long id;
+	@Column(nullable = false)
+	private String fullname;
+	@Transient
+	private int points;
+	@Transient
+	private int contribution;
+	@OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
+	private Set<UnlockedTitle> unlockedTitles = new HashSet<UnlockedTitle>();
 
-    private Long avatarId;
+	private Long avatarId = 0L;
 
-    public Player() {
-    }
+	public Player() {
+	}
 
-    public Player(String fullname) {
-        this.fullname = fullname;
-    }
+	public Player(String fullname) {
+		this.fullname = fullname;
+	}
 
-    @Override
-    public String toString() {
-        return fullname;
-    }
+	@Override
+	public String toString() {
+		return fullname;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(fullname);
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(fullname);
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Player) {
-            Player player = (Player) obj;
-            return Objects.equal(fullname, player.fullname);
-        }
-        return false;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Player) {
+			Player player = (Player) obj;
+			return Objects.equal(fullname, player.fullname);
+		}
+		return false;
+	}
 
-    public String getFullname() {
-        return fullname;
-    }
+	public String getFullname() {
+		return fullname;
+	}
 
-    public int getPoints() {
-        return points;
-    }
+	public int getPoints() {
+		return points;
+	}
 
-    public void setPoints(int points) {
-        this.points = points;
-    }
+	public void setPoints(int points) {
+		this.points = points;
+	}
 
-    public int getContribution() {
-        return contribution;
-    }
+	public int getContribution() {
+		return contribution;
+	}
 
-    public void setContribution(int contribution) {
-        this.contribution = contribution;
-    }
+	public void setContribution(int contribution) {
+		this.contribution = contribution;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Set<UnlockedTitle> getUnlockedTitles() {
-        return unlockedTitles;
-    }
+	public Set<UnlockedTitle> getUnlockedTitles() {
+		return unlockedTitles;
+	}
 
-    public void setUnlockedTitles(Set<UnlockedTitle> unlockedTitles) {
-        this.unlockedTitles = unlockedTitles;
-    }
+	public void setUnlockedTitles(Set<UnlockedTitle> unlockedTitles) {
+		this.unlockedTitles = unlockedTitles;
+	}
 
-    public boolean hasNotUnlocked(Title title) {
-        for (UnlockedTitle unlockedTitle : unlockedTitles) {
-            if (unlockedTitle.getTitle().equals(title)) {
-                return false;
-            }
-        }
-        return true;
-    }
+	public boolean hasNotUnlocked(Title title) {
+		for (UnlockedTitle unlockedTitle : unlockedTitles) {
+			if (unlockedTitle.getTitle().equals(title)) {
+				return false;
+			}
+		}
+		return true;
+	}
 
-    public boolean hasUnlocked(Title title) {
-        return !hasNotUnlocked(title);
-    }
+	public boolean hasUnlocked(Title title) {
+		return !hasNotUnlocked(title);
+	}
 
-    public Long getAvatarId() {
-        return avatarId;
-    }
+	public Long getAvatarId() {
+		return avatarId;
+	}
 
-    public void setAvatarId(Long avatarId) {
-        this.avatarId = avatarId;
-    }
+	public void setAvatarId(Long avatarId) {
+		this.avatarId = avatarId;
+	}
 
 }
