@@ -63,6 +63,7 @@ public class ScoreBean {
 	private String password = "";
 	private String pictureUrl = "";
 	private String message;
+	private String stage;
 	private long currentGame;
 	private String currentLevel = "MVS";
 	private Boolean postOnNgf = false;
@@ -84,6 +85,7 @@ public class ScoreBean {
 			score = scoreFromDb.getValue();
 			pictureUrl = scoreFromDb.getPictureUrl();
 			message = scoreFromDb.getMessage();
+			stage = scoreFromDb.getStage();
 			currentLevel = scoreFromDb.getLevel();
 			currentGame = scoreFromDb.getGame().getId();
 			allClear = scoreFromDb.getAllClear();
@@ -123,6 +125,7 @@ public class ScoreBean {
 		Score scoreToAdd = new Score(score, player, currentLevel, game,
 				pictureUrl);
 		scoreToAdd.setAllClear(allClear);
+		scoreToAdd.setStage(stage);
 		int end = message.length() > MAX_MESSAGE_LENGTH ? MAX_MESSAGE_LENGTH
 				: message.length();
 		scoreToAdd.setMessage(message.substring(0, end));
@@ -158,6 +161,7 @@ public class ScoreBean {
 				scoreFromDb.setLevel(currentLevel);
 				scoreFromDb.setValue(score);
 				scoreFromDb.setAllClear(allClear);
+				scoreFromDb.setStage(stage);
 				scoreService.store(scoreFromDb);
 				return "home";
 			} else {
@@ -275,6 +279,14 @@ public class ScoreBean {
 
 	public void setAllClear(Boolean allClear) {
 		this.allClear = allClear;
+	}
+
+	public String getStage() {
+		return stage;
+	}
+
+	public void setStage(String stage) {
+		this.stage = stage;
 	}
 
 }

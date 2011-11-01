@@ -35,6 +35,7 @@ public class ScoreItem {
     private String positiveGap;
     private String negativeGap;
     private boolean allClear;
+    private String stage;
 
     private int MAX_MESSAGE_LENGTH = 25;
 
@@ -141,6 +142,14 @@ public class ScoreItem {
 
     public void setNegativeGap(String negativeGap) {
         this.negativeGap = negativeGap;
+    }
+
+    public String getStage() {
+        return stage;
+    }
+
+    public void setStage(String stage) {
+        this.stage = stage;
     }
 
     private String cut(String message) {

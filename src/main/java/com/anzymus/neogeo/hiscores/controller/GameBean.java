@@ -108,6 +108,7 @@ public class GameBean {
                 scoreItem.setPictureUrl(score.getPictureUrl());
                 scoreItem.setId(score.getId());
                 scoreItem.setMessage(score.getMessage());
+                scoreItem.setStage(score.getStage());
                 scoreItem.setDate(score.getCreationDate());
                 scoreItem.setAllClear(score.getAllClear());
                 if (oldScore != null && oldScore.getValue().equals(score.getValue())) {

@@ -53,6 +53,9 @@
                 <h:outputText value="Score: " />
                 <h:inputText id="score" value="#{scoreBean.score}" onfocus="clearText(this)" maxlength="10" size="10" required="true" />
 
+                <h:outputText value="Stage: " />
+                <h:inputText id="stage" value="#{scoreBean.stage}" onfocus="clearText(this)" maxlength="10" size="10" required="true" />
+
                 <h:outputText value="All Clear: " />
                 <h:selectBooleanCheckbox id="allClear" value="#{scoreBean.allClear}" />
 

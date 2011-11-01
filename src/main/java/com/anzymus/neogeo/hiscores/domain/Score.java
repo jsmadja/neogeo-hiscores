@@ -18,6 +18,7 @@ package com.anzymus.neogeo.hiscores.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,169 +29,181 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 import com.google.common.base.Objects;
 
 @Entity
 @Table(name = "SCORE")
 @NamedQueries({
-        @NamedQuery(name = "score_findAllByGame", query = "SELECT s FROM Score s WHERE s.game = :game"),
-        @NamedQuery(name = "score_findAllOneCreditScoresByGame", query = "SELECT s FROM Score s WHERE s.game = :game AND s.allClear = true"),
-        @NamedQuery(name = "score_findAllByPlayer", query = "SELECT s FROM Score s WHERE s.player = :player"),
-        @NamedQuery(name = "score_findAll", query = "SELECT s FROM Score s"),
-        @NamedQuery(name = "score_findAllOrderByDateDesc", query = "SELECT s FROM Score s ORDER BY s.creationDate DESC") })
+		@NamedQuery(name = "score_findAllByGame", query = "SELECT s FROM Score s WHERE s.game = :game"),
+		@NamedQuery(name = "score_findAllOneCreditScoresByGame", query = "SELECT s FROM Score s WHERE s.game = :game AND s.allClear = true"),
+		@NamedQuery(name = "score_findAllByPlayer", query = "SELECT s FROM Score s WHERE s.player = :player"),
+		@NamedQuery(name = "score_findAll", query = "SELECT s FROM Score s"),
+		@NamedQuery(name = "score_findAllOrderByDateDesc", query = "SELECT s FROM Score s ORDER BY s.creationDate DESC") })
 public class Score implements Serializable {
 
-    private static final long serialVersionUID = -5889253204083818192L;
+	private static final long serialVersionUID = -5889253204083818192L;
 
-    @Id
-    @GeneratedValue
-    private Long id;
+	@Id
+	@GeneratedValue
+	private Long id;
 
-    @ManyToOne(optional = false)
-    private Game game;
+	@ManyToOne(optional = false)
+	private Game game;
 
-    @ManyToOne(optional = false)
-    private Player player;
+	@ManyToOne(optional = false)
+	private Player player;
 
-    @Column(name = "LEVEL_LABEL", nullable = false)
-    private String level;
+	@Column(name = "LEVEL_LABEL", nullable = false)
+	private String level;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date creationDate;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date creationDate;
 
-    @Column(name = "SCORE_VALUE", nullable = false)
-    private String value;
+	@Column(name = "SCORE_VALUE", nullable = false)
+	private String value;
 
-    @Column(name = "PICTURE_URL")
-    private String pictureUrl;
+	@Column(name = "PICTURE_URL")
+	private String pictureUrl;
 
-    private String message;
+	private String message;
 
-    @Column(name = "ALL_CLEAR")
-    private boolean allClear;
+	private String stage;
 
-    public Score() {
-    }
+	@Column(name = "ALL_CLEAR")
+	private boolean allClear;
 
-    public Score(String value, Player player, String level, Game game, String pictureUrl) {
-        this.value = value;
-        this.player = player;
-        this.level = level;
-        this.game = game;
-        this.pictureUrl = pictureUrl;
-        this.creationDate = new Date();
-    }
+	public Score() {
+	}
 
-    public Score(String value) {
-        this.value = value;
-    }
+	public Score(String value, Player player, String level, Game game,
+			String pictureUrl) {
+		this.value = value;
+		this.player = player;
+		this.level = level;
+		this.game = game;
+		this.pictureUrl = pictureUrl;
+		this.creationDate = new Date();
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Score(String value) {
+		this.value = value;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public Game getGame() {
-        return game;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Player getPlayer() {
-        return player;
-    }
+	public Game getGame() {
+		return game;
+	}
 
-    public String getValue() {
-        return value;
-    }
+	public Player getPlayer() {
+		return player;
+	}
 
-    public String getLevel() {
-        return level;
-    }
+	public String getValue() {
+		return value;
+	}
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
+	public String getLevel() {
+		return level;
+	}
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
+	public Date getCreationDate() {
+		return creationDate;
+	}
 
-    public String getPictureUrl() {
-        return pictureUrl;
-    }
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
 
-    public String getMessage() {
-        return message;
-    }
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+	public String getMessage() {
+		return message;
+	}
 
-    public void setGame(Game game) {
-        this.game = game;
-    }
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
-    public void setLevel(String level) {
-        this.level = level;
-    }
+	public void setGame(Game game) {
+		this.game = game;
+	}
 
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
-    }
+	public void setLevel(String level) {
+		this.level = level;
+	}
 
-    public void setValue(String value) {
-        this.value = value;
-    }
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
+	}
 
-    public boolean getAllClear() {
-        return allClear;
-    }
+	public void setValue(String value) {
+		this.value = value;
+	}
 
-    public void setAllClear(boolean allClear) {
-        this.allClear = allClear;
-    }
+	public boolean getAllClear() {
+		return allClear;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Score) {
-            Score score = (Score) obj;
-            return Objects.equal(value, score.value) && //
-                    Objects.equal(game, score.game) && //
-                    Objects.equal(player, score.player) && //
-                    Objects.equal(allClear, score.allClear) && //
-                    Objects.equal(level, score.level);
-        }
-        return false;
-    }
+	public void setAllClear(boolean allClear) {
+		this.allClear = allClear;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(game, value, player, level, pictureUrl);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Score) {
+			Score score = (Score) obj;
+			return Objects.equal(value, score.value) && //
+					Objects.equal(game, score.game) && //
+					Objects.equal(player, score.player) && //
+					Objects.equal(allClear, score.allClear) && //
+					Objects.equal(level, score.level);
+		}
+		return false;
+	}
 
-    @Override
-    public String toString() {
-        return value;
-    }
+	public String getStage() {
+		return stage;
+	}
 
-    /***
-     * Soccer are like : 6-13-2
-     */
-    private static final String SOCCER_PATTERN = "\\d+-\\d+-\\d+";
+	public void setStage(String stage) {
+		this.stage = stage;
+	}
 
-    /***
-     * Chrono are like 12:55:50
-     */
-    private static final String CHRONO_PATTERN = "\\d+:\\d+:\\d+";
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(game, value, player, level, pictureUrl);
+	}
 
-    public boolean isSoccer() {
-        return value.matches(SOCCER_PATTERN);
-    }
+	@Override
+	public String toString() {
+		return value;
+	}
 
-    public boolean isChrono() {
-        return value.matches(CHRONO_PATTERN);
-    }
+	/***
+	 * Soccer are like : 6-13-2
+	 */
+	private static final String SOCCER_PATTERN = "\\d+-\\d+-\\d+";
+
+	/***
+	 * Chrono are like 12:55:50
+	 */
+	private static final String CHRONO_PATTERN = "\\d+:\\d+:\\d+";
+
+	public boolean isSoccer() {
+		return value.matches(SOCCER_PATTERN);
+	}
+
+	public boolean isChrono() {
+		return value.matches(CHRONO_PATTERN);
+	}
 }
