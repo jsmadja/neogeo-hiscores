@@ -17,58 +17,70 @@
 package com.anzymus.neogeo.hiscores.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 
 public class TitleServiceITest extends AbstractTest {
 
-    private Game game;
-    private String pictureUrl;
-    private Player player;
-    private String level;
+	private Game game;
+	private String pictureUrl;
+	private Player player;
+	private String level;
 
-    @Before
-    public void init() {
-        game = new Game(RandomStringUtils.randomAlphabetic(5));
-        pictureUrl = "http://";
-        player = new Player(RandomStringUtils.randomAlphabetic(10));
-        level = "MVS";
+	@Before
+	public void init() {
+		game = new Game(RandomStringUtils.randomAlphabetic(5));
+		pictureUrl = "http://";
+		player = new Player(RandomStringUtils.randomAlphabetic(10));
+		level = "MVS";
 
-        gameService.store(game);
-        playerService.store(player);
-    }
+		gameService.store(game);
+		playerService.store(player);
+	}
 
-    @Test
-    public void should_get_score_count() {
-        Score score1 = new Score("123456", player, level, game, pictureUrl);
-        Score score2 = new Score("76535", player, level, game, pictureUrl);
-        scoreService.store(score1);
-        scoreService.store(score2);
+	@Test
+	public void should_get_score_count() {
+		Score score1 = new Score("123456", player, level, game, pictureUrl);
+		Score score2 = new Score("76535", player, level, game, pictureUrl);
+		scoreService.store(score1);
+		scoreService.store(score2);
 
-        long scoreCount = titleService.getNumScoresByPlayer(player);
+		long scoreCount = titleService.getNumScoresByPlayer(player);
 
-        assertEquals(2, scoreCount);
-    }
+		assertEquals(2, scoreCount);
+	}
 
-    @Test
-    public void should_get_0_as_score_count() {
-        long scoreCount = titleService.getNumScoresByPlayer(player);
+	@Test
+	public void should_get_0_as_score_count() {
+		long scoreCount = titleService.getNumScoresByPlayer(player);
 
-        assertEquals(0, scoreCount);
-    }
+		assertEquals(0, scoreCount);
+	}
 
-    @Test
-    public void should_find_score_in_game() {
-        Score score = new Score("1234", player, "MVS", game, "http://");
-        scoreService.store(score);
+	@Test
+	public void should_find_score_in_game() {
+		Score score = new Score("1234", player, "MVS", game, "http://");
+		scoreService.store(score);
 
-        boolean hasScoreInGame = titleService.hasScoreInGame(player, game.getName());
-        assertTrue(hasScoreInGame);
-    }
+		boolean hasScoreInGame = titleService.hasScoreInGame(player,
+				game.getName());
+		assertTrue(hasScoreInGame);
+	}
 
+	@Test
+	public void should_find_one_all_clear() {
+		Score score = new Score("12345", player, "MVS", game, "http://");
+		score.setAllClear(true);
+		scoreService.store(score);
+
+		long numAllClears = titleService.getNumAllClearsByPlayer(player);
+		assertEquals(1, numAllClears);
+	}
 }
