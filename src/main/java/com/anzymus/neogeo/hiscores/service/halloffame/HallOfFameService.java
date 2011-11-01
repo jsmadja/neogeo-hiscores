@@ -50,11 +50,6 @@ public class HallOfFameService {
         return createPlayerList(level, pointCalculator);
     }
 
-    public List<Player> getPlayersOrderByRankV2(String level) {
-        PointCalculator pointCalculator = new RedemslugPointCalculator();
-        return createPlayerList(level, pointCalculator);
-    }
-
     private List<Player> createPlayerList(String level, PointCalculator pointCalculator) {
         Map<String, Player> players = new HashMap<String, Player>();
         List<Game> games = gameService.findAll();

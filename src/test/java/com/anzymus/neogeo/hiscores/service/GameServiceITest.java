@@ -29,8 +29,7 @@ public class GameServiceITest extends AbstractTest {
     @Test
     public void should_add_new_game() {
         Game game = new Game("Fatal Fury");
-        game.setRules("Objectif : Faire le maximum de points avec 1 credit.");
-
+        
         gameService.store(game);
         List<Game> games = gameService.findAll();
         assertTrue(games.contains(game));

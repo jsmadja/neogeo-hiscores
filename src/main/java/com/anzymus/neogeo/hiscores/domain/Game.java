@@ -51,11 +51,6 @@ public class Game implements Comparable<Game>, Serializable {
     @Column(nullable = false)
     private String name;
 
-    private String rules;
-
-    @Transient
-    private String pictureUrl;
-
     private Long postId;
 
     public Game() {
@@ -75,22 +70,6 @@ public class Game implements Comparable<Game>, Serializable {
 
     public String getName() {
         return name;
-    }
-
-    public void setRules(String rules) {
-        this.rules = rules;
-    }
-
-    public String getRules() {
-        return rules;
-    }
-
-    public String getPictureUrl() {
-        return pictureUrl;
-    }
-
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
     }
 
     public Long getPostId() {

@@ -57,11 +57,6 @@ public class HallOfFameBean {
         return playerItems;
     }
 
-    public List<PlayerItem> getPlayersV2() {
-        List<Player> players = hallOfFameService.getPlayersOrderByRankV2(level);
-        return createPlayerItems(players);
-    }
-
     private List<PlayerItem> createPlayerItems(List<Player> players) {
         List<PlayerItem> items = new ArrayList<PlayerItem>();
         String oldRank = null;

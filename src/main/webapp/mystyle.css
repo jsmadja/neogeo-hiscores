@@ -77,6 +77,11 @@ a:active, a:hover { color: orange; text-decoration: none; }
     font-size:14pt;
 }
 
+.small_link {
+    color: #3399FF;
+    font-size:10pt;
+}
+
 .title_neogeo {
     color: orange;
     font-size: 48pt;

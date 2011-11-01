@@ -45,11 +45,9 @@ public class GameBean {
 
     private String name;
 
-    private String pictureUrl;
-
-    private String rules;
-
     private Scores scores;
+    
+    private Long postId;
 
     private static final String[] RANKS = { "1st", "2nd", "3rd" };
 
@@ -62,6 +60,7 @@ public class GameBean {
         long gameId = Long.parseLong(id);
         Game game = gameService.findById(gameId);
         name = game.getName();
+        postId = game.getPostId();
         scores = scoreService.findAllByGame(game);
         loadLevelItems();
     }
@@ -77,15 +76,6 @@ public class GameBean {
                 levelItems.add(levelItem);
             }
         }
-    }
-
-    public String edit() {
-        long gameId = Long.parseLong(id);
-        Game game = gameService.findById(gameId);
-        game.setRules(rules);
-        game.setPictureUrl(pictureUrl);
-        gameService.store(game);
-        return "home";
     }
 
     public String getName() {
@@ -149,20 +139,8 @@ public class GameBean {
         return rank;
     }
 
-    public String getPictureUrl() {
-        return pictureUrl;
+    public Long getPostId() {
+        return postId;
     }
-
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
-    }
-
-    public String getRules() {
-        return rules;
-    }
-
-    public void setRules(String rules) {
-        this.rules = rules;
-    }
-
+    
 }
