@@ -78,6 +78,7 @@ public class Score implements Serializable {
 
 	public Score(String value, Player player, String level, Game game,
 			String pictureUrl) {
+		value = adaptScore(value);
 		this.value = value;
 		this.player = player;
 		this.level = level;
@@ -86,7 +87,15 @@ public class Score implements Serializable {
 		this.creationDate = new Date();
 	}
 
+	private String adaptScore(String value) {
+		if (value != null) {
+			value = value.replaceAll(" ", "");
+		}
+		return value;
+	}
+
 	public Score(String value) {
+		value = adaptScore(value);
 		this.value = value;
 	}
 
@@ -147,6 +156,7 @@ public class Score implements Serializable {
 	}
 
 	public void setValue(String value) {
+		value = adaptScore(value);
 		this.value = value;
 	}
 
