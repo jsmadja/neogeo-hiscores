@@ -90,6 +90,7 @@ public class Score implements Serializable {
 	private String adaptScore(String value) {
 		if (value != null) {
 			value = value.replaceAll(" ", "");
+			value = value.replaceAll("\\.", "");
 		}
 		return value;
 	}
