@@ -2,6 +2,8 @@
 - feature: add link to NGF
 - feature: add stage value to scores
 - feature: add stage info in NGF message
+- bug fix: no more spaces in score value
+- bug fix: no more dots in score value
 
 1.3.2
 - feature: add all clearer title
