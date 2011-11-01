@@ -44,15 +44,14 @@ public class TitleService {
 	EntityManager em;
 
 	public long getNumScoresByPlayer(Player player) {
-		Query query = em
-				.createQuery("SELECT COUNT(s) FROM Score s WHERE s.player = :player");
+		Query query = em.createNamedQuery("getNumScoresByPlayer");
 		query.setParameter("player", player);
 		return (Long) query.getSingleResult();
 	}
 
 	public Map<Title, TitleUnlockingStrategy> findAllStrategies() {
 		Map<Title, TitleUnlockingStrategy> strategies = new HashMap<Title, TitleUnlockingStrategy>();
-		TypedQuery<Title> query = em.createQuery("SELECT t FROM Title t",
+		TypedQuery<Title> query = em.createNamedQuery("findAllStrategies",
 				Title.class);
 		for (Title title : query.getResultList()) {
 			try {
@@ -89,8 +88,7 @@ public class TitleService {
 	}
 
 	public boolean hasScoreInGame(Player player, String game) {
-		Query query = em
-				.createQuery("SELECT COUNT(s) FROM Score s WHERE s.player = :player AND s.game.name = :game");
+		Query query = em.createNamedQuery("hasScoreInGame");
 		query.setParameter("player", player);
 		query.setParameter("game", game);
 		return (Long) query.getSingleResult() > 0;
@@ -104,8 +102,7 @@ public class TitleService {
 	}
 
 	public long getNumAllClearsByPlayer(Player player) {
-		Query query = em
-				.createQuery("SELECT COUNT(s) FROM Score s WHERE s.player = :player AND s.allClear = true");
+		Query query = em.createNamedQuery("getNumAllClearsByPlayer");
 		query.setParameter("player", player);
 		return (Long) query.getSingleResult();
 	}

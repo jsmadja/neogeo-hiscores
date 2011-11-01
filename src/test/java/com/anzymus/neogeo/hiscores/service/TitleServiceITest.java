@@ -83,4 +83,5 @@ public class TitleServiceITest extends AbstractTest {
 		long numAllClears = titleService.getNumAllClearsByPlayer(player);
 		assertEquals(1, numAllClears);
 	}
+
 }

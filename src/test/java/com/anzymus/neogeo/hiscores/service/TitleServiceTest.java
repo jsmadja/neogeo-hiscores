@@ -21,54 +21,60 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
+
 import java.util.Arrays;
 import java.util.Map;
+
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+
 import com.anzymus.neogeo.hiscores.domain.Title;
 import com.anzymus.neogeo.hiscores.success.FirstScoreTitleStrategy;
 import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
 
 public class TitleServiceTest {
 
-    @Mock
-    EntityManager em;
+	@Mock
+	EntityManager em;
 
-    TitleService titleService;
+	TitleService titleService;
 
-    @Before
-    public void init() {
-        MockitoAnnotations.initMocks(this);
-        titleService = new TitleService();
-        titleService.em = em;
-    }
+	@Before
+	public void init() {
+		MockitoAnnotations.initMocks(this);
+		titleService = new TitleService();
+		titleService.em = em;
+	}
 
-    @Test
-    public void should_strategy() {
-        String label = "Once upon a time";
-        String description = "Add your first score in neogeo-hiscores.";
+	@Test
+	public void should_strategy() {
+		String label = "Once upon a time";
+		String description = "Add your first score in neogeo-hiscores.";
 
-        Title title = new Title();
-        title.setLabel(label);
-        title.setDescription(description);
-        title.setClassname("com.anzymus.neogeo.hiscores.success.FirstScoreTitleStrategy");
+		Title title = new Title();
+		title.setLabel(label);
+		title.setDescription(description);
+		title.setClassname("com.anzymus.neogeo.hiscores.success.FirstScoreTitleStrategy");
 
-        TypedQuery query = Mockito.mock(TypedQuery.class);
-        when(query.getResultList()).thenReturn(Arrays.asList(title));
+		TypedQuery query = Mockito.mock(TypedQuery.class);
+		when(query.getResultList()).thenReturn(Arrays.asList(title));
 
-        when(em.createQuery(anyString(), any(Class.class))).thenReturn(query);
+		when(em.createNamedQuery(anyString(), any(Class.class))).thenReturn(
+				query);
 
-        Map<Title, TitleUnlockingStrategy> strategies = titleService.findAllStrategies();
-        TitleUnlockingStrategy strategy = strategies.values().iterator().next();
-        Title foundTitle = strategies.keySet().iterator().next();
+		Map<Title, TitleUnlockingStrategy> strategies = titleService
+				.findAllStrategies();
+		TitleUnlockingStrategy strategy = strategies.values().iterator().next();
+		Title foundTitle = strategies.keySet().iterator().next();
 
-        assertTrue(strategy instanceof FirstScoreTitleStrategy);
-        assertEquals(label, foundTitle.getLabel());
-        assertEquals(description, foundTitle.getDescription());
-    }
+		assertTrue(strategy instanceof FirstScoreTitleStrategy);
+		assertEquals(label, foundTitle.getLabel());
+		assertEquals(description, foundTitle.getDescription());
+	}
 }
