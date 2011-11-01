@@ -45,7 +45,7 @@ public class TitleUnlockingService {
     @PersistenceContext
     EntityManager em;
 
-    private static final int MAX_UNLOCKED_TITLES_TO_RETURN = 20;
+    private static final int MAX_UNLOCKED_TITLES_TO_RETURN = 10;
 
     @PostConstruct
     public void init() {
