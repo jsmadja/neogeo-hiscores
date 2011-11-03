@@ -37,74 +37,67 @@ import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public class TitleService {
 
-	private static final Logger LOG = Logger.getLogger(TitleService.class
-			.getName());
+    private static final Logger LOG = Logger.getLogger(TitleService.class.getName());
 
-	@PersistenceContext
-	EntityManager em;
+    @PersistenceContext
+    EntityManager em;
 
-	public long getNumScoresByPlayer(Player player) {
-		Query query = em.createNamedQuery("getNumScoresByPlayer");
-		query.setParameter("player", player);
-		return (Long) query.getSingleResult();
-	}
+    public long getNumScoresByPlayer(Player player) {
+        Query query = em.createNamedQuery("getNumScoresByPlayer");
+        query.setParameter("player", player);
+        return (Long) query.getSingleResult();
+    }
 
-	public Map<Title, TitleUnlockingStrategy> findAllStrategies() {
-		Map<Title, TitleUnlockingStrategy> strategies = new HashMap<Title, TitleUnlockingStrategy>();
-		TypedQuery<Title> query = em.createNamedQuery("findAllStrategies",
-				Title.class);
-		for (Title title : query.getResultList()) {
-			try {
-				String classname = title.getClassname();
-				TitleUnlockingStrategy strategy = (TitleUnlockingStrategy) Class
-						.forName(classname).newInstance();
-				strategy.initialize(this);
-				strategies.put(title, strategy);
-			} catch (ClassNotFoundException e) {
-				LOG.log(Level.WARNING, "Can't create strategy from title: "
-						+ title, e);
-			} catch (InstantiationException e) {
-				LOG.log(Level.WARNING, "Can't create strategy from title: "
-						+ title, e);
-			} catch (IllegalAccessException e) {
-				LOG.log(Level.WARNING, "Can't create strategy from title: "
-						+ title, e);
-			}
-		}
-		return strategies;
-	}
+    public Map<Title, TitleUnlockingStrategy> findAllStrategies() {
+        Map<Title, TitleUnlockingStrategy> strategies = new HashMap<Title, TitleUnlockingStrategy>();
+        TypedQuery<Title> query = em.createNamedQuery("findAllStrategies", Title.class);
+        for (Title title : query.getResultList()) {
+            try {
+                String classname = title.getClassname();
+                TitleUnlockingStrategy strategy = (TitleUnlockingStrategy) Class.forName(classname).newInstance();
+                strategy.initialize(this);
+                strategies.put(title, strategy);
+            } catch (ClassNotFoundException e) {
+                LOG.log(Level.WARNING, "Can't create strategy from title: " + title, e);
+            } catch (InstantiationException e) {
+                LOG.log(Level.WARNING, "Can't create strategy from title: " + title, e);
+            } catch (IllegalAccessException e) {
+                LOG.log(Level.WARNING, "Can't create strategy from title: " + title, e);
+            }
+        }
+        return strategies;
+    }
 
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public Title store(Title title) {
-		Title storedTitle;
-		if (title.getId() == null) {
-			em.persist(title);
-			storedTitle = title;
-		} else {
-			storedTitle = em.merge(title);
-		}
-		em.flush();
-		return storedTitle;
-	}
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public Title store(Title title) {
+        Title storedTitle;
+        if (title.getId() == null) {
+            em.persist(title);
+            storedTitle = title;
+        } else {
+            storedTitle = em.merge(title);
+        }
+        em.flush();
+        return storedTitle;
+    }
 
-	public boolean hasScoreInGame(Player player, String game) {
-		Query query = em.createNamedQuery("hasScoreInGame");
-		query.setParameter("player", player);
-		query.setParameter("game", game);
-		return (Long) query.getSingleResult() > 0;
-	}
+    public boolean hasScoreInGame(Player player, String game) {
+        Query query = em.createNamedQuery("hasScoreInGame");
+        query.setParameter("player", player);
+        query.setParameter("game", game);
+        return (Long) query.getSingleResult() > 0;
+    }
 
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void addStrategy(Title title,
-			TitleUnlockingStrategy titleUnlockingStrategy) {
-		title.setClassname(titleUnlockingStrategy.getClass().getName());
-		store(title);
-	}
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void addStrategy(Title title, TitleUnlockingStrategy titleUnlockingStrategy) {
+        title.setClassname(titleUnlockingStrategy.getClass().getName());
+        store(title);
+    }
 
-	public long getNumAllClearsByPlayer(Player player) {
-		Query query = em.createNamedQuery("getNumAllClearsByPlayer");
-		query.setParameter("player", player);
-		return (Long) query.getSingleResult();
-	}
+    public int getNumAllClearsByPlayer(Player player) {
+        Query query = em.createNamedQuery("getNumAllClearsByPlayer");
+        query.setParameter("player", player);
+        return query.getResultList().size();
+    }
 
 }

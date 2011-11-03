@@ -23,65 +23,65 @@ import org.junit.Test;
 
 public class ScoreTest {
 
-	@Test
-	public void should_not_be_equal() {
-		Player player1 = new Player("abc");
-		String level1 = "MVS";
-		Game game1 = new Game("game");
-		String pictureUrl1 = "pictureUrl";
+    @Test
+    public void should_not_be_equal() {
+        Player player1 = new Player("abc");
+        String level1 = "MVS";
+        Game game1 = new Game("game");
+        String pictureUrl1 = "pictureUrl";
 
-		Score score1 = new Score("1", player1, level1, game1, pictureUrl1);
+        Score score1 = new Score("1", player1, level1, game1, pictureUrl1);
 
-		Player player2 = new Player("def");
-		String level2 = "MVS";
-		Game game2 = new Game("game");
-		String pictureUrl2 = "pictureUrl";
+        Player player2 = new Player("def");
+        String level2 = "MVS";
+        Game game2 = new Game("game");
+        String pictureUrl2 = "pictureUrl";
 
-		Score score2 = new Score("1", player2, level2, game2, pictureUrl2);
+        Score score2 = new Score("1", player2, level2, game2, pictureUrl2);
 
-		assertFalse(score1.equals(score2));
-	}
+        assertFalse(score1.equals(score2));
+    }
 
-	@Test
-	public void should_be_equal() {
-		Player player1 = new Player("abc");
-		String level1 = "MVS";
-		Game game1 = new Game("game");
-		String pictureUrl1 = "pictureUrl";
+    @Test
+    public void should_be_equal() {
+        Player player1 = new Player("abc");
+        String level1 = "MVS";
+        Game game1 = new Game("game");
+        String pictureUrl1 = "pictureUrl";
 
-		Score score1 = new Score("1", player1, level1, game1, pictureUrl1);
+        Score score1 = new Score("1", player1, level1, game1, pictureUrl1);
 
-		Player player2 = new Player("abc");
-		String level2 = "MVS";
-		Game game2 = new Game("game");
-		String pictureUrl2 = "pictureUrl";
+        Player player2 = new Player("abc");
+        String level2 = "MVS";
+        Game game2 = new Game("game");
+        String pictureUrl2 = "pictureUrl";
 
-		Score score2 = new Score("1", player2, level2, game2, pictureUrl2);
+        Score score2 = new Score("1", player2, level2, game2, pictureUrl2);
 
-		assertEquals(score1, score2);
-	}
+        assertEquals(score1, score2);
+    }
 
-	@Test
-	public void should_not_be_equal_when_passing_null() {
-		Score score = new Score();
-		assertFalse(score.equals(null));
-	}
+    @Test
+    public void should_not_be_equal_when_passing_null() {
+        Score score = new Score();
+        assertFalse(score.equals(null));
+    }
 
-	@Test
-	public void should_print_value() {
-		Score score = new Score("123");
-		assertEquals("123", score.toString());
-	}
+    @Test
+    public void should_print_value() {
+        Score score = new Score("123");
+        assertEquals("123", score.toString());
+    }
 
-	@Test
-	public void should_remove_spaces() {
-		Score score = new Score("1 23");
-		assertEquals("123", score.toString());
-	}
+    @Test
+    public void should_remove_spaces() {
+        Score score = new Score("1 23");
+        assertEquals("123", score.toString());
+    }
 
-	@Test
-	public void should_remove_dots() {
-		Score score = new Score("1.23");
-		assertEquals("123", score.toString());
-	}
+    @Test
+    public void should_remove_dots() {
+        Score score = new Score("1.23");
+        assertEquals("123", score.toString());
+    }
 }

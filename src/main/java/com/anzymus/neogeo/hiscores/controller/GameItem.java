@@ -16,7 +16,6 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
-
 public class GameItem {
 
     private String name;

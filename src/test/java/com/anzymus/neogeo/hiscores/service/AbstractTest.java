@@ -42,7 +42,7 @@ public abstract class AbstractTest {
     protected static TitleUnlockingService titleUnlockingService;
     protected static AdministrationWebService administrationWebService;
     protected static HallOfOneCreditService hallOfOneCreditService;
-    
+
     static {
         try {
             Map<String, Object> properties = new HashMap<String, Object>();
@@ -57,7 +57,7 @@ public abstract class AbstractTest {
             titleService = (TitleService) lookup("TitleService");
             titleUnlockingService = (TitleUnlockingService) lookup("TitleUnlockingService");
             hallOfOneCreditService = (HallOfOneCreditService) lookup("HallOfOneCreditService");
-            
+
             administrationWebService = new AdministrationWebService();
             administrationWebService.setGameService(gameService);
             administrationWebService.setPlayerService(playerService);

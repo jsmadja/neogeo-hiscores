@@ -25,8 +25,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class Players {
- 
-    static void extractScoreItemsFromLevels(List<ScoreItem> scoreItems, Game game, Scores scores, String level, String fullname) {
+
+    static void extractScoreItemsFromLevels(List<ScoreItem> scoreItems, Game game, Scores scores, String level,
+            String fullname) {
         List<Score> scoreList = scores.getScoresByLevel(level);
         Collections.sort(scoreList, new ScoreSortedByValueDescComparator());
         Score previousScore = null;

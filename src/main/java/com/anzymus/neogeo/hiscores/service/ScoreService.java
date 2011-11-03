@@ -35,99 +35,93 @@ import com.anzymus.neogeo.hiscores.domain.Scores;
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public class ScoreService {
 
-	@PersistenceContext
-	EntityManager em;
+    @PersistenceContext
+    EntityManager em;
 
-	private static final int MAX_SCORES_TO_RETURN = 10;
+    private static final int MAX_SCORES_TO_RETURN = 10;
 
-	public Scores findAllByGame(Game game) {
-		TypedQuery<Score> query = em.createNamedQuery("score_findAllByGame",
-				Score.class);
-		query.setParameter("game", game);
-		List<Score> scores = query.getResultList();
-		return toScores(scores);
-	}
+    public Scores findAllByGame(Game game) {
+        TypedQuery<Score> query = em.createNamedQuery("score_findAllByGame", Score.class);
+        query.setParameter("game", game);
+        List<Score> scores = query.getResultList();
+        return toScores(scores);
+    }
 
-	public Scores findAllOneCreditScoresByGame(Game game) {
-		TypedQuery<Score> query = em.createNamedQuery(
-				"score_findAllOneCreditScoresByGame", Score.class);
-		query.setParameter("game", game);
-		List<Score> scores = query.getResultList();
-		return toScores(scores);
-	}
+    public Scores findAllOneCreditScoresByGame(Game game) {
+        TypedQuery<Score> query = em.createNamedQuery("score_findAllOneCreditScoresByGame", Score.class);
+        query.setParameter("game", game);
+        List<Score> scores = query.getResultList();
+        return toScores(scores);
+    }
 
-	public Scores findAllByPlayer(Player player) {
-		TypedQuery<Score> query = em.createNamedQuery("score_findAllByPlayer",
-				Score.class);
-		query.setParameter("player", player);
-		List<Score> scores = query.getResultList();
-		return toScores(scores);
-	}
+    public Scores findAllByPlayer(Player player) {
+        TypedQuery<Score> query = em.createNamedQuery("score_findAllByPlayer", Score.class);
+        query.setParameter("player", player);
+        List<Score> scores = query.getResultList();
+        return toScores(scores);
+    }
 
-	public Scores findAll() {
-		TypedQuery<Score> query = em.createNamedQuery("score_findAll",
-				Score.class);
-		List<Score> scores = query.getResultList();
-		return toScores(scores);
-	}
+    public Scores findAll() {
+        TypedQuery<Score> query = em.createNamedQuery("score_findAll", Score.class);
+        List<Score> scores = query.getResultList();
+        return toScores(scores);
+    }
 
-	public List<Score> findLastScoresOrderByDateDesc() {
-		TypedQuery<Score> query = em.createNamedQuery(
-				"score_findAllOrderByDateDesc", Score.class);
-		query.setMaxResults(MAX_SCORES_TO_RETURN);
-		return query.getResultList();
-	}
+    public List<Score> findLastScoresOrderByDateDesc() {
+        TypedQuery<Score> query = em.createNamedQuery("score_findAllOrderByDateDesc", Score.class);
+        query.setMaxResults(MAX_SCORES_TO_RETURN);
+        return query.getResultList();
+    }
 
-	public Score findById(long id) {
-		return em.find(Score.class, id);
-	}
+    public Score findById(long id) {
+        return em.find(Score.class, id);
+    }
 
-	private Scores toScores(List<Score> scoreList) {
-		Scores scores = new Scores();
-		if (scoreList != null) {
-			for (Score score : scoreList) {
-				scores.add(score);
-			}
-		}
-		return scores;
-	}
+    private Scores toScores(List<Score> scoreList) {
+        Scores scores = new Scores();
+        if (scoreList != null) {
+            for (Score score : scoreList) {
+                scores.add(score);
+            }
+        }
+        return scores;
+    }
 
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public Score store(Score score) {
-		if (alreadyExist(score)) {
-			return score;
-		}
-		Score storedScore;
-		if (score.getId() == null) {
-			em.persist(score);
-			storedScore = score;
-		} else {
-			storedScore = em.merge(score);
-		}
-		em.flush();
-		return storedScore;
-	}
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public Score store(Score score) {
+        if (alreadyExist(score)) {
+            return score;
+        }
+        Score storedScore;
+        if (score.getId() == null) {
+            em.persist(score);
+            storedScore = score;
+        } else {
+            storedScore = em.merge(score);
+        }
+        em.flush();
+        return storedScore;
+    }
 
-	private boolean alreadyExist(Score score) {
-		Scores scores = findAllByPlayer(score.getPlayer());
-		return scores.contains(score);
-	}
+    private boolean alreadyExist(Score score) {
+        Scores scores = findAllByPlayer(score.getPlayer());
+        return scores.contains(score);
+    }
 
-	public long findCountByGame(Game game) {
-		String sql = "SELECT COUNT(id) FROM SCORE WHERE game_id = "
-				+ game.getId();
-		Query query = em.createNativeQuery(sql);
-		try {
-			return (Integer) query.getSingleResult();
-		} catch (ClassCastException e) {
-			return (Long) query.getSingleResult();
-		}
-	}
+    public long findCountByGame(Game game) {
+        String sql = "SELECT COUNT(id) FROM SCORE WHERE game_id = " + game.getId();
+        Query query = em.createNativeQuery(sql);
+        try {
+            return (Integer) query.getSingleResult();
+        } catch (ClassCastException e) {
+            return (Long) query.getSingleResult();
+        }
+    }
 
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void delete(Long scoreId) {
-		Score score = findById(scoreId);
-		em.remove(score);
-	}
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void delete(Long scoreId) {
+        Score score = findById(scoreId);
+        em.remove(score);
+    }
 
 }

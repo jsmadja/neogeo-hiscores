@@ -103,7 +103,7 @@ public class PlayerBean {
     public List<ScoreItem> getScores() {
         return scoreItems;
     }
-    
+
     public List<ScoreItem> getScoresOneCredit() {
         return scoreItemsOneCredit;
     }

@@ -1,15 +1,15 @@
 package com.anzymus.neogeo.hiscores.success;
 
-public class AllClearerTitleStrategyTest extends AbstractAllClearerTitleStrategyTest {
+public class AllClearer2TitleStrategyTest extends AbstractAllClearerTitleStrategyTest {
 
     @Override
     protected TitleUnlockingStrategy getAllClearStrategy() {
-        return new AllClearerTitleStrategy();
+        return new AllClearer2TitleStrategy();
     }
 
     @Override
     protected int getNumAllClearsToCreate() {
-        return 1;
+        return 2;
     }
 
 }

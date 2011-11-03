@@ -46,7 +46,7 @@ public class GameBean {
     private String name;
 
     private Scores scores;
-    
+
     private Long postId;
 
     private static final String[] RANKS = { "1st", "2nd", "3rd" };
@@ -143,5 +143,5 @@ public class GameBean {
     public Long getPostId() {
         return postId;
     }
-    
+
 }

@@ -82,5 +82,5 @@ public class PlayerOneCreditBean {
             Players.extractScoreItemsFromLevels(scoreItems, game, scores, level, fullname);
         }
     }
-    
+
 }

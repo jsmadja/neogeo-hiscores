@@ -165,7 +165,7 @@ public class ScoreItem {
     public void setAllClear(boolean allClear) {
         this.allClear = allClear;
     }
-    
+
     public boolean getAllClear() {
         return allClear;
     }

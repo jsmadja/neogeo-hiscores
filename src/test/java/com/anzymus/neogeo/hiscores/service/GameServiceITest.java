@@ -29,7 +29,7 @@ public class GameServiceITest extends AbstractTest {
     @Test
     public void should_add_new_game() {
         Game game = new Game("Fatal Fury");
-        
+
         gameService.store(game);
         List<Game> games = gameService.findAll();
         assertTrue(games.contains(game));

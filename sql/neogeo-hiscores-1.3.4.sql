@@ -1,0 +1,3 @@
+INSERT INTO TITLE (`DESCRIPTION`, `CLASSNAME`, `LABEL`, `POSITION`) VALUES ('Finish 2 games with only one credit', 'com.anzymus.neogeo.hiscores.success.AllClearer2TitleStrategy', 'All clearer! x2', 2002);
+INSERT INTO TITLE (`DESCRIPTION`, `CLASSNAME`, `LABEL`, `POSITION`) VALUES ('Finish 5 games with only one credit', 'com.anzymus.neogeo.hiscores.success.AllClearer5TitleStrategy', 'All clearer! x5', 2005);
+INSERT INTO TITLE (`DESCRIPTION`, `CLASSNAME`, `LABEL`, `POSITION`) VALUES ('Finish 10 games with only one credit', 'com.anzymus.neogeo.hiscores.success.AllClearer10TitleStrategy', 'All clearer! x10', 2010);

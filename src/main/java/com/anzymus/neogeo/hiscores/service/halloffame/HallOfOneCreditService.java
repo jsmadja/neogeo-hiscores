@@ -37,12 +37,12 @@ public class HallOfOneCreditService {
     PlayerService playerService;
 
     private static final String ONE_CREDIT_QUERY = "SELECT s.PLAYER_ID, COUNT(s.PLAYER_ID) FROM SCORE s, PLAYER p WHERE s.ALL_CLEAR = 1 AND s.PLAYER_ID=p.ID GROUP BY PLAYER_ID ORDER BY COUNT(s.PLAYER_ID) DESC, p.FULLNAME ASC";
-    
+
     public List<Player> getPlayersOrderByAllClearCount() {
         List<Player> players = new ArrayList<Player>();
         Query query = em.createNativeQuery(ONE_CREDIT_QUERY);
         List<Object[]> results = query.getResultList();
-        for (Object[] result:results) {
+        for (Object[] result : results) {
             Long playerId = (Long) result[0];
             Long points = (Long) result[1];
             Player player = playerService.findById(playerId);

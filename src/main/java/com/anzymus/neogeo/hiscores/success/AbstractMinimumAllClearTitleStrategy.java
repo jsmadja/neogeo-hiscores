@@ -18,14 +18,13 @@ package com.anzymus.neogeo.hiscores.success;
 
 import com.anzymus.neogeo.hiscores.domain.Player;
 
-public abstract class AbstractMinimumAllClearTitleStrategy extends
-		AbstractTitleStrategy {
+public abstract class AbstractMinimumAllClearTitleStrategy extends AbstractTitleStrategy {
 
-	@Override
-	public boolean isUnlocked(Player player) {
-		return titleService.getNumAllClearsByPlayer(player) >= getNumAllClearsToUnlock();
-	}
+    @Override
+    public boolean isUnlocked(Player player) {
+        return titleService.getNumAllClearsByPlayer(player) >= getNumAllClearsToUnlock();
+    }
 
-	protected abstract long getNumAllClearsToUnlock();
+    protected abstract long getNumAllClearsToUnlock();
 
 }

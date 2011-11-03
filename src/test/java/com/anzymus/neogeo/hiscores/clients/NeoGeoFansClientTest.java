@@ -29,35 +29,32 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 public class NeoGeoFansClientTest {
 
-	NeoGeoFansClient neoGeoFansClient;
+    NeoGeoFansClient neoGeoFansClient;
 
-	@Before
-	public void init() {
-		MockitoAnnotations.initMocks(this);
-		neoGeoFansClient = new NeoGeoFansClient() {
+    @Before
+    public void init() {
+        MockitoAnnotations.initMocks(this);
+        neoGeoFansClient = new NeoGeoFansClient() {
 
-			protected void init() {
-			}
+            protected void init() {
+            }
 
-			protected HtmlPage getLoginPage() throws java.io.IOException,
-					java.net.MalformedURLException {
-				URL url = NeoGeoFansClientTest.class.getClassLoader()
-						.getResource("ngf/login-page.html");
-				return (HtmlPage) webClient.getPage(url);
-			};
+            protected HtmlPage getLoginPage() throws java.io.IOException, java.net.MalformedURLException {
+                URL url = NeoGeoFansClientTest.class.getClassLoader().getResource("ngf/login-page.html");
+                return (HtmlPage) webClient.getPage(url);
+            };
 
-			protected String submitForm(HtmlForm loginForm) {
-				return "Merci de vous être identifié, " + login + ".";
-			}
-		};
-	}
+            protected String submitForm(HtmlForm loginForm) {
+                return "Merci de vous être identifié, " + login + ".";
+            }
+        };
+    }
 
-	@Test
-	public void should_authenticate() throws AuthenticationFailed {
-		boolean authenticated = neoGeoFansClient.authenticate("login",
-				"password");
+    @Test
+    public void should_authenticate() throws AuthenticationFailed {
+        boolean authenticated = neoGeoFansClient.authenticate("login", "password");
 
-		assertTrue(authenticated);
-	}
+        assertTrue(authenticated);
+    }
 
 }

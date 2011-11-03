@@ -70,8 +70,8 @@ public class PlayerService {
         store(player);
     }
 
-	public Player findById(Long id) {
-		return em.find(Player.class, id);
-	}
+    public Player findById(Long id) {
+        return em.find(Player.class, id);
+    }
 
 }
