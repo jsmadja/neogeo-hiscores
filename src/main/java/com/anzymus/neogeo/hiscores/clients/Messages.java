@@ -20,8 +20,8 @@ public class Messages {
         String gameName = score.getGame().getName();
 
         String stage = "";
-        if (isNotBlank(score.getStage())) {
-            stage = " - " + score.getStage();
+        if (isNotBlank(adaptStage(score))) {
+            stage = " - stage " + adaptStage(score);
         }
         String allClear = "";
         if (score.getAllClear()) {
@@ -30,6 +30,16 @@ public class Messages {
 
         String postMessage = format(MESSAGE_PATTERN, gameName, url, scoreValue, message, stage, allClear);
         return postMessage;
+    }
+
+    private static String adaptStage(Score score) {
+        String stage = score.getStage();
+        if (stage != null) {
+            stage = stage.toLowerCase();
+            stage = stage.replaceAll("stage", "");
+            stage = stage.trim();
+        }
+        return stage;
     }
 
 }
