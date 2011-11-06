@@ -53,6 +53,9 @@ public class Game implements Comparable<Game>, Serializable {
 
     private Long postId;
 
+    @Column(nullable = true, name="CUSTOM_STAGE_VALUES")
+    private String customStageValues;
+    
     public Game() {
     }
 
@@ -78,6 +81,14 @@ public class Game implements Comparable<Game>, Serializable {
 
     public void setPostId(Long postId) {
         this.postId = postId;
+    }
+
+    public String getCustomStageValues() {
+        return customStageValues;
+    }
+
+    public void setCustomStageValues(String customStageValues) {
+        this.customStageValues = customStageValues;
     }
 
     @Override
