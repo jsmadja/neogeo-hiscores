@@ -3,6 +3,7 @@
 - graphic: hide post on ngf checkbox if game is not handled
 - graphic: add custom stage values
 - graphic: change date formatter
+- graphic: format stage value in ngf post
 
 1.3.3
 - feature: add link to NGF
