@@ -23,12 +23,21 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+
 import com.anzymus.neogeo.hiscores.clients.AuthenticationFailed;
 import com.anzymus.neogeo.hiscores.clients.NeoGeoFansClient;
 import com.anzymus.neogeo.hiscores.clients.NeoGeoFansClientFactory;
@@ -80,6 +89,14 @@ public class ScoreBeanTest {
         scoreBean.neoGeoFansClientFactory = neoGeoFansClientFactory;
         scoreBean.facesContext = facesContext;
 
+        Iterator<FacesMessage> messages = new ArrayList<FacesMessage>().iterator();
+        when(facesContext.getMessages()).thenReturn(messages);
+
+        ExternalContext externalContext = Mockito.mock(ExternalContext.class);
+        when(externalContext.getRequestParameterMap()).thenReturn(new HashMap<String, String>());
+
+        when(facesContext.getExternalContext()).thenReturn(externalContext);
+
         when(neoGeoFansClientFactory.create()).thenReturn(neoGeoFansClient);
 
         String playerName = "fullname";
@@ -100,6 +117,7 @@ public class ScoreBeanTest {
         Game game = new Game("Fatal Fury");
         long gameId = 19L;
         game.setId(gameId);
+        game.setPostId(ScoreBean.DEFAULT_POST_ID);
 
         String pictureUrl = "http://";
         String level = "MVS";
@@ -107,6 +125,7 @@ public class ScoreBeanTest {
         String message = "mon message";
         Score score = new Score(scoreValue, player, level, game, pictureUrl);
         score.setMessage(message);
+        score.setGame(game);
 
         when(scoreService.findById(1234)).thenReturn(score);
 
@@ -223,8 +242,16 @@ public class ScoreBeanTest {
         when(neoGeoFansClient.authenticate(anyString(), anyString())).thenReturn(true);
 
         scoreBean.setId("12");
+        scoreBean.setCurrentGame(19L);
+
+        Game game = new Game("Fatal Fury");
+        game.setId(19L);
+        game.setPostId(ScoreBean.DEFAULT_POST_ID);
+
+        when(gameService.findById(19L)).thenReturn(game);
 
         Score score = new Score();
+        score.setGame(game);
         when(scoreService.findById(12L)).thenReturn(score);
 
         String redirection = scoreBean.edit();

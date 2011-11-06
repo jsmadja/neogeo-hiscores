@@ -16,7 +16,11 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,6 +30,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 
 import com.anzymus.neogeo.hiscores.clients.AuthenticationFailed;
 import com.anzymus.neogeo.hiscores.clients.Messages;
@@ -39,17 +44,12 @@ import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
 import com.anzymus.neogeo.hiscores.service.TitleUnlockingService;
 import com.google.common.annotations.VisibleForTesting;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Map;
-import javax.faces.event.ValueChangeEvent;
 
 @ManagedBean
 public class ScoreBean {
     public static final String ALL_CLEAR = "ALL CLEAR";
     public static final String DEFAULT_GAME = "3 Count Bout (3 minutes)";
-    public static final int DEFAULT_POST_ID = 41930;
+    public static final long DEFAULT_POST_ID = 41930;
     public static final Logger LOG = Logger.getLogger(ScoreBean.class.getName());
 
     @EJB
@@ -85,15 +85,16 @@ public class ScoreBean {
 
     @VisibleForTesting
     FacesContext facesContext = FacesContext.getCurrentInstance();
-    
+
     private boolean showPostCheckBox;
-    
+
     private List<String> customStageValues = new ArrayList<String>();
-    
-    private Map<String, String> parameters = facesContext.getExternalContext().getRequestParameterMap();
-        
+
+    private Map<String, String> parameters;
+
     @PostConstruct
     public void init() {
+        parameters = facesContext.getExternalContext().getRequestParameterMap();
         Game game;
         if (initAfterGameSelection()) {
             initFromRequest();
@@ -157,8 +158,7 @@ public class ScoreBean {
             return "score/create";
         }
     }
-    
-    
+
     public String edit() {
         try {
             NeoGeoFansClient authenticator = neoGeoFansClientFactory.create();
@@ -198,7 +198,7 @@ public class ScoreBean {
         scoreService.store(scoreFromDb);
         updateFormWithSelectedGame(game);
     }
-    
+
     private void acceptScore(NeoGeoFansClient ngfClient) {
         Game game = gameService.findById(currentGame);
         Player player = playerService.findByFullname(fullname);
@@ -234,13 +234,16 @@ public class ScoreBean {
     }
 
     private void updateFormWithSelectedGame(Game game) {
-        showPostCheckBox = game.getPostId() != DEFAULT_POST_ID;
-        String stageValues = game.getCustomStageValues();
-        if (stageValues != null) {
-            customStageValues.clear();
-            customStageValues.addAll(Arrays.asList(stageValues.split(";")));
-            customStageValues.add(ALL_CLEAR);
-            stage = customStageValues.get(0);
+        Long postId = game.getPostId();
+        if (postId != null) {
+            showPostCheckBox = postId != DEFAULT_POST_ID;
+            String stageValues = game.getCustomStageValues();
+            if (stageValues != null) {
+                customStageValues.clear();
+                customStageValues.addAll(Arrays.asList(stageValues.split(";")));
+                customStageValues.add(ALL_CLEAR);
+                stage = customStageValues.get(0);
+            }
         }
         removeValidationErrors();
     }
@@ -372,5 +375,5 @@ public class ScoreBean {
     public void setCustomStageValues(List<String> customStageValues) {
         this.customStageValues = customStageValues;
     }
-    
+
 }
