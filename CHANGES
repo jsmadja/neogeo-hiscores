@@ -3,6 +3,7 @@
 - graphic: add score picture on mouse over in "game page"
 - graphic: merge Stage and All Clear columns in "game page"
 - graphic: no clearing in score edit page
+- bug fix: score picture is shown in edit page  
 
 1.3.4
 - feature: add AllClear 2, 5, 10 title
