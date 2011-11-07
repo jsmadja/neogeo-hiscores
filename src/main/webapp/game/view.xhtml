@@ -42,7 +42,6 @@
                     <td>Rank</td>
                     <td>Player</td>
                     <td>Score</td>
-                    <td>All clear</td>
                     <td>Stage</td>
                     <td>Date</td>
                     <td></td>
@@ -65,12 +64,14 @@
                             </h:link>
                         </td>
                         <td>
-                            <c:if test="${score.allClear}">
-                                <span class="button small blue">all clear!</span>
-                            </c:if>
-                        </td>
-                        <td>
-                            <h:outputText value="${score.stage}" />
+                            <c:choose>
+                                <c:when test="${score.allClear}">
+                                    <span class="button small blue">all clear!</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <h:outputText value="${score.stage}" />
+                                </c:otherwise>
+                            </c:choose>
                         </td>
                         <td>
                             <h:outputText value="${score.date}" converter="dateDDMMYYYYConverter" styleClass="date" />
