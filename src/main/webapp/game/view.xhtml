@@ -27,13 +27,13 @@
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
     <ui:define name="content_right">
         <h2>${gameBean.name}</h2>
-        
+
         <c:if test="#{gameBean.postId != 41930}">
             <span style="font-size: 10pt">
                 Click <a class="small_link" href="http://www.neogeofans.com/leforum/showthread.php?t=#{gameBean.postId}">here</a> to add your comments in the dedicated thread on Neo Geo Fans forum!
             </span>
         </c:if>
-        
+
         <c:forEach var="level" items="${gameBean.levels}">
             <h3>${level.label}</h3>
 
@@ -45,8 +45,9 @@
                     <td>All clear</td>
                     <td>Stage</td>
                     <td>Date</td>
+                    <td></td>
                 </tr>
-                
+
                 <c:forEach id="scoreTable" var="score" items="#{level.scoreItems}">
                     <tr>
                         <td style="text-align:right">
@@ -73,6 +74,14 @@
                         </td>
                         <td>
                             <h:outputText value="${score.date}" converter="dateDDMMYYYYConverter" styleClass="date" />
+                        </td>
+                        <td>
+                            <a class="thumbnail" href="#thumb">
+                                <img src="${score.pictureUrl}" width="30px" height="30px" />
+                                <span>
+                                    <img src="${score.pictureUrl}" width="500px"/>
+                                </span>
+                            </a>
                         </td>
                     </tr>
                 </c:forEach>
