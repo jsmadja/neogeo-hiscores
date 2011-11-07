@@ -34,17 +34,12 @@ public class ScoreComparator {
     }
 
     private static Score maxAsSoccer(Score score1, Score score2) {
-        Boolean allClearScore1 = score1.getAllClear();
-        Boolean allClearScore2 = score2.getAllClear();
-        if (allClearScore1 == allClearScore2) {
-            SoccerScore soccerScore1 = new SoccerScore(score1);
-            SoccerScore soccerScore2 = new SoccerScore(score2);
-            if (soccerScore1.compareTo(soccerScore2) > 0) {
-                return score1;
-            }
-            return score2;
+        SoccerScore soccerScore1 = new SoccerScore(score1);
+        SoccerScore soccerScore2 = new SoccerScore(score2);
+        if (soccerScore1.compareTo(soccerScore2) > 0) {
+            return score1;
         }
-        return allClearScore1 ? score1 : score2;
+        return score2;
     }
 
     private static boolean areSoccer(Score score1, Score score2) {
@@ -52,14 +47,9 @@ public class ScoreComparator {
     }
 
     private static Score maxAsInt(Score score1, Score score2) {
-        Boolean allClearScore1 = score1.getAllClear();
-        Boolean allClearScore2 = score2.getAllClear();
-        if (allClearScore1 == allClearScore2) {
-            Integer score1asInt = Integer.parseInt(score1.getValue());
-            Integer score2asInt = Integer.parseInt(score2.getValue());
-            return score1asInt > score2asInt ? score1 : score2;
-        }
-        return allClearScore1 ? score1 : score2;
+        Integer score1asInt = Integer.parseInt(score1.getValue());
+        Integer score2asInt = Integer.parseInt(score2.getValue());
+        return score1asInt > score2asInt ? score1 : score2;
     }
 
     public static String gap(Score score1, Score score2) {

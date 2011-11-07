@@ -17,7 +17,9 @@
 package com.anzymus.neogeo.hiscores.comparator;
 
 import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
+
 import com.anzymus.neogeo.hiscores.domain.Score;
 
 public class ScoreComparatorTest {
@@ -34,7 +36,7 @@ public class ScoreComparatorTest {
         Score score1 = new Score("1");
         score1.setAllClear(true);
         Score score2 = new Score("2");
-        assertEquals(score1, ScoreComparator.max(score1, score2));
+        assertEquals(score2, ScoreComparator.max(score1, score2));
     }
 
     @Test
@@ -56,7 +58,7 @@ public class ScoreComparatorTest {
         Score score1 = new Score("6-13-2");
         score1.setAllClear(true);
         Score score2 = new Score("7-5-4");
-        assertEquals(score1, ScoreComparator.max(score1, score2));
+        assertEquals(score2, ScoreComparator.max(score1, score2));
     }
 
     @Test
@@ -95,7 +97,7 @@ public class ScoreComparatorTest {
     }
 
     @Test
-    public void should_find_gap_for_chrono_same_titme() {
+    public void should_find_gap_for_chrono_same_time() {
         Score score1 = new Score("6:00:00");
         Score score2 = new Score("6:00:00");
         assertEquals("0:00:00", ScoreComparator.gap(score1, score2));
