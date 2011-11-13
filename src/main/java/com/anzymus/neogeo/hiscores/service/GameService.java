@@ -17,6 +17,7 @@
 package com.anzymus.neogeo.hiscores.service;
 
 import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -24,6 +25,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 
@@ -82,6 +84,11 @@ public class GameService {
         Query query = em.createNativeQuery(Game.findAllGamesOneCreditedBy, Game.class);
         query = query.setParameter(1, player.getId());
         return query.getResultList();
+    }
+
+    public long getNumberOfGames() {
+        Query query = em.createNativeQuery(Game.getNumberOfGames);
+        return Queries.getCount(query);
     }
 
 }

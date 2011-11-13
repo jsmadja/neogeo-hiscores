@@ -111,11 +111,7 @@ public class ScoreService {
     public long findCountByGame(Game game) {
         String sql = "SELECT COUNT(id) FROM SCORE WHERE game_id = " + game.getId();
         Query query = em.createNativeQuery(sql);
-        try {
-            return (Integer) query.getSingleResult();
-        } catch (ClassCastException e) {
-            return (Long) query.getSingleResult();
-        }
+        return Queries.getCount(query);
     }
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -132,5 +128,10 @@ public class ScoreService {
     public List<Game> findGamesOrderByNumScores() {
         TypedQuery<Game> query = em.createNamedQuery("score_findGamesOrderByNumScores", Game.class);
         return query.getResultList();
+    }
+
+    public long getNumberOfPlayedGames() {
+        Query query = em.createNativeQuery("SELECT count(distinct s.game_id) FROM SCORE s");
+        return Queries.getCount(query);
     }
 }

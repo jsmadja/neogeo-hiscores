@@ -35,6 +35,7 @@ import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Scores;
 import com.anzymus.neogeo.hiscores.domain.UnlockedTitle;
+import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
 import com.anzymus.neogeo.hiscores.service.TitleUnlockingService;
@@ -53,6 +54,9 @@ public class StatsBeanTest {
 
     @Mock
     ScoreService scoreService;
+
+    @Mock
+    GameService gameService;
 
     @Before
     public void init() {
@@ -141,5 +145,24 @@ public class StatsBeanTest {
         Game mostPlayedGame = statsBean.getMostPlayedGames().get(0);
 
         assertEquals(game1, mostPlayedGame);
+    }
+
+    @Test
+    public void should_return_number_of_played_games() {
+        when(scoreService.getNumberOfPlayedGames()).thenReturn(10L);
+
+        long numberOfPlayedGames = statsBean.getNumberOfPlayedGames();
+
+        assertEquals(10L, numberOfPlayedGames);
+    }
+
+    @Test
+    public void should_return_number_of_unplayed_games() {
+        when(scoreService.getNumberOfPlayedGames()).thenReturn(10L);
+        when(gameService.getNumberOfGames()).thenReturn(30L);
+
+        long numberOfUnplayedGames = statsBean.getNumberOfUnplayedGames();
+
+        assertEquals(20L, numberOfUnplayedGames);
     }
 }

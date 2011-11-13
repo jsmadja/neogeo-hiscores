@@ -18,9 +18,12 @@ package com.anzymus.neogeo.hiscores.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
 import java.util.List;
+
 import org.junit.Ignore;
 import org.junit.Test;
+
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
@@ -124,6 +127,13 @@ public class GameServiceITest extends AbstractTest {
         Game playedGame = playedGames.get(0);
 
         assertEquals(game, playedGame);
+    }
+
+    @Test
+    public void should_get_number_of_games() {
+        long expected = gameService.findAll().size();
+        long actual = gameService.getNumberOfGames();
+        assertEquals(expected, actual);
     }
 
 }

@@ -146,4 +146,17 @@ public class ScoreServiceITest extends AbstractTest {
 
         assertEquals(game, firstGame);
     }
+
+    @Test
+    public void should_get_number_of_played_games() {
+        long initialPlayedGames = scoreService.getNumberOfPlayedGames();
+
+        Player player = createPlayer();
+        Game game = createGame();
+        createScore(player, game);
+
+        long actualPlayedGames = scoreService.getNumberOfPlayedGames();
+
+        assertEquals(initialPlayedGames + 1, actualPlayedGames);
+    }
 }
