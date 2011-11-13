@@ -17,6 +17,7 @@
 package com.anzymus.neogeo.hiscores.domain;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,6 +27,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
+
 import com.google.common.base.Objects;
 
 @Entity
@@ -53,9 +55,12 @@ public class Game implements Comparable<Game>, Serializable {
 
     private Long postId;
 
-    @Column(nullable = true, name="CUSTOM_STAGE_VALUES")
+    @Column(nullable = true, name = "CUSTOM_STAGE_VALUES")
     private String customStageValues;
-    
+
+    @Transient
+    private int contribution;
+
     public Game() {
     }
 
@@ -113,6 +118,14 @@ public class Game implements Comparable<Game>, Serializable {
     @Override
     public String toString() {
         return name;
+    }
+
+    public int getContribution() {
+        return contribution;
+    }
+
+    public void setContribution(int contribution) {
+        this.contribution = contribution;
     }
 
 }

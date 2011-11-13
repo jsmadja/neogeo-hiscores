@@ -18,12 +18,14 @@ package com.anzymus.neogeo.hiscores.service;
 
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Title;
 import com.anzymus.neogeo.hiscores.domain.UnlockedTitle;
@@ -73,4 +75,9 @@ public class TitleUnlockingService {
         return query.getResultList();
     }
 
+    public List<Player> findPlayersOrderByNumUnlockedTitles() {
+        TypedQuery<Player> query = em.createNamedQuery("unlockedTitle_findPlayersOrderByNumUnlockedTitles",
+                Player.class);
+        return query.getResultList();
+    }
 }

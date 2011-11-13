@@ -39,8 +39,8 @@ import com.google.common.base.Objects;
 @NamedQueries({ //
 
 @NamedQuery(name = "player_findByFullname", query = "SELECT p FROM Player p WHERE p.fullname = :fullname"),
-        @NamedQuery(name = "player_findAll", query = "SELECT p FROM Player p") //
-})
+        @NamedQuery(name = "player_findAll", query = "SELECT p FROM Player p"), //
+        @NamedQuery(name = "player_getNumberOfPlayers", query = "SELECT COUNT(p) FROM Player p") })
 public class Player implements Serializable {
 
     private static final long serialVersionUID = 2067603406910806588L;

@@ -124,4 +124,13 @@ public class ScoreService {
         em.remove(score);
     }
 
+    public List<Player> findPlayersOrderByNumScores() {
+        TypedQuery<Player> query = em.createNamedQuery("score_findPlayersOrderByNumScores", Player.class);
+        return query.getResultList();
+    }
+
+    public List<Game> findGamesOrderByNumScores() {
+        TypedQuery<Game> query = em.createNamedQuery("score_findGamesOrderByNumScores", Game.class);
+        return query.getResultList();
+    }
 }

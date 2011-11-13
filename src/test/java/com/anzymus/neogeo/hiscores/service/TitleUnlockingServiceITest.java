@@ -16,9 +16,14 @@
 
 package com.anzymus.neogeo.hiscores.service;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
 import java.util.HashMap;
+import java.util.List;
+
 import org.junit.Test;
+
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Title;
@@ -47,6 +52,31 @@ public class TitleUnlockingServiceITest extends AbstractTest {
 
         player = playerService.findByFullname(player.getFullname());
         assertTrue(initialUnlockedTitles < player.getUnlockedTitles().size());
+    }
+
+    @Test
+    public void should_find_best_title_unlocker() {
+        createPlayer();
+
+        Player player = createPlayer();
+        Game game = createGame();
+        createScore(player, game);
+
+        titleUnlockingService.searchUnlockedTitlesFor(player);
+        List<Player> bestTitleUnlockers = titleUnlockingService.findPlayersOrderByNumUnlockedTitles();
+
+        List<Player> players = playerService.findAll();
+
+        System.err.println(players.size() + " players");
+        players.removeAll(bestTitleUnlockers);
+        assertFalse(players.isEmpty());
+
+        for (Player bestPlayer : bestTitleUnlockers) {
+            int numUnlockedTitles = bestPlayer.getUnlockedTitles().size();
+            for (Player p : players) {
+                assertTrue(numUnlockedTitles >= p.getUnlockedTitles().size());
+            }
+        }
     }
 
 }

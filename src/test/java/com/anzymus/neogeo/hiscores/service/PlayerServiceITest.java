@@ -17,8 +17,13 @@
 package com.anzymus.neogeo.hiscores.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+
+import java.util.List;
+
 import org.junit.Test;
+
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Title;
 import com.anzymus.neogeo.hiscores.success.DummyStrategy;
@@ -52,6 +57,13 @@ public class PlayerServiceITest extends AbstractTest {
 
         Player storedPlayer = playerService.findByFullname(player.getFullname());
         assertEquals(1, storedPlayer.getUnlockedTitles().size());
+    }
+
+    @Test
+    public void should_get_number_of_players() {
+        List<Player> players = playerService.findAll();
+        assertFalse(players.isEmpty());
+        assertEquals(players.size(), playerService.getNumberOfPlayers());
     }
 
     private Title createTitle() {

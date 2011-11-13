@@ -17,6 +17,7 @@
 package com.anzymus.neogeo.hiscores.domain;
 
 import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -29,7 +30,9 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "UNLOCKED_TITLE")
 @NamedQueries({//
-@NamedQuery(name = "unlockedTitle_findLastUnlockedTitlesOrderByDateDesc", query = "SELECT ut FROM UnlockedTitle ut ORDER BY ut.unlockDate DESC") })
+        @NamedQuery(name = "unlockedTitle_findLastUnlockedTitlesOrderByDateDesc", query = "SELECT ut FROM UnlockedTitle ut ORDER BY ut.unlockDate DESC"), //
+        @NamedQuery(name = "unlockedTitle_findPlayersOrderByNumUnlockedTitles", query = "SELECT ut.player FROM UnlockedTitle ut GROUP BY ut.player ORDER BY COUNT(ut.id) DESC") //
+})
 public class UnlockedTitle {
 
     @Id

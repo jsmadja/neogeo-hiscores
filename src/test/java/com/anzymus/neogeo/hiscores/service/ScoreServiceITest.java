@@ -19,10 +19,13 @@ package com.anzymus.neogeo.hiscores.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
 import java.util.List;
+
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
@@ -114,5 +117,33 @@ public class ScoreServiceITest extends AbstractTest {
         long count = scoreService.findCountByGame(game1);
 
         assertEquals(initialCount + 3, count);
+    }
+
+    @Test
+    public void should_find_players_order_by_num_scores() {
+        Player player = createPlayer();
+        Game game = createGame();
+        for (int i = 0; i < 50; i++) {
+            createScore(player, game);
+        }
+
+        List<Player> playersOrderByNumScores = scoreService.findPlayersOrderByNumScores();
+        Player firstPlayer = playersOrderByNumScores.get(0);
+
+        assertEquals(player, firstPlayer);
+    }
+
+    @Test
+    public void should_find_games_order_by_num_scores() {
+        Player player = createPlayer();
+        Game game = createGame();
+        for (int i = 0; i < 50; i++) {
+            createScore(player, game);
+        }
+
+        List<Game> gamesOrderByNumScores = scoreService.findGamesOrderByNumScores();
+        Game firstGame = gamesOrderByNumScores.get(0);
+
+        assertEquals(game, firstGame);
     }
 }

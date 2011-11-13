@@ -1,0 +1,68 @@
+<!--
+
+        Copyright (C) 2011 Julien SMADJA <julien dot smadja at gmail dot com>
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at
+
+                http://www.apache.org/licenses/LICENSE-2.0
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:emcomp="http://java.sun.com/jsf/composite/emcomp" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                >
+    <ui:define name="content_right">
+
+        <f:view>
+            <div style="text-align: left">
+                <ul>
+                    <li>Number of players: ${statsBean.numberOfPlayers}</li>
+                    <li>Best title unlockers: 
+                        <c:forEach var="player" items="${statsBean.bestTitleUnlockers}">
+                            <h:link outcome="player" value="${player.fullname}">
+                                <f:param name="fullname" value="${player.fullname}"/>
+                            </h:link> (${fn:length(player.unlockedTitles)})
+                        </c:forEach>
+                    </li>
+                    <li>Best scorers: 
+                        <c:forEach var="player" items="${statsBean.bestScorers}">
+                            <h:link outcome="player" value="${player.fullname}">
+                                <f:param name="fullname" value="${player.fullname}"/>
+                            </h:link> (${player.contribution})
+                        </c:forEach>
+                    </li>
+                    <li>
+                        Most played games: 
+                        <c:forEach var="game" items="${statsBean.mostPlayedGames}">
+                            <h:link outcome="game" value="${game.name}">
+                                <f:param name="id" value="${game.id}"/>
+                            </h:link> (${game.contribution})
+                        </c:forEach>
+                    </li>
+                </ul>
+            </div>
+
+            <!--
+Jeu le plus joué : View Point (34)
+Nombre de jeux joués : 39 (avec un lien vers la page Games qui liste tous les jeux joués, cette page existe déjà)
+Nombre de jeux en attente d'un premier score : 120 (avec un lien vers une nouvelle page nommée Orphaned Games qui liste tous les jeux sans score) 
+            
+            -->
+
+
+        </f:view>
+    </ui:define>
+</ui:composition>
