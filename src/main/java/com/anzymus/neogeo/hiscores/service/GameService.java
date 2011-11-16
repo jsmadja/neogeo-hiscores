@@ -91,4 +91,9 @@ public class GameService {
         return Queries.getCount(query);
     }
 
+    public List<Game> findAllUnplayedGames() {
+        Query query = em.createNativeQuery(Game.findAllUnplayedGames, Game.class);
+        return query.getResultList();
+    }
+
 }

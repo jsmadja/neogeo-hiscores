@@ -136,4 +136,18 @@ public class GameServiceITest extends AbstractTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void should_get_all_unplayed_games() {
+        List<Game> unplayedGames = gameService.findAllUnplayedGames();
+        int initialUnplayedGames = unplayedGames.size();
+
+        Game game1 = createGame();
+        Game game2 = createGame();
+
+        unplayedGames = gameService.findAllUnplayedGames();
+
+        assertEquals(initialUnplayedGames + 2, unplayedGames.size());
+        assertTrue(unplayedGames.contains(game1));
+        assertTrue(unplayedGames.contains(game2));
+    }
 }

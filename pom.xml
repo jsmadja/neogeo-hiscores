@@ -34,7 +34,7 @@
         <javax-persistence-version>2.0.0</javax-persistence-version>
         <jsf-version>2.0.2-b10</jsf-version>
         <junit-version>4.8.2</junit-version>
-        <mockito-version>1.8.5</mockito-version>
+        <mockito-version>1.9.0-rc1</mockito-version>
         <mysql-version>5.1.14</mysql-version>
         <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

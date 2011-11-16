@@ -16,6 +16,7 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
+import com.anzymus.neogeo.hiscores.domain.Game;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -55,4 +56,7 @@ public class GamesBean {
         return gameItems;
     }
 
+    public List<Game> getUnplayedGames() {
+        return gameService.findAllUnplayedGames();
+    }
 }

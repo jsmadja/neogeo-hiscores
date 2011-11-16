@@ -17,13 +17,19 @@
 package com.anzymus.neogeo.hiscores.controller;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
 
@@ -35,14 +41,12 @@ public class GamesBeanTest {
     @Mock
     ScoreService scoreService;
 
+    @InjectMocks
     GamesBean gamesBean;
 
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
-        gamesBean = new GamesBean();
-        gamesBean.gameService = gameService;
-        gamesBean.scoreService = scoreService;
     }
 
     @Test
@@ -61,4 +65,16 @@ public class GamesBeanTest {
         assertEquals("Fatal Fury", gameItem.getName());
         assertEquals(5L, gameItem.getCount());
     }
+
+    @Test
+    public void should_get_all_unplayed_games() {
+        List<Game> expectedUnplayedGames = new ArrayList<Game>();
+        when(gameService.findAllUnplayedGames()).thenReturn(expectedUnplayedGames);
+
+        List<Game> actualUnplayedGames = gamesBean.getUnplayedGames();
+
+        assertEquals(expectedUnplayedGames, actualUnplayedGames);
+        verify(gameService).findAllUnplayedGames();
+    }
+
 }

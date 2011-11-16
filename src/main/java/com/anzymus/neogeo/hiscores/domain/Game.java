@@ -43,6 +43,7 @@ public class Game implements Comparable<Game>, Serializable {
     public static final String findAllGamesOneCreditedBy = "SELECT * FROM GAME WHERE id IN (SELECT DISTINCT game_id FROM SCORE WHERE player_id = ? AND all_clear = 1) ORDER BY name";;
     public static final String getNumberOfGames = "SELECT COUNT(id) FROM GAME";
     public static final String findAllScoreCountForEachGames = "SELECT g.id, g.name, COUNT(s.id) FROM SCORE s, GAME g WHERE s.game_id = g.id GROUP BY g.id ORDER BY g.name";
+    public static final String findAllUnplayedGames = "SELECT * FROM GAME WHERE id NOT IN (SELECT DISTINCT game_id FROM SCORE)";
 
     private static final long serialVersionUID = -8252960983109413218L;
 
