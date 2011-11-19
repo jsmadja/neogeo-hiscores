@@ -20,17 +20,21 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
@@ -57,6 +61,7 @@ public class PlayerBeanTest {
     @Mock
     TitleService titleService;
 
+    @InjectMocks
     PlayerBean playerBean;
 
     Map<Title, TitleUnlockingStrategy> strategies;
@@ -64,12 +69,6 @@ public class PlayerBeanTest {
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
-        playerBean = new PlayerBean();
-        playerBean.gameService = gameService;
-        playerBean.playerService = playerService;
-        playerBean.scoreService = scoreService;
-        playerBean.titleService = titleService;
-
         strategies = new HashMap<Title, TitleUnlockingStrategy>();
         when(titleService.findAllStrategies()).thenReturn(strategies);
     }
@@ -134,6 +133,8 @@ public class PlayerBeanTest {
         scores.add(score2);
         scores.add(score3);
         when(scoreService.findAllByGame(game)).thenReturn(scores);
+
+        when(playerService.findByFullname("fullname2")).thenReturn(player2);
 
         playerBean.setFullname("fullname2");
 
