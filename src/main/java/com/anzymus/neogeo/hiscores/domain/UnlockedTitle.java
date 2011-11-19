@@ -30,8 +30,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "UNLOCKED_TITLE")
 @NamedQueries({//
-        @NamedQuery(name = "unlockedTitle_findLastUnlockedTitlesOrderByDateDesc", query = "SELECT ut FROM UnlockedTitle ut ORDER BY ut.unlockDate DESC"), //
-        @NamedQuery(name = "unlockedTitle_findPlayersOrderByNumUnlockedTitles", query = "SELECT ut.player FROM UnlockedTitle ut GROUP BY ut.player ORDER BY COUNT(ut.id) DESC") //
+@NamedQuery(name = "findLastUnlockedTitlesOrderByDateDesc", query = "SELECT ut FROM UnlockedTitle ut ORDER BY ut.unlockDate DESC") //
 })
 public class UnlockedTitle {
 

@@ -121,12 +121,14 @@ public class ScoreService {
     }
 
     public List<Player> findPlayersOrderByNumScores() {
-        TypedQuery<Player> query = em.createNamedQuery("score_findPlayersOrderByNumScores", Player.class);
+        String sql = "SELECT p.* FROM SCORE s, PLAYER p WHERE s.player_id = p.id GROUP BY s.player_id ORDER BY COUNT(s.id) DESC";
+        Query query = em.createNativeQuery(sql, Player.class);
         return query.getResultList();
     }
 
     public List<Game> findGamesOrderByNumScores() {
-        TypedQuery<Game> query = em.createNamedQuery("score_findGamesOrderByNumScores", Game.class);
+        String sql = "SELECT g.* FROM SCORE s, GAME g WHERE s.game_id = g.id GROUP BY s.game_id ORDER BY COUNT(s.id) DESC";
+        Query query = em.createNativeQuery(sql, Game.class);
         return query.getResultList();
     }
 

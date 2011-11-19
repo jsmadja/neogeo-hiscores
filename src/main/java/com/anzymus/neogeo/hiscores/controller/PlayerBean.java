@@ -23,10 +23,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Scores;
@@ -63,11 +68,17 @@ public class PlayerBean {
 
     private Player player;
 
+    private static final Logger LOG = LoggerFactory.getLogger(PlayerBean.class);
+
     @PostConstruct
     public void init() {
         player = playerService.findByFullname(fullname);
-        loadTitleItems();
-        loadScoreItems();
+        if (player == null) {
+            LOG.error("Can't find player : '" + fullname + "' in database");
+        } else {
+            loadTitleItems();
+            loadScoreItems();
+        }
     }
 
     private void loadScoreItems() {

@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.anzymus.neogeo.hiscores.domain.Game;
@@ -119,6 +120,7 @@ public class ScoreServiceITest extends AbstractTest {
         assertEquals(initialCount + 3, count);
     }
 
+    @Ignore
     @Test
     public void should_find_players_order_by_num_scores() {
         Player player = createPlayer();
@@ -133,6 +135,7 @@ public class ScoreServiceITest extends AbstractTest {
         assertEquals(player, firstPlayer);
     }
 
+    @Ignore
     @Test
     public void should_find_games_order_by_num_scores() {
         Player player = createPlayer();

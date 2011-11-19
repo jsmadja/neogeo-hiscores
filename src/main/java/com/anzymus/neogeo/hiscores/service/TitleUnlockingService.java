@@ -24,6 +24,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import com.anzymus.neogeo.hiscores.domain.Player;
@@ -69,15 +70,15 @@ public class TitleUnlockingService {
     }
 
     public List<UnlockedTitle> findLastUnlockedTitlesOrderByDateDesc() {
-        TypedQuery<UnlockedTitle> query = em.createNamedQuery("unlockedTitle_findLastUnlockedTitlesOrderByDateDesc",
+        TypedQuery<UnlockedTitle> query = em.createNamedQuery("findLastUnlockedTitlesOrderByDateDesc",
                 UnlockedTitle.class);
         query.setMaxResults(MAX_UNLOCKED_TITLES_TO_RETURN);
         return query.getResultList();
     }
 
     public List<Player> findPlayersOrderByNumUnlockedTitles() {
-        TypedQuery<Player> query = em.createNamedQuery("unlockedTitle_findPlayersOrderByNumUnlockedTitles",
-                Player.class);
+        String sql = "SELECT p.* FROM UNLOCKED_TITLE ut, PLAYER p WHERE ut.player_id = p.id GROUP BY ut.player_id ORDER BY COUNT(ut.id) DESC";
+        Query query = em.createNativeQuery(sql, Player.class);
         return query.getResultList();
     }
 }

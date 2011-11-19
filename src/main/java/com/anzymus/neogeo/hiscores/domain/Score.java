@@ -39,9 +39,7 @@ import com.google.common.base.Objects;
         @NamedQuery(name = "score_findAllOneCreditScoresByGame", query = "SELECT s FROM Score s WHERE s.game = :game AND s.allClear = true"),
         @NamedQuery(name = "score_findAllByPlayer", query = "SELECT s FROM Score s WHERE s.player = :player"),
         @NamedQuery(name = "score_findAll", query = "SELECT s FROM Score s"),
-        @NamedQuery(name = "score_findAllOrderByDateDesc", query = "SELECT s FROM Score s ORDER BY s.creationDate DESC"),
-        @NamedQuery(name = "score_findPlayersOrderByNumScores", query = "SELECT s.player FROM Score s GROUP BY s.player ORDER BY COUNT(s.id) DESC"),
-        @NamedQuery(name = "score_findGamesOrderByNumScores", query = "SELECT s.game FROM Score s GROUP BY s.game ORDER BY COUNT(s.id) DESC") //
+        @NamedQuery(name = "score_findAllOrderByDateDesc", query = "SELECT s FROM Score s ORDER BY s.creationDate DESC") //
 })
 public class Score implements Serializable {
 
