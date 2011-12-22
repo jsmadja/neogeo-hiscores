@@ -45,85 +45,86 @@ import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
 @ManagedBean
 public class PlayerBean {
 
-    @EJB
-    ScoreService scoreService;
+	@EJB
+	ScoreService scoreService;
 
-    @EJB
-    PlayerService playerService;
+	@EJB
+	PlayerService playerService;
 
-    @EJB
-    GameService gameService;
+	@EJB
+	GameService gameService;
 
-    @EJB
-    TitleService titleService;
+	@EJB
+	TitleService titleService;
 
-    @ManagedProperty(value = "#{param.fullname}")
-    private String fullname;
+	@ManagedProperty(value = "#{param.fullname}")
+	private String fullname;
 
-    private List<TitleItem> titleItems = new ArrayList<TitleItem>();
+	private List<TitleItem> titleItems = new ArrayList<TitleItem>();
 
-    private List<ScoreItem> scoreItems = new ArrayList<ScoreItem>();
+	private List<ScoreItem> scoreItems = new ArrayList<ScoreItem>();
 
-    private List<ScoreItem> scoreItemsOneCredit = new ArrayList<ScoreItem>();
+	private List<ScoreItem> scoreItemsOneCredit = new ArrayList<ScoreItem>();
 
-    private Player player;
+	private Player player;
 
-    private static final Logger LOG = LoggerFactory.getLogger(PlayerBean.class);
+	private static final Logger LOG = LoggerFactory.getLogger(PlayerBean.class);
 
-    @PostConstruct
-    public void init() {
-        player = playerService.findByFullname(fullname);
-        if (player == null) {
-            LOG.error("Can't find player : '" + fullname + "' in database");
-        } else {
-            loadTitleItems();
-            loadScoreItems();
-        }
-    }
+	@PostConstruct
+	public void init() {
+		player = playerService.findByFullname(fullname);
+		if (player == null) {
+			LOG.error("Can't find player : '" + fullname + "' in database");
+		} else {
+			loadTitleItems();
+			loadScoreItems();
+		}
+	}
 
-    private void loadScoreItems() {
-        for (Game game : gameService.findAllGamesPlayedBy(player)) {
-            extractScoreItemsFromGame(scoreItems, game);
-        }
-    }
+	private void loadScoreItems() {
+		for (Game game : gameService.findAllGamesPlayedBy(player)) {
+			extractScoreItemsFromGame(scoreItems, game);
+		}
+		Players.discoverImprovableScores(scoreItems);
+	}
 
-    private void loadTitleItems() {
-        Map<Title, TitleUnlockingStrategy> strategies = titleService.findAllStrategies();
-        Set<Title> allTitles = strategies.keySet();
-        Set<Title> titles = new TreeSet<Title>(allTitles);
-        for (Title title : titles) {
-            boolean isUnlocked = player.hasUnlocked(title);
-            TitleItem titleItem = new TitleItem(title, isUnlocked);
-            titleItems.add(titleItem);
-        }
-        Collections.sort(titleItems);
-    }
+	private void loadTitleItems() {
+		Map<Title, TitleUnlockingStrategy> strategies = titleService.findAllStrategies();
+		Set<Title> allTitles = strategies.keySet();
+		Set<Title> titles = new TreeSet<Title>(allTitles);
+		for (Title title : titles) {
+			boolean isUnlocked = player.hasUnlocked(title);
+			TitleItem titleItem = new TitleItem(title, isUnlocked);
+			titleItems.add(titleItem);
+		}
+		Collections.sort(titleItems);
+	}
 
-    public Collection<TitleItem> getTitles() {
-        return titleItems;
-    }
+	public Collection<TitleItem> getTitles() {
+		return titleItems;
+	}
 
-    public String getFullname() {
-        return fullname;
-    }
+	public String getFullname() {
+		return fullname;
+	}
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
 
-    public List<ScoreItem> getScores() {
-        return scoreItems;
-    }
+	public List<ScoreItem> getScores() {
+		return scoreItems;
+	}
 
-    public List<ScoreItem> getScoresOneCredit() {
-        return scoreItemsOneCredit;
-    }
+	public List<ScoreItem> getScoresOneCredit() {
+		return scoreItemsOneCredit;
+	}
 
-    private void extractScoreItemsFromGame(List<ScoreItem> scoreItems, Game game) {
-        Scores scores = scoreService.findAllByGame(game);
-        for (String level : Levels.list()) {
-            Players.extractScoreItemsFromLevels(scoreItems, game, scores, level, fullname);
-        }
-    }
+	private void extractScoreItemsFromGame(List<ScoreItem> scoreItems, Game game) {
+		Scores scores = scoreService.findAllByGame(game);
+		for (String level : Levels.list()) {
+			Players.extractScoreItemsFromLevels(scoreItems, game, scores, level, fullname);
+		}
+	}
 
 }

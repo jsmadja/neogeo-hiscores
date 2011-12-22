@@ -18,6 +18,7 @@ package com.anzymus.neogeo.hiscores.controller;
 
 import java.util.Date;
 import com.anzymus.neogeo.hiscores.domain.Game;
+import com.anzymus.neogeo.hiscores.domain.Score;
 
 public class ScoreItem {
 
@@ -36,8 +37,30 @@ public class ScoreItem {
     private String negativeGap;
     private boolean allClear;
     private String stage;
-
+    private Score score;
+    private boolean improvable;
+    
     private int MAX_MESSAGE_LENGTH = 25;
+
+    public ScoreItem() {
+    	
+    }
+    
+    public ScoreItem(Score score) {
+    	this.score = score;
+    }
+    
+    public boolean isImprovable() {
+		return improvable;
+	}
+    
+    public void setImprovable(boolean improvable) {
+		this.improvable = improvable;
+	}
+    
+    public Score getScore() {
+		return score;
+	}
 
     public long getId() {
         return id;

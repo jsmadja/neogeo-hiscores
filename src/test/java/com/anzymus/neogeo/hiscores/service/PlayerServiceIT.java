@@ -28,7 +28,7 @@ import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Title;
 import com.anzymus.neogeo.hiscores.success.DummyStrategy;
 
-public class PlayerServiceITest extends AbstractTest {
+public class PlayerServiceIT extends AbstractTest {
 
     @Test
     public void should_store_player() {

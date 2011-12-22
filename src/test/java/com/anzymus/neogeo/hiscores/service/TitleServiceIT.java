@@ -27,7 +27,7 @@ import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 
-public class TitleServiceITest extends AbstractTest {
+public class TitleServiceIT extends AbstractTest {
 
     private Game game, game2;
     private String pictureUrl;

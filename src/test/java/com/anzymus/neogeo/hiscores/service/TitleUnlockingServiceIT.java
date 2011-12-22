@@ -31,7 +31,7 @@ import com.anzymus.neogeo.hiscores.domain.Title;
 import com.anzymus.neogeo.hiscores.success.FirstScoreTitleStrategy;
 import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
 
-public class TitleUnlockingServiceITest extends AbstractTest {
+public class TitleUnlockingServiceIT extends AbstractTest {
 
     @Test
     public void should_unlock_title() {

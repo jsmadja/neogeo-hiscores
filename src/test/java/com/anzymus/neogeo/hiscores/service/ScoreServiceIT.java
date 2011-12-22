@@ -32,7 +32,7 @@ import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Scores;
 
-public class ScoreServiceITest extends AbstractTest {
+public class ScoreServiceIT extends AbstractTest {
 
     private static Game game1, game2;
 

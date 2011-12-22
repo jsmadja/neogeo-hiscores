@@ -183,6 +183,6 @@ public class PlayerBeanTest {
         titleItem = iterator.next();
         assertEquals(title2, titleItem.getTitle());
         assertFalse(titleItem.isUnlocked());
-
     }
+    
 }

@@ -28,7 +28,7 @@ import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 
-public class GameServiceITest extends AbstractTest {
+public class GameServiceIT extends AbstractTest {
     @Test
     public void should_add_new_game() {
         Game game = new Game("Fatal Fury");

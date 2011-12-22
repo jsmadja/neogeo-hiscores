@@ -32,7 +32,7 @@ import com.anzymus.neogeo.hiscores.service.AbstractTest;
 import com.anzymus.neogeo.hiscores.success.MegaShock10TitleStrategy;
 import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
 
-public class AdministrationWebServiceITest extends AbstractTest {
+public class AdministrationWebServiceIT extends AbstractTest {
 
     @Test
     public void should_add_one_game() {
