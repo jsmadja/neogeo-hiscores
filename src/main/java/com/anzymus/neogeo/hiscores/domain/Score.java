@@ -221,4 +221,8 @@ public class Score implements Serializable {
 	public boolean isClassicScore() {
 		return !isSoccer() && !isChrono();
 	}
+
+	public boolean isImprovable() {
+		return game.isImprovable() && isClassicScore();
+	}
 }

@@ -1,3 +1,7 @@
+1.4.6
+- feature: Add column to decide if game are improvable (means that score could be improved easily)
+
+1.4.5
 1.4.4
 1.4.3
 - bug fix: Home link was invalid

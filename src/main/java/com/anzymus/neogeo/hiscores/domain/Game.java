@@ -34,99 +34,109 @@ import com.google.common.base.Objects;
 @Table(name = "GAME", uniqueConstraints = @UniqueConstraint(columnNames = { "NAME" }))
 @NamedQueries({ //
 @NamedQuery(name = "game_findAll", query = "SELECT g FROM Game g ORDER BY g.name ASC"), //
-        @NamedQuery(name = "game_findByName", query = "SELECT g FROM Game g WHERE g.name = :name") //
+		@NamedQuery(name = "game_findByName", query = "SELECT g FROM Game g WHERE g.name = :name") //
 })
 public class Game implements Comparable<Game>, Serializable {
 
-    public static final String findAllPlayedGames = "SELECT * FROM GAME WHERE id IN (SELECT DISTINCT game_id FROM SCORE) ORDER BY name";
-    public static final String findAllGamesPlayedBy = "SELECT * FROM GAME WHERE id IN (SELECT DISTINCT game_id FROM SCORE WHERE player_id = ?) ORDER BY name";
-    public static final String findAllGamesOneCreditedBy = "SELECT * FROM GAME WHERE id IN (SELECT DISTINCT game_id FROM SCORE WHERE player_id = ? AND all_clear = 1) ORDER BY name";;
-    public static final String getNumberOfGames = "SELECT COUNT(id) FROM GAME";
-    public static final String findAllScoreCountForEachGames = "SELECT g.id, g.name, COUNT(s.id) FROM SCORE s, GAME g WHERE s.game_id = g.id GROUP BY g.id ORDER BY g.name";
-    public static final String findAllUnplayedGames = "SELECT * FROM GAME WHERE id NOT IN (SELECT DISTINCT game_id FROM SCORE)";
+	public static final String findAllPlayedGames = "SELECT * FROM GAME WHERE id IN (SELECT DISTINCT game_id FROM SCORE) ORDER BY name";
+	public static final String findAllGamesPlayedBy = "SELECT * FROM GAME WHERE id IN (SELECT DISTINCT game_id FROM SCORE WHERE player_id = ?) ORDER BY name";
+	public static final String findAllGamesOneCreditedBy = "SELECT * FROM GAME WHERE id IN (SELECT DISTINCT game_id FROM SCORE WHERE player_id = ? AND all_clear = 1) ORDER BY name";;
+	public static final String getNumberOfGames = "SELECT COUNT(id) FROM GAME";
+	public static final String findAllScoreCountForEachGames = "SELECT g.id, g.name, COUNT(s.id) FROM SCORE s, GAME g WHERE s.game_id = g.id GROUP BY g.id ORDER BY g.name";
+	public static final String findAllUnplayedGames = "SELECT * FROM GAME WHERE id NOT IN (SELECT DISTINCT game_id FROM SCORE)";
 
-    private static final long serialVersionUID = -8252960983109413218L;
+	private static final long serialVersionUID = -8252960983109413218L;
 
-    @Id
-    @GeneratedValue
-    private Long id;
+	@Id
+	@GeneratedValue
+	private Long id;
 
-    @Column(nullable = false)
-    private String name;
+	@Column(nullable = false)
+	private String name;
 
-    private Long postId;
+	private Long postId;
 
-    @Column(nullable = true, name = "CUSTOM_STAGE_VALUES")
-    private String customStageValues;
+	@Column(nullable = true, name = "CUSTOM_STAGE_VALUES")
+	private String customStageValues;
 
-    @Transient
-    private int contribution;
+	@Transient
+	private int contribution;
 
-    public Game() {
-    }
+	private boolean improvable;
 
-    public Game(String name) {
-        this.name = name;
-    }
+	public Game() {
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Game(String name) {
+		this.name = name;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Long getPostId() {
-        return postId;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setPostId(Long postId) {
-        this.postId = postId;
-    }
+	public Long getPostId() {
+		return postId;
+	}
 
-    public String getCustomStageValues() {
-        return customStageValues;
-    }
+	public void setPostId(Long postId) {
+		this.postId = postId;
+	}
 
-    public void setCustomStageValues(String customStageValues) {
-        this.customStageValues = customStageValues;
-    }
+	public String getCustomStageValues() {
+		return customStageValues;
+	}
 
-    @Override
-    public int compareTo(Game game) {
-        return name.compareTo(game.name);
-    }
+	public void setCustomStageValues(String customStageValues) {
+		this.customStageValues = customStageValues;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(name);
-    }
+	public boolean isImprovable() {
+		return improvable;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Game) {
-            Game g = (Game) obj;
-            return name.equals(g.name);
-        }
-        return false;
-    }
+	public void setImprovable(boolean improvable) {
+		this.improvable = improvable;
+	}
 
-    @Override
-    public String toString() {
-        return name;
-    }
+	@Override
+	public int compareTo(Game game) {
+		return name.compareTo(game.name);
+	}
 
-    public int getContribution() {
-        return contribution;
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(name);
+	}
 
-    public void setContribution(int contribution) {
-        this.contribution = contribution;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Game) {
+			Game g = (Game) obj;
+			return name.equals(g.name);
+		}
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		return name;
+	}
+
+	public int getContribution() {
+		return contribution;
+	}
+
+	public void setContribution(int contribution) {
+		this.contribution = contribution;
+	}
 
 }

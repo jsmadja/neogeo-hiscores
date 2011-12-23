@@ -85,7 +85,7 @@ public class PlayerBean {
 		for (Game game : gameService.findAllGamesPlayedBy(player)) {
 			extractScoreItemsFromGame(scoreItems, game);
 		}
-		Players.discoverImprovableScores(scoreItems);
+		ScoreItems.discoverImprovableScores(scoreItems);
 	}
 
 	private void loadTitleItems() {
