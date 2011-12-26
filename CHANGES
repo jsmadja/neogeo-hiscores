@@ -1,3 +1,6 @@
+1.4.7
+- feature: Add google analytics tracker
+
 1.4.6
 - feature: Add column to decide if game are improvable (means that score could be improved easily)
 
