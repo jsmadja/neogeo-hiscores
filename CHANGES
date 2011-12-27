@@ -1,3 +1,7 @@
+1.4.8
+- bug fix: Unlocked titles duplication
+- bug fix: Unplayed games ordered by name
+
 1.4.7
 - feature: Add google analytics tracker
 
