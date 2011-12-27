@@ -25,53 +25,30 @@ import java.util.List;
 import org.junit.Test;
 
 import com.anzymus.neogeo.hiscores.domain.Player;
-import com.anzymus.neogeo.hiscores.domain.Title;
-import com.anzymus.neogeo.hiscores.success.DummyStrategy;
 
 public class PlayerServiceIT extends AbstractTest {
 
-    @Test
-    public void should_store_player() {
-        Player player = new Player("fullname");
-        player = playerService.store(player);
-        assertNotNull(player.getId());
-    }
+	@Test
+	public void should_store_player() {
+		Player player = new Player("fullname");
+		player = playerService.store(player);
+		assertNotNull(player.getId());
+	}
 
-    @Test
-    public void should_find_player() {
-        Player player = new Player("find_player");
-        player = playerService.store(player);
+	@Test
+	public void should_find_player() {
+		Player player = new Player("find_player");
+		player = playerService.store(player);
 
-        Player foundPlayer = playerService.findByFullname(player.getFullname());
-        assertNotNull(foundPlayer);
-    }
+		Player foundPlayer = playerService.findByFullname(player.getFullname());
+		assertNotNull(foundPlayer);
+	}
 
-    @Test
-    public void should_add_new_title() {
-        Player player = new Player("fullname_should_add_new_title");
-        player = playerService.store(player);
+	@Test
+	public void should_get_number_of_players() {
+		List<Player> players = playerService.findAll();
+		assertFalse(players.isEmpty());
+		assertEquals(players.size(), playerService.getNumberOfPlayers());
+	}
 
-        Title title = createTitle();
-
-        playerService.unlockTitle(player, title);
-
-        Player storedPlayer = playerService.findByFullname(player.getFullname());
-        assertEquals(1, storedPlayer.getUnlockedTitles().size());
-    }
-
-    @Test
-    public void should_get_number_of_players() {
-        List<Player> players = playerService.findAll();
-        assertFalse(players.isEmpty());
-        assertEquals(players.size(), playerService.getNumberOfPlayers());
-    }
-
-    private Title createTitle() {
-        Title title = new Title();
-        title.setClassname(DummyStrategy.class.getName());
-        title.setLabel("dummy strategy");
-        title.setDescription("is always unlocked");
-        title.setId(1L);
-        return title;
-    }
 }

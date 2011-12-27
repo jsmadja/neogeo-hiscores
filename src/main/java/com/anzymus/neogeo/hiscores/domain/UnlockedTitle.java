@@ -16,6 +16,8 @@
 
 package com.anzymus.neogeo.hiscores.domain;
 
+import static com.google.common.base.Objects.equal;
+
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -27,6 +29,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.google.common.base.Objects;
+
 @Entity
 @Table(name = "UNLOCKED_TITLE")
 @NamedQueries({//
@@ -34,57 +38,71 @@ import javax.persistence.TemporalType;
 })
 public class UnlockedTitle {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+	@Id
+	@GeneratedValue
+	private Long id;
 
-    private Player player;
+	private Player player;
 
-    private Title title;
+	private Title title;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date unlockDate;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date unlockDate;
 
-    public UnlockedTitle() {
+	public UnlockedTitle() {
 
-    }
+	}
 
-    public UnlockedTitle(Player player, Title title) {
-        this.player = player;
-        this.title = title;
-        this.unlockDate = new Date();
-    }
+	public UnlockedTitle(Player player, Title title) {
+		this.player = player;
+		this.title = title;
+		this.unlockDate = new Date();
+	}
 
-    public Long getId() {
-        return id;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof UnlockedTitle) {
+			UnlockedTitle u = (UnlockedTitle) obj;
+			return equal(player, u.player) && equal(title, u.title);
+		}
+		return false;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(player, title);
+	}
 
-    public Player getPlayer() {
-        return player;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Title getTitle() {
-        return title;
-    }
+	public Player getPlayer() {
+		return player;
+	}
 
-    public void setTitle(Title title) {
-        this.title = title;
-    }
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
 
-    public Date getUnlockDate() {
-        return unlockDate;
-    }
+	public Title getTitle() {
+		return title;
+	}
 
-    public void setUnlockDate(Date unlockDate) {
-        this.unlockDate = unlockDate;
-    }
+	public void setTitle(Title title) {
+		this.title = title;
+	}
+
+	public Date getUnlockDate() {
+		return unlockDate;
+	}
+
+	public void setUnlockDate(Date unlockDate) {
+		this.unlockDate = unlockDate;
+	}
 
 }

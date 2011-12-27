@@ -18,10 +18,13 @@ package com.anzymus.neogeo.hiscores.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -34,51 +37,56 @@ import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
 import com.google.common.annotations.VisibleForTesting;
 
 @Stateless
+@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public class TitleUnlockingService {
 
-    @EJB
-    TitleService titleService;
+	@EJB
+	TitleService titleService;
 
-    @EJB
-    PlayerService playerService;
+	@EJB
+	PlayerService playerService;
 
-    @VisibleForTesting
-    Map<Title, TitleUnlockingStrategy> strategiesByTitle;
+	@VisibleForTesting
+	Map<Title, TitleUnlockingStrategy> strategiesByTitle;
 
-    @PersistenceContext
-    EntityManager em;
+	@PersistenceContext
+	EntityManager em;
 
-    private static final int MAX_UNLOCKED_TITLES_TO_RETURN = 10;
+	private static final int MAX_UNLOCKED_TITLES_TO_RETURN = 10;
 
-    @PostConstruct
-    public void init() {
-        strategiesByTitle = titleService.findAllStrategies();
-    }
+	@PostConstruct
+	public void init() {
+		strategiesByTitle = titleService.findAllStrategies();
+	}
 
-    public void searchUnlockedTitlesFor(Player player) {
-        strategiesByTitle = titleService.findAllStrategies();
-        for (Title title : strategiesByTitle.keySet()) {
-            TitleUnlockingStrategy strategy = strategiesByTitle.get(title);
-            if (isUnlockable(player, title, strategy)) {
-                playerService.unlockTitle(player, title);
-            }
-        }
-    }
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void searchUnlockedTitlesFor(Player player) {
+		strategiesByTitle = titleService.findAllStrategies();
+		for (Title title : strategiesByTitle.keySet()) {
+			TitleUnlockingStrategy strategy = strategiesByTitle.get(title);
+			if (isUnlockable(player, title, strategy)) {
+				Set<UnlockedTitle> unlockedTitles = player.getUnlockedTitles();
+				UnlockedTitle unlockedTitle = new UnlockedTitle(player, title);
+				unlockedTitles.add(unlockedTitle);
+			}
+		}
+		playerService.store(player);
+	}
 
-    private boolean isUnlockable(Player player, Title title, TitleUnlockingStrategy strategy) {
-        return player.hasNotUnlocked(title) && strategy.isUnlocked(player);
-    }
+	private boolean isUnlockable(Player player, Title title, TitleUnlockingStrategy strategy) {
+		return player.hasNotUnlocked(title) && strategy.isUnlocked(player);
+	}
 
-    public List<UnlockedTitle> findLastUnlockedTitlesOrderByDateDesc() {
-        TypedQuery<UnlockedTitle> query = em.createNamedQuery("findLastUnlockedTitlesOrderByDateDesc",
-                UnlockedTitle.class);
-        query.setMaxResults(MAX_UNLOCKED_TITLES_TO_RETURN);
-        return query.getResultList();
-    }
+	public List<UnlockedTitle> findLastUnlockedTitlesOrderByDateDesc() {
+		TypedQuery<UnlockedTitle> query = em.createNamedQuery("findLastUnlockedTitlesOrderByDateDesc",
+				UnlockedTitle.class);
+		query.setMaxResults(MAX_UNLOCKED_TITLES_TO_RETURN);
+		return query.getResultList();
+	}
 
-    public List<Player> findPlayersOrderByNumUnlockedTitles() {
-        String sql = "SELECT p.* FROM UNLOCKED_TITLE ut, PLAYER p WHERE ut.player_id = p.id GROUP BY ut.player_id ORDER BY COUNT(ut.id) DESC";
-        Query query = em.createNativeQuery(sql, Player.class);
-        return query.getResultList();
-    }
+	public List<Player> findPlayersOrderByNumUnlockedTitles() {
+		String sql = "SELECT p.* FROM UNLOCKED_TITLE ut, PLAYER p WHERE ut.player_id = p.id GROUP BY ut.player_id ORDER BY COUNT(ut.id) DESC";
+		Query query = em.createNativeQuery(sql, Player.class);
+		return query.getResultList();
+	}
 }

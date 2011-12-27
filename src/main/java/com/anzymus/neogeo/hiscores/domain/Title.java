@@ -34,107 +34,108 @@ import com.google.common.base.Objects;
 @Entity
 @Table(name = "TITLE")
 @NamedQueries({ //
-        @NamedQuery(name = "getNumAllClearsByPlayer", query = "SELECT DISTINCT s.game FROM Score s WHERE s.player = :player AND s.allClear = true AND s.level LIKE 'MVS'"),
-        @NamedQuery(name = "hasScoreInGame", query = "SELECT COUNT(s) FROM Score s WHERE s.player = :player AND s.game.name = :game"),
-        @NamedQuery(name = "getNumScoresByPlayer", query = "SELECT COUNT(s) FROM Score s WHERE s.player = :player"),
-        @NamedQuery(name = "findAllStrategies", query = "SELECT t FROM Title t") //
+		@NamedQuery(name = "getNumAllClearsByPlayer", query = "SELECT DISTINCT s.game FROM Score s WHERE s.player = :player AND s.allClear = true AND s.level LIKE 'MVS'"),
+		@NamedQuery(name = "hasScoreInGame", query = "SELECT COUNT(s) FROM Score s WHERE s.player = :player AND s.game.name = :game"),
+		@NamedQuery(name = "getNumScoresByPlayer", query = "SELECT COUNT(s) FROM Score s WHERE s.player = :player"),
+		@NamedQuery(name = "findAllStrategies", query = "SELECT t FROM Title t") //
 })
 public class Title implements Serializable, Comparable<Title> {
 
-    private static final long serialVersionUID = -4525267232614553107L;
+	private static final long serialVersionUID = -4525267232614553107L;
 
-    @Id
-    @GeneratedValue
-    private Long id;
+	@Id
+	@GeneratedValue
+	private Long id;
 
-    private Long position;
+	private Long position;
 
-    private String label;
+	private String label;
 
-    private String description;
+	private String description;
 
-    private String classname;
+	private String classname;
 
-    @OneToMany(mappedBy = "title", cascade = CascadeType.ALL)
-    private Set<UnlockedTitle> unlockedTitles = new HashSet<UnlockedTitle>();
+	@OneToMany(mappedBy = "title", cascade = CascadeType.ALL)
+	private Set<UnlockedTitle> unlockedTitles = new HashSet<UnlockedTitle>();
 
-    public String getLabel() {
-        return label;
-    }
+	public String getLabel() {
+		return label;
+	}
 
-    public void setLabel(String label) {
-        this.label = label;
-    }
+	public void setLabel(String label) {
+		this.label = label;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public String getClassname() {
-        return classname;
-    }
+	public String getClassname() {
+		return classname;
+	}
 
-    public void setClassname(String classname) {
-        this.classname = classname;
-    }
+	public void setClassname(String classname) {
+		this.classname = classname;
+	}
 
-    public Long getPosition() {
-        return position;
-    }
+	public Long getPosition() {
+		return position;
+	}
 
-    public void setPosition(Long position) {
-        this.position = position;
-    }
+	public void setPosition(Long position) {
+		this.position = position;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Set<UnlockedTitle> getUnlockedTitles() {
-        return unlockedTitles;
-    }
+	public Set<UnlockedTitle> getUnlockedTitles() {
+		return unlockedTitles;
+	}
 
-    public void setUnlockedTitles(Set<UnlockedTitle> unlockedTitles) {
-        this.unlockedTitles = unlockedTitles;
-    }
+	public void setUnlockedTitles(Set<UnlockedTitle> unlockedTitles) {
+		this.unlockedTitles = unlockedTitles;
+	}
 
-    @Override
-    public String toString() {
-        return Objects.toStringHelper(this) //
-                .add("label", label) //
-                .add("description", description) //
-                .add("classname", classname) //
-                .add("position", position) //
-                .toString();
-    }
+	@Override
+	public String toString() {
+		return Objects.toStringHelper(this) //
+				.add("id", id) //
+				.add("label", label) //
+				.add("description", description) //
+				.add("classname", classname) //
+				.add("position", position) //
+				.toString();
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Title) {
-            Title title = (Title) obj;
-            return Objects.equal(id, title.id);
-        }
-        return false;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Title) {
+			Title title = (Title) obj;
+			return Objects.equal(id, title.id);
+		}
+		return false;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(label, description);
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(label, description);
+	}
 
-    @Override
-    public int compareTo(Title t) {
-        if (position == null || t.position == null) {
-            return 0;
-        }
-        return position.compareTo(t.position);
-    }
+	@Override
+	public int compareTo(Title t) {
+		if (position == null || t.position == null) {
+			return 0;
+		}
+		return position.compareTo(t.position);
+	}
 }
