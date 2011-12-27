@@ -20,3 +20,5 @@ rm -rf src/main/webapp/WEB-INF/lib
 rm -rf src/main/webapp/WEB-INF/classes
 rm -rf src/main/webapp/WEB-INF/lib
 rm derby.log
+rm pom.xml.*
+rm release.properties
