@@ -43,126 +43,126 @@ import com.google.common.collect.Lists;
 
 public class StatsBeanTest {
 
-    @InjectMocks
-    StatsBean statsBean;
+	@InjectMocks
+	StatsBean statsBean;
 
-    @Mock
-    PlayerService playerService;
+	@Mock
+	PlayerService playerService;
 
-    @Mock
-    TitleUnlockingService titleUnlockingService;
+	@Mock
+	TitleUnlockingService titleUnlockingService;
 
-    @Mock
-    ScoreService scoreService;
+	@Mock
+	ScoreService scoreService;
 
-    @Mock
-    GameService gameService;
+	@Mock
+	GameService gameService;
 
-    @Before
-    public void init() {
-        statsBean = new StatsBean();
-        MockitoAnnotations.initMocks(this);
-    }
+	@Before
+	public void init() {
+		statsBean = new StatsBean();
+		MockitoAnnotations.initMocks(this);
+	}
 
-    @Test
-    public void should_return_number_of_players() {
-        when(playerService.getNumberOfPlayers()).thenReturn(5L);
+	@Test
+	public void should_return_number_of_players() {
+		when(playerService.getNumberOfPlayers()).thenReturn(5L);
 
-        long numberOfPlayers = statsBean.getNumberOfPlayers();
+		long numberOfPlayers = statsBean.getNumberOfPlayers();
 
-        assertEquals(5, numberOfPlayers);
-    }
+		assertEquals(5, numberOfPlayers);
+	}
 
-    @Test
-    public void should_return_best_title_unlockers() {
-        Set<UnlockedTitle> unlockedTitles = new HashSet<UnlockedTitle>();
-        unlockedTitles.add(new UnlockedTitle());
-        unlockedTitles.add(new UnlockedTitle());
-        assertEquals(2, unlockedTitles.size());
+	@Test
+	public void should_return_best_title_unlockers() {
+		Set<UnlockedTitle> unlockedTitles = new HashSet<UnlockedTitle>();
+		unlockedTitles.add(new UnlockedTitle(new Player("a"), null));
+		unlockedTitles.add(new UnlockedTitle(new Player("b"), null));
+		assertEquals(2, unlockedTitles.size());
 
-        List<Player> bestTitleUnlockers = new ArrayList<Player>();
-        Player p = new Player("player");
-        p.setUnlockedTitles(unlockedTitles);
-        bestTitleUnlockers.add(p);
+		List<Player> bestTitleUnlockers = new ArrayList<Player>();
+		Player p = new Player("player");
+		p.setUnlockedTitles(unlockedTitles);
+		bestTitleUnlockers.add(p);
 
-        when(titleUnlockingService.findPlayersOrderByNumUnlockedTitles()).thenReturn(bestTitleUnlockers);
+		when(titleUnlockingService.findPlayersOrderByNumUnlockedTitles()).thenReturn(bestTitleUnlockers);
 
-        Player player = statsBean.getBestTitleUnlockers().get(0);
+		Player player = statsBean.getBestTitleUnlockers().get(0);
 
-        assertEquals("player", player.getFullname());
-        assertEquals(2, player.getUnlockedTitles().size());
-    }
+		assertEquals("player", player.getFullname());
+		assertEquals(2, player.getUnlockedTitles().size());
+	}
 
-    @Test
-    public void should_return_best_scorers() {
-        Player player1 = new Player("player");
+	@Test
+	public void should_return_best_scorers() {
+		Player player1 = new Player("player");
 
-        List<Player> playersOrderByNumberScores = new ArrayList<Player>();
-        playersOrderByNumberScores.add(player1);
+		List<Player> playersOrderByNumberScores = new ArrayList<Player>();
+		playersOrderByNumberScores.add(player1);
 
-        Scores scores = new Scores();
-        Game game1 = new Game("name1");
-        Game game2 = new Game("name2");
+		Scores scores = new Scores();
+		Game game1 = new Game("name1");
+		Game game2 = new Game("name2");
 
-        scores.add(new Score("123", player1, "MVS", game1, "http://"));
-        scores.add(new Score("456", player1, "MVS", game2, "http://"));
+		scores.add(new Score("123", player1, "MVS", game1, "http://"));
+		scores.add(new Score("456", player1, "MVS", game2, "http://"));
 
-        when(scoreService.findAllByPlayer(player1)).thenReturn(scores);
-        when(scoreService.findPlayersOrderByNumScores()).thenReturn(playersOrderByNumberScores);
+		when(scoreService.findAllByPlayer(player1)).thenReturn(scores);
+		when(scoreService.findPlayersOrderByNumScores()).thenReturn(playersOrderByNumberScores);
 
-        List<Player> bestScorers = statsBean.getBestScorers();
+		List<Player> bestScorers = statsBean.getBestScorers();
 
-        Player player = bestScorers.get(0);
+		Player player = bestScorers.get(0);
 
-        assertEquals("player", player.getFullname());
-        assertEquals(2, player.getContribution());
-    }
+		assertEquals("player", player.getFullname());
+		assertEquals(2, player.getContribution());
+	}
 
-    @Test
-    public void should_return_the_most_played_game() {
-        Game game1 = new Game("name1");
-        Game game2 = new Game("name2");
+	@Test
+	public void should_return_the_most_played_game() {
+		Game game1 = new Game("name1");
+		Game game2 = new Game("name2");
 
-        List<Game> games = Lists.newArrayList();
-        games.add(game1);
-        games.add(game2);
+		List<Game> games = Lists.newArrayList();
+		games.add(game1);
+		games.add(game2);
 
-        Scores scoresGame1 = new Scores();
-        Scores scoresGame2 = new Scores();
+		Scores scoresGame1 = new Scores();
+		Scores scoresGame2 = new Scores();
 
-        Player player1 = new Player("player1");
-        Player player2 = new Player("player2");
+		Player player1 = new Player("player1");
+		Player player2 = new Player("player2");
 
-        scoresGame1.add(new Score("123", player1, "MVS", game1, "http://"));
-        scoresGame1.add(new Score("123", player2, "MVS", game1, "http://"));
-        scoresGame2.add(new Score("456", player1, "MVS", game2, "http://"));
+		scoresGame1.add(new Score("123", player1, "MVS", game1, "http://"));
+		scoresGame1.add(new Score("123", player2, "MVS", game1, "http://"));
+		scoresGame2.add(new Score("456", player1, "MVS", game2, "http://"));
 
-        when(scoreService.findAllByGame(game1)).thenReturn(scoresGame1);
-        when(scoreService.findAllByGame(game2)).thenReturn(scoresGame2);
+		when(scoreService.findAllByGame(game1)).thenReturn(scoresGame1);
+		when(scoreService.findAllByGame(game2)).thenReturn(scoresGame2);
 
-        when(scoreService.findGamesOrderByNumScores()).thenReturn(games);
+		when(scoreService.findGamesOrderByNumScores()).thenReturn(games);
 
-        Game mostPlayedGame = statsBean.getMostPlayedGames().get(0);
+		Game mostPlayedGame = statsBean.getMostPlayedGames().get(0);
 
-        assertEquals(game1, mostPlayedGame);
-    }
+		assertEquals(game1, mostPlayedGame);
+	}
 
-    @Test
-    public void should_return_number_of_played_games() {
-        when(scoreService.getNumberOfPlayedGames()).thenReturn(10L);
+	@Test
+	public void should_return_number_of_played_games() {
+		when(scoreService.getNumberOfPlayedGames()).thenReturn(10L);
 
-        long numberOfPlayedGames = statsBean.getNumberOfPlayedGames();
+		long numberOfPlayedGames = statsBean.getNumberOfPlayedGames();
 
-        assertEquals(10L, numberOfPlayedGames);
-    }
+		assertEquals(10L, numberOfPlayedGames);
+	}
 
-    @Test
-    public void should_return_number_of_unplayed_games() {
-        when(scoreService.getNumberOfPlayedGames()).thenReturn(10L);
-        when(gameService.getNumberOfGames()).thenReturn(30L);
+	@Test
+	public void should_return_number_of_unplayed_games() {
+		when(scoreService.getNumberOfPlayedGames()).thenReturn(10L);
+		when(gameService.getNumberOfGames()).thenReturn(30L);
 
-        long numberOfUnplayedGames = statsBean.getNumberOfUnplayedGames();
+		long numberOfUnplayedGames = statsBean.getNumberOfUnplayedGames();
 
-        assertEquals(20L, numberOfUnplayedGames);
-    }
+		assertEquals(20L, numberOfUnplayedGames);
+	}
 }
