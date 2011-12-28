@@ -16,15 +16,19 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
+import static com.anzymus.neogeo.hiscores.common.IntegerToRank.getOrdinalFor;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+
 import com.anzymus.neogeo.hiscores.comparator.PlayerItemsSortedWithAverageComparator;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.service.halloffame.HallOfFameService;
@@ -32,76 +36,76 @@ import com.anzymus.neogeo.hiscores.service.halloffame.HallOfFameService;
 @ManagedBean
 public class HallOfFameBean {
 
-    @EJB
-    HallOfFameService hallOfFameService;
+	@EJB
+	HallOfFameService hallOfFameService;
 
-    @ManagedProperty(value = "#{param.level}")
-    private String level;
+	@ManagedProperty(value = "#{param.level}")
+	private String level;
 
-    private DecimalFormat format = new DecimalFormat("#0.##");
+	private DecimalFormat format = new DecimalFormat("#0.##");
 
-    private List<PlayerItem> playerItems;
+	private List<PlayerItem> playerItems;
 
-    private Comparator<PlayerItem> sortPlayerItemsWithAverageComparator = new PlayerItemsSortedWithAverageComparator();
+	private Comparator<PlayerItem> sortPlayerItemsWithAverageComparator = new PlayerItemsSortedWithAverageComparator();
 
-    @PostConstruct
-    public void init() {
-        if (level == null) {
-            level = "MVS";
-        }
-        List<Player> players = hallOfFameService.getPlayersOrderByRank(level);
-        playerItems = createPlayerItems(players);
-    }
+	@PostConstruct
+	public void init() {
+		if (level == null) {
+			level = "MVS";
+		}
+		List<Player> players = hallOfFameService.getPlayersOrderByRank(level);
+		playerItems = createPlayerItems(players);
+	}
 
-    public List<PlayerItem> getPlayers() {
-        return playerItems;
-    }
+	public List<PlayerItem> getPlayers() {
+		return playerItems;
+	}
 
-    private List<PlayerItem> createPlayerItems(List<Player> players) {
-        List<PlayerItem> items = new ArrayList<PlayerItem>();
-        String oldRank = null;
-        int oldPoints = 0;
-        for (int i = 0; i < players.size(); i++) {
-            Player player = players.get(i);
-            String rank = Integer.toString(i + 1);
-            int points = player.getPoints();
-            if (oldRank != null && oldPoints == points) {
-                rank = oldRank;
-                points = oldPoints;
-            }
-            PlayerItem playerItem = createPlayerItem(player, rank, points);
-            items.add(playerItem);
-            oldRank = rank;
-            oldPoints = points;
-        }
-        Collections.sort(items, sortPlayerItemsWithAverageComparator);
-        return items;
-    }
+	private List<PlayerItem> createPlayerItems(List<Player> players) {
+		List<PlayerItem> items = new ArrayList<PlayerItem>();
+		int oldRank = Integer.MIN_VALUE;
+		int oldPoints = 0;
+		for (int i = 0; i < players.size(); i++) {
+			Player player = players.get(i);
+			int rank = i + 1;
+			int points = player.getPoints();
+			if (oldRank != Integer.MIN_VALUE && oldPoints == points) {
+				rank = oldRank;
+				points = oldPoints;
+			}
+			PlayerItem playerItem = createPlayerItem(player, getOrdinalFor(rank), points);
+			items.add(playerItem);
+			oldRank = rank;
+			oldPoints = points;
+		}
+		Collections.sort(items, sortPlayerItemsWithAverageComparator);
+		return items;
+	}
 
-    private PlayerItem createPlayerItem(Player player, String rank, int points) {
-        PlayerItem playerItem = new PlayerItem();
-        playerItem.setRank(rank);
-        playerItem.setFullname(player.getFullname());
-        playerItem.setScore(points);
-        playerItem.setContribution(player.getContribution());
-        double average = 0;
-        if (player.getContribution() != 0) {
-            average = (double) points / (double) player.getContribution();
-        }
-        playerItem.setAverage(format.format(average));
-        return playerItem;
-    }
+	private PlayerItem createPlayerItem(Player player, String rank, int points) {
+		PlayerItem playerItem = new PlayerItem();
+		playerItem.setRank(rank);
+		playerItem.setFullname(player.getFullname());
+		playerItem.setScore(points);
+		playerItem.setContribution(player.getContribution());
+		double average = 0;
+		if (player.getContribution() != 0) {
+			average = (double) points / (double) player.getContribution();
+		}
+		playerItem.setAverage(format.format(average));
+		return playerItem;
+	}
 
-    public void setLevel(String level) {
-        this.level = level;
-    }
+	public void setLevel(String level) {
+		this.level = level;
+	}
 
-    public String getLevel() {
-        return level;
-    }
+	public String getLevel() {
+		return level;
+	}
 
-    public List<String> getLevels() {
-        return Levels.list();
-    }
+	public List<String> getLevels() {
+		return Levels.list();
+	}
 
 }

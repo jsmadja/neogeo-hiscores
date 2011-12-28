@@ -44,14 +44,6 @@
                 </td>
                 <td>
                     <table style="text-align: right; min-width:60%">
-                        <tr>
-                            <td></td>
-                            <td style="text-align: left">Games</td>
-                            <td>Score</td>
-                            <td>Rank</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
                         <c:forEach var="score" items="#{playerBean.scores}">
                             <tr>
                             	<td><h:outputText styleClass="button small red" value="Improve it!" rendered="${score.improvable}" /></td>
@@ -67,7 +59,7 @@
                                     </h:link>
                                 </td>
                                 <td>
-                                    <h:outputText value="${score.rankNumber}" />
+                                    <h:outputText value="${score.rank}" />
                                 </td>
                                 <td>
                                     <h:outputText value="+" styleClass="positive-gap" rendered="${fn:length(score.positiveGap) > 0}" />

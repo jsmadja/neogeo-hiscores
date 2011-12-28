@@ -16,58 +16,62 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
+import static com.anzymus.neogeo.hiscores.common.IntegerToRank.getOrdinalFor;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.service.halloffame.HallOfOneCreditService;
 
 @ManagedBean
 public class HallOfOneCreditBean {
 
-    @EJB
-    HallOfOneCreditService hallOfOneCreditService;
+	@EJB
+	HallOfOneCreditService hallOfOneCreditService;
 
-    private List<PlayerItem> playerItems;
+	private List<PlayerItem> playerItems;
 
-    @PostConstruct
-    public void init() {
-        List<Player> players = hallOfOneCreditService.getPlayersOrderByAllClearCount();
-        playerItems = createPlayerItems(players);
-    }
+	@PostConstruct
+	public void init() {
+		List<Player> players = hallOfOneCreditService.getPlayersOrderByAllClearCount();
+		playerItems = createPlayerItems(players);
+	}
 
-    public List<PlayerItem> getPlayers() {
-        return playerItems;
-    }
+	public List<PlayerItem> getPlayers() {
+		return playerItems;
+	}
 
-    private List<PlayerItem> createPlayerItems(List<Player> players) {
-        List<PlayerItem> items = new ArrayList<PlayerItem>();
-        String oldRank = null;
-        int oldPoints = 0;
-        for (int i = 0; i < players.size(); i++) {
-            Player player = players.get(i);
-            String rank = Integer.toString(i + 1);
-            int points = player.getPoints();
-            if (oldRank != null && oldPoints == points) {
-                rank = oldRank;
-                points = oldPoints;
-            }
-            PlayerItem playerItem = createPlayerItem(player, rank, points);
-            items.add(playerItem);
-            oldRank = rank;
-            oldPoints = points;
-        }
-        return items;
-    }
+	private List<PlayerItem> createPlayerItems(List<Player> players) {
+		List<PlayerItem> items = new ArrayList<PlayerItem>();
+		int oldRank = Integer.MIN_VALUE;
+		int oldPoints = 0;
+		for (int i = 0; i < players.size(); i++) {
+			Player player = players.get(i);
+			int rank = i + 1;
+			int points = player.getPoints();
+			if (oldRank != Integer.MIN_VALUE && oldPoints == points) {
+				rank = oldRank;
+				points = oldPoints;
+			}
+			PlayerItem playerItem = createPlayerItem(player, getOrdinalFor(rank), points);
+			items.add(playerItem);
+			oldRank = rank;
+			oldPoints = points;
+		}
+		return items;
+	}
 
-    private PlayerItem createPlayerItem(Player player, String rank, int points) {
-        PlayerItem playerItem = new PlayerItem();
-        playerItem.setRank(rank);
-        playerItem.setFullname(player.getFullname());
-        playerItem.setContribution(player.getContribution());
-        return playerItem;
-    }
+	private PlayerItem createPlayerItem(Player player, String rank, int points) {
+		PlayerItem playerItem = new PlayerItem();
+		playerItem.setRank(rank);
+		playerItem.setFullname(player.getFullname());
+		playerItem.setContribution(player.getContribution());
+		return playerItem;
+	}
 
 }

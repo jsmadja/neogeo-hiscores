@@ -25,13 +25,13 @@
                 xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="content_right">
         <h2>Hall of 1cc</h2>
-        <h:dataTable width="60%" id="playerTable" value="#{hallOfOneCreditBean.players}" var="player" style="text-align: right">
+        <h:dataTable width="40%" id="playerTable" value="#{hallOfOneCreditBean.players}" var="player" style="text-align: right">
             <h:column>
-                <f:facet name="header">Rank</f:facet>
+                <f:facet name="header"></f:facet>
                 <h:outputText value="${player.rank}" />
             </h:column>
             <h:column>
-                <f:facet name="header">Fullname</f:facet>
+                <f:facet name="header"></f:facet>
                 <h:link styleClass="player" outcome="playerOneCreditWall" value="${player.fullname}">
                     <f:param name="fullname" value="${player.fullname}"/>
                 </h:link>

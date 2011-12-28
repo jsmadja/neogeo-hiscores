@@ -16,6 +16,8 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
+import static com.anzymus.neogeo.hiscores.common.IntegerToRank.getOrdinalFor;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -46,6 +48,7 @@ public class Players {
 				Long scoreId = score.getId();
 				String scorePictureUrl = score.getPictureUrl();
 				ScoreItem scoreItem = createScoreItem(score, game, level, rank, value, scoreId, scorePictureUrl);
+				scoreItem.setRank(getOrdinalFor(rank));
 				scoreItem.setPositiveGap(computeGap(score, nextScore));
 				scoreItem.setNegativeGap(computeGap(score, previousScore));
 				scoreItems.add(scoreItem);

@@ -44,11 +44,6 @@
                 </td>
                 <td>
                     <table style="text-align: right; min-width:60%">
-                        <tr>
-                            <td style="text-align: left">Games</td>
-                            <td>Score</td>
-                            <td>Rank</td>
-                        </tr>
                         <c:forEach var="score" items="#{playerOneCreditBean.scoresOneCredit}">
                             <tr>
                                 <td style="text-align: left">
@@ -63,7 +58,7 @@
                                     </h:link>
                                 </td>
                                 <td>
-                                    <h:outputText value="${score.rankNumber}" />
+                                    <h:outputText value="${score.rank}" />
                                 </td>
                             </tr>
                         </c:forEach>

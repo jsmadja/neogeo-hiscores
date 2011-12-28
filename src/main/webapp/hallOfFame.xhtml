@@ -27,15 +27,13 @@
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
     <ui:define name="content_right">
         <h2>Hall of Fame</h2>
-        <br/>
-        <br/>
         <h:dataTable width="60%" id="playerTable" value="#{hallOfFameBean.players}" var="player" style="text-align: right">
             <h:column>
-                <f:facet name="header">Rank</f:facet>
+                <f:facet name="header"></f:facet>
                 <h:outputText value="${player.rank}" />
             </h:column>
             <h:column>
-                <f:facet name="header">Fullname</f:facet>
+                <f:facet name="header"></f:facet>
                 <h:link styleClass="player" outcome="player" value="${player.fullname}">
                     <f:param name="fullname" value="${player.fullname}"/>
                 </h:link>
