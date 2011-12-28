@@ -178,3 +178,7 @@ a:active, a:hover { color: orange; text-decoration: none; }
     color: rgb(118, 118, 118);
     text-decoration: underline;
 }
+
+.rules {
+	text-align: left;
+	font-size:10pt;
