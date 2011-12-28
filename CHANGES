@@ -1,3 +1,9 @@
+1.4.9
+- minor feature: Add rules page
+- minor feature: Add rank computation on all pages
+- minor feature: Only MVS level
+- minor feature: No limit to top ten anymore
+
 1.4.8
 - bug fix: Unlocked titles duplication
 - bug fix: Unplayed games ordered by name
