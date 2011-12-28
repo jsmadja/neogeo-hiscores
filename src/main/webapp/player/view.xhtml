@@ -47,7 +47,6 @@
                         <tr>
                             <td></td>
                             <td style="text-align: left">Games</td>
-                            <td>Level</td>
                             <td>Score</td>
                             <td>Rank</td>
                             <td></td>
@@ -60,9 +59,6 @@
                                     <h:link styleClass="game" outcome="game" value="${score.game.name}">
                                         <f:param name="id" value="${score.game.id}"/>
                                     </h:link>
-                                </td>
-                                <td>
-                                    <h:outputText value="${score.level}" />
                                 </td>
                                 <td>
                                     <h:link outcome="score/edit" styleClass="score" >

@@ -26,11 +26,7 @@
                 xmlns:emcomp="http://java.sun.com/jsf/composite/emcomp"
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
     <ui:define name="content_right">
-        <h2>Hall of Fame  - #{hallOfFameBean.level} </h2>
-        <h:outputText value="Change level: " />
-        <h:selectOneMenu id="level" onchange="document.location='hallOfFame.xhtml?level='+this.value" value="#{hallOfFameBean.level}" >
-            <f:selectItems var="level" value="${hallOfFameBean.levels}" />
-        </h:selectOneMenu>
+        <h2>Hall of Fame</h2>
         <br/>
         <br/>
         <h:dataTable width="60%" id="playerTable" value="#{hallOfFameBean.players}" var="player" style="text-align: right">
