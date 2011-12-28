@@ -16,14 +16,18 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
+import static com.anzymus.neogeo.hiscores.common.IntegerToRank.getOrdinalFor;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+
 import com.anzymus.neogeo.hiscores.comparator.ScoreSortedByValueDescComparator;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Score;
@@ -34,114 +38,105 @@ import com.anzymus.neogeo.hiscores.service.ScoreService;
 @ManagedBean
 public class GameBean {
 
-    @EJB
-    ScoreService scoreService;
+	private static final int MIN_SCORE_TO_SHOW = 10;
 
-    @EJB
-    GameService gameService;
+	@EJB
+	ScoreService scoreService;
 
-    @ManagedProperty(value = "#{param.id}")
-    private String id;
+	@EJB
+	GameService gameService;
 
-    private String name;
+	@ManagedProperty(value = "#{param.id}")
+	private String id;
 
-    private Scores scores;
+	private String name;
 
-    private Long postId;
+	private Scores scores;
 
-    private static final String[] RANKS = { "1st", "2nd", "3rd" };
+	private Long postId;
 
-    private static Comparator<Score> sortScoreByValueDesc = new ScoreSortedByValueDescComparator();
+	private static Comparator<Score> sortScoreByValueDesc = new ScoreSortedByValueDescComparator();
 
-    private List<LevelItem> levelItems = new ArrayList<LevelItem>();
+	private List<LevelItem> levelItems = new ArrayList<LevelItem>();
 
-    @PostConstruct
-    public void init() {
-        long gameId = Long.parseLong(id);
-        Game game = gameService.findById(gameId);
-        name = game.getName();
-        postId = game.getPostId();
-        scores = scoreService.findAllByGame(game);
-        loadLevelItems();
-    }
+	@PostConstruct
+	public void init() {
+		long gameId = Long.parseLong(id);
+		Game game = gameService.findById(gameId);
+		name = game.getName();
+		postId = game.getPostId();
+		scores = scoreService.findAllByGame(game);
+		loadLevelItems();
+	}
 
-    private void loadLevelItems() {
-        for (String level : Levels.list()) {
-            List<Score> scoreList = scores.getScoresByLevel(level);
-            if (!scoreList.isEmpty()) {
-                Collections.sort(scoreList, sortScoreByValueDesc);
-                List<ScoreItem> scoreItems = createScoreItems(scoreList);
-                LevelItem levelItem = new LevelItem(level);
-                levelItem.setScoreItems(scoreItems);
-                levelItems.add(levelItem);
-            }
-        }
-    }
+	private void loadLevelItems() {
+		for (String level : Levels.list()) {
+			List<Score> scoreList = scores.getScoresByLevel(level);
+			if (!scoreList.isEmpty()) {
+				Collections.sort(scoreList, sortScoreByValueDesc);
+				List<ScoreItem> scoreItems = createScoreItems(scoreList);
+				LevelItem levelItem = new LevelItem(level);
+				levelItem.setScoreItems(scoreItems);
+				levelItems.add(levelItem);
+			}
+		}
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public List<LevelItem> getLevels() {
-        return levelItems;
-    }
+	public List<LevelItem> getLevels() {
+		return levelItems;
+	}
 
-    private List<ScoreItem> createScoreItems(List<Score> scores) {
-        Score oldScore = null;
-        String oldRank = null;
-        List<ScoreItem> scoreItems = new ArrayList<ScoreItem>();
-        for (int i = 0; i < 10; i++) {
-            String rank;
-            ScoreItem scoreItem = new ScoreItem();
-            if (i < scores.size()) {
-                Score score = scores.get(i);
-                scoreItem.setValue(score.getValue());
-                scoreItem.setPlayer(score.getPlayer().getFullname());
-                scoreItem.setPictureUrl(score.getPictureUrl());
-                scoreItem.setId(score.getId());
-                scoreItem.setMessage(score.getMessage());
-                scoreItem.setStage(score.getStage());
-                scoreItem.setDate(score.getCreationDate());
-                scoreItem.setAllClear(score.getAllClear());
-                if (oldScore != null && oldScore.getValue().equals(score.getValue())) {
-                    rank = oldRank;
-                } else {
-                    rank = getRankByIdx(i);
-                }
-                oldScore = score;
-            } else {
-                scoreItem.setValue("");
-                scoreItem.setPlayer("");
-                oldScore = null;
-                rank = getRankByIdx(i);
-            }
-            scoreItem.setRank(rank);
-            scoreItems.add(scoreItem);
-            oldRank = rank;
-        }
-        return scoreItems;
-    }
+	private List<ScoreItem> createScoreItems(List<Score> scores) {
+		Score oldScore = null;
+		String oldRank = null;
+		List<ScoreItem> scoreItems = new ArrayList<ScoreItem>();
+		int numScoreToShow = scores.size() > MIN_SCORE_TO_SHOW ? scores.size() : MIN_SCORE_TO_SHOW;
+		for (int i = 0; i < numScoreToShow; i++) {
+			String rank;
+			ScoreItem scoreItem = new ScoreItem();
+			if (i < scores.size()) {
+				Score score = scores.get(i);
+				scoreItem.setValue(score.getValue());
+				scoreItem.setPlayer(score.getPlayer().getFullname());
+				scoreItem.setPictureUrl(score.getPictureUrl());
+				scoreItem.setId(score.getId());
+				scoreItem.setMessage(score.getMessage());
+				scoreItem.setStage(score.getStage());
+				scoreItem.setDate(score.getCreationDate());
+				scoreItem.setAllClear(score.getAllClear());
+				if (oldScore != null && oldScore.getValue().equals(score.getValue())) {
+					rank = oldRank;
+				} else {
+					rank = getOrdinalFor(i + 1);
+				}
+				oldScore = score;
+			} else {
+				scoreItem.setValue("");
+				scoreItem.setPlayer("");
+				oldScore = null;
+				rank = getOrdinalFor(i + 1);
+			}
+			scoreItem.setRank(rank);
+			scoreItems.add(scoreItem);
+			oldRank = rank;
+		}
+		return scoreItems;
+	}
 
-    private String getRankByIdx(int i) {
-        String rank;
-        if (i <= 2) {
-            rank = RANKS[i];
-        } else {
-            rank = (i + 1) + "th";
-        }
-        return rank;
-    }
-
-    public Long getPostId() {
-        return postId;
-    }
+	public Long getPostId() {
+		return postId;
+	}
 
 }
