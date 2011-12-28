@@ -16,6 +16,7 @@
 
 package com.anzymus.neogeo.hiscores.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -26,6 +27,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import org.joda.time.DateTime;
+
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 
@@ -33,67 +36,76 @@ import com.anzymus.neogeo.hiscores.domain.Player;
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public class GameService {
 
-    @PersistenceContext
-    EntityManager em;
+	@PersistenceContext
+	EntityManager em;
 
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Game store(Game game) {
-        Game storedGame;
-        if (game.getId() == null) {
-            em.persist(game);
-            storedGame = game;
-        } else {
-            storedGame = em.merge(game);
-        }
-        em.flush();
-        return storedGame;
-    }
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public Game store(Game game) {
+		Game storedGame;
+		if (game.getId() == null) {
+			em.persist(game);
+			storedGame = game;
+		} else {
+			storedGame = em.merge(game);
+		}
+		em.flush();
+		return storedGame;
+	}
 
-    public List<Game> findAll() {
-        TypedQuery<Game> query = em.createNamedQuery("game_findAll", Game.class);
-        return query.getResultList();
-    }
+	public List<Game> findAll() {
+		TypedQuery<Game> query = em.createNamedQuery("game_findAll", Game.class);
+		return query.getResultList();
+	}
 
-    public Game findByName(String gameName) {
-        TypedQuery<Game> query = em.createNamedQuery("game_findByName", Game.class);
-        query.setParameter("name", gameName);
-        return query.getSingleResult();
-    }
+	public Game findByName(String gameName) {
+		TypedQuery<Game> query = em.createNamedQuery("game_findByName", Game.class);
+		query.setParameter("name", gameName);
+		return query.getSingleResult();
+	}
 
-    public Game findById(long gameId) {
-        return em.find(Game.class, gameId);
-    }
+	public Game findById(long gameId) {
+		return em.find(Game.class, gameId);
+	}
 
-    public List<Game> findAllGamesPlayedBy(Player player) {
-        Query query = em.createNativeQuery(Game.findAllGamesPlayedBy, Game.class);
-        query = query.setParameter(1, player.getId());
-        return query.getResultList();
-    }
+	public List<Game> findAllGamesPlayedBy(Player player) {
+		Query query = em.createNativeQuery(Game.findAllGamesPlayedBy, Game.class);
+		query = query.setParameter(1, player.getId());
+		return query.getResultList();
+	}
 
-    public List<Game> findAllPlayedGames() {
-        Query query = em.createNativeQuery(Game.findAllPlayedGames, Game.class);
-        return query.getResultList();
-    }
+	public List<Game> findAllPlayedGames() {
+		Query query = em.createNativeQuery(Game.findAllPlayedGames, Game.class);
+		return query.getResultList();
+	}
 
-    public List<Object[]> findAllScoreCountForEachGames() {
-        Query query = em.createNativeQuery(Game.findAllScoreCountForEachGames);
-        return query.getResultList();
-    }
+	public List<Object[]> findAllScoreCountForEachGames() {
+		Query query = em.createNativeQuery(Game.findAllScoreCountForEachGames);
+		return query.getResultList();
+	}
 
-    public List<Game> findAllGamesOneCreditedBy(Player player) {
-        Query query = em.createNativeQuery(Game.findAllGamesOneCreditedBy, Game.class);
-        query = query.setParameter(1, player.getId());
-        return query.getResultList();
-    }
+	public List<Game> findAllGamesOneCreditedBy(Player player) {
+		Query query = em.createNativeQuery(Game.findAllGamesOneCreditedBy, Game.class);
+		query = query.setParameter(1, player.getId());
+		return query.getResultList();
+	}
 
-    public long getNumberOfGames() {
-        Query query = em.createNativeQuery(Game.getNumberOfGames);
-        return Queries.getCount(query);
-    }
+	public long getNumberOfGames() {
+		Query query = em.createNativeQuery(Game.getNumberOfGames);
+		return Queries.getCount(query);
+	}
 
-    public List<Game> findAllUnplayedGames() {
-        Query query = em.createNativeQuery(Game.findAllUnplayedGames, Game.class);
-        return query.getResultList();
-    }
+	public List<Game> findAllUnplayedGames() {
+		Query query = em.createNativeQuery(Game.findAllUnplayedGames, Game.class);
+		return query.getResultList();
+	}
+
+	public List<Game> findAllPlayedGamesThisMonth() {
+		Query query = em.createNativeQuery(Game.findAllPlayedGamesThisMonth, Game.class);
+		Date beginDate = new DateTime().withDayOfMonth(1).toDate();
+		Date endDate = new DateTime().withDayOfMonth(31).toDate();
+		query.setParameter(1, beginDate);
+		query.setParameter(2, endDate);
+		return query.getResultList();
+	}
 
 }

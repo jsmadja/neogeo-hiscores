@@ -77,6 +77,11 @@ a:active, a:hover { color: orange; text-decoration: none; }
     font-size:14pt;
 }
 
+.link_little {
+    color: #3399FF;
+    font-size:10pt;
+}
+
 .link_second_level {
     color: #3399FF;
     font-size:11pt;

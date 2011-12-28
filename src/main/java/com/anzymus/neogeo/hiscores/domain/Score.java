@@ -36,6 +36,7 @@ import com.google.common.base.Objects;
 @Table(name = "SCORE")
 @NamedQueries({
 		@NamedQuery(name = "score_findAllByGame", query = "SELECT s FROM Score s WHERE s.game = :game"),
+		@NamedQuery(name = "score_findAllByGameThisMonth", query = "SELECT s FROM Score s WHERE s.game = :game AND s.creationDate >= :beginDate AND s.creationDate <= :endDate"),
 		@NamedQuery(name = "score_findAllOneCreditScoresByGame", query = "SELECT s FROM Score s WHERE s.game = :game AND s.allClear = true"),
 		@NamedQuery(name = "score_findAllByPlayer", query = "SELECT s FROM Score s WHERE s.player = :player"),
 		@NamedQuery(name = "score_findAll", query = "SELECT s FROM Score s"),

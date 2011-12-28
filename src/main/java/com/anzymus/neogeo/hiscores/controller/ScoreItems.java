@@ -1,7 +1,9 @@
 package com.anzymus.neogeo.hiscores.controller;
 
+import static com.anzymus.neogeo.hiscores.common.IntegerToRank.getOrdinalFor;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.anzymus.neogeo.hiscores.domain.Score;
@@ -26,5 +28,42 @@ public class ScoreItems {
 		if (improvableScore != null) {
 			improvableScore.setImprovable(true);
 		}
+	}
+
+	public static List<ScoreItem> createScoreItems(List<Score> scores, int minScoresToShow) {
+		Score oldScore = null;
+		String oldRank = null;
+		List<ScoreItem> scoreItems = new ArrayList<ScoreItem>();
+		int numScoreToShow = scores.size() > minScoresToShow ? scores.size() : minScoresToShow;
+		for (int i = 0; i < numScoreToShow; i++) {
+			String rank;
+			ScoreItem scoreItem = new ScoreItem();
+			if (i < scores.size()) {
+				Score score = scores.get(i);
+				scoreItem.setValue(score.getValue());
+				scoreItem.setPlayer(score.getPlayer().getFullname());
+				scoreItem.setPictureUrl(score.getPictureUrl());
+				scoreItem.setId(score.getId());
+				scoreItem.setMessage(score.getMessage());
+				scoreItem.setStage(score.getStage());
+				scoreItem.setDate(score.getCreationDate());
+				scoreItem.setAllClear(score.getAllClear());
+				if (oldScore != null && oldScore.getValue().equals(score.getValue())) {
+					rank = oldRank;
+				} else {
+					rank = getOrdinalFor(i + 1);
+				}
+				oldScore = score;
+			} else {
+				scoreItem.setValue("");
+				scoreItem.setPlayer("");
+				oldScore = null;
+				rank = getOrdinalFor(i + 1);
+			}
+			scoreItem.setRank(rank);
+			scoreItems.add(scoreItem);
+			oldRank = rank;
+		}
+		return scoreItems;
 	}
 }

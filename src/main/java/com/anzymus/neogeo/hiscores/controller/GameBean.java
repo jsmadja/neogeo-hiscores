@@ -16,8 +16,6 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
-import static com.anzymus.neogeo.hiscores.common.IntegerToRank.getOrdinalFor;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -74,7 +72,7 @@ public class GameBean {
 			List<Score> scoreList = scores.getScoresByLevel(level);
 			if (!scoreList.isEmpty()) {
 				Collections.sort(scoreList, sortScoreByValueDesc);
-				List<ScoreItem> scoreItems = createScoreItems(scoreList);
+				List<ScoreItem> scoreItems = ScoreItems.createScoreItems(scoreList, MIN_SCORE_TO_SHOW);
 				LevelItem levelItem = new LevelItem(level);
 				levelItem.setScoreItems(scoreItems);
 				levelItems.add(levelItem);
@@ -96,43 +94,6 @@ public class GameBean {
 
 	public List<LevelItem> getLevels() {
 		return levelItems;
-	}
-
-	private List<ScoreItem> createScoreItems(List<Score> scores) {
-		Score oldScore = null;
-		String oldRank = null;
-		List<ScoreItem> scoreItems = new ArrayList<ScoreItem>();
-		int numScoreToShow = scores.size() > MIN_SCORE_TO_SHOW ? scores.size() : MIN_SCORE_TO_SHOW;
-		for (int i = 0; i < numScoreToShow; i++) {
-			String rank;
-			ScoreItem scoreItem = new ScoreItem();
-			if (i < scores.size()) {
-				Score score = scores.get(i);
-				scoreItem.setValue(score.getValue());
-				scoreItem.setPlayer(score.getPlayer().getFullname());
-				scoreItem.setPictureUrl(score.getPictureUrl());
-				scoreItem.setId(score.getId());
-				scoreItem.setMessage(score.getMessage());
-				scoreItem.setStage(score.getStage());
-				scoreItem.setDate(score.getCreationDate());
-				scoreItem.setAllClear(score.getAllClear());
-				if (oldScore != null && oldScore.getValue().equals(score.getValue())) {
-					rank = oldRank;
-				} else {
-					rank = getOrdinalFor(i + 1);
-				}
-				oldScore = score;
-			} else {
-				scoreItem.setValue("");
-				scoreItem.setPlayer("");
-				oldScore = null;
-				rank = getOrdinalFor(i + 1);
-			}
-			scoreItem.setRank(rank);
-			scoreItems.add(scoreItem);
-			oldRank = rank;
-		}
-		return scoreItems;
 	}
 
 	public Long getPostId() {

@@ -23,84 +23,91 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
 import com.anzymus.neogeo.hiscores.comparator.ScoreComparator;
+import com.anzymus.neogeo.hiscores.comparator.ScoreSortedByValueDescComparator;
 
 public class Scores implements Iterable<Score> {
 
-    private Set<Score> scores = new HashSet<Score>();
+	private Set<Score> scores = new HashSet<Score>();
 
-    public void add(Score score) {
-        String level = score.getLevel();
-        Player player = score.getPlayer();
-        Game game = score.getGame();
-        Score bestScore = getBestScoreFor(player, level, game);
-        if (bestScore == null) {
-            scores.add(score);
-        } else {
-            Score maxScore = ScoreComparator.max(score, bestScore);
-            scores.remove(bestScore);
-            scores.add(maxScore);
-        }
-    }
+	public void add(Score score) {
+		String level = score.getLevel();
+		Player player = score.getPlayer();
+		Game game = score.getGame();
+		Score bestScore = getBestScoreFor(player, level, game);
+		if (bestScore == null) {
+			scores.add(score);
+		} else {
+			Score maxScore = ScoreComparator.max(score, bestScore);
+			scores.remove(bestScore);
+			scores.add(maxScore);
+		}
+	}
 
-    private Score getBestScoreFor(Player player, String level, Game game) {
-        for (Score score : scores) {
-            if (score.getLevel().equals(level) && score.getPlayer().equals(player) && score.getGame().equals(game)) {
-                return score;
-            }
-        }
-        return null;
-    }
+	private Score getBestScoreFor(Player player, String level, Game game) {
+		for (Score score : scores) {
+			if (score.getLevel().equals(level) && score.getPlayer().equals(player) && score.getGame().equals(game)) {
+				return score;
+			}
+		}
+		return null;
+	}
 
-    public boolean contains(Score score) {
-        return scores.contains(score);
-    }
+	public boolean contains(Score score) {
+		return scores.contains(score);
+	}
 
-    public int count() {
-        return scores.size();
-    }
+	public int count() {
+		return scores.size();
+	}
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (Score score : scores) {
-            sb.append(score).append("\n");
-        }
-        return sb.toString();
-    }
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (Score score : scores) {
+			sb.append(score).append("\n");
+		}
+		return sb.toString();
+	}
 
-    @Override
-    public Iterator<Score> iterator() {
-        return scores.iterator();
-    }
+	@Override
+	public Iterator<Score> iterator() {
+		return scores.iterator();
+	}
 
-    public List<Score> sortByDateDesc() {
-        return asSortedList(comparatorByDateDesc);
-    }
+	public List<Score> sortByDateDesc() {
+		return asSortedList(comparatorByDateDesc);
+	}
 
-    private List<Score> asSortedList(Comparator<Score> comparator) {
-        List<Score> sortedScores = new ArrayList<Score>();
-        sortedScores.addAll(scores);
-        Collections.sort(sortedScores, comparator);
-        return sortedScores;
-    }
+	private List<Score> asSortedList(Comparator<Score> comparator) {
+		List<Score> sortedScores = new ArrayList<Score>();
+		sortedScores.addAll(scores);
+		Collections.sort(sortedScores, comparator);
+		return sortedScores;
+	}
 
-    private static Comparator<Score> comparatorByDateDesc = new Comparator<Score>() {
+	public List<Score> asSortedList() {
+		return asSortedList(comparatorByValueDesc);
+	}
 
-        @Override
-        public int compare(Score s1, Score s2) {
-            return s2.getCreationDate().compareTo(s1.getCreationDate());
-        }
-    };
+	private static Comparator<Score> comparatorByDateDesc = new Comparator<Score>() {
+		@Override
+		public int compare(Score s1, Score s2) {
+			return s2.getCreationDate().compareTo(s1.getCreationDate());
+		}
+	};
 
-    public List<Score> getScoresByLevel(String level) {
-        List<Score> scoresByLevel = new ArrayList<Score>();
-        for (Score score : scores) {
-            if (level.equals(score.getLevel())) {
-                scoresByLevel.add(score);
-            }
-        }
-        return scoresByLevel;
-    }
+	private static Comparator<Score> comparatorByValueDesc = new ScoreSortedByValueDescComparator();
+
+	public List<Score> getScoresByLevel(String level) {
+		List<Score> scoresByLevel = new ArrayList<Score>();
+		for (Score score : scores) {
+			if (level.equals(score.getLevel())) {
+				scoresByLevel.add(score);
+			}
+		}
+		return scoresByLevel;
+	}
 
 }

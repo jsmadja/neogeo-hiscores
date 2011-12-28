@@ -16,32 +16,53 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
+import java.util.List;
+
+import com.anzymus.neogeo.hiscores.domain.Game;
+
 public class GameItem {
 
-    private String name;
-    private long id;
-    private long count;
+	private String name;
+	private long id;
+	private long count;
+	private Game game;
+	private List<ScoreItem> scores;
 
-    public GameItem(String name, long id) {
-        this.name = name;
-        this.id = id;
-    }
+	public GameItem(String name, long id) {
+		this.name = name;
+		this.id = id;
+	}
 
-    GameItem(String name, long id, long count) {
-        this(name, id);
-        this.count = count;
-    }
+	GameItem(String name, long id, long count) {
+		this(name, id);
+		this.count = count;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public GameItem(Game game) {
+		this.game = game;
+	}
 
-    public long getId() {
-        return id;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public long getCount() {
-        return count;
-    }
+	public long getId() {
+		return id;
+	}
 
+	public long getCount() {
+		return count;
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public void setScores(List<ScoreItem> scores) {
+		this.scores = scores;
+	}
+
+	public List<ScoreItem> getScores() {
+		return scores;
+	}
 }
