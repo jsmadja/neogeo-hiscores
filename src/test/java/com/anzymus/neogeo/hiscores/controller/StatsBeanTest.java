@@ -140,7 +140,7 @@ public class StatsBeanTest {
 		when(scoreService.findAllByGame(game1)).thenReturn(scoresGame1);
 		when(scoreService.findAllByGame(game2)).thenReturn(scoresGame2);
 
-		when(scoreService.findGamesOrderByNumScores()).thenReturn(games);
+		when(scoreService.findGamesOrderByNumPlayers()).thenReturn(games);
 
 		Game mostPlayedGame = statsBean.getMostPlayedGames().get(0);
 

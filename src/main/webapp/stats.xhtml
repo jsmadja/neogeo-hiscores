@@ -49,7 +49,7 @@
                         <c:forEach var="game" items="${statsBean.mostPlayedGames}">
                             <h:link outcome="game" value="${game.name}" styleClass="link">
                                 <f:param name="id" value="${game.id}"/>
-                            </h:link> (${game.contribution})
+                            </h:link> (${game.contribution} players)
                         </c:forEach>
                     </li>
                     <li>

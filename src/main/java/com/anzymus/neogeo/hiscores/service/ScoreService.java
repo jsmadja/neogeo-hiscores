@@ -139,8 +139,8 @@ public class ScoreService {
 		return query.getResultList();
 	}
 
-	public List<Game> findGamesOrderByNumScores() {
-		String sql = "SELECT g.* FROM SCORE s, GAME g WHERE s.game_id = g.id GROUP BY s.game_id ORDER BY COUNT(s.id) DESC";
+	public List<Game> findGamesOrderByNumPlayers() {
+		String sql = "SELECT g.* FROM SCORE s, GAME g WHERE s.game_id = g.id GROUP BY s.game_id ORDER BY COUNT(DISTINCT s.player_id) DESC";
 		Query query = em.createNativeQuery(sql, Game.class);
 		return query.getResultList();
 	}

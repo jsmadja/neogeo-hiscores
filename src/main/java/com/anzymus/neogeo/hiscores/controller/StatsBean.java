@@ -90,7 +90,7 @@ public class StatsBean {
 
     public List<Game> getMostPlayedGames() {
         List<Game> mostPlayedGames = Lists.newArrayList();
-        List<Game> gamesOrderByNumScores = scoreService.findGamesOrderByNumScores();
+        List<Game> gamesOrderByNumScores = scoreService.findGamesOrderByNumPlayers();
         if (!gamesOrderByNumScores.isEmpty()) {
             Game game = gamesOrderByNumScores.get(0);
             Scores scores = scoreService.findAllByGame(game);

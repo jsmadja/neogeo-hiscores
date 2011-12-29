@@ -144,7 +144,7 @@ public class ScoreServiceIT extends AbstractTest {
             createScore(player, game);
         }
 
-        List<Game> gamesOrderByNumScores = scoreService.findGamesOrderByNumScores();
+        List<Game> gamesOrderByNumScores = scoreService.findGamesOrderByNumPlayers();
         Game firstGame = gamesOrderByNumScores.get(0);
 
         assertEquals(game, firstGame);
