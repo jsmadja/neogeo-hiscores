@@ -3,6 +3,7 @@
 - fix #5 Centrer les règles
 - fix #6 Traduire les règles
 - fix #8 ATTENTION: JSF1090
+- fix #9 INFO: Skipping call to libraryExists(). Please set context-param com.sun.faces.enableMissingResourceLibraryDetection to true to verify if library http://java.sun.com/jsf/composite/emcomp actually exists
 
 1.5.0
 - feature: add monthly contest page
