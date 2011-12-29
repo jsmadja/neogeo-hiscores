@@ -191,5 +191,7 @@ a:active, a:hover { color: orange; text-decoration: none; }
 }
 
 .rules {
-	text-align: left;
-	font-size:10pt;
+    text-align: left;
+    font-size:10pt;
+    max-width: 60%;
+}
