@@ -24,7 +24,6 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-                xmlns:emcomp="http://java.sun.com/jsf/composite/emcomp"
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
     <ui:define name="content_right">
         <h2>${playerBean.fullname}</h2>
@@ -32,21 +31,21 @@
             <tr style="vertical-align: top">
                 <td style="vertical-align: top">
                     <table>
-                    <c:forEach var="titleItem" items="#{playerBean.titles}">
-                        <tr>
-                            <td>
-                        <h:link styleClass="button small black" rendered="${!titleItem.unlocked}" outcome="player/view" ><img src="${contextPathStatic}/myimages/lock_title.gif" /><h:outputText value=" ${titleItem.title.label}" title="${titleItem.title.description}"  /></h:link>
-                        <h:link styleClass="button small blue" rendered="${titleItem.unlocked}" outcome="player/view" ><img src="${contextPathStatic}/myimages/unlocked_title.png" /><h:outputText value=" ${titleItem.title.label}" title="${titleItem.title.description}"  /></h:link>
-                            </td>
-                        </tr>
-                    </c:forEach>
+                        <c:forEach var="titleItem" items="#{playerBean.titles}">
+                            <tr>
+                                <td>
+                                    <h:outputLink styleClass="button small black" rendered="${!titleItem.unlocked}"><img src="${contextPathStatic}/myimages/lock_title.gif" /><h:outputText value=" ${titleItem.title.label}" title="${titleItem.title.description}"  /></h:outputLink>
+                                    <h:outputLink styleClass="button small blue" rendered="${titleItem.unlocked}"><img src="${contextPathStatic}/myimages/unlocked_title.png" /><h:outputText value=" ${titleItem.title.label}" title="${titleItem.title.description}"  /></h:outputLink>
+                                </td>
+                            </tr>
+                        </c:forEach>
                     </table>
                 </td>
                 <td>
                     <table style="text-align: right; min-width:60%">
                         <c:forEach var="score" items="#{playerBean.scores}">
                             <tr>
-                            	<td><h:outputText styleClass="button small red" value="Improve it!" rendered="${score.improvable}" /></td>
+                                <td><h:outputText styleClass="button small red" value="Improve it!" rendered="${score.improvable}" /></td>
                                 <td style="text-align: left">
                                     <h:link styleClass="game" outcome="game" value="${score.game.name}">
                                         <f:param name="id" value="${score.game.id}"/>
