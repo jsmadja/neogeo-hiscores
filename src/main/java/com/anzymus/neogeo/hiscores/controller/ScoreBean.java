@@ -105,13 +105,16 @@ public class ScoreBean {
 			game = gameService.findByName(DEFAULT_GAME);
 			currentGame = game.getId();
 		}
-		updateFormWithSelectedGame(game);
+		if (game != null) {
+			updateFormWithSelectedGame(game);
+		}
 	}
 
 	private Game initFromDatabase() throws NumberFormatException {
 		Score scoreFromDb = scoreService.findById(Integer.parseInt(id));
 		if (scoreFromDb == null) {
-			throw new IllegalStateException("Score with id : '" + id + "' not found in database");
+			LOG.warning("Score with id : '" + id + "' not found in database");
+			return null;
 		}
 		Game game = scoreFromDb.getGame();
 		fullname = scoreFromDb.getPlayer().getFullname();
