@@ -1,3 +1,6 @@
+1.5.2
+- fix #13 NPE in ScoreBean
+
 1.5.1
 - fix #4 Dans stats, on remarque que le jeu le plus joué est Blazing Star avec 22 hi-scores, alors que Metal Slug en a 23 des hi-scores.
 - fix #5 Centrer les règles
