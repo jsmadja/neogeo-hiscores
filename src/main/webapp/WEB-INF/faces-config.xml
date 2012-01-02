@@ -126,14 +126,14 @@
         <from-view-id>*</from-view-id> 
         <navigation-case> 
             <from-outcome>rules</from-outcome> 
-            <to-view-id>rules.xhtml</to-view-id> 
+            <to-view-id>/rules.xhtml</to-view-id> 
         </navigation-case> 
     </navigation-rule>
 	<navigation-rule> 
         <from-view-id>*</from-view-id> 
         <navigation-case> 
             <from-outcome>monthlyContest</from-outcome> 
-            <to-view-id>monthly-contest.xhtml</to-view-id> 
+            <to-view-id>/monthly-contest.xhtml</to-view-id> 
         </navigation-case> 
     </navigation-rule>
 
