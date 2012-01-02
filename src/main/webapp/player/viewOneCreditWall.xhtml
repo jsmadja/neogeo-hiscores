@@ -34,8 +34,8 @@
                     <c:forEach var="titleItem" items="#{playerBean.titles}">
                         <tr>
                             <td>
-                        <h:link styleClass="button small black" rendered="${!titleItem.unlocked}" outcome="player/view" ><img src="${contextPathStatic}/myimages/lock_title.gif" /><h:outputText value=" ${titleItem.title.label}" title="${titleItem.title.description}"  /></h:link>
-                        <h:link styleClass="button small blue" rendered="${titleItem.unlocked}" outcome="player/view" ><img src="${contextPathStatic}/myimages/unlocked_title.png" /><h:outputText value=" ${titleItem.title.label}" title="${titleItem.title.description}"  /></h:link>
+		                        <h:outputLink styleClass="button small black" rendered="${!titleItem.unlocked}" outcome="player/view" ><img src="${contextPathStatic}/myimages/lock_title.gif" /><h:outputText value=" ${titleItem.title.label}" title="${titleItem.title.description}"  /></h:outputLink>
+		                        <h:outputLink styleClass="button small blue" rendered="${titleItem.unlocked}" outcome="player/view" ><img src="${contextPathStatic}/myimages/unlocked_title.png" /><h:outputText value=" ${titleItem.title.label}" title="${titleItem.title.description}"  /></h:outputLink>
                             </td>
                         </tr>
                     </c:forEach>
