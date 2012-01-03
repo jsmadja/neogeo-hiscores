@@ -31,25 +31,25 @@ import com.anzymus.neogeo.hiscores.service.PlayerService;
 @Stateless
 public class HallOfOneCreditService {
 
-    @PersistenceContext
-    EntityManager em;
-    @EJB
-    PlayerService playerService;
+	@PersistenceContext
+	EntityManager em;
+	@EJB
+	PlayerService playerService;
 
-    private static final String ONE_CREDIT_QUERY = "SELECT s.PLAYER_ID, COUNT(s.PLAYER_ID) FROM SCORE s, PLAYER p WHERE s.ALL_CLEAR = 1 AND s.PLAYER_ID=p.ID GROUP BY PLAYER_ID ORDER BY COUNT(s.PLAYER_ID) DESC, p.FULLNAME ASC";
+	private static final String ONE_CREDIT_QUERY = "SELECT s.PLAYER_ID, COUNT(DISTINCT s.GAME_ID) FROM SCORE s, PLAYER p WHERE s.ALL_CLEAR = 1 AND s.PLAYER_ID=p.ID GROUP BY PLAYER_ID ORDER BY COUNT(DISTINCT s.GAME_ID) DESC, p.FULLNAME ASC";
 
-    public List<Player> getPlayersOrderByAllClearCount() {
-        List<Player> players = new ArrayList<Player>();
-        Query query = em.createNativeQuery(ONE_CREDIT_QUERY);
-        List<Object[]> results = query.getResultList();
-        for (Object[] result : results) {
-            Long playerId = (Long) result[0];
-            Long points = (Long) result[1];
-            Player player = playerService.findById(playerId);
-            player.setPoints(points.intValue());
-            player.setContribution(points.intValue());
-            players.add(player);
-        }
-        return players;
-    }
+	public List<Player> getPlayersOrderByAllClearCount() {
+		List<Player> players = new ArrayList<Player>();
+		Query query = em.createNativeQuery(ONE_CREDIT_QUERY);
+		List<Object[]> results = query.getResultList();
+		for (Object[] result : results) {
+			Long playerId = (Long) result[0];
+			Long points = (Long) result[1];
+			Player player = playerService.findById(playerId);
+			player.setPoints(points.intValue());
+			player.setContribution(points.intValue());
+			players.add(player);
+		}
+		return players;
+	}
 }

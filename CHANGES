@@ -1,3 +1,6 @@
+1.5.4
+- fix #15 Le nombre de 1cc dans le hall of 1cc est faux pour certains joueurs
+
 1.5.3
 - fix #14 [#|2011-12-31T12:36:38.394+0100|WARNING|glassfish3.0.1|javax.enterprise.resource.webcontainer.jsf.renderkit|_ThreadID=52;_ThreadName=Thread-1;|JSF1090 : Le cas de navigation n'est pas résolu pour le composant j_idt25.|#]
 - fix #12 JSF1058 : La ressource référencée par to-view-id, 'monthly-contest.xhtml', pour la navigation depuis '*', ne commence pas par ''/''. Ce caractère sera ajouté pour vous, mais l'erreur doit être corrigée
