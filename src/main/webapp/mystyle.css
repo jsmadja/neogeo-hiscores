@@ -96,6 +96,8 @@ a:active, a:hover { color: orange; text-decoration: none; }
 .title_neogeo {
     color: orange;
     font-size: 48pt;
+    font-family: Times New Roman;
+    font-weight: bold;
 }
 
 .title_hiscore {
