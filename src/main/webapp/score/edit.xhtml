@@ -57,7 +57,7 @@
                     <h:inputText id="score" value="#{scoreBean.score}" maxlength="10" size="10" required="true" />
 
                     <h:outputText value="Stage: " rendered="#{fn:length(scoreBean.customStageValues) == 0}" />
-                    <h:inputText id="stage" value="#{scoreBean.stage}" maxlength="10" size="10" required="true" rendered="#{fn:length(scoreBean.customStageValues) == 0}" />
+                    <h:inputText id="stage" value="#{scoreBean.stage}" maxlength="10" size="10" rendered="#{fn:length(scoreBean.customStageValues) == 0}" />
 
                     <h:outputText value="All Clear: " rendered="#{fn:length(scoreBean.customStageValues) == 0}" />
                     <h:selectBooleanCheckbox id="allClear" value="#{scoreBean.allClear}" rendered="#{fn:length(scoreBean.customStageValues) == 0}" style="margin-left:0" />
