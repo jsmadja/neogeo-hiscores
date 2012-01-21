@@ -113,7 +113,7 @@ public class ScoreBean {
 	private Game initFromDatabase() throws NumberFormatException {
 		Score scoreFromDb = scoreService.findById(Integer.parseInt(id));
 		if (scoreFromDb == null) {
-			LOG.warning("Score with id : '" + id + "' not found in database");
+			LOG.info("Score with id : '" + id + "' not found in database");
 			return null;
 		}
 		Game game = scoreFromDb.getGame();

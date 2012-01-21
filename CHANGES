@@ -1,3 +1,6 @@
+1.5.7
+- change some log levels
+
 1.5.6
 - cosmetic: change title font : Times New Roman
 - fix #16 Le stage doit etre optionnel
