@@ -74,7 +74,7 @@ public class PlayerBean {
 	public void init() {
 		player = playerService.findByFullname(fullname);
 		if (player == null) {
-			LOG.error("Can't find player : '" + fullname + "' in database");
+			LOG.info("Can't find player : '" + fullname + "' in database");
 		} else {
 			loadTitleItems();
 			loadScoreItems();
