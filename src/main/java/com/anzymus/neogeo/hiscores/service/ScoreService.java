@@ -53,8 +53,12 @@ public class ScoreService {
 	public Scores findAllByGameThisMonth(Game game) {
 		TypedQuery<Score> query = em.createNamedQuery("score_findAllByGameThisMonth", Score.class);
 		query.setParameter("game", game);
+                int lastDay = 31;
+                if(new DateTime().getMonthOfYear() == 2) {
+                    lastDay = 29;
+                }
 		Date beginDate = new DateTime().withDayOfMonth(1).toDate();
-		Date endDate = new DateTime().withDayOfMonth(31).toDate();
+		Date endDate = new DateTime().withDayOfMonth(lastDay).toDate();
 		query.setParameter("beginDate", beginDate);
 		query.setParameter("endDate", endDate);
 		return toScores(query.getResultList());
