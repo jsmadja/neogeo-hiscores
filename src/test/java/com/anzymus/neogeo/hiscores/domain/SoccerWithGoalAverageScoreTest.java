@@ -65,4 +65,30 @@ public class SoccerWithGoalAverageScoreTest {
 		assertEquals("4-3-8-6+2", iterator.next().getScore().getValue());
 	}
 
+	@Test
+	public void should_order_with_no_full_data() {
+		List<String> scoreList = new ArrayList<String>() {
+			{
+				add("0-0-0-0+6");
+				add("0-0-0-0+7");
+				add("0-0-0-0+8");
+				add("6-5-11-0+11");
+				add("6-5-13-2+11");
+				add("7-6-13-1+12");
+				add("7-6-7-1+6");
+				add("7-6-9-1+8");
+				add("7-6-9-2-7");
+			}
+		};
+
+		Set<SoccerWithGoalAverageScore> scores = new TreeSet<SoccerWithGoalAverageScore>();
+		for (String score : scoreList) {
+			scores.add(new SoccerWithGoalAverageScore(new Score(score)));
+		}
+
+		assertEquals(scoreList.size(), scores.size());
+
+		Iterator<SoccerWithGoalAverageScore> iterator = scores.iterator();
+		assertEquals("7-6-13-1+12", iterator.next().getScore().getValue());
+	}
 }

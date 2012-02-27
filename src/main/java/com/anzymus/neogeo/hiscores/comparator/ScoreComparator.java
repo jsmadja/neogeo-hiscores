@@ -19,73 +19,90 @@ package com.anzymus.neogeo.hiscores.comparator;
 import com.anzymus.neogeo.hiscores.domain.ChronoScore;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.SoccerScore;
+import com.anzymus.neogeo.hiscores.domain.SoccerWithGoalAverageScore;
 
 public class ScoreComparator {
 
-    public static Score max(Score score1, Score score2) {
-        try {
-            if (areSoccer(score1, score2)) {
-                return maxAsSoccer(score1, score2);
-            }
-            return maxAsInt(score1, score2);
-        } catch (Throwable t) {
-            return score1;
-        }
-    }
+	public static Score max(Score score1, Score score2) {
+		try {
+			if (areSoccer(score1, score2)) {
+				return maxAsSoccer(score1, score2);
+			}
+			if (areSoccerWithGoalAverage(score1, score2)) {
+				return maxAsSoccerWithGoalAverage(score1, score2);
+			}
+			return maxAsInt(score1, score2);
+		} catch (Throwable t) {
+			return score1;
+		}
+	}
 
-    private static Score maxAsSoccer(Score score1, Score score2) {
-        SoccerScore soccerScore1 = new SoccerScore(score1);
-        SoccerScore soccerScore2 = new SoccerScore(score2);
-        if (soccerScore1.compareTo(soccerScore2) > 0) {
-            return score1;
-        }
-        return score2;
-    }
+	private static Score maxAsSoccer(Score score1, Score score2) {
+		SoccerScore soccerScore1 = new SoccerScore(score1);
+		SoccerScore soccerScore2 = new SoccerScore(score2);
+		if (soccerScore1.compareTo(soccerScore2) > 0) {
+			return score1;
+		}
+		return score2;
+	}
 
-    private static boolean areSoccer(Score score1, Score score2) {
-        return score1.isSoccer() && score2.isSoccer();
-    }
+	private static Score maxAsSoccerWithGoalAverage(Score score1, Score score2) {
+		SoccerWithGoalAverageScore soccerScore1 = new SoccerWithGoalAverageScore(score1);
+		SoccerWithGoalAverageScore soccerScore2 = new SoccerWithGoalAverageScore(score2);
+		if (soccerScore1.compareTo(soccerScore2) < 0) {
+			return score1;
+		}
+		return score2;
+	}
 
-    private static Score maxAsInt(Score score1, Score score2) {
-        Integer score1asInt = Integer.parseInt(score1.getValue());
-        Integer score2asInt = Integer.parseInt(score2.getValue());
-        return score1asInt > score2asInt ? score1 : score2;
-    }
+	private static boolean areSoccer(Score score1, Score score2) {
+		return score1.isSoccer() && score2.isSoccer();
+	}
 
-    public static String gap(Score score1, Score score2) {
-        try {
-            if (areChrono(score1, score2)) {
-                return gapAsChrono(score1, score2);
-            }
-            if (areSoccer(score1, score2)) {
-                return gapAsSoccer(score1, score2);
-            }
-            return gapAsInt(score1, score2);
-        } catch (Throwable t) {
-            return "";
-        }
-    }
+	private static boolean areSoccerWithGoalAverage(Score score1, Score score2) {
+		return score1.isSoccerWithGoalAverage() && score2.isSoccerWithGoalAverage();
+	}
 
-    private static boolean areChrono(Score score1, Score score2) {
-        return score1.isChrono() && score2.isChrono();
-    }
+	private static Score maxAsInt(Score score1, Score score2) {
+		Integer score1asInt = Integer.parseInt(score1.getValue());
+		Integer score2asInt = Integer.parseInt(score2.getValue());
+		return score1asInt > score2asInt ? score1 : score2;
+	}
 
-    private static String gapAsChrono(Score score1, Score score2) {
-        ChronoScore chronoScore1 = new ChronoScore(score1);
-        ChronoScore chronoScore2 = new ChronoScore(score2);
-        return chronoScore1.gap(chronoScore2);
-    }
+	public static String gap(Score score1, Score score2) {
+		try {
+			if (areChrono(score1, score2)) {
+				return gapAsChrono(score1, score2);
+			}
+			if (areSoccer(score1, score2)) {
+				return gapAsSoccer(score1, score2);
+			}
+			return gapAsInt(score1, score2);
+		} catch (Throwable t) {
+			return "";
+		}
+	}
 
-    private static String gapAsSoccer(Score score1, Score score2) {
-        SoccerScore soccerScore1 = new SoccerScore(score1);
-        SoccerScore soccerScore2 = new SoccerScore(score2);
-        return soccerScore1.gap(soccerScore2);
-    }
+	private static boolean areChrono(Score score1, Score score2) {
+		return score1.isChrono() && score2.isChrono();
+	}
 
-    private static String gapAsInt(Score score1, Score score2) {
-        Integer score1asInt = Integer.parseInt(score1.getValue());
-        Integer score2asInt = Integer.parseInt(score2.getValue());
-        return Integer.toString(Math.abs(score1asInt - score2asInt));
-    }
+	private static String gapAsChrono(Score score1, Score score2) {
+		ChronoScore chronoScore1 = new ChronoScore(score1);
+		ChronoScore chronoScore2 = new ChronoScore(score2);
+		return chronoScore1.gap(chronoScore2);
+	}
+
+	private static String gapAsSoccer(Score score1, Score score2) {
+		SoccerScore soccerScore1 = new SoccerScore(score1);
+		SoccerScore soccerScore2 = new SoccerScore(score2);
+		return soccerScore1.gap(soccerScore2);
+	}
+
+	private static String gapAsInt(Score score1, Score score2) {
+		Integer score1asInt = Integer.parseInt(score1.getValue());
+		Integer score2asInt = Integer.parseInt(score2.getValue());
+		return Integer.toString(Math.abs(score1asInt - score2asInt));
+	}
 
 }
