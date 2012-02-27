@@ -83,6 +83,13 @@ public class ScoreComparatorTest {
 	}
 
 	@Test
+	public void should_return_max_of_two_scores_as_soccer_with_goal_average_and_0() {
+		Score score1 = new Score("7-5-2-2-3");
+		Score score2 = new Score("0-0-0-0-3");
+		assertEquals(score1, ScoreComparator.max(score1, score2));
+	}
+
+	@Test
 	public void should_find_gap_for_int() {
 		Score score1 = new Score("123");
 		Score score2 = new Score("345");

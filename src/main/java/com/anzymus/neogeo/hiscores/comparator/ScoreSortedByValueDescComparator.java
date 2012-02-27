@@ -17,57 +17,63 @@
 package com.anzymus.neogeo.hiscores.comparator;
 
 import java.util.Comparator;
+
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Score;
+import com.anzymus.neogeo.hiscores.domain.SoccerWithGoalAverageScore;
 
 public class ScoreSortedByValueDescComparator implements Comparator<Score> {
-    @Override
-    public int compare(Score s1, Score s2) {
-        Game game = s1.getGame();
-        String gameName = game.getName();
-        String value1 = s1.getValue();
-        String value2 = s2.getValue();
-        try {
-            int comparison = 0;
-            if (isNegativeScoreGame(gameName)) {
-                comparison = compareAsNegativeInt(value1, value2);
-            } else if (isChronoGame(gameName)) {
-                comparison = compareAsChrono(value1, value2);
-            } else {
-                comparison = compareAsInt(value1, value2);
-            }
+	@Override
+	public int compare(Score s1, Score s2) {
+		if (s1.isSoccerWithGoalAverage() && s2.isSoccerWithGoalAverage()) {
+			return new SoccerWithGoalAverageScore(s1).compareTo(new SoccerWithGoalAverageScore(s2));
+		}
 
-            if (comparison == 0) {
-                comparison = s1.getPlayer().getFullname().compareTo(s2.getPlayer().getFullname());
-            }
-            return comparison;
-        } catch (Throwable t) {
-            return value1.compareTo(value2);
-        }
-    }
+		Game game = s1.getGame();
+		String gameName = game.getName();
+		String value1 = s1.getValue();
+		String value2 = s2.getValue();
+		try {
+			int comparison = 0;
+			if (isNegativeScoreGame(gameName)) {
+				comparison = compareAsNegativeInt(value1, value2);
+			} else if (isChronoGame(gameName)) {
+				comparison = compareAsChrono(value1, value2);
+			} else {
+				comparison = compareAsInt(value1, value2);
+			}
 
-    private boolean isNegativeScoreGame(String gameName) {
-        return gameName.equals("Neo Turf Masters / Big Tournament Golf");
-    }
+			if (comparison == 0) {
+				comparison = s1.getPlayer().getFullname().compareTo(s2.getPlayer().getFullname());
+			}
+			return comparison;
+		} catch (Throwable t) {
+			return value1.compareTo(value2);
+		}
+	}
 
-    private boolean isChronoGame(String gameName) {
-        return gameName.equals("Thrash Rally") || gameName.equals("Neo Drift Out: New Technology")
-                || gameName.equals("Samurai Shodown IV: Amakusa's Revenge / Samurai Spirits: Amakusa Kourin");
-    }
+	private boolean isNegativeScoreGame(String gameName) {
+		return gameName.equals("Neo Turf Masters / Big Tournament Golf");
+	}
 
-    private int compareAsChrono(String value1, String value2) {
-        return value1.compareTo(value2);
-    }
+	private boolean isChronoGame(String gameName) {
+		return gameName.equals("Thrash Rally") || gameName.equals("Neo Drift Out: New Technology")
+				|| gameName.equals("Samurai Shodown IV: Amakusa's Revenge / Samurai Spirits: Amakusa Kourin");
+	}
 
-    private int compareAsInt(String value1, String value2) {
-        Integer score1 = Integer.parseInt(value1);
-        Integer score2 = Integer.parseInt(value2);
-        return score2.compareTo(score1);
-    }
+	private int compareAsChrono(String value1, String value2) {
+		return value1.compareTo(value2);
+	}
 
-    private int compareAsNegativeInt(String value1, String value2) {
-        value1 = value1.replaceAll("-", "");
-        value2 = value2.replaceAll("-", "");
-        return compareAsInt(value1, value2);
-    }
+	private int compareAsInt(String value1, String value2) {
+		Integer score1 = Integer.parseInt(value1);
+		Integer score2 = Integer.parseInt(value2);
+		return score2.compareTo(score1);
+	}
+
+	private int compareAsNegativeInt(String value1, String value2) {
+		value1 = value1.replaceAll("-", "");
+		value2 = value2.replaceAll("-", "");
+		return compareAsInt(value1, value2);
+	}
 }
