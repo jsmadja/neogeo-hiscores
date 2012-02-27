@@ -206,14 +206,14 @@ public class Score implements Serializable {
 	 */
 	private static final String SOCCER_PATTERN = "\\d+-\\d+-\\d+";
 
+	public boolean isSoccer() {
+		return value.matches(SOCCER_PATTERN);
+	}
+
 	/***
 	 * Chrono are like 12:55:50
 	 */
 	private static final String CHRONO_PATTERN = "\\d+:\\d+:\\d+";
-
-	public boolean isSoccer() {
-		return value.matches(SOCCER_PATTERN);
-	}
 
 	public boolean isChrono() {
 		return value.matches(CHRONO_PATTERN);
@@ -225,5 +225,14 @@ public class Score implements Serializable {
 
 	public boolean isImprovable() {
 		return game.isImprovable() && isClassicScore();
+	}
+
+	/***
+	 * Soccer with goal average are like : 6-13-2-1+3 or 6-4-5-6-7
+	 */
+	private static final String SOCCER_WITH_GOAL_AVERAGE_PATTERN = "\\d+-\\d+-\\d+-\\d+[-+]\\d+";
+
+	public boolean isSoccerWithGoalAverage() {
+		return value.matches(SOCCER_WITH_GOAL_AVERAGE_PATTERN);
 	}
 }

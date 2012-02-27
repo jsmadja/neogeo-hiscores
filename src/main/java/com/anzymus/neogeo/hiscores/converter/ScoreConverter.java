@@ -20,43 +20,44 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+
 import com.anzymus.neogeo.hiscores.domain.Score;
 
 @FacesConverter(value = "scoreConverter")
 public class ScoreConverter implements Converter {
 
-    @Override
-    public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+	@Override
+	public Object getAsObject(FacesContext context, UIComponent component, String value) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
 
-    @Override
-    public String getAsString(FacesContext context, UIComponent component, Object value) {
-        return getAsString(value.toString());
-    }
+	@Override
+	public String getAsString(FacesContext context, UIComponent component, Object value) {
+		return getAsString(value.toString());
+	}
 
-    private String addDots(String score) {
-        StringBuilder sb = new StringBuilder();
-        int chara = 0;
-        for (int i = score.length() - 1; i >= 0; i--) {
-            if (chara % 3 == 0 && chara != 0) {
-                sb.append(".");
-            }
-            sb.append(score.charAt(i));
-            chara++;
-        }
-        score = sb.reverse().toString();
-        return score;
-    }
+	private String addDots(String score) {
+		StringBuilder sb = new StringBuilder();
+		int chara = 0;
+		for (int i = score.length() - 1; i >= 0; i--) {
+			if (chara % 3 == 0 && chara != 0) {
+				sb.append(".");
+			}
+			sb.append(score.charAt(i));
+			chara++;
+		}
+		score = sb.reverse().toString();
+		return score;
+	}
 
-    public String getAsString(String scoreValue) {
-        Score score = new Score();
-        score.setValue(scoreValue);
+	public String getAsString(String scoreValue) {
+		Score score = new Score();
+		score.setValue(scoreValue);
 
-        if (!score.isChrono() && !score.isSoccer()) {
-            scoreValue = addDots(scoreValue);
-        }
-        return scoreValue;
-    }
+		if (!score.isChrono() && !score.isSoccer() && !score.isSoccerWithGoalAverage()) {
+			scoreValue = addDots(scoreValue);
+		}
+		return scoreValue;
+	}
 
 }

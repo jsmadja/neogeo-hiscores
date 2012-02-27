@@ -22,25 +22,6 @@ import org.junit.Test;
 
 public class SoccerScoreTest {
 
-	// score board example
-	// 7 7 11 3 8
-	// 7 6 13 1 12
-	// 7 6 8 5 3
-	// 6 6 15 8 7
-	// 6 5 10 11 -1
-	// 5 4 10 6 4
-	// 5 4 9 7 2
-	// 5 4 8 6 2
-	// 5 4 10 9 1
-	// 4 3 8 6 2
-
-	@Test
-	public void t() {
-		SoccerScore score1 = new SoccerScore(new Score("2-3-4"));
-		SoccerScore score2 = new SoccerScore(new Score("2-3-5"));
-		assertEquals(1, score1.compareTo(score2));
-	}
-
 	@Test
 	public void should_compare_two_equal_score() {
 		Score score = new Score("2-3-4");
