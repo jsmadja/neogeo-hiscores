@@ -21,7 +21,7 @@
 
     <groupId>com.anzymus.neogeo</groupId>
     <artifactId>hiscores</artifactId>
-    <version>1.5.11-SNAPSHOT</version>
+    <version>1.6.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>hiscores</name>
     <description>Hi-Scores management of Neo Geo games</description>
@@ -269,6 +269,11 @@
         	<groupId>joda-time</groupId>
         	<artifactId>joda-time</artifactId>
         	<version>2.0</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.apache.cassandra</groupId>
+        	<artifactId>cassandra-all</artifactId>
+        	<version>1.0.7</version>
         </dependency>
     </dependencies>
 
