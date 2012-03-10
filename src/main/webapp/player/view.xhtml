@@ -43,6 +43,15 @@
                 </td>
                 <td>
                     <table style="text-align: right; min-width:60%">
+                        <tr>
+                            <td></td>
+                            <td style="text-align: left">Games</td>
+                            <td>Level</td>
+                            <td>Score</td>
+                            <td>Rank</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
                         <c:forEach var="score" items="#{playerBean.scores}">
                             <tr>
                                 <td><h:outputText styleClass="button small red" value="Improve it!" rendered="${score.improvable}" /></td>
@@ -50,6 +59,9 @@
                                     <h:link styleClass="game" outcome="game" value="${score.game.name}">
                                         <f:param name="id" value="${score.game.id}"/>
                                     </h:link>
+                                </td>
+                                <td>
+                                    <h:outputText value="${score.level}" />
                                 </td>
                                 <td>
                                     <h:link outcome="score/edit" styleClass="score" >

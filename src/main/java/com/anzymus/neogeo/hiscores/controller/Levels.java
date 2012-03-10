@@ -16,14 +16,13 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
-import static java.util.Arrays.asList;
-
+import java.util.Arrays;
 import java.util.List;
 
 public class Levels {
 
-	public static List<String> list() {
-		return asList("MVS");
-	}
+    public static List<String> list() {
+        return Arrays.asList("MVS", "Very Easy", "Easy", "Normal", "Hard", "Very Hard", "Hardest", "Expert");
+    }
 
 }
