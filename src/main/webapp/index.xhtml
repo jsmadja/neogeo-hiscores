@@ -52,7 +52,7 @@
                                         <h:link styleClass="player" outcome="player" value="${item.unlockedTitle.player.fullname}">
                                             <f:param name="fullname" value="${item.unlockedTitle.player.fullname}"/>
                                         </h:link><br/>
-                                        unlocked the title <h:outputText value="${item.unlockedTitle.title.label}" styleClass="score" />
+                                        ${msgs.unlocked_the_title} <h:outputText value="${item.unlockedTitle.title.label}" styleClass="score" />
                                         <br/>
                                         <h:outputText value="${item.unlockedTitle.title.description}" style="font-size:10pt;font-style: italic"/>
                                         <br/>

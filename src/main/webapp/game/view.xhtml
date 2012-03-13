@@ -29,7 +29,7 @@
 
         <c:if test="#{gameBean.postId != 41930}">
             <span style="font-size: 10pt">
-                Click <a class="small_link" href="http://www.neogeofans.com/leforum/showthread.php?t=#{gameBean.postId}">here</a> to add your comments in the dedicated thread on Neo Geo Fans forum!
+                ${msgs.click} <a class="small_link" href="http://www.neogeofans.com/leforum/showthread.php?t=#{gameBean.postId}">${msgs.here}</a> ${msgs.to_add_your_comments}
             </span>
         </c:if>
 
@@ -38,8 +38,8 @@
 
             <table style="min-width: 50%;text-align: right">
                 <tr>
-                    <td>Rank</td>
-                    <td>Player</td>
+                    <td>${msgs.rank}</td>
+                    <td>${msgs.player}</td>
                     <td>Score</td>
                     <td>Stage</td>
                     <td>Date</td>

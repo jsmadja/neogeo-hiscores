@@ -61,28 +61,28 @@
                     <a href="${contextPathStatic}"> <img width="100px" style="border-style: none" src="${contextPathStatic}/myimages/logo.png" alt="logo" /> </a></td><td><span class="title_neogeo">NEO·GEO</span> <span class="title_hiscore">Hi-Scores</span>
                             </td></tr></table>
                     <p style="color: rgb(118, 118, 118); font-size: 14px;">
-                        <a class="link" href="${contextPathStatic}">Home</a> |
-                        <h:link styleClass="link" value="Add New Score" outcome="score/create" />
+                        <a class="link" href="${contextPathStatic}">${msgs.home}</a> |
+                        <h:link styleClass="link" value="${msgs.menu_add_score}" outcome="score/create" />
 								|
-                        <h:link styleClass="link" value="Games" outcome="games" />
+                        <h:link styleClass="link" value="${msgs.menu_games}" outcome="games" />
 								|
-                        <h:link styleClass="link" value="Rules" outcome="rules" />
+                        <h:link styleClass="link" value="${msgs.menu_rules}" outcome="rules" />
                     </p>
                     <p style="color: rgb(118, 118, 118); font-size: 14px;">
-                    	<h:link styleClass="link_second_level" value="Hall of Fame" outcome="hallOfFame">
+                    	<h:link styleClass="link_second_level" value="${msgs.menu_hall_of_fame}" outcome="hallOfFame">
                             <f:param name="level" value="MVS" />
                         </h:link>
 								|
-                        <h:link styleClass="link_second_level" value="Hall of 1cc" outcome="hallOf1cc" />
+                        <h:link styleClass="link_second_level" value="${msgs.menu_hall_of_1cc}" outcome="hallOf1cc" />
                         		|
-                        <h:link styleClass="link_second_level" value="Monthly Contest" outcome="monthlyContest" />
+                        <h:link styleClass="link_second_level" value="${msgs.menu_monthly_contest}" outcome="monthlyContest" />
                     </p>
                     <ui:insert name="content_right" />
                 </div>
             </div>
             <div id="footer">
-                <p style="color: rgb(118, 118, 118); font-size: 8pt;">Neo Geo Hi-Scores version ${msgs.version} | <h:link value="stats" outcome="stats" styleClass="footer_link" /> | <a class="footer_link" href="http://www.neogeofans.com/leforum/showthread.php?t=41884">report a bug</a> | <h:link styleClass="footer_link" value="credits" outcome="credits" />
-                 | ©2011</p>
+                <p style="color: rgb(118, 118, 118); font-size: 8pt;">Neo Geo Hi-Scores version ${msgs.version} | <h:link value="stats" outcome="stats" styleClass="footer_link" /> | <a class="footer_link" href="http://www.neogeofans.com/leforum/showthread.php?t=41884">${msgs.report_a_bug}</a> | <h:link styleClass="footer_link" value="credits" outcome="credits" />
+                 | ©2012</p>
                 <p><a href="http://www.twitter.com/neogeohiscores"><img src="http://twitter-badges.s3.amazonaws.com/twitter-c.png" alt="Follow neogeohiscores on Twitter"/></a> <a href="http://88.191.117.240/rss/timeline.xml" style="vertical-align: text-top;" ><img src="${contextPathStatic}/myimages/icon_rss.gif" alt="rss" /></a></p>
             </div>
         </center>

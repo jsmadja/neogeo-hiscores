@@ -17,48 +17,103 @@
 package com.anzymus.neogeo.hiscores.converter;
 
 import java.util.Date;
+import java.util.Locale;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @FacesConverter(value = "dateConverter")
 public class DateConverter implements Converter {
 
-    @Override
-    public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+	private static final Logger LOG = LoggerFactory.getLogger(DateConverter.class);
 
-    @Override
-    public String getAsString(FacesContext context, UIComponent component, Object value) {
-        Date date = (Date) value;
-        return toFormattedDate(date);
-    }
+	@Override
+	public Object getAsObject(FacesContext context, UIComponent component, String value) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
 
-    String toFormattedDate(Date date) {
-        long current = System.currentTimeMillis();
-        long event = date.getTime();
+	@Override
+	public String getAsString(FacesContext context, UIComponent component, Object value) {
+		if (context != null) {
+			if (context.getExternalContext() != null) {
+				Locale locale = context.getExternalContext().getRequestLocale();
+				if (Locale.FRENCH.equals(locale)) {
+					return toFormattedDateInFrench((Date) value);
+				} else {
+					LOG.info("Locale: " + locale + " is not handled");
+				}
+			}
+		}
+		Date date = (Date) value;
+		return toFormattedDate(date);
+	}
 
-        long durationInSeconds = (current - event) / 1000;
-        long durationInMinutes = durationInSeconds / 60;
-        long durationInHours = durationInMinutes / 60;
-        long durationInDays = durationInHours / 24;
-        long durationInWeeks = durationInDays / 7;
+	String toFormattedDate(Date date) {
+		long current = System.currentTimeMillis();
+		long event = date.getTime();
 
-        if (durationInWeeks >= 1)
-            return durationInWeeks + " week(s) ago";
+		long durationInSeconds = (current - event) / 1000;
+		long durationInMinutes = durationInSeconds / 60;
+		long durationInHours = durationInMinutes / 60;
+		long durationInDays = durationInHours / 24;
+		long durationInWeeks = durationInDays / 7;
 
-        if (durationInDays >= 1)
-            return durationInDays + " day(s) ago";
+		String formattedDate = "";
+		long finalDuration = durationInSeconds;
+		if (durationInWeeks >= 1) {
+			formattedDate += durationInWeeks + " week";
+			finalDuration = durationInWeeks;
+		} else if (durationInDays >= 1) {
+			formattedDate += durationInDays + " day";
+			finalDuration = durationInDays;
+		} else if (durationInHours >= 1) {
+			formattedDate += durationInHours + " hour";
+			finalDuration = durationInHours;
+		} else if (durationInMinutes >= 1) {
+			formattedDate += durationInMinutes + " minute";
+			finalDuration = durationInMinutes;
+		} else
+			formattedDate += durationInSeconds + " second";
+		if (finalDuration > 1) {
+			formattedDate += "s";
+		}
+		return formattedDate + " ago";
+	}
 
-        if (durationInHours >= 1)
-            return durationInHours + " hour(s) ago";
+	String toFormattedDateInFrench(Date date) {
+		long current = System.currentTimeMillis();
+		long event = date.getTime();
 
-        if (durationInMinutes >= 1)
-            return durationInMinutes + " minute(s) ago";
+		long durationInSeconds = (current - event) / 1000;
+		long durationInMinutes = durationInSeconds / 60;
+		long durationInHours = durationInMinutes / 60;
+		long durationInDays = durationInHours / 24;
+		long durationInWeeks = durationInDays / 7;
 
-        return durationInSeconds + " second(s) ago";
-    }
-
+		String formattedDate = "il y a ";
+		long finalDuration = durationInSeconds;
+		if (durationInWeeks >= 1) {
+			formattedDate += durationInWeeks + " semaine";
+			finalDuration = durationInWeeks;
+		} else if (durationInDays >= 1) {
+			formattedDate += durationInDays + " jour";
+			finalDuration = durationInDays;
+		} else if (durationInHours >= 1) {
+			formattedDate += durationInHours + " heure";
+			finalDuration = durationInHours;
+		} else if (durationInMinutes >= 1) {
+			formattedDate += durationInMinutes + " minute";
+			finalDuration = durationInMinutes;
+		} else
+			formattedDate += durationInSeconds + " seconde";
+		if (finalDuration > 1) {
+			formattedDate += "s";
+		}
+		return formattedDate;
+	}
 }

@@ -32,13 +32,13 @@
             <h:messages styleClass="error" />
 
             <h:panelGrid columns="2" >
-                <h:outputText value="Game: " />
+                <h:outputText value="${msgs.game}: " />
                 <h:selectOneMenu id="selectGame" value="#{scoreBean.currentGame}" onchange="submit()" valueChangeListener="#{scoreBean.selectGame}">
                     <f:ajax event="select" render="post_on_ngf" /> 
                     <f:selectItems itemLabel="${game.name}" itemValue="${game.id}" var="game" value="${scoreBean.games}" />
                 </h:selectOneMenu>
 
-                <h:outputText value="Picture Url: " />
+                <h:outputText value="${msgs.picture_url}: " />
                 <h:inputText id="pictureUrl" value="#{scoreBean.pictureUrl}" onkeyup="document.getElementById('picture').src=this.value" onfocus="clearText(this)" required="true" style="width:100%" >
                     <f:validateRegex pattern="(http):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=%@!\-\/]))?" />
                 </h:inputText>
@@ -46,7 +46,7 @@
                 <h:outputText />
                 <img id="picture" src="" width="500px"/>
 
-                <h:outputText value="Level: " />
+                <h:outputText value="${msgs.level}: " />
                 <h:selectOneMenu id="selectLevel" value="#{scoreBean.currentLevel}">
                     <f:selectItems value="#{scoreBean.levelList}" />
                 </h:selectOneMenu>
@@ -68,15 +68,15 @@
                 <h:outputText value="Message: " />
                 <h:inputTextarea id="message" value="#{scoreBean.message}" onfocus="clearText(this)" cols="40" rows="5" style="width:100%" />
 
-                <h:outputText value="Post on NGF: " id="post_on_ngf" />
+                <h:outputText value="${msgs.post_on_ngf}: " id="post_on_ngf" />
                 <h:selectBooleanCheckbox id="postOnNgf" value="#{scoreBean.postOnNgf}" style="margin-left:0" />
 
-                <h:outputText value="NGF login: " />
+                <h:outputText value="${msgs.login}: " />
                 <h:inputText id="fullname" value="#{scoreBean.fullname}" onfocus="clearText(this)" required="true" >
                     <f:validateLength minimum="1" />
                 </h:inputText>
 
-                <h:outputText value="NGF password: " />
+                <h:outputText value="${msgs.password}: " />
                 <h:inputSecret id="password" value="#{scoreBean.password}" onfocus="clearText(this)" required="true" >
                     <f:validateLength minimum="1" />
                 </h:inputSecret>

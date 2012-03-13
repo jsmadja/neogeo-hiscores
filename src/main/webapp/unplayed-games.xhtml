@@ -25,7 +25,7 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
     <ui:define name="content_right">
-        <h2>All unplayed games</h2>
+        <h2>${msgs.unplayed_games}</h2>
         <table style="min-width: 40%">
             <c:forEach id="gameTable" var="gameItem" items="#{gamesBean.unplayedGames}">
                 <tr>

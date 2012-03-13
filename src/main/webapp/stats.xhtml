@@ -29,15 +29,15 @@
         <f:view>
             <div style="text-align: left">
                 <ul>
-                    <li>Number of players: ${statsBean.numberOfPlayers}</li>
-                    <li>Best title unlockers: 
+                    <li>${msgs.number_of_players}: ${statsBean.numberOfPlayers}</li>
+                    <li>${msgs.best_title_unlockers}: 
                         <c:forEach var="player" items="${statsBean.bestTitleUnlockers}">
                             <h:link outcome="player" value="${player.fullname}" styleClass="link">
                                 <f:param name="fullname" value="${player.fullname}"/>
                             </h:link> (${fn:length(player.unlockedTitles)})
                         </c:forEach>
                     </li>
-                    <li>Best scorers: 
+                    <li>${msgs.best_scorers}: 
                         <c:forEach var="player" items="${statsBean.bestScorers}">
                             <h:link outcome="player" value="${player.fullname}" styleClass="link">
                                 <f:param name="fullname" value="${player.fullname}"/>
@@ -45,7 +45,7 @@
                         </c:forEach>
                     </li>
                     <li>
-                        Most played games: 
+                        ${msgs.most_played_games}: 
                         <c:forEach var="game" items="${statsBean.mostPlayedGames}">
                             <h:link outcome="game" value="${game.name}" styleClass="link">
                                 <f:param name="id" value="${game.id}"/>
@@ -53,10 +53,10 @@
                         </c:forEach>
                     </li>
                     <li>
-                        Number of played games: <h:link styleClass="link" value="${statsBean.numberOfPlayedGames}" outcome="games" />
+                        ${msgs.number_of_played_games}: <h:link styleClass="link" value="${statsBean.numberOfPlayedGames}" outcome="games" />
                     </li>
                     <li>
-                        Number of unplayed games: <h:link styleClass="link" value="${statsBean.numberOfUnplayedGames}" outcome="unplayed-games" />
+                        ${msgs.number_of_unplayed_games}: <h:link styleClass="link" value="${statsBean.numberOfUnplayedGames}" outcome="unplayed-games" />
                     </li>
     
                 </ul>

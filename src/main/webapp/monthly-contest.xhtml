@@ -26,9 +26,9 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 	<ui:define name="content_right">
-		<h2>Monthly Contest in ${monthlyContestBean.month} ${monthlyContestBean.year}</h2>
+		<h2>${msgs.monthly_contest} ${monthlyContestBean.month} ${monthlyContestBean.year}</h2>
 
-		<p style="font-size: 10pt">The 3 most scored games this month are :</p>
+		<p style="font-size: 10pt">${msgs.most_scored_games} :</p>
 
 		<table>
 			<tr style="vertical-align: top;">
@@ -63,7 +63,7 @@
 			</tr>
 		</table>
 
-		<p style="font-size: 10pt;width: 60%"> You can also score these games :
+		<p style="font-size: 10pt;width: 60%"> ${msgs.also_score_theses_games} :
 			<c:forEach id="gameTable" var="gameItem" items="#{monthlyContestBean.games}">
 				<h:link outcome="game" value="${gameItem.game.name}" styleClass="link_little">
 					<f:param name="id" value="${gameItem.game.id}" />
