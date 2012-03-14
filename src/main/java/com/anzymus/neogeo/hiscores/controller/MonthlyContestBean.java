@@ -29,6 +29,7 @@ import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 import org.joda.time.DateTime;
 
@@ -52,8 +53,11 @@ public class MonthlyContestBean {
 
 	private List<GameItem> gameItems;
 
+	private Locale locale = Locale.UK;
+
 	@PostConstruct
 	public void init() {
+		setLocaleFromRequest();
 		List<GameItem> gameItems = new ArrayList<GameItem>();
 		List<Game> playedGamesThisMonth = gameService.findAllPlayedGamesThisMonth();
 		for (Game game : playedGamesThisMonth) {
@@ -67,8 +71,19 @@ public class MonthlyContestBean {
 		this.gameItems = keepOnlyMostScoredGames(gameItems);
 	}
 
+	public void setLocale(Locale locale) {
+		this.locale = locale;
+	}
+
+	private void setLocaleFromRequest() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		if (facesContext != null) {
+			locale = facesContext.getExternalContext().getRequestLocale();
+		}
+	}
+
 	public String getMonth() {
-		return new SimpleDateFormat("MMMMM", Locale.UK).format(new Date());
+		return new SimpleDateFormat("MMMMM", locale).format(new Date());
 	}
 
 	public int getYear() {
