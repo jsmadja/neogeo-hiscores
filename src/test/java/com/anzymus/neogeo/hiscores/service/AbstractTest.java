@@ -19,10 +19,13 @@ package com.anzymus.neogeo.hiscores.service;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
 import javax.naming.NamingException;
+
 import org.apache.commons.lang.RandomStringUtils;
+
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
@@ -31,68 +34,70 @@ import com.anzymus.neogeo.hiscores.webservice.AdministrationWebService;
 
 public abstract class AbstractTest {
 
-    protected static EJBContainer container;
+	protected static EJBContainer container;
 
-    protected static Context namingContext;
+	protected static Context namingContext;
 
-    protected static PlayerService playerService;
-    protected static ScoreService scoreService;
-    protected static GameService gameService;
-    protected static TitleService titleService;
-    protected static TitleUnlockingService titleUnlockingService;
-    protected static AdministrationWebService administrationWebService;
-    protected static HallOfOneCreditService hallOfOneCreditService;
+	protected static PlayerService playerService;
+	protected static ScoreService scoreService;
+	protected static GameService gameService;
+	protected static TitleService titleService;
+	protected static TitleUnlockingService titleUnlockingService;
+	protected static AdministrationWebService administrationWebService;
+	protected static HallOfOneCreditService hallOfOneCreditService;
+	protected static ChallengeService challengeService;
 
-    static {
-        try {
-            Map<String, Object> properties = new HashMap<String, Object>();
-            properties.put(EJBContainer.MODULES, new File("target/classes"));
-            container = EJBContainer.createEJBContainer(properties);
+	static {
+		try {
+			Map<String, Object> properties = new HashMap<String, Object>();
+			properties.put(EJBContainer.MODULES, new File("target/classes"));
+			container = EJBContainer.createEJBContainer(properties);
 
-            namingContext = container.getContext();
+			namingContext = container.getContext();
 
-            playerService = (PlayerService) lookup("PlayerService");
-            scoreService = (ScoreService) lookup("ScoreService");
-            gameService = (GameService) lookup("GameService");
-            titleService = (TitleService) lookup("TitleService");
-            titleUnlockingService = (TitleUnlockingService) lookup("TitleUnlockingService");
-            hallOfOneCreditService = (HallOfOneCreditService) lookup("HallOfOneCreditService");
+			playerService = (PlayerService) lookup("PlayerService");
+			scoreService = (ScoreService) lookup("ScoreService");
+			gameService = (GameService) lookup("GameService");
+			titleService = (TitleService) lookup("TitleService");
+			titleUnlockingService = (TitleUnlockingService) lookup("TitleUnlockingService");
+			hallOfOneCreditService = (HallOfOneCreditService) lookup("HallOfOneCreditService");
+			challengeService = (ChallengeService) lookup("ChallengeService");
 
-            administrationWebService = new AdministrationWebService();
-            administrationWebService.setGameService(gameService);
-            administrationWebService.setPlayerService(playerService);
-            administrationWebService.setScoreService(scoreService);
-            administrationWebService.setTitleUnlockingService(titleUnlockingService);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+			administrationWebService = new AdministrationWebService();
+			administrationWebService.setGameService(gameService);
+			administrationWebService.setPlayerService(playerService);
+			administrationWebService.setScoreService(scoreService);
+			administrationWebService.setTitleUnlockingService(titleUnlockingService);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-    private static Object lookup(String key) throws NamingException {
-        return namingContext.lookup("java:global/classes/" + key);
-    }
+	private static Object lookup(String key) throws NamingException {
+		return namingContext.lookup("java:global/classes/" + key);
+	}
 
-    protected Score createScore(Player player, Game game) {
-        String value = RandomStringUtils.randomNumeric(7);
-        String level = "MVS";
-        String pictureUrl = "http://";
-        Score score = new Score(value, player, level, game, pictureUrl);
-        score = scoreService.store(score);
-        return score;
-    }
+	protected Score createScore(Player player, Game game) {
+		String value = RandomStringUtils.randomNumeric(7);
+		String level = "MVS";
+		String pictureUrl = "http://";
+		Score score = new Score(value, player, level, game, pictureUrl);
+		score = scoreService.store(score);
+		return score;
+	}
 
-    protected Game createGame() {
-        String name = RandomStringUtils.randomAlphabetic(10);
-        Game game = new Game(name);
-        game = gameService.store(game);
-        return game;
-    }
+	protected Game createGame() {
+		String name = RandomStringUtils.randomAlphabetic(10);
+		Game game = new Game(name);
+		game = gameService.store(game);
+		return game;
+	}
 
-    protected Player createPlayer() {
-        String fullname = RandomStringUtils.randomAlphabetic(10);
-        Player player = new Player(fullname);
-        player = playerService.store(player);
-        return player;
-    }
+	protected Player createPlayer() {
+		String fullname = RandomStringUtils.randomAlphabetic(10);
+		Player player = new Player(fullname);
+		player = playerService.store(player);
+		return player;
+	}
 
 }

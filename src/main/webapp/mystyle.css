@@ -230,3 +230,8 @@ a:active, a:hover { color: orange; text-decoration: none; }
     font-size:10pt;
     max-width: 60%;
 }
+
+.challenge {
+    font-size: 10pt;
+    color: darkorange;
+}

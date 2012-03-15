@@ -1,0 +1,80 @@
+<!--
+
+        Copyright (C) 2011 Julien SMADJA <julien dot smadja at gmail dot com>
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at
+
+                http://www.apache.org/licenses/LICENSE-2.0
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="content_right">
+        <h2>${msgs.text_add_a_challenge_title}</h2>
+        <h:form id="form">
+
+            <h:messages styleClass="error" />
+
+            <h:selectOneMenu id="player1" value="#{challengeBean.currentPlayer1}">
+                <f:ajax render="player2 games" listener="#{challengeBean.challengerListener}" /> 
+                <f:selectItems itemLabel="${player.fullname}" itemValue="${player.id}" var="player" value="${challengeBean.player1List}" />
+            </h:selectOneMenu>
+
+            &nbsp;&nbsp;&nbsp;${msgs.versus}&nbsp;&nbsp;&nbsp;
+
+            <h:selectOneMenu id="player2" value="#{challengeBean.currentPlayer2}">
+                <f:ajax render="games" listener="#{challengeBean.gameListener}" /> 
+                <f:selectItems itemLabel="${player.fullname}" itemValue="${player.id}" var="player" value="${challengeBean.player2List}" />
+            </h:selectOneMenu>
+
+            <br/><br/>
+
+            <h:dataTable id="games" var="challengeableGame" value="#{challengeBean.challengeableGames}" width="60%" style="text-align: right" >
+                <h:column>
+                    <h:link styleClass="game" outcome="game" value="#{challengeableGame.game.name}">
+                        <f:param name="id" value="#{challengeableGame.game.id}"/>
+                    </h:link>
+                </h:column>
+                <h:column>
+                    <f:facet name="header" >
+                        <h:link styleClass="player" outcome="player" value="#{challengeBean.player1.fullname}">
+                            <f:param name="fullname" value="#{challengeBean.player1.fullname}"/>
+                        </h:link>
+                    </f:facet>    
+                    <h:outputText value="#{challengeableGame.player1Score.value}" converter="scoreConverter" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header" >
+                        <h:link styleClass="player" outcome="player" value="#{challengeBean.player2.fullname}">
+                            <f:param name="fullname" value="#{challengeBean.player2.fullname}"/>
+                        </h:link>
+                    </f:facet>    
+                    <h:outputText value="#{challengeableGame.player2Score.value}" converter="scoreConverter"/>
+                </h:column>
+                <h:column>
+                    <h:link styleClass="challenge" outcome="challenge" value="${challenge_him}">
+                        <f:param name="player1" value="#{challengeBean.player1.id}"/>
+                        <f:param name="player2" value="#{challengeBean.player2.id}"/>
+                        <f:param name="game" value="#{challengeableGame.game.id}"/>
+                    </h:link>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>

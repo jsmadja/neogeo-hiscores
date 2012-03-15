@@ -45,7 +45,7 @@ public class Scores implements Iterable<Score> {
 		}
 	}
 
-	private Score getBestScoreFor(Player player, String level, Game game) {
+	public Score getBestScoreFor(Player player, String level, Game game) {
 		for (Score score : scores) {
 			if (score.getLevel().equals(level) && score.getPlayer().equals(player) && score.getGame().equals(game)) {
 				return score;
