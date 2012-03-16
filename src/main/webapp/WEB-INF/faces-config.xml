@@ -26,6 +26,10 @@
             <base-name>/Messages</base-name>
             <var>msgs</var>
         </resource-bundle>
+        <locale-config>
+        	<default-locale>en</default-locale>
+        	<supported-locale>fr</supported-locale>
+        </locale-config>
     </application>
     
     <navigation-rule> 
