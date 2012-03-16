@@ -52,9 +52,6 @@ public class ChallengeBean {
 	private Player player1;
 	private Player player2;
 
-	private String title;
-	private String description;
-
 	@EJB
 	GameService gameService;
 
@@ -113,22 +110,6 @@ public class ChallengeBean {
 
 	public void gameListener(AjaxBehaviorEvent event) {
 		LOG.info(challengeableGames.size() + " games to challenge");
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getDescription() {
-		return description;
 	}
 
 	public long getCurrentPlayer1() {

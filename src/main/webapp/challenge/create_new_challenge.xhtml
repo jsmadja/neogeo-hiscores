@@ -27,54 +27,37 @@
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
     <ui:define name="content_right">
         <h2>${msgs.text_add_a_challenge_title}</h2>
-        <h:form id="form">
+                <h:form id="form">
 
             <h:messages styleClass="error" />
 
-            <h:selectOneMenu id="player1" value="#{challengeBean.currentPlayer1}">
-                <f:ajax render="player2 games" listener="#{challengeBean.challengerListener}" /> 
-                <f:selectItems itemLabel="${player.fullname}" itemValue="${player.id}" var="player" value="${challengeBean.player1List}" />
-            </h:selectOneMenu>
+            <h:panelGrid columns="2" >
+                <h:outputText value="${msgs.player} 1: " />
+                <h:outputText value="#{newChallengeBean.player1.fullname}" />
+                
+                <h:outputText value="${msgs.player} 2: " />
+                <h:outputText value="#{newChallengeBean.player2.fullname}" />
+                
+                <h:outputText value="${msgs.game}: " />
+                <h:outputText value="#{newChallengeBean.game.name}" />
+                
+                <h:outputText value="${msgs.title}: " />
+                <h:inputText id="title" value="#{newChallengeBean.title}" required="true" style="width:100%" />
 
-            &nbsp;&nbsp;&nbsp;${msgs.versus}&nbsp;&nbsp;&nbsp;
+                <h:outputText value="${msgs.description}: " />
+                <h:inputTextarea id="description" value="#{newChallengeBean.description}" required="true" cols="40" rows="5" style="width:100%" />
 
-            <h:selectOneMenu id="player2" value="#{challengeBean.currentPlayer2}">
-                <f:ajax render="games" listener="#{challengeBean.gameListener}" /> 
-                <f:selectItems itemLabel="${player.fullname}" itemValue="${player.id}" var="player" value="${challengeBean.player2List}" />
-            </h:selectOneMenu>
-
-            <br/><br/>
-
-            <h:dataTable id="games" var="challengeableGame" value="#{challengeBean.challengeableGames}" width="60%" style="text-align: right" >
-                <h:column>
-                    <h:link styleClass="game" outcome="game" value="#{challengeableGame.game.name}">
-                        <f:param name="id" value="#{challengeableGame.game.id}"/>
-                    </h:link>
-                </h:column>
-                <h:column>
-                    <f:facet name="header" >
-                        <h:link styleClass="player" outcome="player" value="#{challengeBean.player1.fullname}">
-                            <f:param name="fullname" value="#{challengeBean.player1.fullname}"/>
-                        </h:link>
-                    </f:facet>    
-                    <h:outputText value="#{challengeableGame.player1Score.value}" converter="scoreConverter" />
-                </h:column>
-                <h:column>
-                    <f:facet name="header" >
-                        <h:link styleClass="player" outcome="player" value="#{challengeBean.player2.fullname}">
-                            <f:param name="fullname" value="#{challengeBean.player2.fullname}"/>
-                        </h:link>
-                    </f:facet>    
-                    <h:outputText value="#{challengeableGame.player2Score.value}" converter="scoreConverter"/>
-                </h:column>
-                <h:column>
-                    <h:link styleClass="challenge" outcome="challenge" value="${challenge_him}">
-                        <f:param name="player1" value="#{challengeBean.player1.id}"/>
-                        <f:param name="player2" value="#{challengeBean.player2.id}"/>
-                        <f:param name="game" value="#{challengeableGame.game.id}"/>
-                    </h:link>
-                </h:column>
-            </h:dataTable>
+                <h:outputText value="${msgs.password}: " />
+                <h:inputSecret id="password" value="#{newChallengeBean.password}" required="true" >
+                    <f:validateLength minimum="1" />
+                </h:inputSecret>
+                
+                <h:inputHidden id="player1" value="#{newChallengeBean.player1Id}" />
+                <h:inputHidden id="player2" value="#{newChallengeBean.player2Id}" />
+                <h:inputHidden id="game" value="#{newChallengeBean.gameId}" />
+                
+                <h:commandButton id="submit" value="${msgs.form_button_add_new_challenge}" action="#{newChallengeBean.add}" />
+            </h:panelGrid>
         </h:form>
     </ui:define>
 </ui:composition>
