@@ -13,27 +13,32 @@
  *     See the License for the specific language governing permissions and
  *     limitations under the License.
  */
-
 package com.anzymus.neogeo.hiscores.comparator;
 
-import com.anzymus.neogeo.hiscores.domain.TimelineItem;
 import java.util.Comparator;
 import java.util.Date;
 
+import com.anzymus.neogeo.hiscores.domain.TimelineItem;
+
 public class TimelineSortedByDateDescComparator implements Comparator<TimelineItem> {
 
-    @Override
-    public int compare(TimelineItem t1, TimelineItem t2) {
-        Date date1 = getDate(t1);
-        Date date2 = getDate(t2);
-        return date2.compareTo(date1);
-    }
+	@Override
+	public int compare(TimelineItem t1, TimelineItem t2) {
+		Date date1 = getDate(t1);
+		Date date2 = getDate(t2);
+		if (date1 != null && date2 != null) {
+			return date2.compareTo(date1);
+		}
+		return 1;
+	}
 
-    private Date getDate(TimelineItem timelineItem) {
-        if (timelineItem.getScore() != null) {
-            return timelineItem.getScore().getCreationDate();
-        }
-        return timelineItem.getUnlockedTitle().getUnlockDate();
-    }
-
+	private Date getDate(TimelineItem timelineItem) {
+		if (timelineItem.getScore() != null) {
+			return timelineItem.getScore().getCreationDate();
+		}
+		if (timelineItem.getUnlockedTitle() != null) {
+			return timelineItem.getUnlockedTitle().getUnlockDate();
+		}
+		return timelineItem.getChallenge().getCreationDate();
+	}
 }

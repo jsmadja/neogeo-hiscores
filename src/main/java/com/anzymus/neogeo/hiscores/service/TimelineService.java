@@ -16,12 +16,16 @@
 
 package com.anzymus.neogeo.hiscores.service;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+
 import com.anzymus.neogeo.hiscores.comparator.TimelineSortedByDateDescComparator;
+import com.anzymus.neogeo.hiscores.domain.Challenge;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Timeline;
 import com.anzymus.neogeo.hiscores.domain.TimelineItem;
@@ -30,54 +34,67 @@ import com.anzymus.neogeo.hiscores.domain.UnlockedTitle;
 @Stateless
 public class TimelineService {
 
-    @EJB
-    ScoreService scoreService;
+	@EJB
+	ScoreService scoreService;
 
-    @EJB
-    TitleUnlockingService titleUnlockingService;
+	@EJB
+	TitleUnlockingService titleUnlockingService;
 
-    public Timeline createTimeline() {
-        Timeline timeline = new Timeline();
-        addLastScores(timeline);
-        addLastUnlockedTitles(timeline);
-        sortItemsByDateDesc(timeline);
-        return timeline;
-    }
+	@EJB
+	ChallengeService challengeService;
 
-    private void addLastScores(Timeline timeline) {
-        List<Score> scores = scoreService.findLastScoresOrderByDateDesc();
-        for (Score score : scores) {
-            TimelineItem item = new TimelineItem(score);
-            final String pictureUrl = score.getPictureUrl();
-            if (pictureUrl == null || pictureUrl.length() == 0) {
-                item.setPictureUrl("myimages/nopic.jpg");
-            } else {
-                item.setPictureUrl(pictureUrl);
-            }
-            Long avatarId = score.getPlayer().getAvatarId();
-            if (avatarId == null || avatarId == 0) {
-                item.setAvatarUrl(item.getPictureUrl());
-            } else {
-                item.setAvatarUrl("http://www.neogeofans.com/leforum/image.php?u=" + avatarId);
-            }
+	public Timeline createTimeline() {
+		Timeline timeline = new Timeline();
+		addLastScores(timeline);
+		addLastUnlockedTitles(timeline);
+		addLastChallenges(timeline);
+		sortItemsByDateDesc(timeline);
+		return timeline;
+	}
 
-            timeline.getItems().add(item);
-        }
-    }
+	private void addLastChallenges(Timeline timeline) {
+		Collection<Challenge> challenges = challengeService.findAllActiveChallenges();
+		for (Challenge challenge : challenges) {
+			TimelineItem item = new TimelineItem(challenge);
+			item.setPictureUrl("myimages/challenge.png");
+			timeline.getItems().add(item);
+		}
+	}
 
-    private void addLastUnlockedTitles(Timeline timeline) {
-        List<UnlockedTitle> unlockedTitles = titleUnlockingService.findLastUnlockedTitlesOrderByDateDesc();
-        for (UnlockedTitle unlockTitle : unlockedTitles) {
-            TimelineItem item = new TimelineItem(unlockTitle);
-            item.setPictureUrl("myimages/success.png");
-            timeline.getItems().add(item);
-        }
-    }
+	private void addLastScores(Timeline timeline) {
+		List<Score> scores = scoreService.findLastScoresOrderByDateDesc();
+		for (Score score : scores) {
+			TimelineItem item = new TimelineItem(score);
+			final String pictureUrl = score.getPictureUrl();
+			if (pictureUrl == null || pictureUrl.length() == 0) {
+				item.setPictureUrl("myimages/nopic.jpg");
+			} else {
+				item.setPictureUrl(pictureUrl);
+			}
+			Long avatarId = score.getPlayer().getAvatarId();
+			if (avatarId == null || avatarId == 0) {
+				item.setAvatarUrl(item.getPictureUrl());
+			} else {
+				item.setAvatarUrl("http://www.neogeofans.com/leforum/image.php?u=" + avatarId);
+			}
 
-    private void sortItemsByDateDesc(Timeline timeline) {
-        Collections.sort(timeline.getItems(), timelineSortedByDateDescComparator);
-    }
+			timeline.getItems().add(item);
+		}
+	}
 
-    private static final Comparator<TimelineItem> timelineSortedByDateDescComparator = new TimelineSortedByDateDescComparator();
+	private void addLastUnlockedTitles(Timeline timeline) {
+		List<UnlockedTitle> unlockedTitles = titleUnlockingService.findLastUnlockedTitlesOrderByDateDesc();
+		for (UnlockedTitle unlockTitle : unlockedTitles) {
+			TimelineItem item = new TimelineItem(unlockTitle);
+			item.setPictureUrl("myimages/success.png");
+			timeline.getItems().add(item);
+		}
+	}
+
+	private void sortItemsByDateDesc(Timeline timeline) {
+		Collections.sort(timeline.getItems(), timelineSortedByDateDescComparator);
+	}
+
+	private static final Comparator<TimelineItem> timelineSortedByDateDescComparator = new TimelineSortedByDateDescComparator();
 
 }

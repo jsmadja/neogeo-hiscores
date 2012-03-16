@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -42,6 +43,15 @@ public class Challenge {
 	@Column(name = "FINISH_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date finishDate;
+
+	@Column(name = "CREATION_DATE")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date creationDate;
+
+	@PrePersist
+	public void prePersist() {
+		creationDate = new Date();
+	}
 
 	public Long getId() {
 		return id;
@@ -116,5 +126,13 @@ public class Challenge {
 	@Override
 	public int hashCode() {
 		return Objects.hashCode(title, description);
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
 	}
 }

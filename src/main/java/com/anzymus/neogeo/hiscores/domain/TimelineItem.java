@@ -18,41 +18,54 @@ package com.anzymus.neogeo.hiscores.domain;
 
 public class TimelineItem {
 
-    private Score score;
-    private String pictureUrl;
-    private UnlockedTitle unlockedTitle;
-    private String avatarUrl;
+	private Score score;
+	private String pictureUrl;
+	private UnlockedTitle unlockedTitle;
+	private String avatarUrl;
+	private Challenge challenge;
 
-    public TimelineItem(Score score) {
-        this.score = score;
-    }
+	public TimelineItem(Score score) {
+		this.score = score;
+	}
 
-    public TimelineItem(UnlockedTitle unlockedTitle) {
-        this.unlockedTitle = unlockedTitle;
-    }
+	public TimelineItem(UnlockedTitle unlockedTitle) {
+		this.unlockedTitle = unlockedTitle;
+	}
 
-    public Score getScore() {
-        return score;
-    }
+	public TimelineItem(Challenge challenge) {
+		this.setChallenge(challenge);
+	}
 
-    public UnlockedTitle getUnlockedTitle() {
-        return unlockedTitle;
-    }
+	public Score getScore() {
+		return score;
+	}
 
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
-    }
+	public UnlockedTitle getUnlockedTitle() {
+		return unlockedTitle;
+	}
 
-    public String getPictureUrl() {
-        return pictureUrl;
-    }
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
+	}
 
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
 
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
-    }
+	public String getAvatarUrl() {
+		return avatarUrl;
+	}
+
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
+	}
+
+	public void setChallenge(Challenge challenge) {
+		this.challenge = challenge;
+	}
+
+	public Challenge getChallenge() {
+		return challenge;
+	}
 
 }
