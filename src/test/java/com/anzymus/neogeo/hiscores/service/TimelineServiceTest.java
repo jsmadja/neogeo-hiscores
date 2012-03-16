@@ -19,12 +19,19 @@ package com.anzymus.neogeo.hiscores.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
-import org.junit.Before;
+
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import com.anzymus.neogeo.hiscores.domain.Challenge;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
@@ -33,100 +40,122 @@ import com.anzymus.neogeo.hiscores.domain.TimelineItem;
 import com.anzymus.neogeo.hiscores.domain.Title;
 import com.anzymus.neogeo.hiscores.domain.UnlockedTitle;
 
+@RunWith(MockitoJUnitRunner.class)
 public class TimelineServiceTest {
 
-    @Mock
-    ScoreService scoreService;
+	@Mock
+	ScoreService scoreService;
 
-    @Mock
-    TitleUnlockingService titleUnlockingService;
+	@Mock
+	TitleUnlockingService titleUnlockingService;
 
-    TimelineService timelineService;
+	@Mock
+	ChallengeService challengeService;
 
-    @Before
-    public void init() {
-        MockitoAnnotations.initMocks(this);
-        timelineService = new TimelineService();
-        timelineService.scoreService = scoreService;
-        timelineService.titleUnlockingService = titleUnlockingService;
-    }
+	@InjectMocks
+	TimelineService timelineService;
 
-    @Test
-    public void should_create_empty_timeline() {
-        Timeline timeline = timelineService.createTimeline();
-        assertTrue(timeline.getItems().isEmpty());
-    }
+	@Test
+	public void should_create_empty_timeline() {
+		Timeline timeline = timelineService.createTimeline();
+		assertTrue(timeline.getItems().isEmpty());
+	}
 
-    @Test
-    public void should_create_timeline_with_one_score() {
-        Score score = new Score("123", new Player(), "MVS", new Game(), "http://");
+	@Test
+	public void should_create_timeline_with_one_score() {
+		Score score = new Score("123", new Player(), "MVS", new Game(), "http://");
 
-        List<Score> scores = new ArrayList<Score>();
-        scores.add(score);
+		List<Score> scores = new ArrayList<Score>();
+		scores.add(score);
 
-        when(scoreService.findLastScoresOrderByDateDesc()).thenReturn(scores);
+		when(scoreService.findLastScoresOrderByDateDesc()).thenReturn(scores);
 
-        Timeline timeline = timelineService.createTimeline();
-        assertEquals(1, timeline.getItems().size());
+		Timeline timeline = timelineService.createTimeline();
+		assertEquals(1, timeline.getItems().size());
 
-        TimelineItem timelineItem = timeline.getItems().get(0);
-        assertEquals(score, timelineItem.getScore());
-        assertEquals(score.getPictureUrl(), timelineItem.getAvatarUrl());
-        assertEquals(score.getPictureUrl(), timelineItem.getPictureUrl());
-    }
+		TimelineItem timelineItem = timeline.getItems().get(0);
+		assertEquals(score, timelineItem.getScore());
+		assertEquals(score.getPictureUrl(), timelineItem.getAvatarUrl());
+		assertEquals(score.getPictureUrl(), timelineItem.getPictureUrl());
+	}
 
-    @Test
-    public void should_create_timeline_with_one_score_with_no_picture() {
-        Score score = new Score("123", new Player(), "MVS", new Game(), null);
+	@Test
+	public void should_create_timeline_with_one_score_with_no_picture() {
+		Score score = new Score("123", new Player(), "MVS", new Game(), null);
 
-        List<Score> scores = new ArrayList<Score>();
-        scores.add(score);
+		List<Score> scores = new ArrayList<Score>();
+		scores.add(score);
 
-        when(scoreService.findLastScoresOrderByDateDesc()).thenReturn(scores);
+		when(scoreService.findLastScoresOrderByDateDesc()).thenReturn(scores);
 
-        Timeline timeline = timelineService.createTimeline();
-        assertEquals(1, timeline.getItems().size());
+		Timeline timeline = timelineService.createTimeline();
+		assertEquals(1, timeline.getItems().size());
 
-        TimelineItem timelineItem = timeline.getItems().get(0);
-        assertEquals(score, timelineItem.getScore());
-        assertEquals("myimages/nopic.jpg", timelineItem.getAvatarUrl());
-        assertEquals("myimages/nopic.jpg", timelineItem.getPictureUrl());
-    }
+		TimelineItem timelineItem = timeline.getItems().get(0);
+		assertEquals(score, timelineItem.getScore());
+		assertEquals("myimages/nopic.jpg", timelineItem.getAvatarUrl());
+		assertEquals("myimages/nopic.jpg", timelineItem.getPictureUrl());
+	}
 
-    @Test
-    public void should_create_timeline_with_one_score_with_avatar() {
-        Player player = new Player();
-        player.setAvatarId(5L);
-        Score score = new Score("123", player, "MVS", new Game(), "http://");
+	@Test
+	public void should_create_timeline_with_one_score_with_avatar() {
+		Player player = new Player();
+		player.setAvatarId(5L);
+		Score score = new Score("123", player, "MVS", new Game(), "http://");
 
-        List<Score> scores = new ArrayList<Score>();
-        scores.add(score);
+		List<Score> scores = new ArrayList<Score>();
+		scores.add(score);
 
-        when(scoreService.findLastScoresOrderByDateDesc()).thenReturn(scores);
+		when(scoreService.findLastScoresOrderByDateDesc()).thenReturn(scores);
 
-        Timeline timeline = timelineService.createTimeline();
-        assertEquals(1, timeline.getItems().size());
+		Timeline timeline = timelineService.createTimeline();
+		assertEquals(1, timeline.getItems().size());
 
-        TimelineItem timelineItem = timeline.getItems().get(0);
-        assertEquals(score, timelineItem.getScore());
-        assertEquals("http://www.neogeofans.com/leforum/image.php?u=5", timelineItem.getAvatarUrl());
-        assertEquals(score.getPictureUrl(), timelineItem.getPictureUrl());
-    }
+		TimelineItem timelineItem = timeline.getItems().get(0);
+		assertEquals(score, timelineItem.getScore());
+		assertEquals("http://www.neogeofans.com/leforum/image.php?u=5", timelineItem.getAvatarUrl());
+		assertEquals(score.getPictureUrl(), timelineItem.getPictureUrl());
+	}
 
-    @Test
-    public void should_create_timeline_with_one_unlocked_title() {
-        UnlockedTitle unlockedTitle = new UnlockedTitle(new Player(), new Title());
+	@Test
+	public void should_create_timeline_with_one_unlocked_title() {
+		UnlockedTitle unlockedTitle = new UnlockedTitle(new Player(), new Title());
 
-        List<UnlockedTitle> unlockedTitles = new ArrayList<UnlockedTitle>();
-        unlockedTitles.add(unlockedTitle);
+		List<UnlockedTitle> unlockedTitles = new ArrayList<UnlockedTitle>();
+		unlockedTitles.add(unlockedTitle);
 
-        when(titleUnlockingService.findLastUnlockedTitlesOrderByDateDesc()).thenReturn(unlockedTitles);
+		when(titleUnlockingService.findLastUnlockedTitlesOrderByDateDesc()).thenReturn(unlockedTitles);
 
-        Timeline timeline = timelineService.createTimeline();
-        assertEquals(1, timeline.getItems().size());
+		Timeline timeline = timelineService.createTimeline();
+		assertEquals(1, timeline.getItems().size());
 
-        TimelineItem timelineItem = timeline.getItems().get(0);
-        assertEquals(unlockedTitle, timelineItem.getUnlockedTitle());
-        assertEquals("myimages/success.png", timelineItem.getPictureUrl());
-    }
+		TimelineItem timelineItem = timeline.getItems().get(0);
+		assertEquals(unlockedTitle, timelineItem.getUnlockedTitle());
+		assertEquals("myimages/success.png", timelineItem.getPictureUrl());
+	}
+
+	@Test
+	public void should_create_timeline_with_one_challenge() {
+		Challenge challenge = new Challenge();
+		Player player1 = new Player("player1");
+		Player player2 = new Player("player2");
+		Date creationDate = new Date();
+		Game game = new Game("game");
+		challenge.setPlayer1(player1);
+		challenge.setPlayer2(player2);
+		challenge.setGame(game);
+		challenge.setCreationDate(creationDate);
+
+		Collection<Challenge> challenges = new ArrayList<Challenge>();
+		challenges.add(challenge);
+
+		when(challengeService.findAllActiveChallenges()).thenReturn(challenges);
+
+		Timeline timeline = timelineService.createTimeline();
+		assertEquals(1, timeline.getItems().size());
+
+		TimelineItem timelineItem = timeline.getItems().get(0);
+		assertEquals(challenge, timelineItem.getChallenge());
+		assertEquals("myimages/challenge.png", timelineItem.getPictureUrl());
+	}
 }
