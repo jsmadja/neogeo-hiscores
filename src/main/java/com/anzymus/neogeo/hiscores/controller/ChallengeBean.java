@@ -21,7 +21,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -40,8 +39,6 @@ import com.anzymus.neogeo.hiscores.service.ScoreService;
 
 @ManagedBean
 public class ChallengeBean {
-	public static final Logger LOG = Logger.getLogger(ChallengeBean.class.getName());
-
 	private long currentPlayer1;
 	private long currentPlayer2;
 
@@ -104,12 +101,30 @@ public class ChallengeBean {
 		}
 	}
 
+	private void toChallengeableGames(Collection<Game> games) {
+		Scores player1Scores = scoreService.findAllByPlayer(player1);
+		Scores player2Scores = scoreService.findAllByPlayer(player2);
+		for (Game game : games) {
+			this.challengeableGames.add(toChallengeableGame(game, player1Scores, player2Scores));
+		}
+	}
+
+	private ChallengeableGame toChallengeableGame(Game game, Scores player1Scores, Scores player2Scores) {
+		ChallengeableGame challengeableGame = new ChallengeableGame(game);
+
+		Score player1Score = player1Scores.getBestScoreFor(player1, "MVS", game);
+		Score player2Score = player2Scores.getBestScoreFor(player2, "MVS", game);
+
+		challengeableGame.setPlayer1Score(player1Score);
+		challengeableGame.setPlayer2Score(player2Score);
+
+		return challengeableGame;
+	}
+
 	public void challengerListener(AjaxBehaviorEvent event) {
-		LOG.info(player2List.size() + " players to challenge");
 	}
 
 	public void gameListener(AjaxBehaviorEvent event) {
-		LOG.info(challengeableGames.size() + " games to challenge");
 	}
 
 	public long getCurrentPlayer1() {
@@ -166,30 +181,6 @@ public class ChallengeBean {
 
 	public void setPlayer2(Player player2) {
 		this.player2 = player2;
-	}
-
-	public static Logger getLog() {
-		return LOG;
-	}
-
-	private void toChallengeableGames(Collection<Game> games) {
-		Scores player1Scores = scoreService.findAllByPlayer(player1);
-		Scores player2Scores = scoreService.findAllByPlayer(player2);
-		for (Game game : games) {
-			this.challengeableGames.add(toChallengeableGame(game, player1Scores, player2Scores));
-		}
-	}
-
-	private ChallengeableGame toChallengeableGame(Game game, Scores player1Scores, Scores player2Scores) {
-		ChallengeableGame challengeableGame = new ChallengeableGame(game);
-
-		Score player1Score = player1Scores.getBestScoreFor(player1, "MVS", game);
-		Score player2Score = player2Scores.getBestScoreFor(player2, "MVS", game);
-
-		challengeableGame.setPlayer1Score(player1Score);
-		challengeableGame.setPlayer2Score(player2Score);
-
-		return challengeableGame;
 	}
 
 }
