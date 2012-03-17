@@ -10,8 +10,10 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 
 import com.anzymus.neogeo.hiscores.clients.AuthenticationFailed;
+import com.anzymus.neogeo.hiscores.clients.Messages;
 import com.anzymus.neogeo.hiscores.clients.NeoGeoFansClient;
 import com.anzymus.neogeo.hiscores.clients.NeoGeoFansClientFactory;
+import com.anzymus.neogeo.hiscores.domain.Challenge;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.exception.ChallengeNotCreatedException;
@@ -70,7 +72,12 @@ public class NewChallengeBean {
 		try {
 			boolean isAuthenticated = ngfClient.authenticate(player1.getFullname(), password);
 			if (isAuthenticated) {
-				challengeService.createChallenge(player1, player2, game, title, description);
+				Challenge challenge = challengeService.createChallenge(player1, player2, game, title, description);
+				Long postId = game.getPostId();
+				if (postId == null) {
+					postId = 41930L;
+				}
+				ngfClient.post(Messages.toMessage(challenge), postId);
 				return "home";
 			} else {
 				facesContext.addMessage(null, new FacesMessage("Your NGF account is invalid"));

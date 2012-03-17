@@ -16,6 +16,7 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -28,6 +29,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
+import com.anzymus.neogeo.hiscores.comparator.ScoreComparator;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
@@ -38,7 +40,9 @@ import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
 
 @ManagedBean
-public class ChallengeBean {
+public class ChallengeBean implements Serializable {
+	private static final long serialVersionUID = 1276287493146369717L;
+
 	private long currentPlayer1;
 	private long currentPlayer2;
 
@@ -114,6 +118,12 @@ public class ChallengeBean {
 
 		Score player1Score = player1Scores.getBestScoreFor(player1, "MVS", game);
 		Score player2Score = player2Scores.getBestScoreFor(player2, "MVS", game);
+
+		if (player1Score == ScoreComparator.max(player1Score, player2Score)) {
+			challengeableGame.setScore1Greater(true);
+		} else {
+			challengeableGame.setScore2Greater(true);
+		}
 
 		challengeableGame.setPlayer1Score(player1Score);
 		challengeableGame.setPlayer2Score(player2Score);

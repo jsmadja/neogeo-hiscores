@@ -15,14 +15,20 @@
  */
 package com.anzymus.neogeo.hiscores.controller;
 
+import java.io.Serializable;
+
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Score;
 
-public class ChallengeableGame {
+public class ChallengeableGame implements Serializable {
+
+	private static final long serialVersionUID = -3681065486951796856L;
 
 	private Game game;
 	private Score player1Score;
 	private Score player2Score;
+	private boolean score1Greater;
+	private boolean score2Greater;
 
 	public ChallengeableGame(Game game) {
 		this.game = game;
@@ -50,6 +56,22 @@ public class ChallengeableGame {
 
 	public void setPlayer2Score(Score player2Score) {
 		this.player2Score = player2Score;
+	}
+
+	public boolean getScore1Greater() {
+		return score1Greater;
+	}
+
+	public void setScore1Greater(boolean score1Greater) {
+		this.score1Greater = score1Greater;
+	}
+
+	public boolean getScore2Greater() {
+		return score2Greater;
+	}
+
+	public void setScore2Greater(boolean score2Greater) {
+		this.score2Greater = score2Greater;
 	}
 
 }

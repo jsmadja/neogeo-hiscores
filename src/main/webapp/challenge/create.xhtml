@@ -57,7 +57,8 @@
                             <f:param name="fullname" value="#{challengeBean.player1.fullname}"/>
                         </h:link>
                     </f:facet>    
-                    <h:outputText value="#{challengeableGame.player1Score.value}" style="font-size: 10pt" converter="scoreConverter" />
+                    <h:outputText value="#{challengeableGame.player1Score.value}" style="font-size: 10pt;color:red" converter="scoreConverter" rendered="${challengeableGame.score1Greater == true}" />
+                    <h:outputText value="#{challengeableGame.player1Score.value}" style="font-size: 10pt;color:green" converter="scoreConverter" rendered="${challengeableGame.score1Greater != true}" />
                 </h:column>
                 <h:column>
                     <f:facet name="header" >
@@ -65,7 +66,8 @@
                             <f:param name="fullname" value="#{challengeBean.player2.fullname}"/>
                         </h:link>
                     </f:facet>    
-                    <h:outputText value="#{challengeableGame.player2Score.value}" style="font-size: 10pt" converter="scoreConverter"/>
+                    <h:outputText value="#{challengeableGame.player2Score.value}" style="font-size: 10pt;color:red" converter="scoreConverter" rendered="${challengeableGame.score2Greater == true}"/>
+                    <h:outputText value="#{challengeableGame.player2Score.value}" style="font-size: 10pt;color:green" converter="scoreConverter" rendered="${challengeableGame.score2Greater != true}"/>
                 </h:column>
                 <h:column>
                     <h:link styleClass="challenge" outcome="challenge/create_new_challenge" style="margin-left: 10px" value="${msgs.challenge_him}">
