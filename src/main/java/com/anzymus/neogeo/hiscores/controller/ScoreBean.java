@@ -36,6 +36,7 @@ import com.anzymus.neogeo.hiscores.clients.AuthenticationFailed;
 import com.anzymus.neogeo.hiscores.clients.Messages;
 import com.anzymus.neogeo.hiscores.clients.NeoGeoFansClient;
 import com.anzymus.neogeo.hiscores.clients.NeoGeoFansClientFactory;
+import com.anzymus.neogeo.hiscores.common.ImageFetcher;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
@@ -85,6 +86,8 @@ public class ScoreBean {
 
 	@VisibleForTesting
 	FacesContext facesContext = FacesContext.getCurrentInstance();
+
+	private ImageFetcher imageFetcher = new ImageFetcher();
 
 	private boolean showPostCheckBox;
 
@@ -196,7 +199,7 @@ public class ScoreBean {
 		Score scoreFromDb = scoreService.findById(Integer.parseInt(id));
 		scoreFromDb.setMessage(message);
 		scoreFromDb.setGame(game);
-		scoreFromDb.setPictureUrl(pictureUrl);
+		scoreFromDb.setPictureUrl(imageFetcher.get(pictureUrl));
 		scoreFromDb.setLevel(currentLevel);
 		scoreFromDb.setValue(score);
 		scoreFromDb.setAllClear(allClear || ALL_CLEAR.equals(stage));
@@ -211,7 +214,7 @@ public class ScoreBean {
 		if (player == null) {
 			player = playerService.store(new Player(fullname));
 		}
-		Score scoreToAdd = new Score(score, player, currentLevel, game, pictureUrl);
+		Score scoreToAdd = new Score(score, player, currentLevel, game, imageFetcher.get(pictureUrl));
 		scoreToAdd.setAllClear(allClear || ALL_CLEAR.equals(stage));
 		scoreToAdd.setStage(stage);
 		int end = message.length() > MAX_MESSAGE_LENGTH ? MAX_MESSAGE_LENGTH : message.length();
