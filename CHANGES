@@ -1,3 +1,7 @@
+1.6.1
+- feature: add Image Fetcher
+- bugfix: change colors in Challenge table
+
 1.6.0
 - feature: challenges
 - bugfix: 1cc wall only for MVS scorers
