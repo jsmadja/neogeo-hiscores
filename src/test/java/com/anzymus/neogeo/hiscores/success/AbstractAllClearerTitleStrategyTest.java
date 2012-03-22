@@ -48,7 +48,7 @@ public abstract class AbstractAllClearerTitleStrategyTest {
     public void should_detect_unlocking() {
         when(titleService.getNumAllClearsByPlayer(player)).thenReturn(getNumAllClearsToCreate());
 
-        boolean unlocked = titleUnlockingStrategy.isUnlocked(player);
+        boolean unlocked = titleUnlockingStrategy.isUnlockable(player);
 
         assertTrue(unlocked);
     }
@@ -57,7 +57,7 @@ public abstract class AbstractAllClearerTitleStrategyTest {
     public void should_not_detect_unlocking() {
         when(titleService.getNumAllClearsByPlayer(player)).thenReturn(0);
 
-        boolean unlocked = titleUnlockingStrategy.isUnlocked(player);
+        boolean unlocked = titleUnlockingStrategy.isUnlockable(player);
 
         assertFalse(unlocked);
     }

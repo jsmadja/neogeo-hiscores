@@ -105,4 +105,10 @@ public class ChallengeService {
 		return commonsGames;
 	}
 
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void deleteAll() {
+		Query query = em.createQuery("DELETE FROM Challenge");
+		query.executeUpdate();
+	}
+
 }

@@ -23,11 +23,13 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import com.anzymus.neogeo.hiscores.domain.Player;
 
 @Stateless
+@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public class PlayerService {
 
 	@PersistenceContext
@@ -67,6 +69,12 @@ public class PlayerService {
 
 	public long getNumberOfPlayers() {
 		return (Long) em.createNamedQuery("player_getNumberOfPlayers").getSingleResult();
+	}
+
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void deleteAll() {
+		Query query = em.createQuery("DELETE FROM Player");
+		query.executeUpdate();
 	}
 
 }

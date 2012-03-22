@@ -46,7 +46,7 @@ public class FirstScoreTitleStrategyTest {
 
         when(titleService.getNumScoresByPlayer(player)).thenReturn(1L);
 
-        boolean unlocked = firstScoreTitle.isUnlocked(player);
+        boolean unlocked = firstScoreTitle.isUnlockable(player);
         assertTrue(unlocked);
     }
 
@@ -56,7 +56,7 @@ public class FirstScoreTitleStrategyTest {
 
         when(titleService.getNumScoresByPlayer(player)).thenReturn(0L);
 
-        boolean unlocked = firstScoreTitle.isUnlocked(player);
+        boolean unlocked = firstScoreTitle.isUnlockable(player);
         assertFalse(unlocked);
     }
 

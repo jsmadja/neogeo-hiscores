@@ -26,6 +26,8 @@ import java.util.Set;
 
 import com.anzymus.neogeo.hiscores.comparator.ScoreComparator;
 import com.anzymus.neogeo.hiscores.comparator.ScoreSortedByValueDescComparator;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Sets;
 
 public class Scores implements Iterable<Score> {
 
@@ -108,6 +110,27 @@ public class Scores implements Iterable<Score> {
 			}
 		}
 		return scoresByLevel;
+	}
+
+	public int getRank(Player player) {
+		keepOnlyLevel("MVS");
+		List<Score> asSortedList = asSortedList();
+		for (int i = 0; i < asSortedList.size(); i++) {
+			if (asSortedList.get(i).getPlayer().equals(player)) {
+				return i + 1;
+			}
+		}
+		throw new RuntimeException("Player " + player.getFullname() + " is not in scores");
+	}
+
+	private void keepOnlyLevel(final String level) {
+		Predicate<Score> predicate = new Predicate<Score>() {
+			@Override
+			public boolean apply(Score score) {
+				return score.getLevel().equals(level);
+			}
+		};
+		scores = Sets.filter(scores, predicate);
 	}
 
 }

@@ -51,14 +51,14 @@ public class WorldHeroTitleStrategyTest {
         when(titleService.hasScoreInGame(player, "World Heroes 2 Jet")).thenReturn(true);
         when(titleService.hasScoreInGame(player, "World Heroes Perfect")).thenReturn(true);
 
-        boolean unlocked = worldHeroTitleStrategy.isUnlocked(player);
+        boolean unlocked = worldHeroTitleStrategy.isUnlockable(player);
         assertTrue(unlocked);
     }
 
     @Test
     public void should_not_detect_unlocked_title() {
         Player player = new Player();
-        boolean unlocked = worldHeroTitleStrategy.isUnlocked(player);
+        boolean unlocked = worldHeroTitleStrategy.isUnlockable(player);
         assertFalse(unlocked);
     }
 

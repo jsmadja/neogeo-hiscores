@@ -40,7 +40,8 @@ import com.google.common.base.Objects;
 		@NamedQuery(name = "score_findAllOneCreditScoresByGame", query = "SELECT s FROM Score s WHERE s.game = :game AND s.allClear = true"),
 		@NamedQuery(name = "score_findAllByPlayer", query = "SELECT s FROM Score s WHERE s.player = :player"),
 		@NamedQuery(name = "score_findAll", query = "SELECT s FROM Score s"),
-		@NamedQuery(name = "score_findAllOrderByDateDesc", query = "SELECT s FROM Score s ORDER BY s.creationDate DESC") //
+		@NamedQuery(name = "score_findAllOrderByDateDesc", query = "SELECT s FROM Score s ORDER BY s.creationDate DESC"),
+		@NamedQuery(name = "score_getNumScoredGamesByGenres", query = "SELECT COUNT(DISTINCT s.game) FROM Score s WHERE s.player = :player AND s.game.genre IN :genres") //
 })
 public class Score implements Serializable {
 
@@ -235,4 +236,5 @@ public class Score implements Serializable {
 	public boolean isSoccerWithGoalAverage() {
 		return value.matches(SOCCER_WITH_GOAL_AVERAGE_PATTERN);
 	}
+
 }

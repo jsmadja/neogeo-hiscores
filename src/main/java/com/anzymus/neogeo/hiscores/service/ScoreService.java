@@ -53,10 +53,10 @@ public class ScoreService {
 	public Scores findAllByGameThisMonth(Game game) {
 		TypedQuery<Score> query = em.createNamedQuery("score_findAllByGameThisMonth", Score.class);
 		query.setParameter("game", game);
-                int lastDay = 31;
-                if(new DateTime().getMonthOfYear() == 2) {
-                    lastDay = 29;
-                }
+		int lastDay = 31;
+		if (new DateTime().getMonthOfYear() == 2) {
+			lastDay = 29;
+		}
 		Date beginDate = new DateTime().withDayOfMonth(1).toDate();
 		Date endDate = new DateTime().withDayOfMonth(lastDay).toDate();
 		query.setParameter("beginDate", beginDate);
@@ -154,5 +154,10 @@ public class ScoreService {
 		return Queries.getCount(query);
 	}
 
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void deleteAll() {
+		Query query = em.createQuery("DELETE FROM Score");
+		query.executeUpdate();
+	}
 
 }

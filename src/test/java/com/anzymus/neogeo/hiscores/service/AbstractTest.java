@@ -25,10 +25,12 @@ import javax.naming.Context;
 import javax.naming.NamingException;
 
 import org.apache.commons.lang.RandomStringUtils;
+import org.junit.Before;
 
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
+import com.anzymus.neogeo.hiscores.domain.Title;
 import com.anzymus.neogeo.hiscores.service.halloffame.HallOfOneCreditService;
 import com.anzymus.neogeo.hiscores.webservice.AdministrationWebService;
 
@@ -43,6 +45,7 @@ public abstract class AbstractTest {
 	protected static GameService gameService;
 	protected static TitleService titleService;
 	protected static TitleUnlockingService titleUnlockingService;
+	protected static TitleRelockingService titleRelockingService;
 	protected static AdministrationWebService administrationWebService;
 	protected static HallOfOneCreditService hallOfOneCreditService;
 	protected static ChallengeService challengeService;
@@ -60,6 +63,7 @@ public abstract class AbstractTest {
 			gameService = (GameService) lookup("GameService");
 			titleService = (TitleService) lookup("TitleService");
 			titleUnlockingService = (TitleUnlockingService) lookup("TitleUnlockingService");
+			titleRelockingService = (TitleRelockingService) lookup("TitleRelockingService");
 			hallOfOneCreditService = (HallOfOneCreditService) lookup("HallOfOneCreditService");
 			challengeService = (ChallengeService) lookup("ChallengeService");
 
@@ -71,6 +75,16 @@ public abstract class AbstractTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Before
+	public void init() {
+		titleUnlockingService.deleteAll();
+		titleRelockingService.deleteAll();
+		titleService.deleteAll();
+		scoreService.deleteAll();
+		challengeService.deleteAll();
+		playerService.deleteAll();
 	}
 
 	private static Object lookup(String key) throws NamingException {
@@ -98,6 +112,16 @@ public abstract class AbstractTest {
 		Player player = new Player(fullname);
 		player = playerService.store(player);
 		return player;
+	}
+
+	protected Title createTitle() {
+		Title title = new Title();
+		title.setClassname("com.anzymus.neogeo.hiscores.success.FirstScoreTitleStrategy");
+		title.setDescription("A title");
+		title.setLabel("First score");
+		title.setPosition(1L);
+		title = titleService.store(title);
+		return title;
 	}
 
 }

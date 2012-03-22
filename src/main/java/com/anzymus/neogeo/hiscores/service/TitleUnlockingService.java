@@ -74,7 +74,7 @@ public class TitleUnlockingService {
 	}
 
 	private boolean isUnlockable(Player player, Title title, TitleUnlockingStrategy strategy) {
-		return player.hasNotUnlocked(title) && strategy.isUnlocked(player);
+		return player.hasNotUnlocked(title) && strategy.isUnlockable(player);
 	}
 
 	public List<UnlockedTitle> findLastUnlockedTitlesOrderByDateDesc() {
@@ -88,5 +88,15 @@ public class TitleUnlockingService {
 		String sql = "SELECT p.* FROM UNLOCKED_TITLE ut, PLAYER p WHERE ut.player_id = p.id GROUP BY ut.player_id ORDER BY COUNT(ut.id) DESC";
 		Query query = em.createNativeQuery(sql, Player.class);
 		return query.getResultList();
+	}
+
+	public boolean isRelockable(Title title, Player player) {
+		return !strategiesByTitle.get(title).isUnlockable(player);
+	}
+
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void deleteAll() {
+		Query query = em.createQuery("DELETE FROM UnlockedTitle");
+		query.executeUpdate();
 	}
 }

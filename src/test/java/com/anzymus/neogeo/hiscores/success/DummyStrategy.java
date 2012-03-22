@@ -21,7 +21,7 @@ import com.anzymus.neogeo.hiscores.domain.Player;
 public class DummyStrategy extends AbstractTitleStrategy {
 
     @Override
-    public boolean isUnlocked(Player player) {
+    public boolean isUnlockable(Player player) {
         return true;
     }
 

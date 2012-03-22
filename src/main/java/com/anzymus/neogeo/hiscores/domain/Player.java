@@ -56,6 +56,9 @@ public class Player implements Serializable {
 	@OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
 	private Set<UnlockedTitle> unlockedTitles = new HashSet<UnlockedTitle>();
 
+	@OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
+	private Set<RelockedTitle> relockedTitles = new HashSet<RelockedTitle>();
+
 	private Long avatarId = 0L;
 
 	public Player() {
@@ -139,6 +142,14 @@ public class Player implements Serializable {
 
 	public void setAvatarId(Long avatarId) {
 		this.avatarId = avatarId;
+	}
+
+	public void setRelockedTitles(Set<RelockedTitle> relockedTitles) {
+		this.relockedTitles = relockedTitles;
+	}
+
+	public Set<RelockedTitle> getRelockedTitles() {
+		return relockedTitles;
 	}
 
 }

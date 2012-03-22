@@ -46,7 +46,7 @@ public abstract class AbstractMegaShockTitleStrategyTest {
     public void should_detect_unlocking() {
         when(titleService.getNumScoresByPlayer(player)).thenReturn(getNumScoresToCreate());
 
-        boolean unlocked = titleUnlockingStrategy.isUnlocked(player);
+        boolean unlocked = titleUnlockingStrategy.isUnlockable(player);
 
         assertTrue(unlocked);
     }
@@ -55,7 +55,7 @@ public abstract class AbstractMegaShockTitleStrategyTest {
     public void should_not_detect_unlocking() {
         when(titleService.getNumScoresByPlayer(player)).thenReturn(0L);
 
-        boolean unlocked = titleUnlockingStrategy.isUnlocked(player);
+        boolean unlocked = titleUnlockingStrategy.isUnlockable(player);
 
         assertFalse(unlocked);
     }

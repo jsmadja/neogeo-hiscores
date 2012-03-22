@@ -17,7 +17,6 @@
 package com.anzymus.neogeo.hiscores.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
@@ -46,8 +45,11 @@ public class PlayerServiceIT extends AbstractTest {
 
 	@Test
 	public void should_get_number_of_players() {
+		createPlayer();
+		createPlayer();
+		createPlayer();
 		List<Player> players = playerService.findAll();
-		assertFalse(players.isEmpty());
+		assertEquals(3, players.size());
 		assertEquals(players.size(), playerService.getNumberOfPlayers());
 	}
 

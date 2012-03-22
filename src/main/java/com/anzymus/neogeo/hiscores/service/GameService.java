@@ -16,6 +16,7 @@
 
 package com.anzymus.neogeo.hiscores.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -102,13 +103,27 @@ public class GameService {
 	public List<Game> findAllPlayedGamesThisMonth() {
 		Query query = em.createNativeQuery(Game.findAllPlayedGamesThisMonth, Game.class);
 		Date beginDate = new DateTime().withDayOfMonth(1).toDate();
-                int lastDay = 31;
-                if(new DateTime().getMonthOfYear() == 2) {
-                    lastDay = 29;
-                }
+		int lastDay = 31;
+		if (new DateTime().getMonthOfYear() == 2) {
+			lastDay = 29;
+		}
 		Date endDate = new DateTime().withDayOfMonth(lastDay).toDate();
 		query.setParameter(1, beginDate);
 		query.setParameter(2, endDate);
+		return query.getResultList();
+	}
+
+	public List<Game> findGamesByGenres(String[] genres) {
+		List<Game> games = new ArrayList<Game>();
+		for (String genre : genres) {
+			games.addAll(findGamesByGenre(genre));
+		}
+		return games;
+	}
+
+	private List<Game> findGamesByGenre(String genre) {
+		TypedQuery<Game> query = em.createNamedQuery("game_findGamesByGenre", Game.class);
+		query.setParameter(1, genre);
 		return query.getResultList();
 	}
 

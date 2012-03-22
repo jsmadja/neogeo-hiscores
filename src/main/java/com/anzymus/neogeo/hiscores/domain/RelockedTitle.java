@@ -20,11 +20,12 @@ import static com.google.common.base.Objects.equal;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.JoinColumn;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,37 +33,40 @@ import javax.persistence.TemporalType;
 import com.google.common.base.Objects;
 
 @Entity
-@Table(name = "UNLOCKED_TITLE")
-@NamedQueries({//
-@NamedQuery(name = "findLastUnlockedTitlesOrderByDateDesc", query = "SELECT ut FROM UnlockedTitle ut ORDER BY ut.unlockDate DESC") //
-})
-public class UnlockedTitle {
+@Table(name = "RELOCKED_TITLE")
+public class RelockedTitle {
 
 	@Id
 	@GeneratedValue
 	private Long id;
 
+	@JoinColumn(nullable = false)
 	private Player player;
 
+	@JoinColumn(nullable = false)
 	private Title title;
 
+	@Column(name = "RELOCK_DATE", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date unlockDate;
+	private Date relockDate;
 
-	public UnlockedTitle() {
+	@JoinColumn
+	// (nullable = false)
+	private Score relockerScore;
+
+	public RelockedTitle() {
 
 	}
 
-	public UnlockedTitle(Player player, Title title) {
-		this.player = player;
-		this.title = title;
-		this.unlockDate = new Date();
+	@PrePersist
+	public void prePersist() {
+		relockDate = new Date();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof UnlockedTitle) {
-			UnlockedTitle u = (UnlockedTitle) obj;
+		if (obj instanceof RelockedTitle) {
+			RelockedTitle u = (RelockedTitle) obj;
 			return equal(player, u.player) && equal(title, u.title);
 		}
 		return false;
@@ -97,21 +101,20 @@ public class UnlockedTitle {
 		this.title = title;
 	}
 
-	public Date getUnlockDate() {
-		return unlockDate;
+	public Score getRelockerScore() {
+		return relockerScore;
 	}
 
-	public void setUnlockDate(Date unlockDate) {
-		this.unlockDate = unlockDate;
+	public void setRelockerScore(Score relockerScore) {
+		this.relockerScore = relockerScore;
 	}
 
-	@Override
-	public String toString() {
-		return Objects.toStringHelper(this).//
-				add("Title", title).//
-				add("Player", player).//
-				add("Unlock date", unlockDate).//
-				toString();
+	public void setRelockDate(Date relockDate) {
+		this.relockDate = relockDate;
+	}
+
+	public Date getRelockDate() {
+		return relockDate;
 	}
 
 }

@@ -22,7 +22,7 @@ import com.anzymus.neogeo.hiscores.domain.Player;
 public abstract class AbstractUnlockingByScoringInManyGamesStrategy extends AbstractTitleStrategy {
 
     @Override
-    public boolean isUnlocked(Player player) {
+    public boolean isUnlockable(Player player) {
         List<String> gameNames = getGameNamesToScore();
         for (String gameName : gameNames) {
             if (!titleService.hasScoreInGame(player, gameName)) {

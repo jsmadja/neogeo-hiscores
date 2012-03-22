@@ -34,7 +34,8 @@ import com.google.common.base.Objects;
 @Table(name = "GAME", uniqueConstraints = @UniqueConstraint(columnNames = { "NAME" }))
 @NamedQueries({ //
 @NamedQuery(name = "game_findAll", query = "SELECT g FROM Game g ORDER BY g.name ASC"), //
-		@NamedQuery(name = "game_findByName", query = "SELECT g FROM Game g WHERE g.name = :name") //
+		@NamedQuery(name = "game_findByName", query = "SELECT g FROM Game g WHERE g.name = :name"), //
+		@NamedQuery(name = "game_findGamesByGenre", query = "SELECT g FROM Game g WHERE g.genre = :genre") //
 })
 public class Game implements Comparable<Game>, Serializable {
 
@@ -56,6 +57,9 @@ public class Game implements Comparable<Game>, Serializable {
 	private String name;
 
 	private Long postId;
+
+	@Column(nullable = false)
+	private String genre = "Unknown";
 
 	@Column(nullable = true, name = "CUSTOM_STAGE_VALUES")
 	private String customStageValues;
@@ -138,6 +142,14 @@ public class Game implements Comparable<Game>, Serializable {
 
 	public void setContribution(int contribution) {
 		this.contribution = contribution;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	public String getGenre() {
+		return genre;
 	}
 
 }
