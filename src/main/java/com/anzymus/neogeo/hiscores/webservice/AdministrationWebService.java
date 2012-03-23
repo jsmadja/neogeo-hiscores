@@ -17,9 +17,11 @@
 package com.anzymus.neogeo.hiscores.webservice;
 
 import java.util.List;
+
 import javax.ejb.EJB;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
@@ -31,86 +33,64 @@ import com.anzymus.neogeo.hiscores.service.TitleUnlockingService;
 @WebService
 public class AdministrationWebService {
 
-    @EJB
-    GameService gameService;
+	@EJB
+	GameService gameService;
 
-    @EJB
-    ScoreService scoreService;
+	@EJB
+	ScoreService scoreService;
 
-    @EJB
-    PlayerService playerService;
+	@EJB
+	PlayerService playerService;
 
-    @EJB
-    TitleUnlockingService titleUnlockingService;
+	@EJB
+	TitleUnlockingService titleUnlockingService;
 
-    @WebMethod
-    public void initializeGameList(String list) {
-        String[] games = list.split(";");
-        for (String gameName : games) {
-            addGame(gameName.trim());
-        }
-    }
+	@WebMethod
+	public void addScore(String gameName, String level, String fullname, String scorePoints, String pictureUrl,
+			String message) {
+		Game game = gameService.findByName(gameName);
+		Player player = playerService.findByFullname(fullname);
+		if (player == null) {
+			player = playerService.store(new Player(fullname));
+		}
+		Score score = new Score(scorePoints, player, level, game, pictureUrl);
+		score.setMessage(message);
+		scoreService.store(score);
+	}
 
-    @WebMethod
-    public void initializeScoreList(String list) {
-        String[] scores = list.split(",");
-        for (String scoreLine : scores) {
-            String[] scoreValue = scoreLine.split(";");
-            for (int i = 0; i < scoreValue.length; i++) {
-                scoreValue[i] = scoreValue[i].replaceAll("\"", "").trim();
-            }
-            String fullname = scoreValue[1];
-            String message = scoreValue.length >= 5 ? scoreValue[4] : "";
-            addScore(scoreValue[0], "MVS", fullname, scoreValue[2], scoreValue[3], message);
-        }
-    }
+	@WebMethod
+	public void addGame(String name) {
+		Game game = new Game(name);
+		gameService.store(game);
+	}
 
-    @WebMethod
-    public void addScore(String gameName, String level, String fullname, String scorePoints, String pictureUrl,
-            String message) {
-        Game game = gameService.findByName(gameName);
-        Player player = playerService.findByFullname(fullname);
-        if (player == null) {
-            player = playerService.store(new Player(fullname));
-        }
-        Score score = new Score(scorePoints, player, level, game, pictureUrl);
-        score.setMessage(message);
-        scoreService.store(score);
-    }
+	@WebMethod
+	public void deleteScore(Long scoreId) {
+		scoreService.delete(scoreId);
+	}
 
-    @WebMethod
-    public void addGame(String name) {
-        Game game = new Game(name);
-        gameService.store(game);
-    }
+	@WebMethod
+	public void unlockNewTitles() {
+		List<Player> players = playerService.findAll();
+		for (Player player : players) {
+			titleUnlockingService.searchUnlockedTitlesFor(player);
+		}
+	}
 
-    @WebMethod
-    public void deleteScore(Long scoreId) {
-        scoreService.delete(scoreId);
-    }
+	public void setGameService(GameService gameService) {
+		this.gameService = gameService;
+	}
 
-    @WebMethod
-    public void unlockNewTitles() {
-        List<Player> players = playerService.findAll();
-        for (Player player : players) {
-            titleUnlockingService.searchUnlockedTitlesFor(player);
-        }
-    }
+	public void setScoreService(ScoreService scoreService) {
+		this.scoreService = scoreService;
+	}
 
-    public void setGameService(GameService gameService) {
-        this.gameService = gameService;
-    }
+	public void setPlayerService(PlayerService playerService) {
+		this.playerService = playerService;
+	}
 
-    public void setScoreService(ScoreService scoreService) {
-        this.scoreService = scoreService;
-    }
-
-    public void setPlayerService(PlayerService playerService) {
-        this.playerService = playerService;
-    }
-
-    public void setTitleUnlockingService(TitleUnlockingService titleUnlockingService) {
-        this.titleUnlockingService = titleUnlockingService;
-    }
+	public void setTitleUnlockingService(TitleUnlockingService titleUnlockingService) {
+		this.titleUnlockingService = titleUnlockingService;
+	}
 
 }
