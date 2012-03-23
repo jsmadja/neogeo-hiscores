@@ -27,6 +27,7 @@ import org.slf4j.LoggerFactory;
 
 import com.anzymus.neogeo.hiscores.converter.ScoreConverter;
 import com.anzymus.neogeo.hiscores.domain.Challenge;
+import com.anzymus.neogeo.hiscores.domain.RelockedTitle;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Timeline;
 import com.anzymus.neogeo.hiscores.domain.TimelineItem;
@@ -96,6 +97,8 @@ public class TimelineRss {
 			return createScoreEntry(item.getScore());
 		} else if (item.getUnlockedTitle() != null) {
 			return createUnlockedTitleEntry(item.getUnlockedTitle());
+		} else if (item.getRelockedTitle() != null) {
+			return createRelockedTitleEntry(item.getRelockedTitle());
 		}
 		return createChallengeEntry(item.getChallenge());
 	}
@@ -129,6 +132,16 @@ public class TimelineRss {
 		title += " unlocked title " + titleLabel;
 		String link = "http://www.neogeo-hiscores.com/faces/player/view.xhtml?fullname=" + playerName;
 		Date date = unlockedTitle.getUnlockDate();
+		return createEntry(title, link, date);
+	}
+
+	private SyndEntry createRelockedTitleEntry(RelockedTitle relockedTitle) {
+		String titleLabel = relockedTitle.getTitle().getLabel();
+		String playerName = relockedTitle.getPlayer().getFullname();
+		String title = playerName;
+		title += " lost the title " + titleLabel;
+		String link = "http://www.neogeo-hiscores.com/faces/player/view.xhtml?fullname=" + playerName;
+		Date date = relockedTitle.getRelockDate();
 		return createEntry(title, link, date);
 	}
 
