@@ -23,6 +23,7 @@ public class TimelineItem {
 	private UnlockedTitle unlockedTitle;
 	private String avatarUrl;
 	private Challenge challenge;
+	private RelockedTitle relockedTitle;
 
 	public TimelineItem(Score score) {
 		this.score = score;
@@ -30,6 +31,10 @@ public class TimelineItem {
 
 	public TimelineItem(UnlockedTitle unlockedTitle) {
 		this.unlockedTitle = unlockedTitle;
+	}
+
+	public TimelineItem(RelockedTitle relockedTitle) {
+		this.setRelockedTitle(relockedTitle);
 	}
 
 	public TimelineItem(Challenge challenge) {
@@ -66,6 +71,14 @@ public class TimelineItem {
 
 	public Challenge getChallenge() {
 		return challenge;
+	}
+
+	public void setRelockedTitle(RelockedTitle relockedTitle) {
+		this.relockedTitle = relockedTitle;
+	}
+
+	public RelockedTitle getRelockedTitle() {
+		return relockedTitle;
 	}
 
 }

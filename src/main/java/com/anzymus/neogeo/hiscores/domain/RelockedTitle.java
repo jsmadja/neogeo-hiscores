@@ -25,6 +25,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -34,6 +36,9 @@ import com.google.common.base.Objects;
 
 @Entity
 @Table(name = "RELOCKED_TITLE")
+@NamedQueries({//
+@NamedQuery(name = "findLastRelockedTitlesOrderByDateDesc", query = "SELECT rt FROM RelockedTitle rt ORDER BY rt.relockDate DESC") //
+})
 public class RelockedTitle {
 
 	@Id
@@ -50,8 +55,7 @@ public class RelockedTitle {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date relockDate;
 
-	@JoinColumn
-	// (nullable = false)
+	@JoinColumn(name = "RELOCKER_SCORE", nullable = false)
 	private Score relockerScore;
 
 	public RelockedTitle() {

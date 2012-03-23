@@ -58,7 +58,7 @@ public class Game implements Comparable<Game>, Serializable {
 
 	private Long postId;
 
-	@Column(nullable = false)
+	@Column(name = "GENRE", nullable = false)
 	private String genre = "Unknown";
 
 	@Column(nullable = true, name = "CUSTOM_STAGE_VALUES")

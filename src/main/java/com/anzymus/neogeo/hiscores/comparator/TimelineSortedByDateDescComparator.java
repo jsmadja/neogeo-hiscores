@@ -40,6 +40,9 @@ public class TimelineSortedByDateDescComparator implements Comparator<TimelineIt
 		if (timelineItem.getUnlockedTitle() != null) {
 			return timelineItem.getUnlockedTitle().getUnlockDate();
 		}
+		if (timelineItem.getRelockedTitle() != null) {
+			return timelineItem.getRelockedTitle().getRelockDate();
+		}
 		return timelineItem.getChallenge().getCreationDate();
 	}
 }

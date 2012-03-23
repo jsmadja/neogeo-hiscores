@@ -26,6 +26,7 @@ import javax.ejb.Stateless;
 
 import com.anzymus.neogeo.hiscores.comparator.TimelineSortedByDateDescComparator;
 import com.anzymus.neogeo.hiscores.domain.Challenge;
+import com.anzymus.neogeo.hiscores.domain.RelockedTitle;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Timeline;
 import com.anzymus.neogeo.hiscores.domain.TimelineItem;
@@ -47,6 +48,7 @@ public class TimelineService {
 		Timeline timeline = new Timeline();
 		addLastScores(timeline);
 		addLastUnlockedTitles(timeline);
+		addLastRelockedTitles(timeline);
 		addLastChallenges(timeline);
 		sortItemsByDateDesc(timeline);
 		return timeline;
@@ -87,6 +89,15 @@ public class TimelineService {
 		for (UnlockedTitle unlockTitle : unlockedTitles) {
 			TimelineItem item = new TimelineItem(unlockTitle);
 			item.setPictureUrl("myimages/success.png");
+			timeline.getItems().add(item);
+		}
+	}
+
+	private void addLastRelockedTitles(Timeline timeline) {
+		List<RelockedTitle> relockedTitles = titleUnlockingService.findLastRelockedTitlesOrderByDateDesc();
+		for (RelockedTitle relockTitle : relockedTitles) {
+			TimelineItem item = new TimelineItem(relockTitle);
+			item.setPictureUrl("myimages/relock_title.png");
 			timeline.getItems().add(item);
 		}
 	}

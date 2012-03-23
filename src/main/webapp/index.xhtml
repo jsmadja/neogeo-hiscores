@@ -32,7 +32,7 @@
                     <tr>
                         <td>
                             <c:choose>
-                                <c:when test="${item.unlockedTitle != null || item.challenge != null}">
+                                <c:when test="${item.unlockedTitle != null || item.relockedTitle != null || item.challenge != null}">
                                     <img src="${contextPathStatic}/${item.pictureUrl}" width="100px" border="0" />
                                 </c:when>
                                 <c:otherwise>
@@ -58,42 +58,50 @@
                                         <br/>
                                         <h:outputText value="${item.unlockedTitle.unlockDate}" style="font-size:10pt" converter="dateConverter"/>
                                     </c:when>
+                                    <c:when test="${item.relockedTitle != null}">
+                                        <h:link styleClass="player" outcome="player" value="${item.relockedTitle.player.fullname}">
+                                            <f:param name="fullname" value="${item.relockedTitle.player.fullname}"/>
+                                        </h:link><br/>
+                                        ${msgs.relocked_the_title} <h:outputText value="${item.relockedTitle.title.label}" styleClass="score" /> ${msgs.cause_of_relocking} <h:link styleClass="player" outcome="player" value="${item.relockedTitle.relockerScore.player.fullname}">
+                                            <f:param name="fullname" value="${item.relockedTitle.player.fullname}"/>
+                                        </h:link> ${msgs.on} <h:link styleClass="game" outcome="game" value="${item.relockedTitle.relockerScore.game.name}">
+                                            <f:param name="id" value="${item.relockedTitle.relockerScore.game.id}"/>
+                                        </h:link>
+                                        <br/>
+                                        <h:outputText value="${item.relockedTitle.relockDate}" style="font-size:10pt" converter="dateConverter"/>
+                                    </c:when>
+                                    <c:when test="${item.challenge != null}">
+                                        <h:link styleClass="player" outcome="player" value="${item.challenge.player1.fullname}">
+                                            <f:param name="fullname" value="${item.challenge.player1.fullname}"/>
+                                        </h:link> 
+                                        ${msgs.versus} 
+                                        <h:link styleClass="player" outcome="player" value="${item.challenge.player2.fullname}">
+                                            <f:param name="fullname" value="${item.challenge.player2.fullname}"/> </h:link> 
+                                        ${msgs.on}
+                                        <h:link styleClass="game" outcome="game" value="${item.challenge.game.name}">
+                                            <f:param name="id" value="${item.challenge.game.id}"/>
+                                        </h:link>
+                                        <br/>
+                                        <h:outputText value="${item.challenge.title}" style="font-size:10pt;font-style: italic"/>
+                                        <br/>
+                                        <h:outputText value="${item.challenge.creationDate}" style="font-size:10pt" converter="dateConverter"/>
+                                    </c:when>
                                     <c:otherwise>
-                                        <c:choose>
-                                            <c:when test="${item.challenge != null}">
-                                                <h:link styleClass="player" outcome="player" value="${item.challenge.player1.fullname}">
-                                                    <f:param name="fullname" value="${item.challenge.player1.fullname}"/>
-                                                </h:link> 
-                                                ${msgs.versus} 
-                                                <h:link styleClass="player" outcome="player" value="${item.challenge.player2.fullname}">
-                                                    <f:param name="fullname" value="${item.challenge.player2.fullname}"/> </h:link> 
-                                                ${msgs.on}
-                                                <h:link styleClass="game" outcome="game" value="${item.challenge.game.name}">
-                                                    <f:param name="id" value="${item.challenge.game.id}"/>
-                                                </h:link>
-                                                <br/>
-                                                <h:outputText value="${item.challenge.title}" style="font-size:10pt;font-style: italic"/>
-                                                <br/>
-                                                <h:outputText value="${item.challenge.creationDate}" style="font-size:10pt" converter="dateConverter"/>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <h:link styleClass="player" outcome="player" value="${item.score.player.fullname}">
-                                                    <f:param name="fullname" value="${item.score.player.fullname}"/>
-                                                </h:link><br/>
-                                                <h:link outcome="score/edit" styleClass="score" >
-                                                    <h:outputText value="${item.score.value}" converter="scoreConverter" />    
-                                                    <f:param name="scoreId" value="${item.score.id}" />
-                                                </h:link>
-                                                ${msgs.on} 
-                                                <h:link styleClass="game" outcome="game" value="${item.score.game.name}">
-                                                    <f:param name="id" value="${item.score.game.id}"/>
-                                                </h:link> (${item.score.level})
-                                                <br/>
-                                                <h:outputText value="${item.score.message}" style="font-size:10pt;font-style: italic"/>
-                                                <br/>
-                                                <h:outputText value="${item.score.creationDate}" style="font-size:10pt" converter="dateConverter"/>
-                                            </c:otherwise>
-                                        </c:choose>
+                                        <h:link styleClass="player" outcome="player" value="${item.score.player.fullname}">
+                                            <f:param name="fullname" value="${item.score.player.fullname}"/>
+                                        </h:link><br/>
+                                        <h:link outcome="score/edit" styleClass="score" >
+                                            <h:outputText value="${item.score.value}" converter="scoreConverter" />    
+                                            <f:param name="scoreId" value="${item.score.id}" />
+                                        </h:link>
+                                        ${msgs.on} 
+                                        <h:link styleClass="game" outcome="game" value="${item.score.game.name}">
+                                            <f:param name="id" value="${item.score.game.id}"/>
+                                        </h:link> (${item.score.level})
+                                        <br/>
+                                        <h:outputText value="${item.score.message}" style="font-size:10pt;font-style: italic"/>
+                                        <br/>
+                                        <h:outputText value="${item.score.creationDate}" style="font-size:10pt" converter="dateConverter"/>
                                     </c:otherwise>
                                 </c:choose>
                             </p>

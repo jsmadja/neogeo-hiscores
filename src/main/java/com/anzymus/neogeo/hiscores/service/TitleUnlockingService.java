@@ -31,6 +31,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import com.anzymus.neogeo.hiscores.domain.Player;
+import com.anzymus.neogeo.hiscores.domain.RelockedTitle;
 import com.anzymus.neogeo.hiscores.domain.Title;
 import com.anzymus.neogeo.hiscores.domain.UnlockedTitle;
 import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
@@ -53,6 +54,8 @@ public class TitleUnlockingService {
 	EntityManager em;
 
 	private static final int MAX_UNLOCKED_TITLES_TO_RETURN = 10;
+
+	private static final int MAX_RELOCKED_TITLES_TO_RETURN = 20;
 
 	@PostConstruct
 	public void init() {
@@ -81,6 +84,13 @@ public class TitleUnlockingService {
 		TypedQuery<UnlockedTitle> query = em.createNamedQuery("findLastUnlockedTitlesOrderByDateDesc",
 				UnlockedTitle.class);
 		query.setMaxResults(MAX_UNLOCKED_TITLES_TO_RETURN);
+		return query.getResultList();
+	}
+
+	public List<RelockedTitle> findLastRelockedTitlesOrderByDateDesc() {
+		TypedQuery<RelockedTitle> query = em.createNamedQuery("findLastRelockedTitlesOrderByDateDesc",
+				RelockedTitle.class);
+		query.setMaxResults(MAX_RELOCKED_TITLES_TO_RETURN);
 		return query.getResultList();
 	}
 
