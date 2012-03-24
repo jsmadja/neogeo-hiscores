@@ -16,10 +16,10 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
-public class ShmuperTitleStrategy extends AbstractGenreTitleStrategy {
+public class QuizerTitleStrategy extends AbstractGenreTitleStrategy {
 
 	protected String[] getGenres() {
-		return new String[] { "Shooter" };
+		return new String[] { "Quiz" };
 	}
 
 }

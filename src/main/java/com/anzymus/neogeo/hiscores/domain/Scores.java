@@ -120,7 +120,7 @@ public class Scores implements Iterable<Score> {
 				return i + 1;
 			}
 		}
-		throw new RuntimeException("Player " + player.getFullname() + " is not in scores");
+		return Integer.MAX_VALUE;
 	}
 
 	private void keepOnlyLevel(final String level) {

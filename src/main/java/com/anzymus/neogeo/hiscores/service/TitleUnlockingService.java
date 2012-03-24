@@ -80,6 +80,13 @@ public class TitleUnlockingService {
 		return player.hasNotUnlocked(title) && strategy.isUnlockable(player);
 	}
 
+	public boolean isRelockable(UnlockedTitle unlockedTitle) {
+		Player player = unlockedTitle.getPlayer();
+		Title title = unlockedTitle.getTitle();
+		TitleUnlockingStrategy strategy = strategiesByTitle.get(title);
+		return !strategy.isUnlockable(player);
+	}
+
 	public List<UnlockedTitle> findLastUnlockedTitlesOrderByDateDesc() {
 		TypedQuery<UnlockedTitle> query = em.createNamedQuery("findLastUnlockedTitlesOrderByDateDesc",
 				UnlockedTitle.class);
@@ -109,4 +116,21 @@ public class TitleUnlockingService {
 		Query query = em.createQuery("DELETE FROM UnlockedTitle");
 		query.executeUpdate();
 	}
+
+	public List<UnlockedTitle> findAll() {
+		TypedQuery<UnlockedTitle> query = em.createQuery("SELECT ut FROM UnlockedTitle ut", UnlockedTitle.class);
+		return query.getResultList();
+	}
+
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void remove(UnlockedTitle unlockedTitle) {
+		unlockedTitle = findById(unlockedTitle.getId());
+		unlockedTitle.getPlayer().getUnlockedTitles().remove(unlockedTitle);
+		// em.remove(unlockedTitle);
+	}
+
+	public UnlockedTitle findById(Long id) {
+		return em.find(UnlockedTitle.class, id);
+	}
+
 }

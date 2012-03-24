@@ -53,7 +53,7 @@ public class Player implements Serializable {
 	private int points;
 	@Transient
 	private int contribution;
-	@OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "player", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<UnlockedTitle> unlockedTitles = new HashSet<UnlockedTitle>();
 
 	@OneToMany(mappedBy = "player", cascade = CascadeType.ALL)

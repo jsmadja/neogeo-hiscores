@@ -123,7 +123,7 @@ public class GameService {
 
 	private List<Game> findGamesByGenre(String genre) {
 		TypedQuery<Game> query = em.createNamedQuery("game_findGamesByGenre", Game.class);
-		query.setParameter(1, genre);
+		query.setParameter("genre", genre);
 		return query.getResultList();
 	}
 

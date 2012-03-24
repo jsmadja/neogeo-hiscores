@@ -14,24 +14,12 @@
  *     limitations under the License.
  */
 
-package com.anzymus.neogeo.hiscores.webservice;
+package com.anzymus.neogeo.hiscores.success;
 
-import org.junit.Test;
+public class ShooterTitleStrategy extends AbstractGenreTitleStrategy {
 
-import com.anzymus.neogeo.hiscores.domain.Game;
-import com.anzymus.neogeo.hiscores.domain.Player;
-import com.anzymus.neogeo.hiscores.domain.Score;
-import com.anzymus.neogeo.hiscores.service.AbstractTest;
-
-public class AdministrationWebServiceIT extends AbstractTest {
-
-	@Test
-	public void should_delete_score() {
-		Player player = createPlayer();
-		Game game = createGame();
-		Score score = createScore(player, game);
-
-		administrationWebService.deleteScore(score.getId());
+	protected String[] getGenres() {
+		return new String[] { "Shooter" };
 	}
 
 }

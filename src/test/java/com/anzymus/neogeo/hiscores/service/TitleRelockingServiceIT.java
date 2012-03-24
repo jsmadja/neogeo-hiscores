@@ -61,11 +61,10 @@ public class TitleRelockingServiceIT extends AbstractTest {
 
 		Player relockerPlayer = createPlayer();
 		Score relockerScore = createScore(relockerPlayer, game);
-		titleRelockingService.relockTitles(relockerPlayer, relockerScore);
+		titleRelockingService.relockTitles(relockerScore);
 
 		scorePlayer = playerService.findById(scorePlayer.getId());
 		assertEquals(1, scorePlayer.getRelockedTitles().size());
-		scorePlayer.getUnlockedTitles().toString();
 		assertEquals(0, scorePlayer.getUnlockedTitles().size());
 	}
 
