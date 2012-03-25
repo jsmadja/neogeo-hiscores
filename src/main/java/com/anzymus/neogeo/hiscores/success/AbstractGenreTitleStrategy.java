@@ -25,15 +25,27 @@ public abstract class AbstractGenreTitleStrategy extends AbstractTitleStrategy {
 
 	@Override
 	public boolean isUnlockable(Player player) {
-		int countNok = 0;
 		List<Scores> scoresByGame = titleService.getScoresByGameGenres(getGenres());
+		if (scoresByGame.isEmpty()) {
+			return false;
+		}
+		int countNok = 0;
+		int unplayedGame = 0;
+		int countOk = 0;
 		for (Scores scores : scoresByGame) {
 			int rank = scores.getRank(player);
-			if (rank > 3) {
+			if (rank == Integer.MAX_VALUE) {
+				unplayedGame++;
+			} else if (rank > 3) {
 				countNok++;
+			} else {
+				countOk++;
 			}
 		}
-		return countNok <= (scoresByGame.size() - countNok);
+		if (unplayedGame == scoresByGame.size()) {
+			return false;
+		}
+		return countNok <= countOk;
 	}
 
 	protected abstract String[] getGenres();
