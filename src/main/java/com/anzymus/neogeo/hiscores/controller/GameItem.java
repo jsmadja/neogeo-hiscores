@@ -26,6 +26,7 @@ public class GameItem {
 	private long id;
 	private long count;
 	private Game game;
+	private String genre;
 	private List<ScoreItem> scores;
 
 	public GameItem(String name, long id) {
@@ -36,6 +37,12 @@ public class GameItem {
 	GameItem(String name, long id, long count) {
 		this(name, id);
 		this.count = count;
+	}
+
+	GameItem(String name, long id, long count, String genre) {
+		this(name, id);
+		this.count = count;
+		this.setGenre(genre);
 	}
 
 	public GameItem(Game game) {
@@ -64,5 +71,13 @@ public class GameItem {
 
 	public List<ScoreItem> getScores() {
 		return scores;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	public String getGenre() {
+		return genre;
 	}
 }

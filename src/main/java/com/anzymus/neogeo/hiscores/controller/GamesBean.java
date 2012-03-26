@@ -16,47 +16,50 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
-import com.anzymus.neogeo.hiscores.domain.Game;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+
+import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
-import javax.annotation.PostConstruct;
 
 @ManagedBean
 public class GamesBean {
 
-    @EJB
-    GameService gameService;
+	@EJB
+	GameService gameService;
 
-    @EJB
-    ScoreService scoreService;
+	@EJB
+	ScoreService scoreService;
 
-    List<GameItem> gameItems = new ArrayList<GameItem>();
+	List<GameItem> gameItems = new ArrayList<GameItem>();
 
-    @PostConstruct
-    public void init() {
-        loadGameItems();
-    }
+	@PostConstruct
+	public void init() {
+		loadGameItems();
+	}
 
-    private void loadGameItems() {
-        List<Object[]> scoreCounts = gameService.findAllScoreCountForEachGames();
-        for (Object[] scoreCount : scoreCounts) {
-            Long gameId = (Long) scoreCount[0];
-            String gameName = (String) scoreCount[1];
-            Long count = (Long) scoreCount[2];
-            GameItem gameItem = new GameItem(gameName, gameId, count);
-            gameItems.add(gameItem);
-        }
-    }
+	private void loadGameItems() {
+		List<Object[]> scoreCounts = gameService.findAllScoreCountForEachGames();
+		for (Object[] scoreCount : scoreCounts) {
+			Long gameId = (Long) scoreCount[0];
+			String gameName = (String) scoreCount[1];
+			Long count = (Long) scoreCount[2];
+			String genre = (String) scoreCount[3];
+			GameItem gameItem = new GameItem(gameName, gameId, count, genre);
+			gameItems.add(gameItem);
+		}
+	}
 
-    public List<GameItem> getGames() {
-        return gameItems;
-    }
+	public List<GameItem> getGames() {
+		return gameItems;
+	}
 
-    public List<Game> getUnplayedGames() {
-        return gameService.findAllUnplayedGames();
-    }
+	public List<Game> getUnplayedGames() {
+		return gameService.findAllUnplayedGames();
+	}
 }

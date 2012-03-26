@@ -35,46 +35,46 @@ import com.anzymus.neogeo.hiscores.service.ScoreService;
 
 public class GamesBeanTest {
 
-    @Mock
-    GameService gameService;
+	@Mock
+	GameService gameService;
 
-    @Mock
-    ScoreService scoreService;
+	@Mock
+	ScoreService scoreService;
 
-    @InjectMocks
-    GamesBean gamesBean;
+	@InjectMocks
+	GamesBean gamesBean;
 
-    @Before
-    public void init() {
-        MockitoAnnotations.initMocks(this);
-    }
+	@Before
+	public void init() {
+		MockitoAnnotations.initMocks(this);
+	}
 
-    @Test
-    public void should_get_game_list_with_scores() {
-        Object[] count = new Object[] { 0L, "Fatal Fury", 5L };
+	@Test
+	public void should_get_game_list_with_scores() {
+		Object[] count = new Object[] { 0L, "Fatal Fury", 5L, "Fighting" };
 
-        List<Object[]> scoreCount = new ArrayList<Object[]>();
-        scoreCount.add(count);
+		List<Object[]> scoreCount = new ArrayList<Object[]>();
+		scoreCount.add(count);
 
-        when(gameService.findAllScoreCountForEachGames()).thenReturn(scoreCount);
+		when(gameService.findAllScoreCountForEachGames()).thenReturn(scoreCount);
 
-        gamesBean.init();
-        List<GameItem> games = gamesBean.getGames();
-        GameItem gameItem = games.get(0);
-        assertEquals(0, gameItem.getId());
-        assertEquals("Fatal Fury", gameItem.getName());
-        assertEquals(5L, gameItem.getCount());
-    }
+		gamesBean.init();
+		List<GameItem> games = gamesBean.getGames();
+		GameItem gameItem = games.get(0);
+		assertEquals(0, gameItem.getId());
+		assertEquals("Fatal Fury", gameItem.getName());
+		assertEquals(5L, gameItem.getCount());
+	}
 
-    @Test
-    public void should_get_all_unplayed_games() {
-        List<Game> expectedUnplayedGames = new ArrayList<Game>();
-        when(gameService.findAllUnplayedGames()).thenReturn(expectedUnplayedGames);
+	@Test
+	public void should_get_all_unplayed_games() {
+		List<Game> expectedUnplayedGames = new ArrayList<Game>();
+		when(gameService.findAllUnplayedGames()).thenReturn(expectedUnplayedGames);
 
-        List<Game> actualUnplayedGames = gamesBean.getUnplayedGames();
+		List<Game> actualUnplayedGames = gamesBean.getUnplayedGames();
 
-        assertEquals(expectedUnplayedGames, actualUnplayedGames);
-        verify(gameService).findAllUnplayedGames();
-    }
+		assertEquals(expectedUnplayedGames, actualUnplayedGames);
+		verify(gameService).findAllUnplayedGames();
+	}
 
 }

@@ -30,6 +30,7 @@
             <tr>
                 <td></td>
                 <td style="text-align:right" >Scores</td>
+                <td style="text-align:right" >Genre</td>
             </tr>
             <c:forEach id="gameTable" var="gameItem" items="#{gamesBean.games}">
                 <tr>
@@ -40,6 +41,9 @@
                     </td>
                     <td style="text-align:right;color:orange">
                         <h:outputText value="${gameItem.count}" />
+                    </td>
+		    <td style="text-align:right">
+                        <h:outputText value="${gameItem.genre}" />
                     </td>
                 </tr>
             </c:forEach>
