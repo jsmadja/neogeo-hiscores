@@ -17,6 +17,8 @@
 package com.anzymus.neogeo.hiscores.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,10 +34,14 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import com.anzymus.neogeo.hiscores.comparator.ScoreSortedByValueDescComparator;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
+import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Scores;
 import com.anzymus.neogeo.hiscores.domain.Title;
+import com.anzymus.neogeo.hiscores.service.halloffame.NgfPointCalculator;
+import com.anzymus.neogeo.hiscores.service.halloffame.PointCalculator;
 import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
 
 @Stateless
@@ -125,5 +131,38 @@ public class TitleService {
 		}
 		return scores;
 	}
+
+	public double getAverageScoreFor(Player player) {
+		String level = "MVS";
+		double points = 0;
+		double contributions = 0;
+		List<Game> games = gameService.findAll();
+		for (Game game : games) {
+			Scores scores = scoreService.findAllByGame(game);
+			List<Score> scoresByLevel = scores.getScoresByLevel(level);
+			int maxPoints = scoresByLevel.size() >= 10 ? 10 : scoresByLevel.size();
+			Collections.sort(scoresByLevel, sortScoreByValueDesc);
+			Score oldScore = null;
+			int oldPoint = 0;
+			for (int i = 0; i < scoresByLevel.size() && i < 8; i++) {
+				Score score = scoresByLevel.get(i);
+				int point = pointCalculator.getPointsByIndex(i, maxPoints);
+				if (oldScore != null && score.getValue().equals(oldScore.getValue())) {
+					point = oldPoint;
+				}
+				if (score.getPlayer().equals(player)) {
+				    points += point;
+				    contributions++;
+				}
+				oldScore = score;
+				oldPoint = point;
+				
+			}
+		}
+		return points / contributions;
+	}
+
+	private Comparator<Score> sortScoreByValueDesc = new ScoreSortedByValueDescComparator();
+	private PointCalculator pointCalculator = new NgfPointCalculator();
 
 }
