@@ -30,7 +30,7 @@
             <table width="40%" style="margin-left: 200px">
                 <c:forEach var="item" items="${timelineBean.items}" >
                     <tr>
-                        <td>
+                        <td width="100px">
                             <c:choose>
                                 <c:when test="${item.unlockedTitle != null || item.relockedTitle != null || item.challenge != null}">
                                     <img src="${contextPathStatic}/${item.pictureUrl}" width="100px" border="0" />

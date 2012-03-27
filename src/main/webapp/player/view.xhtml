@@ -31,7 +31,7 @@
             <tr style="vertical-align: top">
                 <td style="vertical-align: top">
                     <table>
-                        <c:forEach var="titleItem" items="#{playerBean.titles}">
+                        <c:forEach end="${(fn:length(playerBean.titles)/2) - 1}" var="titleItem" items="#{playerBean.titles}">
                             <tr>
                                 <td>
                                     <h:outputLink styleClass="button small black" rendered="${!titleItem.unlocked}"><img src="${contextPathStatic}/myimages/lock_title.gif" /><h:outputText value=" ${titleItem.title.label}" title="${titleItem.title.description}"  /></h:outputLink>
@@ -54,18 +54,17 @@
                         </tr>
                         <c:forEach var="score" items="#{playerBean.scores}">
                             <tr>
-                                <td><h:outputText styleClass="button small red" value="Improve it!" rendered="${score.improvable}" /></td>
                                 <td style="text-align: left">
                                     <h:link styleClass="game" outcome="game" value="${score.game.name}">
                                         <f:param name="id" value="${score.game.id}"/>
-                                    </h:link>
+                                    </h:link><h:outputText styleClass="button improve red" value="Improve it!" rendered="${score.improvable}" />
                                 </td>
                                 <td>
                                     <h:outputText value="${score.level}" />
                                 </td>
                                 <td>
                                     <h:link outcome="score/edit" styleClass="score" >
-                                        <h:outputText value="${score.value}" converter="scoreConverter" />    
+                                        <h:outputText value="${score.value}" converter="scoreConverter" />
                                         <f:param name="scoreId" value="${score.id}" />
                                     </h:link>
                                 </td>
@@ -79,6 +78,18 @@
                                 <td>
                                     <h:outputText value="-" styleClass="negative-gap" rendered="${fn:length(score.negativeGap) > 0}" />
                                     <h:outputText value="${score.negativeGap}" styleClass="negative-gap" converter="scoreConverter" />
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </td>
+                <td style="vertical-align: top">
+                    <table>
+                        <c:forEach begin="${fn:length(playerBean.titles)/2}" var="titleItem" items="#{playerBean.titles}">
+                            <tr>
+                                <td>
+                                    <h:outputLink styleClass="button small black" rendered="${!titleItem.unlocked}"><img src="${contextPathStatic}/myimages/lock_title.gif" /><h:outputText value=" ${titleItem.title.label}" title="${titleItem.title.description}"  /></h:outputLink>
+                                    <h:outputLink styleClass="button small blue" rendered="${titleItem.unlocked}"><img src="${contextPathStatic}/myimages/unlocked_title.png" /><h:outputText value=" ${titleItem.title.label}" title="${titleItem.title.description}"  /></h:outputLink>
                                 </td>
                             </tr>
                         </c:forEach>
