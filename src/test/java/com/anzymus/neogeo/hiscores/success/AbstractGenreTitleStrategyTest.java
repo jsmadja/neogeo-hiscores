@@ -16,6 +16,7 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
@@ -28,7 +29,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
+import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Scores;
 import com.anzymus.neogeo.hiscores.service.TitleService;
 
@@ -204,6 +207,198 @@ public class AbstractGenreTitleStrategyTest {
 				scoresByGame);
 
 		assertFalse(abstractGenreTitleStrategy.isUnlockable(player));
+	}
+
+	@Test
+	public void should_have_an_achievement_of_0_percent() {
+		Player player = new Player();
+
+		Achievement achievement = abstractGenreTitleStrategy.getAchievementFor(player);
+
+		assertEquals(0, achievement.getProgressInPercent());
+		assertEquals(1, achievement.getSteps().size());
+		assertEquals("Have a rank Between 1st and 3rd place in Shooter games", achievement.getSteps().get(0)
+				.getDescription());
+		assertFalse(achievement.getSteps().get(0).isComplete());
+	}
+
+	@Test
+	public void should_have_an_achievement_of_0_percent_with_one_game() {
+		Player player = new Player();
+
+		List<Scores> scoresByGame = new ArrayList<Scores>();
+		Scores scores1 = mock(Scores.class);
+		List<Score> scores = new ArrayList<Score>();
+		Game game = new Game("View Point");
+		scores.add(new Score("1", player, "MVS", game, "pictureUrl"));
+		when(scores1.asSortedList()).thenReturn(scores);
+		when(scores1.getRank(player)).thenReturn(4);
+		scoresByGame.add(scores1);
+
+		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenres(any(String[].class))).thenReturn(
+				scoresByGame);
+
+		Achievement achievement = abstractGenreTitleStrategy.getAchievementFor(player);
+
+		assertEquals(0, achievement.getProgressInPercent());
+		assertEquals(1, achievement.getSteps().size());
+		assertEquals("View Point", achievement.getSteps().get(0).getDescription());
+		assertFalse(achievement.getSteps().get(0).isComplete());
+	}
+
+	@Test
+	public void should_have_an_achievement_of_100_percent() {
+		Player player = new Player();
+
+		List<Scores> scoresByGame = new ArrayList<Scores>();
+		Scores scores1 = mock(Scores.class);
+		List<Score> scores = new ArrayList<Score>();
+		Game game = new Game("View Point");
+		scores.add(new Score("1", player, "MVS", game, "pictureUrl"));
+		when(scores1.asSortedList()).thenReturn(scores);
+		when(scores1.getRank(player)).thenReturn(3);
+		scoresByGame.add(scores1);
+
+		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenres(any(String[].class))).thenReturn(
+				scoresByGame);
+
+		Achievement achievement = abstractGenreTitleStrategy.getAchievementFor(player);
+
+		assertEquals(100, achievement.getProgressInPercent());
+		assertEquals(1, achievement.getSteps().size());
+		assertEquals("View Point", achievement.getSteps().get(0).getDescription());
+		assertTrue(achievement.getSteps().get(0).isComplete());
+	}
+
+	@Test
+	public void should_have_an_achievement_of_100_percent_on_two_games() {
+		Game game1 = new Game("View Point");
+		Game game2 = new Game("Last Resort");
+
+		Player player = new Player();
+
+		List<Score> allScores1 = new ArrayList<Score>();
+		allScores1.add(new Score("1", player, "MVS", game1, "pictureUrl"));
+		Scores scores1 = mock(Scores.class);
+		when(scores1.asSortedList()).thenReturn(allScores1);
+		when(scores1.getRank(player)).thenReturn(3);
+
+		List<Score> allScores2 = new ArrayList<Score>();
+		allScores2.add(new Score("1", player, "MVS", game2, "pictureUrl"));
+		Scores scores2 = mock(Scores.class);
+		when(scores2.asSortedList()).thenReturn(allScores2);
+		when(scores2.getRank(player)).thenReturn(1);
+
+		List<Scores> scoresByGame = new ArrayList<Scores>();
+		scoresByGame.add(scores1);
+		scoresByGame.add(scores2);
+
+		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenres(any(String[].class))).thenReturn(
+				scoresByGame);
+
+		Achievement achievement = abstractGenreTitleStrategy.getAchievementFor(player);
+
+		assertEquals(100, achievement.getProgressInPercent());
+		assertEquals(2, achievement.getSteps().size());
+		assertEquals("View Point", achievement.getSteps().get(0).getDescription());
+		assertTrue(achievement.getSteps().get(0).isComplete());
+		assertEquals("Last Resort", achievement.getSteps().get(1).getDescription());
+		assertTrue(achievement.getSteps().get(1).isComplete());
+	}
+
+	@Test
+	public void should_have_an_achievement_of_100_percent_on_three_games() {
+		Game game1 = new Game("View Point");
+		Game game2 = new Game("Last Resort");
+		Game game3 = new Game("Pulstar");
+
+		Player player = new Player();
+
+		List<Score> allScores1 = new ArrayList<Score>();
+		allScores1.add(new Score("1", player, "MVS", game1, "pictureUrl"));
+		Scores scores1 = mock(Scores.class);
+		when(scores1.asSortedList()).thenReturn(allScores1);
+		when(scores1.getRank(player)).thenReturn(3);
+
+		List<Score> allScores2 = new ArrayList<Score>();
+		allScores2.add(new Score("1", player, "MVS", game2, "pictureUrl"));
+		Scores scores2 = mock(Scores.class);
+		when(scores2.asSortedList()).thenReturn(allScores2);
+		when(scores2.getRank(player)).thenReturn(1);
+
+		List<Score> allScores3 = new ArrayList<Score>();
+		allScores3.add(new Score("1", player, "MVS", game3, "pictureUrl"));
+		Scores scores3 = mock(Scores.class);
+		when(scores3.asSortedList()).thenReturn(allScores3);
+		when(scores3.getRank(player)).thenReturn(10);
+
+		List<Scores> scoresByGame = new ArrayList<Scores>();
+		scoresByGame.add(scores1);
+		scoresByGame.add(scores2);
+		scoresByGame.add(scores3);
+
+		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenres(any(String[].class))).thenReturn(
+				scoresByGame);
+
+		Achievement achievement = abstractGenreTitleStrategy.getAchievementFor(player);
+
+		assertEquals(100, achievement.getProgressInPercent());
+		assertEquals(3, achievement.getSteps().size());
+		assertEquals("View Point", achievement.getSteps().get(0).getDescription());
+		assertTrue(achievement.getSteps().get(0).isComplete());
+		assertEquals("Last Resort", achievement.getSteps().get(1).getDescription());
+		assertTrue(achievement.getSteps().get(1).isComplete());
+		assertEquals("Pulstar", achievement.getSteps().get(2).getDescription());
+		assertTrue(achievement.getSteps().get(2).isComplete());
+	}
+
+	@Test
+	public void should_have_an_achievement_of_50_percent_on_three_games() {
+		Game game1 = new Game("View Point");
+		Game game2 = new Game("Last Resort");
+		Game game3 = new Game("Pulstar");
+
+		Player player = new Player();
+
+		List<Score> allScores1 = new ArrayList<Score>();
+		allScores1.add(new Score("1", player, "MVS", game1, "pictureUrl"));
+		Scores scores1 = mock(Scores.class);
+		when(scores1.asSortedList()).thenReturn(allScores1);
+		when(scores1.getRank(player)).thenReturn(3);
+
+		List<Score> allScores2 = new ArrayList<Score>();
+		allScores2.add(new Score("1", player, "MVS", game2, "pictureUrl"));
+		Scores scores2 = mock(Scores.class);
+		when(scores2.asSortedList()).thenReturn(allScores2);
+		when(scores2.getRank(player)).thenReturn(10);
+
+		List<Score> allScores3 = new ArrayList<Score>();
+		allScores3.add(new Score("1", player, "MVS", game3, "pictureUrl"));
+		Scores scores3 = mock(Scores.class);
+		when(scores3.asSortedList()).thenReturn(allScores3);
+		when(scores3.getRank(player)).thenReturn(10);
+
+		List<Scores> scoresByGame = new ArrayList<Scores>();
+		scoresByGame.add(scores1);
+		scoresByGame.add(scores2);
+		scoresByGame.add(scores3);
+
+		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenres(any(String[].class))).thenReturn(
+				scoresByGame);
+
+		Achievement achievement = abstractGenreTitleStrategy.getAchievementFor(player);
+
+		assertEquals(50, achievement.getProgressInPercent());
+		assertEquals(3, achievement.getSteps().size());
+		assertEquals("View Point", achievement.getSteps().get(0).getDescription());
+		assertEquals("3rd", achievement.getSteps().get(0).getExtra());
+		assertTrue(achievement.getSteps().get(0).isComplete());
+		assertEquals("Last Resort", achievement.getSteps().get(1).getDescription());
+		assertEquals("10th", achievement.getSteps().get(1).getExtra());
+		assertFalse(achievement.getSteps().get(1).isComplete());
+		assertEquals("Pulstar", achievement.getSteps().get(2).getDescription());
+		assertEquals("10th", achievement.getSteps().get(2).getExtra());
+		assertFalse(achievement.getSteps().get(2).isComplete());
 	}
 
 }

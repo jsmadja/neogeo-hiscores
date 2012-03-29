@@ -34,9 +34,15 @@
                         <c:forEach end="${(fn:length(playerBean.titles)/2) - 1}" var="titleItem" items="#{playerBean.titles}">
                             <tr>
                                 <td>
-                                    <h:outputLink styleClass="button small black" rendered="${!titleItem.unlocked}"><img src="${contextPathStatic}/myimages/lock_title.gif" /><h:outputText value=" ${titleItem.title.label}" title="${titleItem.title.description}"  /></h:outputLink>
-                                    <h:outputLink styleClass="button small blue" rendered="${titleItem.unlocked}"><img src="${contextPathStatic}/myimages/unlocked_title.png" /><h:outputText value=" ${titleItem.title.label}" title="${titleItem.title.description}"  /></h:outputLink>
-                                </td>
+                                    <h:link styleClass="button small black" outcome="title/view" value="${titleItem.title.label}" rendered="${!titleItem.unlocked}">
+					<f:param name="titleId" value="${titleItem.title.id}"/>
+					<f:param name="playerId" value="${playerBean.player.id}"/>
+				    </h:link>
+				    <h:link  styleClass="button small blue" outcome="title/view" value="${titleItem.title.label}" rendered="${titleItem.unlocked}">
+					<f:param name="titleId" value="${titleItem.title.id}"/>
+					<f:param name="playerId" value="${playerBean.player.id}"/>
+				    </h:link>
+				</td>
                             </tr>
                         </c:forEach>
                     </table>
@@ -45,7 +51,6 @@
                     <table style="text-align: right; min-width:60%">
                         <tr>
                             <td></td>
-                            <td style="text-align: left"></td>
                             <td>${msgs.level}</td>
                             <td>Score</td>
                             <td>${msgs.rank}</td>
@@ -88,9 +93,15 @@
                         <c:forEach begin="${fn:length(playerBean.titles)/2}" var="titleItem" items="#{playerBean.titles}">
                             <tr>
                                 <td>
-                                    <h:outputLink styleClass="button small black" rendered="${!titleItem.unlocked}"><img src="${contextPathStatic}/myimages/lock_title.gif" /><h:outputText value=" ${titleItem.title.label}" title="${titleItem.title.description}"  /></h:outputLink>
-                                    <h:outputLink styleClass="button small blue" rendered="${titleItem.unlocked}"><img src="${contextPathStatic}/myimages/unlocked_title.png" /><h:outputText value=" ${titleItem.title.label}" title="${titleItem.title.description}"  /></h:outputLink>
-                                </td>
+				    <h:link styleClass="button small black" outcome="title/view" value="${titleItem.title.label}" rendered="${!titleItem.unlocked}">
+					<f:param name="titleId" value="${titleItem.title.id}"/>
+					<f:param name="playerId" value="${playerBean.player.id}"/>
+				    </h:link>
+				    <h:link  styleClass="button small blue" outcome="title/view" value="${titleItem.title.label}" rendered="${titleItem.unlocked}">
+					<f:param name="titleId" value="${titleItem.title.id}"/>
+					<f:param name="playerId" value="${playerBean.player.id}"/>
+				    </h:link> 
+				</td>
                             </tr>
                         </c:forEach>
                     </table>

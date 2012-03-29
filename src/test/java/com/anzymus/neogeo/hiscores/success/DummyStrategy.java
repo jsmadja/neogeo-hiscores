@@ -25,4 +25,8 @@ public class DummyStrategy extends AbstractTitleStrategy {
         return true;
     }
 
+    @Override
+    public Achievement getAchievementFor(Player player) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

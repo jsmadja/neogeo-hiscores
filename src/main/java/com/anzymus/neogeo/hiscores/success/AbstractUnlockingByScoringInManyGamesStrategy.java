@@ -16,8 +16,10 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
-import java.util.List;
 import com.anzymus.neogeo.hiscores.domain.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractUnlockingByScoringInManyGamesStrategy extends AbstractTitleStrategy {
 
@@ -30,6 +32,25 @@ public abstract class AbstractUnlockingByScoringInManyGamesStrategy extends Abst
             }
         }
         return true;
+    }
+
+    @Override
+    public Achievement getAchievementFor(Player player) {
+        int completedGamesCount = 0;
+        List<Step> steps = new ArrayList<Step>();
+        List<String> gameNames = getGameNamesToScore();
+        for (String gameName : gameNames) {
+            boolean completed = titleService.hasScoreInGame(player, gameName);
+            if (completed) {
+                completedGamesCount++;
+            }
+            steps.add(new Step("Add a score for " + gameName, completed));
+        }
+        Achievement achievement = new Achievement(percent(completedGamesCount, gameNames.size()));
+        for(Step step:steps) {
+            achievement.addStep(step);
+        }
+        return achievement;
     }
 
     abstract List<String> getGameNamesToScore();

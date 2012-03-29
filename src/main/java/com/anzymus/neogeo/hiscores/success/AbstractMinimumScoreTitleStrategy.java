@@ -20,11 +20,26 @@ import com.anzymus.neogeo.hiscores.domain.Player;
 
 public abstract class AbstractMinimumScoreTitleStrategy extends AbstractTitleStrategy {
 
-    @Override
-    public boolean isUnlockable(Player player) {
-        return titleService.getNumScoresByPlayer(player) >= getNumScoresToUnlock();
-    }
+	@Override
+	public boolean isUnlockable(Player player) {
+		return titleService.getNumScoresByPlayer(player) >= getNumScoresToUnlock();
+	}
 
-    protected abstract long getNumScoresToUnlock();
+	@Override
+	public Achievement getAchievementFor(Player player) {
+		long numScores = titleService.getNumScoresByPlayer(player);
+		if (numScores >= getNumScoresToUnlock()) {
+			numScores = getNumScoresToUnlock();
+		}
+		Achievement achievement = new Achievement(percent(numScores, getNumScoresToUnlock()));
+		achievement.addStep(new Step(getStepName(), numScores >= getNumScoresToUnlock()));
+		return achievement;
+	}
 
+	protected abstract long getNumScoresToUnlock();
+
+	protected String getStepName() {
+		long numScores = getNumScoresToUnlock();
+		return "Add " + numScores + " score" + (numScores > 1 ? "s" : "") + " in neogeo-hiscores.com";
+	}
 }

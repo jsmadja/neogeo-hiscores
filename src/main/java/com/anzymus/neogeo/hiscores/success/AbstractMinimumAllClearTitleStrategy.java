@@ -20,11 +20,27 @@ import com.anzymus.neogeo.hiscores.domain.Player;
 
 public abstract class AbstractMinimumAllClearTitleStrategy extends AbstractTitleStrategy {
 
-    @Override
-    public boolean isUnlockable(Player player) {
-        return titleService.getNumAllClearsByPlayer(player) >= getNumAllClearsToUnlock();
-    }
+	@Override
+	public boolean isUnlockable(Player player) {
+		return titleService.getNumAllClearsByPlayer(player) >= getNumAllClearsToUnlock();
+	}
 
-    protected abstract long getNumAllClearsToUnlock();
+	@Override
+	public Achievement getAchievementFor(Player player) {
+		long numAllClears = titleService.getNumAllClearsByPlayer(player);
+		if (numAllClears > getNumAllClearsToUnlock()) {
+			numAllClears = getNumAllClearsToUnlock();
+		}
+		Achievement achievement = new Achievement(percent(numAllClears, getNumAllClearsToUnlock()));
+		achievement.addStep(new Step(getStepName(), numAllClears >= getNumAllClearsToUnlock()));
+		return achievement;
+	}
+
+	protected String getStepName() {
+		long numAllClears = getNumAllClearsToUnlock();
+		return "Finish " + numAllClears + " game" + (numAllClears > 1 ? "s" : "") + " with only one credit";
+	}
+
+	protected abstract long getNumAllClearsToUnlock();
 
 }

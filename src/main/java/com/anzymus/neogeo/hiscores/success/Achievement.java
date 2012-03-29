@@ -16,10 +16,29 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
-public class QuizerTitleStrategy extends AbstractGenreTitleStrategy {
+import java.util.ArrayList;
+import java.util.List;
 
-    protected String[] getGenres() {
-        return new String[]{"Quiz"};
+public class Achievement {
+
+    private List<Step> steps = new ArrayList<Step>();
+
+    private int progressInPercent;
+
+    public Achievement(int progressInPercent) {
+        this.progressInPercent = progressInPercent;
     }
 
+    public int getProgressInPercent() {
+        return progressInPercent;
+    }
+
+
+    public List<Step> getSteps() {
+        return steps;
+    }
+
+    public void addStep(Step step) {
+        steps.add(step);
+    }
 }

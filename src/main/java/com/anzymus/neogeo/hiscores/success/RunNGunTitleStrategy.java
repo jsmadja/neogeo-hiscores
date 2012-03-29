@@ -18,8 +18,8 @@ package com.anzymus.neogeo.hiscores.success;
 
 public class RunNGunTitleStrategy extends AbstractGenreTitleStrategy {
 
-	protected String[] getGenres() {
-		return new String[] { "Run n Gun" };
-	}
+    protected String[] getGenres() {
+        return new String[]{"Run n Gun"};
+    }
 
 }

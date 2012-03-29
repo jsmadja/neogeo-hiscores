@@ -16,10 +16,12 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
+import com.anzymus.neogeo.hiscores.domain.Player;
+
 public class PuzzlerTitleStrategy extends AbstractGenreTitleStrategy {
 
-	protected String[] getGenres() {
-		return new String[] { "Puzzle" };
-	}
+    protected String[] getGenres() {
+        return new String[]{"Puzzle"};
+    }
 
 }

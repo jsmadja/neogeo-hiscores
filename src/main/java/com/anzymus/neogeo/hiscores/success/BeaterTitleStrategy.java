@@ -18,8 +18,8 @@ package com.anzymus.neogeo.hiscores.success;
 
 public class BeaterTitleStrategy extends AbstractGenreTitleStrategy {
 
-	protected String[] getGenres() {
-		return new String[] { "Beat em all" };
-	}
+    protected String[] getGenres() {
+        return new String[]{"Beat em all"};
+    }
 
 }

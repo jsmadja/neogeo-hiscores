@@ -52,7 +52,11 @@
                                         <h:link styleClass="player" outcome="player" value="${item.unlockedTitle.player.fullname}">
                                             <f:param name="fullname" value="${item.unlockedTitle.player.fullname}"/>
                                         </h:link><br/>
-                                        ${msgs.unlocked_the_title} <h:outputText value="${item.unlockedTitle.title.label}" styleClass="score" />
+                                        ${msgs.unlocked_the_title}
+                                        <h:link styleClass="score" outcome="title/view" value="${item.unlockedTitle.title.label}">
+                                            <f:param name="titleId" value="${item.unlockedTitle.title.id}"/>
+                                            <f:param name="playerId" value="${item.unlockedTitle.player.id}"/>
+                                        </h:link>
                                         <br/>
                                         <h:outputText value="${item.unlockedTitle.title.description}" style="font-size:10pt;font-style: italic"/>
                                         <br/>
@@ -62,7 +66,11 @@
                                         <h:link styleClass="player" outcome="player" value="${item.relockedTitle.player.fullname}">
                                             <f:param name="fullname" value="${item.relockedTitle.player.fullname}"/>
                                         </h:link><br/>
-                                        ${msgs.relocked_the_title} <h:outputText value="${item.relockedTitle.title.label}" styleClass="score" /> ${msgs.cause_of_relocking} <h:link styleClass="player" outcome="player" value="${item.relockedTitle.relockerScore.player.fullname}">
+                                        ${msgs.relocked_the_title}
+					<h:link styleClass="score" outcome="title/view" value="${item.relockedTitle.title.label}">
+                                            <f:param name="titleId" value="${item.relockedTitle.title.id}"/>
+                                            <f:param name="playerId" value="${item.relockedTitle.player.id}"/>
+                                        </h:link> ${msgs.cause_of_relocking} <h:link styleClass="player" outcome="player" value="${item.relockedTitle.relockerScore.player.fullname}">
                                             <f:param name="fullname" value="${item.relockedTitle.player.fullname}"/>
                                         </h:link> ${msgs.on} <h:link styleClass="game" outcome="game" value="${item.relockedTitle.relockerScore.game.name}">
                                             <f:param name="id" value="${item.relockedTitle.relockerScore.game.id}"/>

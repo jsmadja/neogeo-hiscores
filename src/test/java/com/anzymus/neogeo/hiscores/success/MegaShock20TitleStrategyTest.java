@@ -16,6 +16,13 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
+import com.anzymus.neogeo.hiscores.domain.Player;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.mockito.Mockito.when;
+
 public class MegaShock20TitleStrategyTest extends AbstractMegaShockTitleStrategyTest {
 
     protected TitleUnlockingStrategy getMegaShockStrategy() {
@@ -24,6 +31,19 @@ public class MegaShock20TitleStrategyTest extends AbstractMegaShockTitleStrategy
 
     protected long getNumScoresToCreate() {
         return 20;
+    }
+
+    @Test
+    public void should_have_an_achievement_of_50_percent() {
+        Player player = new Player();
+        when(titleService.getNumScoresByPlayer(player)).thenReturn(10L);
+
+        Achievement achievement = titleUnlockingStrategy.getAchievementFor(player);
+
+        assertEquals(50, achievement.getProgressInPercent());
+        assertEquals(1, achievement.getSteps().size());
+        assertEquals("Add 20 scores in neogeo-hiscores.com", achievement.getSteps().get(0).getDescription());
+        assertFalse(achievement.getSteps().get(0).isComplete());
     }
 
 }

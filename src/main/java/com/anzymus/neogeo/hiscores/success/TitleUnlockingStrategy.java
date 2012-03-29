@@ -21,8 +21,9 @@ import com.anzymus.neogeo.hiscores.service.TitleService;
 
 public interface TitleUnlockingStrategy {
 
-	void initialize(TitleService titleService);
+    void initialize(TitleService titleService);
 
-	boolean isUnlockable(Player player);
+    boolean isUnlockable(Player player);
 
+    Achievement getAchievementFor(Player player);
 }

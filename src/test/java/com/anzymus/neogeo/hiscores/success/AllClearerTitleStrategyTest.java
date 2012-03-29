@@ -16,16 +16,63 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
+
+import org.junit.Test;
+
+import com.anzymus.neogeo.hiscores.domain.Player;
+
 public class AllClearerTitleStrategyTest extends AbstractAllClearerTitleStrategyTest {
 
-    @Override
-    protected TitleUnlockingStrategy getAllClearStrategy() {
-        return new AllClearerTitleStrategy();
-    }
+	@Override
+	protected TitleUnlockingStrategy getAllClearStrategy() {
+		return new AllClearerTitleStrategy();
+	}
 
-    @Override
-    protected int getNumAllClearsToCreate() {
-        return 1;
-    }
+	@Override
+	protected int getNumAllClearsToCreate() {
+		return 1;
+	}
+
+	@Test
+	public void should_have_an_achievement_of_0_percent() {
+		Player player = new Player();
+
+		Achievement achievement = titleUnlockingStrategy.getAchievementFor(player);
+
+		assertEquals(0, achievement.getProgressInPercent());
+		assertEquals(1, achievement.getSteps().size());
+		assertEquals("Finish 1 game with only one credit", achievement.getSteps().get(0).getDescription());
+		assertFalse(achievement.getSteps().get(0).isComplete());
+	}
+
+	@Test
+	public void should_have_an_achievement_of_100_percent() {
+		Player player = new Player();
+		when(titleService.getNumAllClearsByPlayer(player)).thenReturn(1);
+
+		Achievement achievement = titleUnlockingStrategy.getAchievementFor(player);
+
+		assertEquals(100, achievement.getProgressInPercent());
+		assertEquals(1, achievement.getSteps().size());
+		assertEquals("Finish 1 game with only one credit", achievement.getSteps().get(0).getDescription());
+		assertTrue(achievement.getSteps().get(0).isComplete());
+	}
+
+	@Test
+	public void should_have_an_achievement_of_100_percent_with_more_than_one_score() {
+		Player player = new Player();
+		when(titleService.getNumAllClearsByPlayer(player)).thenReturn(5);
+
+		Achievement achievement = titleUnlockingStrategy.getAchievementFor(player);
+
+		assertEquals(100, achievement.getProgressInPercent());
+		assertEquals(1, achievement.getSteps().size());
+		assertEquals("Finish 1 game with only one credit", achievement.getSteps().get(0).getDescription());
+		assertTrue(achievement.getSteps().get(0).isComplete());
+	}
 
 }

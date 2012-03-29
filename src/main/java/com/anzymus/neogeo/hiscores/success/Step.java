@@ -16,10 +16,31 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
-public class QuizerTitleStrategy extends AbstractGenreTitleStrategy {
+public class Step {
 
-    protected String[] getGenres() {
-        return new String[]{"Quiz"};
-    }
+	private boolean complete;
+	private String description;
+	private String extra;
 
+	public Step(String description, boolean complete) {
+		this.description = description;
+		this.complete = complete;
+	}
+
+	public Step(String description, String extra, boolean complete) {
+		this(description, complete);
+		this.extra = extra;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public boolean isComplete() {
+		return complete;
+	}
+
+	public String getExtra() {
+		return extra;
+	}
 }

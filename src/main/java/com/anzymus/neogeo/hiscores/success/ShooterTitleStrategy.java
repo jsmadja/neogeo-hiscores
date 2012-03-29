@@ -18,8 +18,8 @@ package com.anzymus.neogeo.hiscores.success;
 
 public class ShooterTitleStrategy extends AbstractGenreTitleStrategy {
 
-	protected String[] getGenres() {
-		return new String[] { "Shooter" };
-	}
+    protected String[] getGenres() {
+        return new String[]{"Shooter"};
+    }
 
 }

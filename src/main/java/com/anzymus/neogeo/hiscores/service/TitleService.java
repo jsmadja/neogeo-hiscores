@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -59,11 +60,18 @@ public class TitleService {
 	@EJB
 	GameService gameService;
 
-	public long getNumScoresByPlayer(Player player) {
+    private Map<Title,TitleUnlockingStrategy> strategies;
+
+    public long getNumScoresByPlayer(Player player) {
 		Query query = em.createNamedQuery("getNumScoresByPlayer");
 		query.setParameter("player", player);
 		return (Long) query.getSingleResult();
 	}
+
+    @PostConstruct
+    public void init() {
+        this.strategies = findAllStrategies();
+    }
 
 	public Map<Title, TitleUnlockingStrategy> findAllStrategies() {
 		Map<Title, TitleUnlockingStrategy> strategies = new HashMap<Title, TitleUnlockingStrategy>();
@@ -165,4 +173,11 @@ public class TitleService {
 	private Comparator<Score> sortScoreByValueDesc = new ScoreSortedByValueDescComparator();
 	private PointCalculator pointCalculator = new NgfPointCalculator();
 
+    public Title findById(long id) {
+        return em.find(Title.class, id);
+    }
+
+    public TitleUnlockingStrategy getStrategyByTitle(Title title) {
+        return this.strategies.get(title);
+    }
 }

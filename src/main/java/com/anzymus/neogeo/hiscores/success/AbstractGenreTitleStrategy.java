@@ -16,8 +16,10 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.anzymus.neogeo.hiscores.common.IntegerToRank;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Scores;
 
@@ -46,6 +48,52 @@ public abstract class AbstractGenreTitleStrategy extends AbstractTitleStrategy {
 			return false;
 		}
 		return countNok <= countOk;
+	}
+
+	@Override
+	public Achievement getAchievementFor(Player player) {
+		List<Scores> scoresByGame = titleService.getScoresByGameGenres(getGenres());
+		if (scoresByGame.isEmpty()) {
+			Achievement achievement = new Achievement(0);
+			Step step = new Step("Have a rank Between 1st and 3rd place in Shooter games", false);
+			achievement.addStep(step);
+			return achievement;
+		}
+		int countNok = 0;
+		int countOk = 0;
+		List<Step> steps = new ArrayList<Step>();
+		for (Scores scores : scoresByGame) {
+			boolean complete = false;
+			int rank = scores.getRank(player);
+			if (rank == Integer.MAX_VALUE) {
+			} else if (rank > 3) {
+				countNok++;
+			} else {
+				complete = true;
+				countOk++;
+			}
+			if (rank != Integer.MAX_VALUE) {
+				String gameName = scores.asSortedList().get(0).getGame().getName();
+				steps.add(new Step(gameName, IntegerToRank.getOrdinalFor(rank), complete));
+			}
+		}
+
+		boolean allIsComplete = countNok <= countOk;
+		int percent;
+		if (allIsComplete) {
+			percent = countOk > 0 ? 100 : 0;
+		} else {
+			percent = percent(countOk, (int) Math.ceil((double) scoresByGame.size() / 2));
+		}
+		Achievement achievement = new Achievement(percent);
+		for (Step step : steps) {
+			if (allIsComplete) {
+				achievement.addStep(new Step(step.getDescription(), step.getExtra(), true));
+			} else {
+				achievement.addStep(step);
+			}
+		}
+		return achievement;
 	}
 
 	protected abstract String[] getGenres();

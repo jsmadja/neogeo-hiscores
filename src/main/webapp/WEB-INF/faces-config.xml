@@ -156,5 +156,14 @@
             <to-view-id>/challenge/create_new_challenge.xhtml</to-view-id> 
         </navigation-case> 
     </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>title/view</from-outcome>
+            <to-view-id>/title/view.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
     
 </faces-config>
