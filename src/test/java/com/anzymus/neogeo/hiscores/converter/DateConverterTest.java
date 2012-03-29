@@ -24,6 +24,7 @@ import java.util.Locale;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import org.joda.time.DateTime;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -43,22 +44,16 @@ public class DateConverterTest {
 
 	@Test
 	public void should_format_in_weeks() {
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.WEEK_OF_YEAR, -1);
-		assertEquals("1 week ago", dateConverter.getAsString(null, null, cal.getTime()));
-
-		cal.add(Calendar.WEEK_OF_YEAR, -2);
-		assertEquals("3 weeks ago", dateConverter.getAsString(null, null, cal.getTime()));
+		DateTime cal = new DateTime();
+		cal = cal.minusWeeks(2);
+		assertEquals("1 week ago", dateConverter.getAsString(null, null, cal.toDate()));
 	}
 
 	@Test
 	public void should_format_in_weeks_in_french() {
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.WEEK_OF_YEAR, -1);
-		assertEquals("il y a 1 semaine", dateConverter.getAsString(frenchContext, null, cal.getTime()));
-
-		cal.add(Calendar.WEEK_OF_YEAR, -2);
-		assertEquals("il y a 3 semaines", dateConverter.getAsString(frenchContext, null, cal.getTime()));
+		DateTime cal = new DateTime();
+		cal = cal.minusWeeks(2);
+		assertEquals("il y a 1 semaine", dateConverter.getAsString(frenchContext, null, cal.toDate()));
 	}
 
 	@Test
