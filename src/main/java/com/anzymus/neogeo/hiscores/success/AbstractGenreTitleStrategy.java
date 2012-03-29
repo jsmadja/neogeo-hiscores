@@ -55,7 +55,7 @@ public abstract class AbstractGenreTitleStrategy extends AbstractTitleStrategy {
 		List<Scores> scoresByGame = titleService.getScoresByGameGenres(getGenres());
 		if (scoresByGame.isEmpty()) {
 			Achievement achievement = new Achievement(0);
-			Step step = new Step("Have a rank Between 1st and 3rd place in Shooter games", false);
+			Step step = new Step("Have a rank Between 1st and 3rd place in " + getGenres()[0] + " games", false);
 			achievement.addStep(step);
 			return achievement;
 		}
