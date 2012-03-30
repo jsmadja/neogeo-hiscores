@@ -21,14 +21,18 @@
 	<properties>
 		<eclipselink-version>2.2.0-RC3</eclipselink-version>
 		<glassfish-version>3.1-b38</glassfish-version>
+		<guava-version>11.0</guava-version>
 		<javaee-version>6.0</javaee-version>
 		<javax-persistence-version>2.0.0</javax-persistence-version>
+		<jersey-client-version>1.12</jersey-client-version>
+		<joda-time-version>2.1</joda-time-version>
 		<jsf-version>2.0.2-b10</jsf-version>
-		<junit-version>4.8.2</junit-version>
-		<mockito-version>1.9.0-rc1</mockito-version>
+		<junit-version>4.10</junit-version>
+		<mockito-version>1.9.0</mockito-version>
 		<mysql-version>5.1.14</mysql-version>
 		<netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<slf4j-version>1.6.4</slf4j-version>
 	</properties>
 
 	<licenses>
@@ -159,11 +163,6 @@
 			<name>Maven2 Repo 2</name>
 		</repository>
 		<repository>
-			<id>JBoss</id>
-			<url>http://repository.jboss.com/maven2</url>
-			<name>JBoss</name>
-		</repository>
-		<repository>
 			<id>Java</id>
 			<url>http://download.java.net/maven/2/</url>
 			<name>Java</name>
@@ -183,7 +182,7 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>r09</version>
+			<version>${guava-version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -219,7 +218,7 @@
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-client</artifactId>
-			<version>1.8</version>
+			<version>${jersey-client-version}</version>
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
@@ -255,12 +254,12 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.6.1</version>
+			<version>${slf4j-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
-			<version>2.0</version>
+			<version>${joda-time-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.bull.javamelody</groupId>

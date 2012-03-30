@@ -55,6 +55,7 @@
             </h:column>
         </h:dataTable>
 
+	<c:if test="${fn:length(titleBean.players) > 0}">
 	<p style="font-size: 10pt;width: 60%"> ${msgs.other_players_having_this_title} :
 	    <c:forEach id="playerTable" var="player" items="#{titleBean.players}">
 		<h:link outcome="player" value="${player.fullname}" styleClass="link_little">
@@ -62,8 +63,7 @@
 		</h:link>&nbsp;
 	    </c:forEach>
 	</p>
-	
-	<br/>
+	</c:if>
 	
     </ui:define>
 </ui:composition>
