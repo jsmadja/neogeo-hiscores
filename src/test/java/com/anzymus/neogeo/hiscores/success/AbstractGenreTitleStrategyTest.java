@@ -343,13 +343,11 @@ public class AbstractGenreTitleStrategyTest {
 		Achievement achievement = abstractGenreTitleStrategy.getAchievementFor(player);
 
 		assertEquals(100, achievement.getProgressInPercent());
-		assertEquals(3, achievement.getSteps().size());
+		assertEquals(2, achievement.getSteps().size());
 		assertEquals("View Point", achievement.getSteps().get(0).getDescription());
 		assertTrue(achievement.getSteps().get(0).isComplete());
 		assertEquals("Last Resort", achievement.getSteps().get(1).getDescription());
 		assertTrue(achievement.getSteps().get(1).isComplete());
-		assertEquals("Pulstar", achievement.getSteps().get(2).getDescription());
-		assertTrue(achievement.getSteps().get(2).isComplete());
 	}
 
 	@Test

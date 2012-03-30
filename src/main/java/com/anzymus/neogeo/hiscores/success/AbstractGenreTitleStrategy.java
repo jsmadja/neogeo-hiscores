@@ -88,7 +88,9 @@ public abstract class AbstractGenreTitleStrategy extends AbstractTitleStrategy {
 		Achievement achievement = new Achievement(percent);
 		for (Step step : steps) {
 			if (allIsComplete) {
-				achievement.addStep(new Step(step.getDescription(), step.getExtra(), true));
+				if (step.isComplete()) {
+					achievement.addStep(step);
+				}
 			} else {
 				achievement.addStep(step);
 			}
