@@ -16,24 +16,30 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
-import com.anzymus.neogeo.hiscores.domain.Player;
+import com.anzymus.neogeo.hiscores.domain.Title;
 import com.anzymus.neogeo.hiscores.service.TitleService;
 
 public abstract class AbstractTitleStrategy implements TitleUnlockingStrategy {
 
-    protected TitleService titleService;
+	protected TitleService titleService;
+	protected Title title;
 
-    @Override
-    public Achievement getAchievementFor(Player player) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+	public void initialize(TitleService titleService) {
+		this.titleService = titleService;
+	}
 
-    public void initialize(TitleService titleService) {
-        this.titleService = titleService;
-    }
+	protected int percent(long up, long down) {
+		return (int) (up * 100 / down);
+	}
 
-    protected int percent(long up, long down) {
-        return (int)(up*100/down);
-    }
+	@Override
+	public Title getTitle() {
+		return title;
+	}
+
+	@Override
+	public void setTitle(Title title) {
+		this.title = title;
+	}
 
 }

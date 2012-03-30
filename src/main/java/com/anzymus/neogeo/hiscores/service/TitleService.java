@@ -60,18 +60,18 @@ public class TitleService {
 	@EJB
 	GameService gameService;
 
-    private Map<Title,TitleUnlockingStrategy> strategies;
+	private Map<Title, TitleUnlockingStrategy> strategies;
 
-    public long getNumScoresByPlayer(Player player) {
+	public long getNumScoresByPlayer(Player player) {
 		Query query = em.createNamedQuery("getNumScoresByPlayer");
 		query.setParameter("player", player);
 		return (Long) query.getSingleResult();
 	}
 
-    @PostConstruct
-    public void init() {
-        this.strategies = findAllStrategies();
-    }
+	@PostConstruct
+	public void init() {
+		this.strategies = findAllStrategies();
+	}
 
 	public Map<Title, TitleUnlockingStrategy> findAllStrategies() {
 		Map<Title, TitleUnlockingStrategy> strategies = new HashMap<Title, TitleUnlockingStrategy>();
@@ -81,6 +81,7 @@ public class TitleService {
 				String classname = title.getClassname();
 				TitleUnlockingStrategy strategy = (TitleUnlockingStrategy) Class.forName(classname).newInstance();
 				strategy.initialize(this);
+				strategy.setTitle(title);
 				strategies.put(title, strategy);
 			} catch (ClassNotFoundException e) {
 				LOG.log(Level.WARNING, "Can't create strategy from title: " + title, e);
@@ -159,12 +160,12 @@ public class TitleService {
 					point = oldPoint;
 				}
 				if (score.getPlayer().equals(player)) {
-				    points += point;
-				    contributions++;
+					points += point;
+					contributions++;
 				}
 				oldScore = score;
 				oldPoint = point;
-				
+
 			}
 		}
 		return points / contributions;
@@ -173,11 +174,11 @@ public class TitleService {
 	private Comparator<Score> sortScoreByValueDesc = new ScoreSortedByValueDescComparator();
 	private PointCalculator pointCalculator = new NgfPointCalculator();
 
-    public Title findById(long id) {
-        return em.find(Title.class, id);
-    }
+	public Title findById(long id) {
+		return em.find(Title.class, id);
+	}
 
-    public TitleUnlockingStrategy getStrategyByTitle(Title title) {
-        return this.strategies.get(title);
-    }
+	public TitleUnlockingStrategy getStrategyByTitle(Title title) {
+		return this.strategies.get(title);
+	}
 }

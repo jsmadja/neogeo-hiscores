@@ -16,14 +16,20 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
+import com.anzymus.neogeo.hiscores.domain.Achievement;
 import com.anzymus.neogeo.hiscores.domain.Player;
+import com.anzymus.neogeo.hiscores.domain.Title;
 import com.anzymus.neogeo.hiscores.service.TitleService;
 
 public interface TitleUnlockingStrategy {
 
-    void initialize(TitleService titleService);
+	void initialize(TitleService titleService);
 
-    boolean isUnlockable(Player player);
+	boolean isUnlockable(Player player);
 
-    Achievement getAchievementFor(Player player);
+	Achievement getAchievementFor(Player player);
+
+	Title getTitle();
+
+	void setTitle(Title title);
 }

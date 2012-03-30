@@ -1,0 +1,49 @@
+<!--
+
+        Copyright (C) 2011 Julien SMADJA <julien dot smadja at gmail dot com>
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at
+
+                http://www.apache.org/licenses/LICENSE-2.0
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="content_right">
+        <h2>${achievementsBean.player.fullname}</h2>
+		<h:dataTable id="achievementTable" value="${achievementsBean.achievements}" var="achievement">
+			<h:column>
+			    <h:link styleClass="score" outcome="title/view" value="${achievement.title.label}">
+				<f:param name="playerId" value="${achievementsBean.player.id}"/>
+				<f:param name="titleId" value="${achievement.title.id}"/>
+			    </h:link>
+			</h:column>
+			<h:column>
+					<div id="progress_bar" class="ui-progress-bar ui-container transition" style="width:300px" align="left">
+						<div style="width: ${achievement.progressInPercent}%;" class="ui-progress">
+							<span style="display: block;" class="ui-label">
+							<b class="value">${achievement.progressInPercent}%</b>
+						</span>
+						</div>
+					</div>
+				
+			</h:column>
+		</h:dataTable>
+    </ui:define>
+</ui:composition>

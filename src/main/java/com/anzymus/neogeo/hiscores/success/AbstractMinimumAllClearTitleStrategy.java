@@ -16,6 +16,7 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
+import com.anzymus.neogeo.hiscores.domain.Achievement;
 import com.anzymus.neogeo.hiscores.domain.Player;
 
 public abstract class AbstractMinimumAllClearTitleStrategy extends AbstractTitleStrategy {
@@ -31,7 +32,7 @@ public abstract class AbstractMinimumAllClearTitleStrategy extends AbstractTitle
 		if (numAllClears > getNumAllClearsToUnlock()) {
 			numAllClears = getNumAllClearsToUnlock();
 		}
-		Achievement achievement = new Achievement(percent(numAllClears, getNumAllClearsToUnlock()));
+		Achievement achievement = new Achievement(getTitle(), percent(numAllClears, getNumAllClearsToUnlock()));
 		achievement.addStep(new Step(getStepName(), numAllClears >= getNumAllClearsToUnlock()));
 		return achievement;
 	}

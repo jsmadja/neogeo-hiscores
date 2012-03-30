@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.anzymus.neogeo.hiscores.common.IntegerToRank;
+import com.anzymus.neogeo.hiscores.domain.Achievement;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Scores;
 
@@ -54,7 +55,7 @@ public abstract class AbstractGenreTitleStrategy extends AbstractTitleStrategy {
 	public Achievement getAchievementFor(Player player) {
 		List<Scores> scoresByGame = titleService.getScoresByGameGenres(getGenres());
 		if (scoresByGame.isEmpty()) {
-			Achievement achievement = new Achievement(0);
+			Achievement achievement = new Achievement(getTitle(), 0);
 			Step step = new Step("Have a rank Between 1st and 3rd place in " + getGenres()[0] + " games", false);
 			achievement.addStep(step);
 			return achievement;
@@ -85,7 +86,7 @@ public abstract class AbstractGenreTitleStrategy extends AbstractTitleStrategy {
 		} else {
 			percent = percent(countOk, (int) Math.ceil((double) scoresByGame.size() / 2));
 		}
-		Achievement achievement = new Achievement(percent);
+		Achievement achievement = new Achievement(title, percent);
 		for (Step step : steps) {
 			if (allIsComplete) {
 				if (step.isComplete()) {

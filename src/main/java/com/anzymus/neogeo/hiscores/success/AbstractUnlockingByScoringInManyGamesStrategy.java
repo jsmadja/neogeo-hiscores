@@ -16,42 +16,43 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
-import com.anzymus.neogeo.hiscores.domain.Player;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import com.anzymus.neogeo.hiscores.domain.Achievement;
+import com.anzymus.neogeo.hiscores.domain.Player;
+
 public abstract class AbstractUnlockingByScoringInManyGamesStrategy extends AbstractTitleStrategy {
 
-    @Override
-    public boolean isUnlockable(Player player) {
-        List<String> gameNames = getGameNamesToScore();
-        for (String gameName : gameNames) {
-            if (!titleService.hasScoreInGame(player, gameName)) {
-                return false;
-            }
-        }
-        return true;
-    }
+	@Override
+	public boolean isUnlockable(Player player) {
+		List<String> gameNames = getGameNamesToScore();
+		for (String gameName : gameNames) {
+			if (!titleService.hasScoreInGame(player, gameName)) {
+				return false;
+			}
+		}
+		return true;
+	}
 
-    @Override
-    public Achievement getAchievementFor(Player player) {
-        int completedGamesCount = 0;
-        List<Step> steps = new ArrayList<Step>();
-        List<String> gameNames = getGameNamesToScore();
-        for (String gameName : gameNames) {
-            boolean completed = titleService.hasScoreInGame(player, gameName);
-            if (completed) {
-                completedGamesCount++;
-            }
-            steps.add(new Step("Add a score for " + gameName, completed));
-        }
-        Achievement achievement = new Achievement(percent(completedGamesCount, gameNames.size()));
-        for(Step step:steps) {
-            achievement.addStep(step);
-        }
-        return achievement;
-    }
+	@Override
+	public Achievement getAchievementFor(Player player) {
+		int completedGamesCount = 0;
+		List<Step> steps = new ArrayList<Step>();
+		List<String> gameNames = getGameNamesToScore();
+		for (String gameName : gameNames) {
+			boolean completed = titleService.hasScoreInGame(player, gameName);
+			if (completed) {
+				completedGamesCount++;
+			}
+			steps.add(new Step("Add a score for " + gameName, completed));
+		}
+		Achievement achievement = new Achievement(title, percent(completedGamesCount, gameNames.size()));
+		for (Step step : steps) {
+			achievement.addStep(step);
+		}
+		return achievement;
+	}
 
-    abstract List<String> getGameNamesToScore();
+	abstract List<String> getGameNamesToScore();
 }

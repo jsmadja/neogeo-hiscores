@@ -14,31 +14,43 @@
  *     limitations under the License.
  */
 
-package com.anzymus.neogeo.hiscores.success;
+package com.anzymus.neogeo.hiscores.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.anzymus.neogeo.hiscores.success.Step;
+
 public class Achievement {
 
-    private List<Step> steps = new ArrayList<Step>();
+	private List<Step> steps = new ArrayList<Step>();
 
-    private int progressInPercent;
+	private int progressInPercent;
 
-    public Achievement(int progressInPercent) {
-        this.progressInPercent = progressInPercent;
-    }
+	private Title title;
 
-    public int getProgressInPercent() {
-        return progressInPercent;
-    }
+	public Achievement(Title title, int progressInPercent) {
+		this.setTitle(title);
+		this.progressInPercent = progressInPercent;
+	}
 
+	public int getProgressInPercent() {
+		return progressInPercent;
+	}
 
-    public List<Step> getSteps() {
-        return steps;
-    }
+	public List<Step> getSteps() {
+		return steps;
+	}
 
-    public void addStep(Step step) {
-        steps.add(step);
-    }
+	public void addStep(Step step) {
+		steps.add(step);
+	}
+
+	public void setTitle(Title title) {
+		this.title = title;
+	}
+
+	public Title getTitle() {
+		return title;
+	}
 }

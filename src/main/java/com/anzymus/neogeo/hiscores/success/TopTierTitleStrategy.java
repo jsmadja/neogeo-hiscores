@@ -16,29 +16,30 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
+import com.anzymus.neogeo.hiscores.domain.Achievement;
 import com.anzymus.neogeo.hiscores.domain.Player;
 
 public class TopTierTitleStrategy extends AbstractTitleStrategy {
 
-    private static final long MINIMUM_SCORE = 7;
+	private static final long MINIMUM_SCORE = 7;
 
-    @Override
-    public boolean isUnlockable(Player player) {
-        double averageScore = titleService.getAverageScoreFor(player);
-        return averageScore >= 7;
-    }
+	@Override
+	public boolean isUnlockable(Player player) {
+		double averageScore = titleService.getAverageScoreFor(player);
+		return averageScore >= 7;
+	}
 
-        @Override
-    public Achievement getAchievementFor(Player player) {
-        double averageScore = titleService.getAverageScoreFor(player);
-        boolean completed = averageScore >= MINIMUM_SCORE;
-        if(averageScore > MINIMUM_SCORE) {
-            averageScore = MINIMUM_SCORE;
-        }
-        Achievement achievement = new Achievement(percent((long) (averageScore*10), MINIMUM_SCORE*10));
-        Step step = new Step("Have an average score greater or equal to "+MINIMUM_SCORE , completed);
-        achievement.addStep(step);
-        return achievement;
-    }
+	@Override
+	public Achievement getAchievementFor(Player player) {
+		double averageScore = titleService.getAverageScoreFor(player);
+		boolean completed = averageScore >= MINIMUM_SCORE;
+		if (averageScore > MINIMUM_SCORE) {
+			averageScore = MINIMUM_SCORE;
+		}
+		Achievement achievement = new Achievement(title, percent((long) (averageScore * 10), MINIMUM_SCORE * 10));
+		Step step = new Step("Have an average score greater or equal to " + MINIMUM_SCORE, completed);
+		achievement.addStep(step);
+		return achievement;
+	}
 
 }

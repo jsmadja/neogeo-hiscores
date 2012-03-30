@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 
+import com.anzymus.neogeo.hiscores.domain.Achievement;
 import com.anzymus.neogeo.hiscores.domain.Player;
 
 public class AllClearerTitleStrategyTest extends AbstractAllClearerTitleStrategyTest {

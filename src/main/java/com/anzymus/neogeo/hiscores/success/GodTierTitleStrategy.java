@@ -16,28 +16,29 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
+import com.anzymus.neogeo.hiscores.domain.Achievement;
 import com.anzymus.neogeo.hiscores.domain.Player;
 
 public class GodTierTitleStrategy extends AbstractTitleStrategy {
 
-    private static final int MINIMUM_SCORE = 10;
+	private static final int MINIMUM_SCORE = 10;
 
-    @Override
-    public boolean isUnlockable(Player player) {
-        return titleService.getAverageScoreFor(player) >= MINIMUM_SCORE;
-    }
+	@Override
+	public boolean isUnlockable(Player player) {
+		return titleService.getAverageScoreFor(player) >= MINIMUM_SCORE;
+	}
 
-    @Override
-    public Achievement getAchievementFor(Player player) {
-        double averageScore = titleService.getAverageScoreFor(player);
-        boolean completed = averageScore >= MINIMUM_SCORE;
-        if(averageScore > MINIMUM_SCORE) {
-            averageScore = MINIMUM_SCORE;
-        }
-        Achievement achievement = new Achievement(percent((long) (averageScore*10), 100));
-        Step step = new Step("Have an average score equal to "+MINIMUM_SCORE , completed);
-        achievement.addStep(step);
-        return achievement;
-    }
+	@Override
+	public Achievement getAchievementFor(Player player) {
+		double averageScore = titleService.getAverageScoreFor(player);
+		boolean completed = averageScore >= MINIMUM_SCORE;
+		if (averageScore > MINIMUM_SCORE) {
+			averageScore = MINIMUM_SCORE;
+		}
+		Achievement achievement = new Achievement(title, percent((long) (averageScore * 10), 100));
+		Step step = new Step("Have an average score equal to " + MINIMUM_SCORE, completed);
+		achievement.addStep(step);
+		return achievement;
+	}
 
 }

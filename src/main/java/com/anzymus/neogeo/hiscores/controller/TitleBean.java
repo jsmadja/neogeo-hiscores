@@ -24,13 +24,12 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
+import com.anzymus.neogeo.hiscores.domain.Achievement;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Title;
 import com.anzymus.neogeo.hiscores.domain.UnlockedTitle;
 import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.TitleService;
-import com.anzymus.neogeo.hiscores.success.Achievement;
-import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
 
 @ManagedBean
 public class TitleBean {
@@ -42,10 +41,10 @@ public class TitleBean {
 	private String playerId;
 
 	@EJB
-	private TitleService titleService;
+	private PlayerService playerService;
 
 	@EJB
-	private PlayerService playerService;
+	private TitleService titleService;
 
 	private Achievement achievement;
 	private Title title;
@@ -57,8 +56,7 @@ public class TitleBean {
 	public void init() {
 		title = titleService.findById(Long.parseLong(titleId));
 		player = playerService.findById(Long.parseLong(playerId));
-		TitleUnlockingStrategy strategy = titleService.getStrategyByTitle(title);
-		achievement = strategy.getAchievementFor(player);
+		achievement = playerService.getAchievementFor(player, title);
 		Set<UnlockedTitle> unlockedTitles = title.getUnlockedTitles();
 		for (UnlockedTitle unlockedTitle : unlockedTitles) {
 			players.add(unlockedTitle.getPlayer());

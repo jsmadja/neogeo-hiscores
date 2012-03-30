@@ -16,8 +16,12 @@
 
 package com.anzymus.neogeo.hiscores.service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -26,7 +30,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import com.anzymus.neogeo.hiscores.domain.Achievement;
 import com.anzymus.neogeo.hiscores.domain.Player;
+import com.anzymus.neogeo.hiscores.domain.Title;
+import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
@@ -34,6 +41,24 @@ public class PlayerService {
 
 	@PersistenceContext
 	EntityManager em;
+
+	@EJB
+	private TitleService titleService;
+
+	public Achievement getAchievementFor(Player player, Title title) {
+		TitleUnlockingStrategy strategy = titleService.getStrategyByTitle(title);
+		return strategy.getAchievementFor(player);
+	}
+
+	public List<Achievement> getAchievementsFor(Player player) {
+		Map<Title, TitleUnlockingStrategy> StrategiesByTitle = titleService.findAllStrategies();
+		Collection<TitleUnlockingStrategy> strategies = StrategiesByTitle.values();
+		List<Achievement> achievements = new ArrayList<Achievement>();
+		for (TitleUnlockingStrategy strategy : strategies) {
+			achievements.add(strategy.getAchievementFor(player));
+		}
+		return achievements;
+	}
 
 	public Player findByFullname(String fullname) {
 		TypedQuery<Player> query = em.createNamedQuery("player_findByFullname", Player.class);
