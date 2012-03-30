@@ -16,83 +16,100 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
-import com.anzymus.neogeo.hiscores.domain.Game;
-import com.anzymus.neogeo.hiscores.domain.Player;
-import com.anzymus.neogeo.hiscores.domain.Title;
-import com.anzymus.neogeo.hiscores.service.PlayerService;
-import com.anzymus.neogeo.hiscores.service.TitleService;
-import com.anzymus.neogeo.hiscores.success.Achievement;
-import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
+import com.anzymus.neogeo.hiscores.domain.Player;
+import com.anzymus.neogeo.hiscores.domain.Title;
+import com.anzymus.neogeo.hiscores.domain.UnlockedTitle;
+import com.anzymus.neogeo.hiscores.service.PlayerService;
+import com.anzymus.neogeo.hiscores.service.TitleService;
+import com.anzymus.neogeo.hiscores.success.Achievement;
+import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
+
 @ManagedBean
 public class TitleBean {
 
-    @ManagedProperty(value = "#{param.titleId}")
-    private String titleId;
+	@ManagedProperty(value = "#{param.titleId}")
+	private String titleId;
 
-    @ManagedProperty(value = "#{param.playerId}")
-    private String playerId;
+	@ManagedProperty(value = "#{param.playerId}")
+	private String playerId;
 
-    @EJB
-    private TitleService titleService;
+	@EJB
+	private TitleService titleService;
 
-    @EJB
-    private PlayerService playerService;
+	@EJB
+	private PlayerService playerService;
 
-    private Achievement achievement;
-    private Title title;
-    private Player player;
+	private Achievement achievement;
+	private Title title;
+	private Player player;
 
-    @PostConstruct
+	private Set<Player> players = new TreeSet<Player>();
+
+	@PostConstruct
 	public void init() {
 		title = titleService.findById(Long.parseLong(titleId));
 		player = playerService.findById(Long.parseLong(playerId));
-        TitleUnlockingStrategy strategy = titleService.getStrategyByTitle(title);
-        achievement = strategy.getAchievementFor(player);
+		TitleUnlockingStrategy strategy = titleService.getStrategyByTitle(title);
+		achievement = strategy.getAchievementFor(player);
+		Set<UnlockedTitle> unlockedTitles = title.getUnlockedTitles();
+		for (UnlockedTitle unlockedTitle : unlockedTitles) {
+			players.add(unlockedTitle.getPlayer());
+		}
 	}
 
-    public Player getPlayer() {
-        return player;
-    }
+	public Player getPlayer() {
+		return player;
+	}
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
 
-    public Title getTitle() {
-        return title;
-    }
+	public Title getTitle() {
+		return title;
+	}
 
-    public void setTitle(Title title) {
-        this.title = title;
-    }
+	public void setTitle(Title title) {
+		this.title = title;
+	}
 
-    public Achievement getAchievement() {
-        return achievement;
-    }
+	public Achievement getAchievement() {
+		return achievement;
+	}
 
-    public void setAchievement(Achievement achievement) {
-        this.achievement = achievement;
-    }
+	public void setAchievement(Achievement achievement) {
+		this.achievement = achievement;
+	}
 
-    public String getPlayerId() {
-        return playerId;
-    }
+	public String getPlayerId() {
+		return playerId;
+	}
 
-    public void setPlayerId(String playerId) {
-        this.playerId = playerId;
-    }
+	public void setPlayerId(String playerId) {
+		this.playerId = playerId;
+	}
 
-    public String getTitleId() {
-        return titleId;
-    }
+	public String getTitleId() {
+		return titleId;
+	}
 
-    public void setTitleId(String titleId) {
-        this.titleId = titleId;
-    }
+	public void setTitleId(String titleId) {
+		this.titleId = titleId;
+	}
+
+	public Set<Player> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(Set<Player> players) {
+		this.players = players;
+	}
 }

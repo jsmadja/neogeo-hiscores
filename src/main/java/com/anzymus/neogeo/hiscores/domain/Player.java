@@ -40,7 +40,7 @@ import com.google.common.base.Objects;
 @NamedQuery(name = "player_findByFullname", query = "SELECT p FROM Player p WHERE p.fullname = :fullname"),
 		@NamedQuery(name = "player_findAll", query = "SELECT p FROM Player p ORDER BY p.fullname"), //
 		@NamedQuery(name = "player_getNumberOfPlayers", query = "SELECT COUNT(p) FROM Player p") })
-public class Player implements Serializable {
+public class Player implements Serializable, Comparable<Player> {
 
 	private static final long serialVersionUID = 2067603406910806588L;
 
@@ -150,6 +150,11 @@ public class Player implements Serializable {
 
 	public Set<RelockedTitle> getRelockedTitles() {
 		return relockedTitles;
+	}
+
+	@Override
+	public int compareTo(Player p) {
+		return fullname.toLowerCase().compareTo(p.getFullname().toLowerCase());
 	}
 
 }
