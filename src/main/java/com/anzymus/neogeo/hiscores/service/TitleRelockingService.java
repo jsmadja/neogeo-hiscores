@@ -21,6 +21,7 @@ import static java.text.MessageFormat.format;
 import java.util.List;
 import java.util.Set;
 
+import javax.ejb.Asynchronous;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -66,6 +67,7 @@ public class TitleRelockingService {
 		return storedRelockedTitle;
 	}
 
+	@Asynchronous
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void relockTitles(Score relockerScore) {
 		Player relockerPlayer = relockerScore.getPlayer();
@@ -85,8 +87,7 @@ public class TitleRelockingService {
 				RelockedTitle relockedTitle = createRelockedTitle(relockerScore, player, title);
 				player.getRelockedTitles().add(relockedTitle);
 				unlockedTitles.remove(unlockedTitle);
-				LOG.info(format("The score on {0} posted by {1} relocked the title {2} of player {3}",
-						relockerScore.getGame(), relockerPlayer, title.getLabel(), player));
+				LOG.info(format("The score on {0} posted by {1} relocked the title {2} of player {3}", relockerScore.getGame(), relockerPlayer, title.getLabel(), player));
 			}
 		}
 		playerService.store(player);
