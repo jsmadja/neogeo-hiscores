@@ -23,8 +23,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -35,22 +33,10 @@ import com.anzymus.neogeo.hiscores.domain.Player;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-public class GameService {
+public class GameService extends GenericService<Game> {
 
-	@PersistenceContext
-	EntityManager em;
-
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public Game store(Game game) {
-		Game storedGame;
-		if (game.getId() == null) {
-			em.persist(game);
-			storedGame = game;
-		} else {
-			storedGame = em.merge(game);
-		}
-		em.flush();
-		return storedGame;
+	public GameService() {
+		super(Game.class);
 	}
 
 	public List<Game> findAll() {
@@ -62,10 +48,6 @@ public class GameService {
 		TypedQuery<Game> query = em.createNamedQuery("game_findByName", Game.class);
 		query.setParameter("name", gameName);
 		return query.getSingleResult();
-	}
-
-	public Game findById(long gameId) {
-		return em.find(Game.class, gameId);
 	}
 
 	public List<Game> findAllGamesPlayedBy(Player player) {

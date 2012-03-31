@@ -26,8 +26,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.slf4j.Logger;
@@ -41,12 +39,9 @@ import com.anzymus.neogeo.hiscores.domain.UnlockedTitle;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-public class TitleRelockingService {
+public class TitleRelockingService extends GenericService<RelockedTitle> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(TitleRelockingService.class);
-
-	@PersistenceContext
-	EntityManager em;
 
 	@EJB
 	private PlayerService playerService;
@@ -54,17 +49,8 @@ public class TitleRelockingService {
 	@EJB
 	private TitleUnlockingService titleUnlockingService;
 
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public RelockedTitle store(RelockedTitle relockedTitle) {
-		RelockedTitle storedRelockedTitle;
-		if (relockedTitle.getId() == null) {
-			em.persist(relockedTitle);
-			storedRelockedTitle = relockedTitle;
-		} else {
-			storedRelockedTitle = em.merge(relockedTitle);
-		}
-		em.flush();
-		return storedRelockedTitle;
+	public TitleRelockingService() {
+		super(RelockedTitle.class);
 	}
 
 	@Asynchronous
@@ -90,7 +76,7 @@ public class TitleRelockingService {
 				LOG.info(format("The score on {0} posted by {1} relocked the title {2} of player {3}", relockerScore.getGame(), relockerPlayer, title.getLabel(), player));
 			}
 		}
-		playerService.store(player);
+		playerService.merge(player);
 	}
 
 	private RelockedTitle createRelockedTitle(Score relockerScore, Player player, Title title) {

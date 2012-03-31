@@ -30,8 +30,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -47,12 +45,9 @@ import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-public class TitleService {
+public class TitleService extends GenericService<Title> {
 
 	private static final Logger LOG = Logger.getLogger(TitleService.class.getName());
-
-	@PersistenceContext
-	EntityManager em;
 
 	@EJB
 	ScoreService scoreService;
@@ -61,6 +56,10 @@ public class TitleService {
 	GameService gameService;
 
 	private Map<Title, TitleUnlockingStrategy> strategies;
+
+	public TitleService() {
+		super(Title.class);
+	}
 
 	public long getNumScoresByPlayer(Player player) {
 		Query query = em.createNamedQuery("getNumScoresByPlayer");
@@ -92,19 +91,6 @@ public class TitleService {
 			}
 		}
 		return strategies;
-	}
-
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public Title store(Title title) {
-		Title storedTitle;
-		if (title.getId() == null) {
-			em.persist(title);
-			storedTitle = title;
-		} else {
-			storedTitle = em.merge(title);
-		}
-		em.flush();
-		return storedTitle;
 	}
 
 	public boolean hasScoreInGame(Player player, String game) {
@@ -173,10 +159,6 @@ public class TitleService {
 
 	private Comparator<Score> sortScoreByValueDesc = new ScoreSortedByValueDescComparator();
 	private PointCalculator pointCalculator = new NgfPointCalculator();
-
-	public Title findById(long id) {
-		return em.find(Title.class, id);
-	}
 
 	public TitleUnlockingStrategy getStrategyByTitle(Title title) {
 		return this.strategies.get(title);

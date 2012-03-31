@@ -22,8 +22,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -36,12 +34,13 @@ import com.anzymus.neogeo.hiscores.domain.Scores;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-public class ScoreService {
-
-	@PersistenceContext
-	EntityManager em;
+public class ScoreService extends GenericService<Score> {
 
 	private static final int MAX_SCORES_TO_RETURN = 10;
+
+	public ScoreService() {
+		super(Score.class);
+	}
 
 	public Scores findAllByGame(Game game) {
 		TypedQuery<Score> query = em.createNamedQuery("score_findAllByGame", Score.class);
@@ -90,10 +89,6 @@ public class ScoreService {
 		return query.getResultList();
 	}
 
-	public Score findById(long id) {
-		return em.find(Score.class, id);
-	}
-
 	private Scores toScores(List<Score> scoreList) {
 		Scores scores = new Scores();
 		if (scoreList != null) {
@@ -102,27 +97,6 @@ public class ScoreService {
 			}
 		}
 		return scores;
-	}
-
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public Score store(Score score) {
-		if (alreadyExist(score)) {
-			return score;
-		}
-		Score storedScore;
-		if (score.getId() == null) {
-			em.persist(score);
-			storedScore = score;
-		} else {
-			storedScore = em.merge(score);
-		}
-		em.flush();
-		return storedScore;
-	}
-
-	private boolean alreadyExist(Score score) {
-		Scores scores = findAllByPlayer(score.getPlayer());
-		return scores.contains(score);
 	}
 
 	public long findCountByGame(Game game) {

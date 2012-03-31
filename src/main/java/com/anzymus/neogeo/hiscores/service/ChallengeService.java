@@ -25,8 +25,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -39,26 +37,23 @@ import com.anzymus.neogeo.hiscores.exception.ChallengeNotCreatedException;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-public class ChallengeService {
-
-	@PersistenceContext
-	EntityManager em;
+public class ChallengeService extends GenericService<Challenge> {
 
 	@EJB
 	GameService gameService;
 
+	public ChallengeService() {
+		super(Challenge.class);
+	}
+
 	public Collection<Player> findPlayersToChallenge(Player player) {
 		Long playerId = player.getId();
-		Query query = em.createNativeQuery(
-				"SELECT * FROM PLAYER WHERE ID IN(SELECT s.PLAYER_ID FROM SCORE s WHERE s.PLAYER_ID != " + playerId
-						+ " AND s.GAME_ID IN (SELECT GAME_ID FROM SCORE s WHERE s.PLAYER_ID = " + playerId
-						+ ")) ORDER BY FULLNAME", Player.class);
+		Query query = em.createNativeQuery("SELECT * FROM PLAYER WHERE ID IN(SELECT s.PLAYER_ID FROM SCORE s WHERE s.PLAYER_ID != " + playerId + " AND s.GAME_ID IN (SELECT GAME_ID FROM SCORE s WHERE s.PLAYER_ID = " + playerId + ")) ORDER BY FULLNAME", Player.class);
 		return query.getResultList();
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public Challenge createChallenge(Player player1, Player player2, Game game, String title, String description)
-			throws ChallengeNotCreatedException {
+	public Challenge createChallenge(Player player1, Player player2, Game game, String title, String description) throws ChallengeNotCreatedException {
 		if (!areChallengeable(player1, player2, game)) {
 			throw new ChallengeNotCreatedException(player1.getFullname() + " can't challenge " + player2.getFullname());
 		}

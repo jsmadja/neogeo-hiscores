@@ -25,8 +25,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -39,7 +37,7 @@ import com.google.common.annotations.VisibleForTesting;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-public class TitleUnlockingService {
+public class TitleUnlockingService extends GenericService<UnlockedTitle> {
 
 	@EJB
 	TitleService titleService;
@@ -50,12 +48,13 @@ public class TitleUnlockingService {
 	@VisibleForTesting
 	Map<Title, TitleUnlockingStrategy> strategiesByTitle;
 
-	@PersistenceContext
-	EntityManager em;
-
 	private static final int MAX_UNLOCKED_TITLES_TO_RETURN = 10;
 
 	private static final int MAX_RELOCKED_TITLES_TO_RETURN = 20;
+
+	public TitleUnlockingService() {
+		super(UnlockedTitle.class);
+	}
 
 	@PostConstruct
 	public void init() {
@@ -73,7 +72,7 @@ public class TitleUnlockingService {
 				unlockedTitles.add(unlockedTitle);
 			}
 		}
-		playerService.store(player);
+		playerService.merge(player);
 	}
 
 	private boolean isUnlockable(Player player, Title title, TitleUnlockingStrategy strategy) {
@@ -88,15 +87,13 @@ public class TitleUnlockingService {
 	}
 
 	public List<UnlockedTitle> findLastUnlockedTitlesOrderByDateDesc() {
-		TypedQuery<UnlockedTitle> query = em.createNamedQuery("findLastUnlockedTitlesOrderByDateDesc",
-				UnlockedTitle.class);
+		TypedQuery<UnlockedTitle> query = em.createNamedQuery("findLastUnlockedTitlesOrderByDateDesc", UnlockedTitle.class);
 		query.setMaxResults(MAX_UNLOCKED_TITLES_TO_RETURN);
 		return query.getResultList();
 	}
 
 	public List<RelockedTitle> findLastRelockedTitlesOrderByDateDesc() {
-		TypedQuery<RelockedTitle> query = em.createNamedQuery("findLastRelockedTitlesOrderByDateDesc",
-				RelockedTitle.class);
+		TypedQuery<RelockedTitle> query = em.createNamedQuery("findLastRelockedTitlesOrderByDateDesc", RelockedTitle.class);
 		query.setMaxResults(MAX_RELOCKED_TITLES_TO_RETURN);
 		return query.getResultList();
 	}
@@ -126,11 +123,6 @@ public class TitleUnlockingService {
 	public void remove(UnlockedTitle unlockedTitle) {
 		unlockedTitle = findById(unlockedTitle.getId());
 		unlockedTitle.getPlayer().getUnlockedTitles().remove(unlockedTitle);
-		// em.remove(unlockedTitle);
-	}
-
-	public UnlockedTitle findById(Long id) {
-		return em.find(UnlockedTitle.class, id);
 	}
 
 }

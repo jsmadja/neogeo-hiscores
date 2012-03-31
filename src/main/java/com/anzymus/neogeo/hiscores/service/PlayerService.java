@@ -25,8 +25,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -37,13 +35,14 @@ import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-public class PlayerService {
-
-	@PersistenceContext
-	EntityManager em;
+public class PlayerService extends GenericService<Player> {
 
 	@EJB
 	private TitleService titleService;
+
+	public PlayerService() {
+		super(Player.class);
+	}
 
 	public Achievement getAchievementFor(Player player, Title title) {
 		TitleUnlockingStrategy strategy = titleService.getStrategyByTitle(title);
@@ -73,23 +72,6 @@ public class PlayerService {
 	public List<Player> findAll() {
 		TypedQuery<Player> query = em.createNamedQuery("player_findAll", Player.class);
 		return query.getResultList();
-	}
-
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public Player store(Player player) {
-		Player storedPlayer;
-		if (player.getId() == null) {
-			em.persist(player);
-			storedPlayer = player;
-		} else {
-			storedPlayer = em.merge(player);
-		}
-		em.flush();
-		return storedPlayer;
-	}
-
-	public Player findById(Long id) {
-		return em.find(Player.class, id);
 	}
 
 	public long getNumberOfPlayers() {
