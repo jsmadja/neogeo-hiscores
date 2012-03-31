@@ -34,9 +34,11 @@ import javax.faces.context.FacesContext;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import com.anzymus.neogeo.hiscores.clients.AuthenticationFailed;
 import com.anzymus.neogeo.hiscores.clients.NeoGeoFansClient;
@@ -47,216 +49,216 @@ import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
+import com.anzymus.neogeo.hiscores.service.TitleRelockingService;
 import com.anzymus.neogeo.hiscores.service.TitleUnlockingService;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ScoreBeanTest {
 
-    @Mock
-    ScoreService scoreService;
+	@Mock
+	ScoreService scoreService;
 
-    @Mock
-    PlayerService playerService;
+	@Mock
+	PlayerService playerService;
 
-    @Mock
-    GameService gameService;
+	@Mock
+	GameService gameService;
 
-    @Mock
-    NeoGeoFansClientFactory neoGeoFansClientFactory;
+	@Mock
+	NeoGeoFansClientFactory neoGeoFansClientFactory;
 
-    @Mock
-    TitleUnlockingService titleUnlockingService;
+	@Mock
+	TitleUnlockingService titleUnlockingService;
 
-    @Mock
-    NeoGeoFansClient neoGeoFansClient;
+	@Mock
+	TitleRelockingService titleRelockingService;
 
-    @Mock
-    FacesContext facesContext;
+	@Mock
+	NeoGeoFansClient neoGeoFansClient;
 
-    ScoreBean scoreBean;
+	@Mock
+	FacesContext facesContext;
 
-    private Player player;
+	@InjectMocks
+	ScoreBean scoreBean;
 
-    private Game game;
+	private Player player;
 
-    @Before
-    public void init() {
-        MockitoAnnotations.initMocks(this);
-        scoreBean = new ScoreBean();
-        scoreBean.gameService = gameService;
-        scoreBean.playerService = playerService;
-        scoreBean.scoreService = scoreService;
-        scoreBean.titleUnlockingService = titleUnlockingService;
-        scoreBean.neoGeoFansClientFactory = neoGeoFansClientFactory;
-        scoreBean.facesContext = facesContext;
+	private Game game;
 
-        Iterator<FacesMessage> messages = new ArrayList<FacesMessage>().iterator();
-        when(facesContext.getMessages()).thenReturn(messages);
+	@Before
+	public void init() {
+		Iterator<FacesMessage> messages = new ArrayList<FacesMessage>().iterator();
+		when(facesContext.getMessages()).thenReturn(messages);
 
-        ExternalContext externalContext = Mockito.mock(ExternalContext.class);
-        when(externalContext.getRequestParameterMap()).thenReturn(new HashMap<String, String>());
+		ExternalContext externalContext = Mockito.mock(ExternalContext.class);
+		when(externalContext.getRequestParameterMap()).thenReturn(new HashMap<String, String>());
 
-        when(facesContext.getExternalContext()).thenReturn(externalContext);
+		when(facesContext.getExternalContext()).thenReturn(externalContext);
 
-        when(neoGeoFansClientFactory.create()).thenReturn(neoGeoFansClient);
+		when(neoGeoFansClientFactory.create()).thenReturn(neoGeoFansClient);
 
-        String playerName = "fullname";
-        player = new Player(playerName);
-        when(playerService.findByFullname("fullname")).thenReturn(player);
+		String playerName = "fullname";
+		player = new Player(playerName);
+		when(playerService.findByFullname("fullname")).thenReturn(player);
 
-        game = new Game("Fatal Fury");
-        long gameId = 19L;
-        game.setId(gameId);
-        when(gameService.findById(19L)).thenReturn(game);
-    }
+		game = new Game("Fatal Fury");
+		long gameId = 19L;
+		game.setId(gameId);
+		when(gameService.findById(19L)).thenReturn(game);
+	}
 
-    @Test
-    public void should_init_bean_with_score_from_db() {
-        String playerName = "fullname";
-        Player player = new Player(playerName);
+	@Test
+	public void should_init_bean_with_score_from_db() {
+		String playerName = "fullname";
+		Player player = new Player(playerName);
 
-        Game game = new Game("Fatal Fury");
-        long gameId = 19L;
-        game.setId(gameId);
-        game.setPostId(ScoreBean.DEFAULT_POST_ID);
+		Game game = new Game("Fatal Fury");
+		long gameId = 19L;
+		game.setId(gameId);
+		game.setPostId(ScoreBean.DEFAULT_POST_ID);
 
-        String pictureUrl = "http://";
-        String level = "MVS";
-        String scoreValue = "765465";
-        String message = "mon message";
-        Score score = new Score(scoreValue, player, level, game, pictureUrl);
-        score.setMessage(message);
-        score.setGame(game);
+		String pictureUrl = "http://";
+		String level = "MVS";
+		String scoreValue = "765465";
+		String message = "mon message";
+		Score score = new Score(scoreValue, player, level, game, pictureUrl);
+		score.setMessage(message);
+		score.setGame(game);
 
-        when(scoreService.findById(1234)).thenReturn(score);
+		when(scoreService.findById(1234)).thenReturn(score);
 
-        scoreBean.setId("1234");
-        scoreBean.init();
+		scoreBean.setId("1234");
+		scoreBean.init();
 
-        assertEquals(playerName, scoreBean.getFullname());
-        assertEquals(scoreValue, scoreBean.getScore());
-        assertEquals(message, scoreBean.getMessage());
-        assertEquals(pictureUrl, scoreBean.getPictureUrl());
-        assertEquals(level, scoreBean.getCurrentLevel());
-        assertEquals(gameId, scoreBean.getCurrentGame());
-    }
+		assertEquals(playerName, scoreBean.getFullname());
+		assertEquals(scoreValue, scoreBean.getScore());
+		assertEquals(message, scoreBean.getMessage());
+		assertEquals(pictureUrl, scoreBean.getPictureUrl());
+		assertEquals(level, scoreBean.getCurrentLevel());
+		assertEquals(gameId, scoreBean.getCurrentGame());
+	}
 
-    @Test
-    public void should_add_score_in_db() throws AuthenticationFailed {
-        when(neoGeoFansClient.authenticate(anyString(), anyString())).thenReturn(true);
+	@Test
+	public void should_add_score_in_db() throws AuthenticationFailed {
+		when(neoGeoFansClient.authenticate(anyString(), anyString())).thenReturn(true);
 
-        String scoreValue = "12432";
-        String pictureUrl = "http://";
-        String level = "Easy";
-        String message = "mon message";
-        String password = "mypassword";
+		String scoreValue = "12432";
+		String pictureUrl = "http://";
+		String level = "Easy";
+		String message = "mon message";
+		String password = "mypassword";
 
-        scoreBean.setScore(scoreValue);
-        scoreBean.setCurrentGame(game.getId());
-        scoreBean.setCurrentLevel(level);
-        scoreBean.setMessage(message);
-        scoreBean.setFullname("fullname");
-        scoreBean.setPassword(password);
-        scoreBean.setPictureUrl(pictureUrl);
+		scoreBean.setScore(scoreValue);
+		scoreBean.setCurrentGame(game.getId());
+		scoreBean.setCurrentLevel(level);
+		scoreBean.setMessage(message);
+		scoreBean.setFullname("fullname");
+		scoreBean.setPassword(password);
+		scoreBean.setPictureUrl(pictureUrl);
 
-        String redirection = scoreBean.add();
-        assertEquals("home", redirection);
+		String redirection = scoreBean.add();
+		assertEquals("home", redirection);
 
-        Score scoreToAdd = new Score(scoreValue, player, level, game, pictureUrl);
+		Score scoreToAdd = new Score(scoreValue, player, level, game, pictureUrl);
 
-        verify(neoGeoFansClient).authenticate(player.getFullname(), password);
-        verify(scoreService).store(scoreToAdd);
-    }
+		verify(neoGeoFansClient).authenticate(player.getFullname(), password);
+		verify(scoreService).store(scoreToAdd);
+	}
 
-    @Test
-    public void should_post_in_ngf_if_mvs_level() throws AuthenticationFailed {
-        when(neoGeoFansClient.authenticate(anyString(), anyString())).thenReturn(true);
+	@Test
+	public void should_post_in_ngf_if_mvs_level() throws AuthenticationFailed {
+		when(neoGeoFansClient.authenticate(anyString(), anyString())).thenReturn(true);
 
-        String scoreValue = "12432";
-        String pictureUrl = "http://";
-        String level = "MVS";
-        String message = "mon message";
-        String password = "mypassword";
+		String scoreValue = "12432";
+		String pictureUrl = "http://";
+		String level = "MVS";
+		String message = "mon message";
+		String password = "mypassword";
 
-        scoreBean.setScore(scoreValue);
-        scoreBean.setCurrentGame(game.getId());
-        scoreBean.setCurrentLevel(level);
-        scoreBean.setMessage(message);
-        scoreBean.setFullname("fullname");
-        scoreBean.setPassword(password);
-        scoreBean.setPictureUrl(pictureUrl);
-        scoreBean.setPostOnNgf(true);
+		scoreBean.setScore(scoreValue);
+		scoreBean.setCurrentGame(game.getId());
+		scoreBean.setCurrentLevel(level);
+		scoreBean.setMessage(message);
+		scoreBean.setFullname("fullname");
+		scoreBean.setPassword(password);
+		scoreBean.setPictureUrl(pictureUrl);
+		scoreBean.setPostOnNgf(true);
 
-        String redirection = scoreBean.add();
-        assertEquals("home", redirection);
+		Score score = new Score(scoreValue, player, level, game, pictureUrl);
+		when(scoreService.store(any(Score.class))).thenReturn(score);
 
-        verify(neoGeoFansClient).post(anyString(), anyInt());
-    }
+		String redirection = scoreBean.add();
+		assertEquals("home", redirection);
 
-    @Test
-    public void should_not_post_in_ngf_if_boolean_is_false() throws AuthenticationFailed {
-        when(neoGeoFansClient.authenticate(anyString(), anyString())).thenReturn(true);
+		verify(neoGeoFansClient).post(anyString(), anyInt());
+	}
 
-        String scoreValue = "12432";
-        String pictureUrl = "http://";
-        String level = "MVS";
-        String message = "mon message";
-        String password = "mypassword";
+	@Test
+	public void should_not_post_in_ngf_if_boolean_is_false() throws AuthenticationFailed {
+		when(neoGeoFansClient.authenticate(anyString(), anyString())).thenReturn(true);
 
-        scoreBean.setScore(scoreValue);
-        scoreBean.setCurrentGame(game.getId());
-        scoreBean.setCurrentLevel(level);
-        scoreBean.setMessage(message);
-        scoreBean.setFullname("fullname");
-        scoreBean.setPassword(password);
-        scoreBean.setPictureUrl(pictureUrl);
-        scoreBean.setPostOnNgf(false);
+		String scoreValue = "12432";
+		String pictureUrl = "http://";
+		String level = "MVS";
+		String message = "mon message";
+		String password = "mypassword";
 
-        String redirection = scoreBean.add();
-        assertEquals("home", redirection);
+		scoreBean.setScore(scoreValue);
+		scoreBean.setCurrentGame(game.getId());
+		scoreBean.setCurrentLevel(level);
+		scoreBean.setMessage(message);
+		scoreBean.setFullname("fullname");
+		scoreBean.setPassword(password);
+		scoreBean.setPictureUrl(pictureUrl);
+		scoreBean.setPostOnNgf(false);
 
-        verify(neoGeoFansClient, never()).post(anyString(), anyInt());
-    }
+		String redirection = scoreBean.add();
+		assertEquals("home", redirection);
 
-    @Test
-    public void should_show_error_when_login_password_are_invalids_when_add() throws AuthenticationFailed {
-        when(neoGeoFansClient.authenticate(anyString(), anyString())).thenReturn(false);
+		verify(neoGeoFansClient, never()).post(anyString(), anyInt());
+	}
 
-        String redirection = scoreBean.add();
-        assertEquals("score/create", redirection);
+	@Test
+	public void should_show_error_when_login_password_are_invalids_when_add() throws AuthenticationFailed {
+		when(neoGeoFansClient.authenticate(anyString(), anyString())).thenReturn(false);
 
-        verify(facesContext).addMessage(anyString(), any(FacesMessage.class));
-    }
+		String redirection = scoreBean.add();
+		assertEquals("score/create", redirection);
 
-    @Test
-    public void should_show_error_when_login_password_are_invalids_when_edit() throws AuthenticationFailed {
-        when(neoGeoFansClient.authenticate(anyString(), anyString())).thenReturn(false);
+		verify(facesContext).addMessage(anyString(), any(FacesMessage.class));
+	}
 
-        String redirection = scoreBean.edit();
-        assertEquals("score/edit", redirection);
+	@Test
+	public void should_show_error_when_login_password_are_invalids_when_edit() throws AuthenticationFailed {
+		when(neoGeoFansClient.authenticate(anyString(), anyString())).thenReturn(false);
 
-        verify(facesContext).addMessage(anyString(), any(FacesMessage.class));
-    }
+		String redirection = scoreBean.edit();
+		assertEquals("score/edit", redirection);
 
-    @Test
-    public void should_edit_score() throws AuthenticationFailed {
-        when(neoGeoFansClient.authenticate(anyString(), anyString())).thenReturn(true);
+		verify(facesContext).addMessage(anyString(), any(FacesMessage.class));
+	}
 
-        scoreBean.setId("12");
-        scoreBean.setCurrentGame(19L);
+	@Test
+	public void should_edit_score() throws AuthenticationFailed {
+		when(neoGeoFansClient.authenticate(anyString(), anyString())).thenReturn(true);
 
-        Game game = new Game("Fatal Fury");
-        game.setId(19L);
-        game.setPostId(ScoreBean.DEFAULT_POST_ID);
+		scoreBean.setId("12");
+		scoreBean.setCurrentGame(19L);
 
-        when(gameService.findById(19L)).thenReturn(game);
+		Game game = new Game("Fatal Fury");
+		game.setId(19L);
+		game.setPostId(ScoreBean.DEFAULT_POST_ID);
 
-        Score score = new Score();
-        score.setGame(game);
-        when(scoreService.findById(12L)).thenReturn(score);
+		when(gameService.findById(19L)).thenReturn(game);
 
-        String redirection = scoreBean.edit();
-        assertEquals("home", redirection);
+		Score score = new Score();
+		score.setGame(game);
+		when(scoreService.findById(12L)).thenReturn(score);
 
-        verify(scoreService).store(score);
-    }
+		String redirection = scoreBean.edit();
+		assertEquals("home", redirection);
+
+		verify(scoreService).store(score);
+	}
 }

@@ -43,6 +43,7 @@ import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
+import com.anzymus.neogeo.hiscores.service.TitleRelockingService;
 import com.anzymus.neogeo.hiscores.service.TitleUnlockingService;
 import com.google.common.annotations.VisibleForTesting;
 
@@ -64,6 +65,9 @@ public class ScoreBean {
 
 	@EJB
 	TitleUnlockingService titleUnlockingService;
+
+	@EJB
+	TitleRelockingService titleRelockingService;
 
 	@ManagedProperty(value = "#{param.scoreId}")
 	private String id;
@@ -219,19 +223,20 @@ public class ScoreBean {
 		scoreToAdd.setStage(stage);
 		int end = message.length() > MAX_MESSAGE_LENGTH ? MAX_MESSAGE_LENGTH : message.length();
 		scoreToAdd.setMessage(message.substring(0, end));
-		scoreService.store(scoreToAdd);
+		scoreToAdd = scoreService.store(scoreToAdd);
 		postOnNgf(scoreToAdd, game, ngfClient);
 		titleUnlockingService.searchUnlockedTitlesFor(player);
+		titleRelockingService.relockTitles(scoreToAdd);
 	}
 
-	private void postOnNgf(Score scoreToAdd, Game game, NeoGeoFansClient ngfClient) {
+	private void postOnNgf(Score score, Game game, NeoGeoFansClient ngfClient) {
 		if (postOnNgf) {
 			if ("MVS".equals(currentLevel)) {
 				Long postId = game.getPostId();
 				if (postId == null) {
 					postId = 41930L;
 				}
-				ngfClient.post(Messages.toMessage(scoreToAdd), postId);
+				ngfClient.post(Messages.toMessage(score), postId);
 			}
 		}
 	}
