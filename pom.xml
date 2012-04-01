@@ -148,7 +148,6 @@
 		<finalName>hiscores</finalName>
 	</build>
 
-
 	<pluginRepositories>
 		<pluginRepository>
 			<id>maven2-repository.java.net</id>
@@ -200,7 +199,6 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>${guava-version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -237,7 +235,6 @@
 			<artifactId>jersey-client</artifactId>
 			<version>${jersey-client-version}</version>
 			<type>jar</type>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
@@ -255,13 +252,11 @@
 			<groupId>net.sourceforge.htmlunit</groupId>
 			<artifactId>htmlunit</artifactId>
 			<version>1.14</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>2.6</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.java.dev.rome</groupId>
@@ -284,7 +279,6 @@
 			<version>1.35.0</version>
 		</dependency>
 	</dependencies>
-
 
 	<profiles>
 		<profile>
