@@ -85,11 +85,7 @@ public class GameService extends GenericService<Game> {
 	public List<Game> findAllPlayedGamesThisMonth() {
 		Query query = em.createNativeQuery(Game.findAllPlayedGamesThisMonth, Game.class);
 		Date beginDate = new DateTime().withDayOfMonth(1).toDate();
-		int lastDay = 31;
-		if (new DateTime().getMonthOfYear() == 2) {
-			lastDay = 29;
-		}
-		Date endDate = new DateTime().withDayOfMonth(lastDay).toDate();
+		Date endDate = Dates.findLastDayOfMonth();
 		query.setParameter(1, beginDate);
 		query.setParameter(2, endDate);
 		return query.getResultList();

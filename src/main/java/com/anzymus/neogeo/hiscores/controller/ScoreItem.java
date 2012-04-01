@@ -17,6 +17,7 @@
 package com.anzymus.neogeo.hiscores.controller;
 
 import java.util.Date;
+
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Score;
 

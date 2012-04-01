@@ -18,8 +18,11 @@ package com.anzymus.neogeo.hiscores.comparator;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
 import java.util.Comparator;
+
 import org.junit.Test;
+
 import com.anzymus.neogeo.hiscores.domain.Player;
 
 public class PlayerSortedByPointsDescComparatorTest {

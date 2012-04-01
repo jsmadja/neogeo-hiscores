@@ -18,7 +18,9 @@ package com.anzymus.neogeo.hiscores.converter;
 
 import java.util.Calendar;
 import java.util.Date;
+
 import junit.framework.Assert;
+
 import org.junit.Test;
 
 public class DateMMDDYYConverterTest {

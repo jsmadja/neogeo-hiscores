@@ -16,16 +16,19 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
-import com.anzymus.neogeo.hiscores.domain.Achievement;
-import com.anzymus.neogeo.hiscores.domain.Player;
-import com.anzymus.neogeo.hiscores.service.TitleService;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+import com.anzymus.neogeo.hiscores.domain.Achievement;
+import com.anzymus.neogeo.hiscores.domain.Player;
+import com.anzymus.neogeo.hiscores.service.TitleService;
 
 public class WorldHeroTitleStrategyTest {
 

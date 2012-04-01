@@ -52,7 +52,7 @@ public class TitleService extends GenericService<Title> {
 	@EJB
 	ScoreService scoreService;
 
-	@EJB
+	private @EJB
 	GameService gameService;
 
 	private Map<Title, TitleUnlockingStrategy> strategies;

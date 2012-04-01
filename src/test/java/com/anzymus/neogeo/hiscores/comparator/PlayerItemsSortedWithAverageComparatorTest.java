@@ -17,7 +17,9 @@
 package com.anzymus.neogeo.hiscores.comparator;
 
 import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
+
 import com.anzymus.neogeo.hiscores.controller.PlayerItem;
 
 public class PlayerItemsSortedWithAverageComparatorTest {

@@ -6,13 +6,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-public class GenericService<T> {
+public abstract class GenericService<T> {
 
 	@PersistenceContext
 	protected EntityManager em;
 
 	private Class<T> clazz;
 
+	public GenericService() {}
+	
 	public GenericService(Class<T> clazz) {
 		this.clazz = clazz;
 	}

@@ -22,8 +22,10 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+
 import com.anzymus.neogeo.hiscores.comparator.PlayerSortedByPointsDescComparator;
 import com.anzymus.neogeo.hiscores.comparator.ScoreSortedByValueDescComparator;
 import com.anzymus.neogeo.hiscores.domain.Game;

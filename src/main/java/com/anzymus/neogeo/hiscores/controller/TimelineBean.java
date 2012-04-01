@@ -17,12 +17,14 @@
 package com.anzymus.neogeo.hiscores.controller;
 
 import java.util.List;
+
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+
 import com.anzymus.neogeo.hiscores.domain.Timeline;
 import com.anzymus.neogeo.hiscores.domain.TimelineItem;
 import com.anzymus.neogeo.hiscores.service.TimelineService;
-import javax.ejb.EJB;
 
 @ManagedBean
 public class TimelineBean {

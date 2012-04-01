@@ -36,7 +36,7 @@ public class GamesBean {
 	@EJB
 	ScoreService scoreService;
 
-	List<GameItem> gameItems = new ArrayList<GameItem>();
+	private List<GameItem> gameItems = new ArrayList<GameItem>();
 
 	@PostConstruct
 	public void init() {

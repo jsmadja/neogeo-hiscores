@@ -34,87 +34,87 @@ import com.google.common.collect.Lists;
 @ManagedBean
 public class StatsBean {
 
-    @EJB
-    PlayerService playerService;
+	@EJB
+	PlayerService playerService;
 
-    @EJB
-    TitleUnlockingService titleUnlockingService;
+	@EJB
+	TitleUnlockingService titleUnlockingService;
 
-    @EJB
-    ScoreService scoreService;
+	private @EJB
+	ScoreService scoreService;
 
-    @EJB
-    GameService gameService;
+	@EJB
+	GameService gameService;
 
-    public long getNumberOfPlayers() {
-        return playerService.getNumberOfPlayers();
-    }
+	public long getNumberOfPlayers() {
+		return playerService.getNumberOfPlayers();
+	}
 
-    public List<Player> getBestTitleUnlockers() {
-        List<Player> bestTitleUnlockers = new ArrayList<Player>();
-        List<Player> playersOrderByNumUnlockedTitles = titleUnlockingService.findPlayersOrderByNumUnlockedTitles();
-        if (!playersOrderByNumUnlockedTitles.isEmpty()) {
-            Player player = playersOrderByNumUnlockedTitles.get(0);
-            int max = player.getUnlockedTitles().size();
-            int currentNumUnlockedTitles = max;
-            while (max == currentNumUnlockedTitles && !playersOrderByNumUnlockedTitles.isEmpty()) {
-                Player nextPlayer = playersOrderByNumUnlockedTitles.remove(0);
-                currentNumUnlockedTitles = nextPlayer.getUnlockedTitles().size();
-                if (currentNumUnlockedTitles == max) {
-                    bestTitleUnlockers.add(nextPlayer);
-                }
-            }
-        }
-        return bestTitleUnlockers;
-    }
+	public List<Player> getBestTitleUnlockers() {
+		List<Player> bestTitleUnlockers = new ArrayList<Player>();
+		List<Player> playersOrderByNumUnlockedTitles = titleUnlockingService.findPlayersOrderByNumUnlockedTitles();
+		if (!playersOrderByNumUnlockedTitles.isEmpty()) {
+			Player player = playersOrderByNumUnlockedTitles.get(0);
+			int max = player.getUnlockedTitles().size();
+			int currentNumUnlockedTitles = max;
+			while (max == currentNumUnlockedTitles && !playersOrderByNumUnlockedTitles.isEmpty()) {
+				Player nextPlayer = playersOrderByNumUnlockedTitles.remove(0);
+				currentNumUnlockedTitles = nextPlayer.getUnlockedTitles().size();
+				if (currentNumUnlockedTitles == max) {
+					bestTitleUnlockers.add(nextPlayer);
+				}
+			}
+		}
+		return bestTitleUnlockers;
+	}
 
-    public List<Player> getBestScorers() {
-        List<Player> bestScorers = new ArrayList<Player>();
-        List<Player> playersOrderByNumScores = scoreService.findPlayersOrderByNumScores();
-        if (!playersOrderByNumScores.isEmpty()) {
-            Player player = playersOrderByNumScores.get(0);
-            Scores scores = scoreService.findAllByPlayer(player);
-            int maxContributions = scores.count();
-            int currentContributions = maxContributions;
-            while (maxContributions == currentContributions && !playersOrderByNumScores.isEmpty()) {
-                player = playersOrderByNumScores.remove(0);
-                scores = scoreService.findAllByPlayer(player);
-                currentContributions = scores.count();
-                if (currentContributions == maxContributions) {
-                    player.setContribution(maxContributions);
-                    bestScorers.add(player);
-                }
-            }
-        }
-        return bestScorers;
-    }
+	public List<Player> getBestScorers() {
+		List<Player> bestScorers = new ArrayList<Player>();
+		List<Player> playersOrderByNumScores = scoreService.findPlayersOrderByNumScores();
+		if (!playersOrderByNumScores.isEmpty()) {
+			Player player = playersOrderByNumScores.get(0);
+			Scores scores = scoreService.findAllByPlayer(player);
+			int maxContributions = scores.count();
+			int currentContributions = maxContributions;
+			while (maxContributions == currentContributions && !playersOrderByNumScores.isEmpty()) {
+				player = playersOrderByNumScores.remove(0);
+				scores = scoreService.findAllByPlayer(player);
+				currentContributions = scores.count();
+				if (currentContributions == maxContributions) {
+					player.setContribution(maxContributions);
+					bestScorers.add(player);
+				}
+			}
+		}
+		return bestScorers;
+	}
 
-    public List<Game> getMostPlayedGames() {
-        List<Game> mostPlayedGames = Lists.newArrayList();
-        List<Game> gamesOrderByNumScores = scoreService.findGamesOrderByNumPlayers();
-        if (!gamesOrderByNumScores.isEmpty()) {
-            Game game = gamesOrderByNumScores.get(0);
-            Scores scores = scoreService.findAllByGame(game);
-            int maxContributions = scores.count();
-            int currentContributions = maxContributions;
-            while (maxContributions == currentContributions && !gamesOrderByNumScores.isEmpty()) {
-                game = gamesOrderByNumScores.remove(0);
-                scores = scoreService.findAllByGame(game);
-                currentContributions = scores.count();
-                if (currentContributions == maxContributions) {
-                    game.setContribution(maxContributions);
-                    mostPlayedGames.add(game);
-                }
-            }
-        }
-        return mostPlayedGames;
-    }
+	public List<Game> getMostPlayedGames() {
+		List<Game> mostPlayedGames = Lists.newArrayList();
+		List<Game> gamesOrderByNumScores = scoreService.findGamesOrderByNumPlayers();
+		if (!gamesOrderByNumScores.isEmpty()) {
+			Game game = gamesOrderByNumScores.get(0);
+			Scores scores = scoreService.findAllByGame(game);
+			int maxContributions = scores.count();
+			int currentContributions = maxContributions;
+			while (maxContributions == currentContributions && !gamesOrderByNumScores.isEmpty()) {
+				game = gamesOrderByNumScores.remove(0);
+				scores = scoreService.findAllByGame(game);
+				currentContributions = scores.count();
+				if (currentContributions == maxContributions) {
+					game.setContribution(maxContributions);
+					mostPlayedGames.add(game);
+				}
+			}
+		}
+		return mostPlayedGames;
+	}
 
-    public long getNumberOfPlayedGames() {
-        return scoreService.getNumberOfPlayedGames();
-    }
+	public long getNumberOfPlayedGames() {
+		return scoreService.getNumberOfPlayedGames();
+	}
 
-    public long getNumberOfUnplayedGames() {
-        return gameService.getNumberOfGames() - getNumberOfPlayedGames();
-    }
+	public long getNumberOfUnplayedGames() {
+		return gameService.getNumberOfGames() - getNumberOfPlayedGames();
+	}
 }

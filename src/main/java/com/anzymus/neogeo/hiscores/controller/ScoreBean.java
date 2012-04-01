@@ -49,7 +49,7 @@ import com.google.common.annotations.VisibleForTesting;
 
 @ManagedBean
 public class ScoreBean {
-	public static final String ALL_CLEAR = "ALL CLEAR";
+	private static final String ALL_CLEAR = "ALL CLEAR";
 	public static final String DEFAULT_GAME = "3 Count Bout (3 minutes)";
 	public static final long DEFAULT_POST_ID = 41930;
 	public static final Logger LOG = Logger.getLogger(ScoreBean.class.getName());

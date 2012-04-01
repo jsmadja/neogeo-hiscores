@@ -17,6 +17,7 @@
 package com.anzymus.neogeo.hiscores.service.halloffame;
 
 import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 public class NgfPointCalculatorTest {

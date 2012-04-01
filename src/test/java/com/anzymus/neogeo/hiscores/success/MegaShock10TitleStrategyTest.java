@@ -16,14 +16,15 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
-import com.anzymus.neogeo.hiscores.domain.Achievement;
-import com.anzymus.neogeo.hiscores.domain.Player;
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
+
+import org.junit.Test;
+
+import com.anzymus.neogeo.hiscores.domain.Achievement;
+import com.anzymus.neogeo.hiscores.domain.Player;
 
 public class MegaShock10TitleStrategyTest extends AbstractMegaShockTitleStrategyTest {
 

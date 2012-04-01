@@ -33,7 +33,6 @@ import com.anzymus.neogeo.hiscores.domain.RelockedTitle;
 import com.anzymus.neogeo.hiscores.domain.Title;
 import com.anzymus.neogeo.hiscores.domain.UnlockedTitle;
 import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
-import com.google.common.annotations.VisibleForTesting;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
@@ -45,7 +44,6 @@ public class TitleUnlockingService extends GenericService<UnlockedTitle> {
 	@EJB
 	PlayerService playerService;
 
-	@VisibleForTesting
 	Map<Title, TitleUnlockingStrategy> strategiesByTitle;
 
 	private static final int MAX_UNLOCKED_TITLES_TO_RETURN = 10;

@@ -33,7 +33,7 @@ public class HallOfOneCreditService {
 
 	@PersistenceContext
 	EntityManager em;
-	@EJB
+	private @EJB
 	PlayerService playerService;
 
 	private static final String ONE_CREDIT_QUERY = "SELECT s.PLAYER_ID, COUNT(DISTINCT s.GAME_ID) FROM SCORE s, PLAYER p WHERE s.ALL_CLEAR = 1 AND s.PLAYER_ID=p.ID AND s.LEVEL_LABEL = \"MVS\" GROUP BY PLAYER_ID ORDER BY COUNT(DISTINCT s.GAME_ID) DESC, p.FULLNAME ASC";

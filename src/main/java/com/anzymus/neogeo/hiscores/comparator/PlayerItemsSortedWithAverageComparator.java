@@ -17,6 +17,7 @@
 package com.anzymus.neogeo.hiscores.comparator;
 
 import java.util.Comparator;
+
 import com.anzymus.neogeo.hiscores.controller.PlayerItem;
 
 public class PlayerItemsSortedWithAverageComparator implements Comparator<PlayerItem> {

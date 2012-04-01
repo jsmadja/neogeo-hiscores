@@ -17,6 +17,7 @@
 package com.anzymus.neogeo.hiscores.domain;
 
 import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 public class PlayerTest {

@@ -17,9 +17,12 @@
 package com.anzymus.neogeo.hiscores.comparator;
 
 import static org.junit.Assert.assertEquals;
+
 import java.util.Calendar;
 import java.util.Comparator;
+
 import org.junit.Test;
+
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.TimelineItem;
 import com.anzymus.neogeo.hiscores.domain.UnlockedTitle;

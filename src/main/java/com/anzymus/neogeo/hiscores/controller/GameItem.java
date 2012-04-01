@@ -34,11 +34,6 @@ public class GameItem {
 		this.id = id;
 	}
 
-	GameItem(String name, long id, long count) {
-		this(name, id);
-		this.count = count;
-	}
-
 	GameItem(String name, long id, long count, String genre) {
 		this(name, id);
 		this.count = count;

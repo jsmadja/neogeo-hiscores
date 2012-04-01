@@ -23,7 +23,6 @@ public class SoccerWithGoalAverageScore implements Comparable<SoccerWithGoalAver
 	private Integer games;
 	private Integer won;
 	private Integer goalsFor;
-	private Integer goalAgainst;
 	private Integer goalDifference;
 	private Score score;
 
@@ -35,10 +34,8 @@ public class SoccerWithGoalAverageScore implements Comparable<SoccerWithGoalAver
 		won = Integer.parseInt(splits[1]);
 		goalsFor = Integer.parseInt(splits[2]);
 		if (splits[3].contains("+")) {
-			goalAgainst = Integer.parseInt(splits[3].split("\\+")[0]);
 			goalDifference = Integer.parseInt(splits[3].split("\\+")[1]);
 		} else {
-			goalAgainst = Integer.parseInt(splits[3]);
 			goalDifference = -Integer.parseInt(splits[4]);
 		}
 	}

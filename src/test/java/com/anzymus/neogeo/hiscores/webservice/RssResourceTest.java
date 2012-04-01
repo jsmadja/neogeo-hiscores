@@ -18,10 +18,12 @@ package com.anzymus.neogeo.hiscores.webservice;
 
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.when;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
 import com.anzymus.neogeo.hiscores.domain.Timeline;
 import com.anzymus.neogeo.hiscores.service.RssService;
 import com.anzymus.neogeo.hiscores.service.rss.TimelineRss;

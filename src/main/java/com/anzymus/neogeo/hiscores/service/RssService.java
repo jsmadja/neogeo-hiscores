@@ -20,8 +20,8 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+
 import com.anzymus.neogeo.hiscores.domain.Timeline;
-import com.anzymus.neogeo.hiscores.service.TimelineService;
 import com.anzymus.neogeo.hiscores.service.rss.TimelineRss;
 
 @Stateless

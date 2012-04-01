@@ -41,7 +41,7 @@ import com.anzymus.neogeo.hiscores.service.TitleUnlockingService;
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public class AdministrationWebService {
 
-	@EJB
+	private @EJB
 	GameService gameService;
 
 	@EJB
@@ -60,8 +60,7 @@ public class AdministrationWebService {
 
 	@WebMethod
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void addScore(String gameName, String level, String fullname, String scorePoints, String pictureUrl,
-			String message) {
+	public void addScore(String gameName, String level, String fullname, String scorePoints, String pictureUrl, String message) {
 		Game game = gameService.findByName(gameName);
 		Player player = playerService.findByFullname(fullname);
 		if (player == null) {
@@ -107,8 +106,7 @@ public class AdministrationWebService {
 		for (UnlockedTitle unlockedTitle : unlockedTitles) {
 			if (titleUnlockingService.isRelockable(unlockedTitle)) {
 				titleUnlockingService.remove(unlockedTitle);
-				LOG.info("Title " + unlockedTitle.getTitle().getLabel() + " has been removed from player "
-						+ unlockedTitle.getPlayer());
+				LOG.info("Title " + unlockedTitle.getTitle().getLabel() + " has been removed from player " + unlockedTitle.getPlayer());
 			}
 		}
 	}

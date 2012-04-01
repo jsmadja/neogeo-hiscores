@@ -18,6 +18,7 @@ package com.anzymus.neogeo.hiscores.converter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
