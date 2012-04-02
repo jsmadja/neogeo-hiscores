@@ -28,7 +28,7 @@ public abstract class AbstractGenreTitleStrategy extends AbstractTitleStrategy {
 
 	@Override
 	public boolean isUnlockable(Player player) {
-		List<Scores> scoresByGame = titleService.getScoresByGameGenres(getGenres());
+		List<Scores> scoresByGame = titleService.getScoresByGameGenre(getGenre());
 		if (scoresByGame.isEmpty()) {
 			return false;
 		}
@@ -53,10 +53,10 @@ public abstract class AbstractGenreTitleStrategy extends AbstractTitleStrategy {
 
 	@Override
 	public Achievement getAchievementFor(Player player) {
-		List<Scores> scoresByGame = titleService.getScoresByGameGenres(getGenres());
+		List<Scores> scoresByGame = titleService.getScoresByGameGenre(getGenre());
 		if (scoresByGame.isEmpty()) {
 			Achievement achievement = new Achievement(getTitle(), 0);
-			Step step = new Step("Have a rank Between 1st and 3rd place in " + getGenres()[0] + " games", false);
+			Step step = new Step("Have a rank Between 1st and 3rd place in " + getGenre() + " games", false);
 			achievement.addStep(step);
 			return achievement;
 		}
@@ -99,6 +99,6 @@ public abstract class AbstractGenreTitleStrategy extends AbstractTitleStrategy {
 		return achievement;
 	}
 
-	protected abstract String[] getGenres();
+	protected abstract String getGenre();
 
 }

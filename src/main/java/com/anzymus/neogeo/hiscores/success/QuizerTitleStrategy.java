@@ -18,8 +18,8 @@ package com.anzymus.neogeo.hiscores.success;
 
 public class QuizerTitleStrategy extends AbstractGenreTitleStrategy {
 
-    protected String[] getGenres() {
-        return new String[]{"Quiz"};
-    }
+	protected String getGenre() {
+		return "Quiz";
+	}
 
 }

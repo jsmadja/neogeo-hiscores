@@ -28,6 +28,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import com.anzymus.neogeo.hiscores.domain.Achievement;
 import com.anzymus.neogeo.hiscores.domain.Game;
@@ -55,8 +56,7 @@ public class AbstractGenreTitleStrategyTest {
 		when(scores.getRank(player)).thenReturn(13);
 
 		scoresByGame.add(scores);
-		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenres(any(String[].class))).thenReturn(
-				scoresByGame);
+		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenre(any(String.class))).thenReturn(scoresByGame);
 
 		assertFalse(abstractGenreTitleStrategy.isUnlockable(player));
 	}
@@ -69,8 +69,7 @@ public class AbstractGenreTitleStrategyTest {
 		when(scores.getRank(player)).thenReturn(1);
 
 		scoresByGame.add(scores);
-		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenres(any(String[].class))).thenReturn(
-				scoresByGame);
+		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenre(any(String.class))).thenReturn(scoresByGame);
 
 		assertTrue(abstractGenreTitleStrategy.isUnlockable(player));
 	}
@@ -87,8 +86,7 @@ public class AbstractGenreTitleStrategyTest {
 		when(scores2.getRank(player)).thenReturn(1);
 		scoresByGame.add(scores2);
 
-		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenres(any(String[].class))).thenReturn(
-				scoresByGame);
+		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenre(any(String.class))).thenReturn(scoresByGame);
 
 		assertTrue(abstractGenreTitleStrategy.isUnlockable(player));
 	}
@@ -105,8 +103,7 @@ public class AbstractGenreTitleStrategyTest {
 		when(scores2.getRank(player)).thenReturn(13);
 		scoresByGame.add(scores2);
 
-		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenres(any(String[].class))).thenReturn(
-				scoresByGame);
+		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenre(Mockito.anyString())).thenReturn(scoresByGame);
 
 		assertFalse(abstractGenreTitleStrategy.isUnlockable(player));
 	}
@@ -123,8 +120,7 @@ public class AbstractGenreTitleStrategyTest {
 		when(scores2.getRank(player)).thenReturn(13);
 		scoresByGame.add(scores2);
 
-		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenres(any(String[].class))).thenReturn(
-				scoresByGame);
+		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenre(Mockito.anyString())).thenReturn(scoresByGame);
 
 		assertTrue(abstractGenreTitleStrategy.isUnlockable(player));
 	}
@@ -145,8 +141,7 @@ public class AbstractGenreTitleStrategyTest {
 		when(scores3.getRank(player)).thenReturn(1);
 		scoresByGame.add(scores3);
 
-		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenres(any(String[].class))).thenReturn(
-				scoresByGame);
+		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenre(Mockito.anyString())).thenReturn(scoresByGame);
 
 		assertTrue(abstractGenreTitleStrategy.isUnlockable(player));
 	}
@@ -167,8 +162,7 @@ public class AbstractGenreTitleStrategyTest {
 		when(scores3.getRank(player)).thenReturn(1);
 		scoresByGame.add(scores3);
 
-		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenres(any(String[].class))).thenReturn(
-				scoresByGame);
+		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenre(Mockito.anyString())).thenReturn(scoresByGame);
 
 		assertFalse(abstractGenreTitleStrategy.isUnlockable(player));
 	}
@@ -189,8 +183,7 @@ public class AbstractGenreTitleStrategyTest {
 		when(scores3.getRank(player)).thenReturn(Integer.MAX_VALUE);
 		scoresByGame.add(scores3);
 
-		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenres(any(String[].class))).thenReturn(
-				scoresByGame);
+		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenre(Mockito.anyString())).thenReturn(scoresByGame);
 
 		assertTrue(abstractGenreTitleStrategy.isUnlockable(player));
 	}
@@ -204,8 +197,7 @@ public class AbstractGenreTitleStrategyTest {
 		when(scores.getRank(player)).thenReturn(Integer.MAX_VALUE);
 		scoresByGame.add(scores);
 
-		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenres(any(String[].class))).thenReturn(
-				scoresByGame);
+		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenre(Mockito.anyString())).thenReturn(scoresByGame);
 
 		assertFalse(abstractGenreTitleStrategy.isUnlockable(player));
 	}
@@ -218,8 +210,7 @@ public class AbstractGenreTitleStrategyTest {
 
 		assertEquals(0, achievement.getProgressInPercent());
 		assertEquals(1, achievement.getSteps().size());
-		assertEquals("Have a rank Between 1st and 3rd place in Shooter games", achievement.getSteps().get(0)
-				.getDescription());
+		assertEquals("Have a rank Between 1st and 3rd place in Shooter games", achievement.getSteps().get(0).getDescription());
 		assertFalse(achievement.getSteps().get(0).isComplete());
 	}
 
@@ -236,8 +227,7 @@ public class AbstractGenreTitleStrategyTest {
 		when(scores1.getRank(player)).thenReturn(4);
 		scoresByGame.add(scores1);
 
-		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenres(any(String[].class))).thenReturn(
-				scoresByGame);
+		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenre(Mockito.anyString())).thenReturn(scoresByGame);
 
 		Achievement achievement = abstractGenreTitleStrategy.getAchievementFor(player);
 
@@ -260,8 +250,7 @@ public class AbstractGenreTitleStrategyTest {
 		when(scores1.getRank(player)).thenReturn(3);
 		scoresByGame.add(scores1);
 
-		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenres(any(String[].class))).thenReturn(
-				scoresByGame);
+		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenre(Mockito.anyString())).thenReturn(scoresByGame);
 
 		Achievement achievement = abstractGenreTitleStrategy.getAchievementFor(player);
 
@@ -294,8 +283,7 @@ public class AbstractGenreTitleStrategyTest {
 		scoresByGame.add(scores1);
 		scoresByGame.add(scores2);
 
-		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenres(any(String[].class))).thenReturn(
-				scoresByGame);
+		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenre(Mockito.anyString())).thenReturn(scoresByGame);
 
 		Achievement achievement = abstractGenreTitleStrategy.getAchievementFor(player);
 
@@ -338,8 +326,7 @@ public class AbstractGenreTitleStrategyTest {
 		scoresByGame.add(scores2);
 		scoresByGame.add(scores3);
 
-		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenres(any(String[].class))).thenReturn(
-				scoresByGame);
+		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenre(Mockito.anyString())).thenReturn(scoresByGame);
 
 		Achievement achievement = abstractGenreTitleStrategy.getAchievementFor(player);
 
@@ -382,8 +369,7 @@ public class AbstractGenreTitleStrategyTest {
 		scoresByGame.add(scores2);
 		scoresByGame.add(scores3);
 
-		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenres(any(String[].class))).thenReturn(
-				scoresByGame);
+		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenre(Mockito.anyString())).thenReturn(scoresByGame);
 
 		Achievement achievement = abstractGenreTitleStrategy.getAchievementFor(player);
 

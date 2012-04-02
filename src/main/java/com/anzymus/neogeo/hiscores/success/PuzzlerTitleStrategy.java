@@ -18,8 +18,8 @@ package com.anzymus.neogeo.hiscores.success;
 
 public class PuzzlerTitleStrategy extends AbstractGenreTitleStrategy {
 
-	protected String[] getGenres() {
-		return new String[] { "Puzzle" };
+	protected String getGenre() {
+		return "Puzzle";
 	}
 
 }
