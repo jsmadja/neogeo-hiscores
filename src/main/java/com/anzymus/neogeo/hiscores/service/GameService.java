@@ -16,7 +16,6 @@
 
 package com.anzymus.neogeo.hiscores.service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -91,15 +90,7 @@ public class GameService extends GenericService<Game> {
 		return query.getResultList();
 	}
 
-	public List<Game> findGamesByGenres(String[] genres) {
-		List<Game> games = new ArrayList<Game>();
-		for (String genre : genres) {
-			games.addAll(findGamesByGenre(genre));
-		}
-		return games;
-	}
-
-	private List<Game> findGamesByGenre(String genre) {
+	public List<Game> findGamesByGenre(String genre) {
 		TypedQuery<Game> query = em.createNamedQuery("game_findGamesByGenre", Game.class);
 		query.setParameter("genre", genre);
 		return query.getResultList();

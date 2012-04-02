@@ -118,9 +118,9 @@ public class TitleService extends GenericService<Title> {
 		query.executeUpdate();
 	}
 
-	public List<Scores> getScoresByGameGenres(String[] genres) {
+	public List<Scores> getScoresByGameGenre(String genre) {
 		List<Scores> scores = new ArrayList<Scores>();
-		List<Game> games = gameService.findGamesByGenres(genres);
+		List<Game> games = gameService.findGamesByGenre(genre);
 		for (Game game : games) {
 			scores.add(scoreService.findAllByGame(game));
 		}
@@ -131,10 +131,10 @@ public class TitleService extends GenericService<Title> {
 		String level = "MVS";
 		double points = 0;
 		double contributions = 0;
-		List<Game> games = gameService.findAll();
+		List<Game> games = gameService.findAllGamesPlayedBy(player);
 		for (Game game : games) {
-			Scores scores = scoreService.findAllByGame(game);
-			List<Score> scoresByLevel = scores.getScoresByLevel(level);
+			Scores scores = scoreService.findAllByGame(game, level);
+			List<Score> scoresByLevel = scores.asSortedList();
 			int maxPoints = scoresByLevel.size() >= 10 ? 10 : scoresByLevel.size();
 			Collections.sort(scoresByLevel, sortScoreByValueDesc);
 			Score oldScore = null;

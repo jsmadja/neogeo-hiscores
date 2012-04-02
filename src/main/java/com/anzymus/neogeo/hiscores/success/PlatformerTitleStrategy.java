@@ -18,8 +18,8 @@ package com.anzymus.neogeo.hiscores.success;
 
 public class PlatformerTitleStrategy extends AbstractGenreTitleStrategy {
 
-	protected String[] getGenres() {
-		return new String[] { "Platform" };
+	protected String getGenre() {
+		return "Platform";
 	}
 
 }

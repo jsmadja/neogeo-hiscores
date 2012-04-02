@@ -31,16 +31,17 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.google.common.base.Objects;
+import java.util.regex.Pattern;
 
 @Entity
 @Table(name = "SCORE")
-@NamedQueries({
-		@NamedQuery(name = "score_findAllByGame", query = "SELECT s FROM Score s WHERE s.game = :game"),
-		@NamedQuery(name = "score_findAllByGameThisMonth", query = "SELECT s FROM Score s WHERE s.game = :game AND s.creationDate >= :beginDate AND s.creationDate <= :endDate"),
-		@NamedQuery(name = "score_findAllOneCreditScoresByGame", query = "SELECT s FROM Score s WHERE s.game = :game AND s.allClear = true"),
-		@NamedQuery(name = "score_findAllByPlayer", query = "SELECT s FROM Score s WHERE s.player = :player"),
-		@NamedQuery(name = "score_findAll", query = "SELECT s FROM Score s"),
-		@NamedQuery(name = "score_findAllOrderByDateDesc", query = "SELECT s FROM Score s ORDER BY s.creationDate DESC"),
+@NamedQueries({ @NamedQuery(name = "score_findAllByGame", query = "SELECT s FROM Score s WHERE s.game = :game"), //
+		@NamedQuery(name = "score_findAllByGameAndLevel", query = "SELECT s FROM Score s WHERE s.game = :game AND s.level = :level"), //
+		@NamedQuery(name = "score_findAllByGameThisMonth", query = "SELECT s FROM Score s WHERE s.game = :game AND s.creationDate >= :beginDate AND s.creationDate <= :endDate"), //
+		@NamedQuery(name = "score_findAllOneCreditScoresByGame", query = "SELECT s FROM Score s WHERE s.game = :game AND s.allClear = true"), //
+		@NamedQuery(name = "score_findAllByPlayer", query = "SELECT s FROM Score s WHERE s.player = :player"), //
+		@NamedQuery(name = "score_findAll", query = "SELECT s FROM Score s"), //
+		@NamedQuery(name = "score_findAllOrderByDateDesc", query = "SELECT s FROM Score s ORDER BY s.creationDate DESC"), //
 		@NamedQuery(name = "score_getNumScoredGamesByGenres", query = "SELECT COUNT(DISTINCT s.game) FROM Score s WHERE s.player = :player AND s.game.genre IN :genres") //
 })
 public class Score implements Serializable {
@@ -231,10 +232,10 @@ public class Score implements Serializable {
 	/***
 	 * Soccer with goal average are like : 6-13-2-1+3 or 6-4-5-6-7
 	 */
-	private static final String SOCCER_WITH_GOAL_AVERAGE_PATTERN = "\\d+-\\d+-\\d+-\\d+[-+]\\d+";
-
+	private static final Pattern SOCCER_WITH_GOAL_AVERAGE_PATTERN = Pattern.compile("\\d+-\\d+-\\d+-\\d+[-+]\\d+");
+	
 	public boolean isSoccerWithGoalAverage() {
-		return value.matches(SOCCER_WITH_GOAL_AVERAGE_PATTERN);
+		return SOCCER_WITH_GOAL_AVERAGE_PATTERN.matcher(value).matches();
 	}
 
 }

@@ -18,8 +18,8 @@ package com.anzymus.neogeo.hiscores.success;
 
 public class RacerTitleStrategy extends AbstractGenreTitleStrategy {
 
-    protected String[] getGenres() {
-        return new String[]{"Racing"};
-    }
+	protected String getGenre() {
+		return "Racing";
+	}
 
 }

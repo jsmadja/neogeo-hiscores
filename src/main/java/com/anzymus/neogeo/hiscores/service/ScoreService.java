@@ -49,6 +49,14 @@ public class ScoreService extends GenericService<Score> {
 		return toScores(scores);
 	}
 
+	public Scores findAllByGame(Game game, String level) {
+		TypedQuery<Score> query = em.createNamedQuery("score_findAllByGameAndLevel", Score.class);
+		query.setParameter("game", game);
+		query.setParameter("level", level);
+		List<Score> scores = query.getResultList();
+		return toScores(scores);
+	}
+
 	public Scores findAllByGameThisMonth(Game game) {
 		TypedQuery<Score> query = em.createNamedQuery("score_findAllByGameThisMonth", Score.class);
 		query.setParameter("game", game);
