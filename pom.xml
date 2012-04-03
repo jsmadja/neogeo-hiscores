@@ -36,8 +36,8 @@
 	<description>Hi-Scores management of Neo Geo games</description>
 
 	<properties>
-		<eclipselink-version>2.3.2</eclipselink-version>
-		<glassfish-version>3.2-b06</glassfish-version>
+		<eclipselink-version>2.2.0-RC3</eclipselink-version>
+		<glassfish-version>3.1-b38</glassfish-version>
 		<guava-version>11.0</guava-version>
 		<javaee-version>6.0</javaee-version>
 		<javax-persistence-version>2.0.0</javax-persistence-version>
@@ -165,8 +165,8 @@
 		</repository>
 		<repository>
 			<id>EclipseLink Repo</id>
-			<name>http://maven.eclipse.org/nexus/service/local/repositories/Sonatype/content/</name>
-			<url>http://maven.eclipse.org/nexus/service/local/repositories/Sonatype/content/</url>
+			<name>Eclipse maven repository http://eclipse.ialto.org/rt/eclipselink/maven.repo/</name>
+			<url>http://mirror.csclub.uwaterloo.ca/eclipse/rt/eclipselink/maven.repo/</url>
 		</repository>
 		<repository>
 			<id>Maven2</id>
@@ -303,14 +303,14 @@
 			</activation>
 			<properties>
 				<skipTests>false</skipTests>
-				<jta-data-source>jdbc/__mysql</jta-data-source>
-				<eclipselink.target-database>MYSQL</eclipselink.target-database>
+				<jta-data-source>jdbc/__default</jta-data-source>
+				<eclipselink.target-database>DERBY</eclipselink.target-database>
 				<eclipselink.ddl-generation>create-tables</eclipselink.ddl-generation>
 				<!-- <eclipselink.ddl-generation>drop-and-create-tables</eclipselink.ddl-generation> -->
-				<javax.persistence.jdbc.driver>com.mysql.jdbc.Driver</javax.persistence.jdbc.driver>
-				<javax.persistence.jdbc.url>jdbc:mysql://localhost:3306/hiscores</javax.persistence.jdbc.url>
-				<javax.persistence.jdbc.user>root</javax.persistence.jdbc.user>
-				<javax.persistence.jdbc.password></javax.persistence.jdbc.password>
+				<javax.persistence.jdbc.driver>org.apache.derby.jdbc.ClientDriver</javax.persistence.jdbc.driver>
+				<javax.persistence.jdbc.url>jdbc:derby://localhost:1527/fluxx;create=true</javax.persistence.jdbc.url>
+				<javax.persistence.jdbc.user>APP</javax.persistence.jdbc.user>
+				<javax.persistence.jdbc.password>APP</javax.persistence.jdbc.password>
 				<contextPath>http://localhost:8080</contextPath>
 				<contextPathStatic>http://localhost:8080</contextPathStatic>
 			</properties>

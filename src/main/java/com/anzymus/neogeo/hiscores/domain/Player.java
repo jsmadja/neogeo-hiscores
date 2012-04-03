@@ -37,7 +37,8 @@ import com.google.common.base.Objects;
 @Entity
 @Table(name = "PLAYER", uniqueConstraints = @UniqueConstraint(columnNames = { "fullname" }))
 @NamedQueries({ //
-@NamedQuery(name = "player_findByFullname", query = "SELECT p FROM Player p WHERE p.fullname = :fullname"), @NamedQuery(name = "player_findAll", query = "SELECT p FROM Player p ORDER BY p.fullname"), //
+@NamedQuery(name = "player_findByFullname", query = "SELECT p FROM Player p WHERE p.fullname = :fullname"),
+		@NamedQuery(name = "player_findAll", query = "SELECT p FROM Player p ORDER BY p.fullname"), //
 		@NamedQuery(name = "player_getNumberOfPlayers", query = "SELECT COUNT(p) FROM Player p") })
 public class Player implements Serializable, Comparable<Player> {
 
@@ -46,20 +47,16 @@ public class Player implements Serializable, Comparable<Player> {
 	@Id
 	@GeneratedValue
 	private Long id;
-
 	@Column(nullable = false)
 	private String fullname;
-
 	@Transient
 	private int points;
-
 	@Transient
 	private int contribution;
-
 	@OneToMany(mappedBy = "player", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<UnlockedTitle> unlockedTitles = new HashSet<UnlockedTitle>();
 
-	@OneToMany(mappedBy = "player", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
 	private Set<RelockedTitle> relockedTitles = new HashSet<RelockedTitle>();
 
 	private Long avatarId = 0L;
