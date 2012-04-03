@@ -18,10 +18,10 @@ package com.anzymus.neogeo.hiscores.service;
 
 import static java.text.MessageFormat.format;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-import javax.ejb.Asynchronous;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -53,30 +53,30 @@ public class TitleRelockingService extends GenericService<RelockedTitle> {
 		super(RelockedTitle.class);
 	}
 
-	@Asynchronous
+	// @Asynchronous
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void relockTitles(Score relockerScore) {
+		LOG.info("Start relocking titles");
 		Player relockerPlayer = relockerScore.getPlayer();
 		List<Player> players = playerService.findAll();
+		players.remove(relockerPlayer);
 		for (Player player : players) {
-			if (!player.equals(relockerPlayer)) {
-				relockTitles(relockerPlayer, relockerScore, player);
-			}
+			relockTitles(relockerPlayer, relockerScore, player);
 		}
+		LOG.info("End relocking titles");
 	}
 
 	private void relockTitles(Player relockerPlayer, Score relockerScore, Player player) {
 		Set<UnlockedTitle> unlockedTitles = player.getUnlockedTitles();
-		for (UnlockedTitle unlockedTitle : unlockedTitles) {
+		for (UnlockedTitle unlockedTitle : Collections.unmodifiableSet(unlockedTitles)) {
 			Title title = unlockedTitle.getTitle();
 			if (isRelockable(title, player)) {
+				unlockedTitles.remove(unlockedTitle);
 				RelockedTitle relockedTitle = createRelockedTitle(relockerScore, player, title);
 				player.getRelockedTitles().add(relockedTitle);
-				unlockedTitles.remove(unlockedTitle);
 				LOG.info(format("The score on {0} posted by {1} relocked the title {2} of player {3}", relockerScore.getGame(), relockerPlayer, title.getLabel(), player));
 			}
 		}
-		playerService.merge(player);
 	}
 
 	private RelockedTitle createRelockedTitle(Score relockerScore, Player player, Title title) {
