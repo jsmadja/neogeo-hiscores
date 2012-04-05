@@ -23,6 +23,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -42,8 +43,10 @@ public class UnlockedTitle {
 	@GeneratedValue
 	private Long id;
 
+	@ManyToOne
 	private Player player;
 
+	@ManyToOne
 	private Title title;
 
 	@Temporal(TemporalType.TIMESTAMP)

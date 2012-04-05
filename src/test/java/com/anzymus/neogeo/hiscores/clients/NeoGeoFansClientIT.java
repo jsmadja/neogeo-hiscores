@@ -1,7 +1,9 @@
 package com.anzymus.neogeo.hiscores.clients;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore
 public class NeoGeoFansClientIT {
 
 	@Test

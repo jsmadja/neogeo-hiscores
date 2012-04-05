@@ -24,7 +24,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.PrePersist;
@@ -45,17 +45,17 @@ public class RelockedTitle {
 	@GeneratedValue
 	private Long id;
 
-	@JoinColumn(nullable = false)
+	@ManyToOne
 	private Player player;
 
-	@JoinColumn(nullable = false)
+	@ManyToOne
 	private Title title;
 
 	@Column(name = "RELOCK_DATE", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date relockDate;
 
-	@JoinColumn(name = "RELOCKER_SCORE", nullable = false)
+	@ManyToOne
 	private Score relockerScore;
 
 	public RelockedTitle() {

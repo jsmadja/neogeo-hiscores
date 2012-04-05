@@ -21,7 +21,6 @@ import static java.text.MessageFormat.format;
 import java.util.List;
 import java.util.Set;
 
-import javax.ejb.Asynchronous;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -53,7 +52,6 @@ public class TitleRelockingService extends GenericService<RelockedTitle> {
 		super(RelockedTitle.class);
 	}
 
-	@Asynchronous
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void relockTitles(Score relockerScore) {
 		Player relockerPlayer = relockerScore.getPlayer();
