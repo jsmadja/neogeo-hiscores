@@ -18,9 +18,11 @@ package com.anzymus.neogeo.hiscores.service;
 
 import static java.text.MessageFormat.format;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import javax.ejb.Asynchronous;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -53,7 +55,9 @@ public class TitleRelockingService extends GenericService<RelockedTitle> {
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	@Asynchronous
 	public void relockTitles(Score relockerScore) {
+		LOG.info("Start to relock titles");
 		Player relockerPlayer = relockerScore.getPlayer();
 		List<Player> players = playerService.findAll();
 		for (Player player : players) {
@@ -61,11 +65,13 @@ public class TitleRelockingService extends GenericService<RelockedTitle> {
 				relockTitles(relockerPlayer, relockerScore, player);
 			}
 		}
+		LOG.info("End to relock titles");
 	}
 
 	private void relockTitles(Player relockerPlayer, Score relockerScore, Player player) {
 		Set<UnlockedTitle> unlockedTitles = player.getUnlockedTitles();
-		for (UnlockedTitle unlockedTitle : unlockedTitles) {
+		Set<UnlockedTitle> unmodifiableSet = Collections.unmodifiableSet(unlockedTitles);
+		for (UnlockedTitle unlockedTitle : unmodifiableSet) {
 			Title title = unlockedTitle.getTitle();
 			if (isRelockable(title, player)) {
 				RelockedTitle relockedTitle = createRelockedTitle(relockerScore, player, title);
