@@ -27,9 +27,7 @@ import javax.jws.WebService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
-import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.UnlockedTitle;
 import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.PlayerService;
@@ -57,28 +55,6 @@ public class AdministrationWebService {
 	TitleRelockingService titleRelockingService;
 
 	private static final Logger LOG = LoggerFactory.getLogger(AdministrationWebService.class);
-
-	@WebMethod
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void addScore(String gameName, String level, String fullname, String scorePoints, String pictureUrl, String message) {
-		Game game = gameService.findByName(gameName);
-		Player player = playerService.findByFullname(fullname);
-		if (player == null) {
-			player = playerService.store(new Player(fullname));
-		}
-		Score score = new Score(scorePoints, player, level, game, pictureUrl);
-		score.setMessage(message);
-		scoreService.store(score);
-		titleRelockingService.relockTitles(score);
-		titleUnlockingService.searchUnlockedTitlesFor(player);
-	}
-
-	@WebMethod
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void addGame(String name) {
-		Game game = new Game(name);
-		gameService.store(game);
-	}
 
 	@WebMethod
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)

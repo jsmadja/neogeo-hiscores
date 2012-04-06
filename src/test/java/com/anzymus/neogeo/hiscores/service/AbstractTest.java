@@ -36,8 +36,6 @@ import com.anzymus.neogeo.hiscores.webservice.AdministrationWebService;
 
 public abstract class AbstractTest {
 
-	protected static EJBContainer container;
-
 	protected static Context namingContext;
 
 	protected static PlayerService playerService;
@@ -54,7 +52,7 @@ public abstract class AbstractTest {
 		try {
 			Map<String, Object> properties = new HashMap<String, Object>();
 			properties.put(EJBContainer.MODULES, new File("target/classes"));
-			container = EJBContainer.createEJBContainer(properties);
+			EJBContainer container = EJBContainer.createEJBContainer(properties);
 
 			namingContext = container.getContext();
 
@@ -73,7 +71,7 @@ public abstract class AbstractTest {
 			administrationWebService.setScoreService(scoreService);
 			administrationWebService.setTitleUnlockingService(titleUnlockingService);
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new IllegalStateException(e);
 		}
 	}
 
@@ -96,22 +94,19 @@ public abstract class AbstractTest {
 		String level = "MVS";
 		String pictureUrl = "http://";
 		Score score = new Score(value, player, level, game, pictureUrl);
-		score = scoreService.store(score);
-		return score;
+		return scoreService.store(score);
 	}
 
 	protected Game createGame() {
 		String name = RandomStringUtils.randomAlphabetic(10);
 		Game game = new Game(name);
-		game = gameService.store(game);
-		return game;
+		return gameService.store(game);
 	}
 
 	protected Player createPlayer() {
 		String fullname = RandomStringUtils.randomAlphabetic(10);
 		Player player = new Player(fullname);
-		player = playerService.store(player);
-		return player;
+		return playerService.store(player);
 	}
 
 	protected Title createTitle() {
@@ -120,8 +115,7 @@ public abstract class AbstractTest {
 		title.setDescription("A title");
 		title.setLabel("First score");
 		title.setPosition(1L);
-		title = titleService.store(title);
-		return title;
+		return titleService.store(title);
 	}
 
 }
