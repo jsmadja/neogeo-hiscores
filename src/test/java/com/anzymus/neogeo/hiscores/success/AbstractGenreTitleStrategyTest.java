@@ -62,29 +62,21 @@ public class AbstractGenreTitleStrategyTest {
 	}
 
 	@Test
-	public void should_unlock_for_100_percent_accomplished_with_one_game() {
+	public void should_unlock_for_100_percent_accomplished_with_three_games() {
 		List<Scores> scoresByGame = new ArrayList<Scores>();
-		Scores scores = mock(Scores.class);
 		Player player = new Player();
-		when(scores.getRank(player)).thenReturn(1);
 
-		scoresByGame.add(scores);
-		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenre(any(String.class))).thenReturn(scoresByGame);
-
-		assertTrue(abstractGenreTitleStrategy.isUnlockable(player));
-	}
-
-	@Test
-	public void should_unlock_for_100_percent_accomplished_with_two_games() {
-		List<Scores> scoresByGame = new ArrayList<Scores>();
 		Scores scores1 = mock(Scores.class);
-		Player player = new Player();
 		when(scores1.getRank(player)).thenReturn(1);
 		scoresByGame.add(scores1);
 
 		Scores scores2 = mock(Scores.class);
 		when(scores2.getRank(player)).thenReturn(1);
 		scoresByGame.add(scores2);
+
+		Scores scores3 = mock(Scores.class);
+		when(scores3.getRank(player)).thenReturn(1);
+		scoresByGame.add(scores3);
 
 		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenre(any(String.class))).thenReturn(scoresByGame);
 
@@ -109,16 +101,21 @@ public class AbstractGenreTitleStrategyTest {
 	}
 
 	@Test
-	public void should_unlock_for_50_percent_accomplished_with_two_games() {
+	public void should_unlock_for_50_percent_accomplished_with_three_games() {
 		List<Scores> scoresByGame = new ArrayList<Scores>();
-		Scores scores1 = mock(Scores.class);
 		Player player = new Player();
-		when(scores1.getRank(player)).thenReturn(1);
-		scoresByGame.add(scores1);
 
-		Scores scores2 = mock(Scores.class);
-		when(scores2.getRank(player)).thenReturn(13);
-		scoresByGame.add(scores2);
+		for (int i = 0; i < 3; i++) {
+			Scores scores = mock(Scores.class);
+			when(scores.getRank(player)).thenReturn(1);
+			scoresByGame.add(scores);
+		}
+
+		for (int i = 0; i < 3; i++) {
+			Scores scores = mock(Scores.class);
+			when(scores.getRank(player)).thenReturn(10);
+			scoresByGame.add(scores);
+		}
 
 		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenre(Mockito.anyString())).thenReturn(scoresByGame);
 
@@ -126,20 +123,21 @@ public class AbstractGenreTitleStrategyTest {
 	}
 
 	@Test
-	public void should_unlock_for_66_percent_accomplished_with_two_games() {
+	public void should_unlock_for_66_percent_accomplished_with_nine_games() {
 		List<Scores> scoresByGame = new ArrayList<Scores>();
-		Scores scores1 = mock(Scores.class);
 		Player player = new Player();
-		when(scores1.getRank(player)).thenReturn(1);
-		scoresByGame.add(scores1);
 
-		Scores scores2 = mock(Scores.class);
-		when(scores2.getRank(player)).thenReturn(13);
-		scoresByGame.add(scores2);
+		for (int i = 0; i < 6; i++) {
+			Scores scores = mock(Scores.class);
+			when(scores.getRank(player)).thenReturn(1);
+			scoresByGame.add(scores);
+		}
 
-		Scores scores3 = mock(Scores.class);
-		when(scores3.getRank(player)).thenReturn(1);
-		scoresByGame.add(scores3);
+		for (int i = 0; i < 3; i++) {
+			Scores scores = mock(Scores.class);
+			when(scores.getRank(player)).thenReturn(10);
+			scoresByGame.add(scores);
+		}
 
 		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenre(Mockito.anyString())).thenReturn(scoresByGame);
 
@@ -170,14 +168,19 @@ public class AbstractGenreTitleStrategyTest {
 	@Test
 	public void should_unlock_for_50_percent_accomplished_with_one_game_and_one_game_not_played() {
 		List<Scores> scoresByGame = new ArrayList<Scores>();
-		Scores scores1 = mock(Scores.class);
 		Player player = new Player();
-		when(scores1.getRank(player)).thenReturn(3);
-		scoresByGame.add(scores1);
 
-		Scores scores2 = mock(Scores.class);
-		when(scores2.getRank(player)).thenReturn(9);
-		scoresByGame.add(scores2);
+		for (int i = 0; i < 3; i++) {
+			Scores scores = mock(Scores.class);
+			when(scores.getRank(player)).thenReturn(1);
+			scoresByGame.add(scores);
+		}
+
+		for (int i = 0; i < 3; i++) {
+			Scores scores = mock(Scores.class);
+			when(scores.getRank(player)).thenReturn(10);
+			scoresByGame.add(scores);
+		}
 
 		Scores scores3 = mock(Scores.class);
 		when(scores3.getRank(player)).thenReturn(Integer.MAX_VALUE);

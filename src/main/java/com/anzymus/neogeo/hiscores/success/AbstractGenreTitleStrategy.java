@@ -26,6 +26,8 @@ import com.anzymus.neogeo.hiscores.domain.Scores;
 
 public abstract class AbstractGenreTitleStrategy extends AbstractTitleStrategy {
 
+	private static final int THRESHOLD = 3;
+
 	@Override
 	public boolean isUnlockable(Player player) {
 		List<Scores> scoresByGame = titleService.getScoresByGameGenre(getGenre());
@@ -48,7 +50,7 @@ public abstract class AbstractGenreTitleStrategy extends AbstractTitleStrategy {
 		if (unplayedGame == scoresByGame.size()) {
 			return false;
 		}
-		return countNok <= countOk;
+		return countOk >= THRESHOLD && countNok <= countOk;
 	}
 
 	@Override
