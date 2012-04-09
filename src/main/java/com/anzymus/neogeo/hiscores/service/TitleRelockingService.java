@@ -29,8 +29,8 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.Query;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.RelockedTitle;
@@ -42,7 +42,7 @@ import com.anzymus.neogeo.hiscores.domain.UnlockedTitle;
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public class TitleRelockingService extends GenericService<RelockedTitle> {
 
-	private static final Logger LOG = LoggerFactory.getLogger(TitleRelockingService.class);
+	private static final Log LOG = LogFactory.getLog(TitleRelockingService.class);
 
 	@EJB
 	private PlayerService playerService;
