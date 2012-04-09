@@ -81,7 +81,7 @@ public abstract class AbstractGenreTitleStrategy extends AbstractTitleStrategy {
 			}
 		}
 
-		boolean allIsComplete = countNok <= countOk;
+		boolean allIsComplete = countOk >= THRESHOLD && countNok <= countOk;
 		int percent;
 		if (allIsComplete) {
 			percent = countOk > 0 ? 100 : 0;

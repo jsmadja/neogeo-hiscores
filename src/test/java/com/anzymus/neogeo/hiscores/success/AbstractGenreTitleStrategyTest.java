@@ -264,45 +264,10 @@ public class AbstractGenreTitleStrategyTest {
 	}
 
 	@Test
-	public void should_have_an_achievement_of_100_percent_on_two_games() {
-		Game game1 = new Game("View Point");
-		Game game2 = new Game("Last Resort");
-
-		Player player = new Player();
-
-		List<Score> allScores1 = new ArrayList<Score>();
-		allScores1.add(new Score("1", player, "MVS", game1, "pictureUrl"));
-		Scores scores1 = mock(Scores.class);
-		when(scores1.asSortedList()).thenReturn(allScores1);
-		when(scores1.getRank(player)).thenReturn(3);
-
-		List<Score> allScores2 = new ArrayList<Score>();
-		allScores2.add(new Score("1", player, "MVS", game2, "pictureUrl"));
-		Scores scores2 = mock(Scores.class);
-		when(scores2.asSortedList()).thenReturn(allScores2);
-		when(scores2.getRank(player)).thenReturn(1);
-
-		List<Scores> scoresByGame = new ArrayList<Scores>();
-		scoresByGame.add(scores1);
-		scoresByGame.add(scores2);
-
-		when(abstractGenreTitleStrategy.titleService.getScoresByGameGenre(Mockito.anyString())).thenReturn(scoresByGame);
-
-		Achievement achievement = abstractGenreTitleStrategy.getAchievementFor(player);
-
-		assertEquals(100, achievement.getProgressInPercent());
-		assertEquals(2, achievement.getSteps().size());
-		assertEquals("View Point", achievement.getSteps().get(0).getDescription());
-		assertTrue(achievement.getSteps().get(0).isComplete());
-		assertEquals("Last Resort", achievement.getSteps().get(1).getDescription());
-		assertTrue(achievement.getSteps().get(1).isComplete());
-	}
-
-	@Test
 	public void should_have_an_achievement_of_100_percent_on_three_games() {
 		Game game1 = new Game("View Point");
 		Game game2 = new Game("Last Resort");
-		Game game3 = new Game("Pulstar");
+		Game game3 = new Game("Blazing Star");
 
 		Player player = new Player();
 
@@ -322,7 +287,7 @@ public class AbstractGenreTitleStrategyTest {
 		allScores3.add(new Score("1", player, "MVS", game3, "pictureUrl"));
 		Scores scores3 = mock(Scores.class);
 		when(scores3.asSortedList()).thenReturn(allScores3);
-		when(scores3.getRank(player)).thenReturn(10);
+		when(scores3.getRank(player)).thenReturn(1);
 
 		List<Scores> scoresByGame = new ArrayList<Scores>();
 		scoresByGame.add(scores1);
@@ -334,11 +299,13 @@ public class AbstractGenreTitleStrategyTest {
 		Achievement achievement = abstractGenreTitleStrategy.getAchievementFor(player);
 
 		assertEquals(100, achievement.getProgressInPercent());
-		assertEquals(2, achievement.getSteps().size());
+		assertEquals(3, achievement.getSteps().size());
 		assertEquals("View Point", achievement.getSteps().get(0).getDescription());
 		assertTrue(achievement.getSteps().get(0).isComplete());
 		assertEquals("Last Resort", achievement.getSteps().get(1).getDescription());
 		assertTrue(achievement.getSteps().get(1).isComplete());
+		assertEquals("Blazing Star", achievement.getSteps().get(2).getDescription());
+		assertTrue(achievement.getSteps().get(2).isComplete());
 	}
 
 	@Test
