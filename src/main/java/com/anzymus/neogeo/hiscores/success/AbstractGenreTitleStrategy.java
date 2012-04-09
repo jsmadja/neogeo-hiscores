@@ -86,7 +86,11 @@ public abstract class AbstractGenreTitleStrategy extends AbstractTitleStrategy {
 		if (allIsComplete) {
 			percent = countOk > 0 ? 100 : 0;
 		} else {
-			percent = percent(countOk, (int) Math.ceil((double) scoresByGame.size() / 2));
+			int ceil = (int) Math.ceil((double) scoresByGame.size() / 2);
+			if (ceil < 3) {
+				ceil = 3;
+			}
+			percent = percent(countOk, ceil);
 		}
 		Achievement achievement = new Achievement(title, percent);
 		for (Step step : steps) {
