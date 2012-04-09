@@ -66,7 +66,6 @@ public abstract class AbstractTest {
 			challengeService = (ChallengeService) lookup("ChallengeService");
 
 			administrationWebService = new AdministrationWebService();
-			administrationWebService.setGameService(gameService);
 			administrationWebService.setPlayerService(playerService);
 			administrationWebService.setScoreService(scoreService);
 			administrationWebService.setTitleUnlockingService(titleUnlockingService);

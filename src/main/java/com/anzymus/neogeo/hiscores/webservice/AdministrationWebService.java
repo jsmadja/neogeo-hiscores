@@ -29,7 +29,6 @@ import org.slf4j.LoggerFactory;
 
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.UnlockedTitle;
-import com.anzymus.neogeo.hiscores.service.GameService;
 import com.anzymus.neogeo.hiscores.service.PlayerService;
 import com.anzymus.neogeo.hiscores.service.ScoreService;
 import com.anzymus.neogeo.hiscores.service.TitleRelockingService;
@@ -38,9 +37,6 @@ import com.anzymus.neogeo.hiscores.service.TitleUnlockingService;
 @WebService
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public class AdministrationWebService {
-
-	private @EJB
-	GameService gameService;
 
 	@EJB
 	ScoreService scoreService;
@@ -85,10 +81,6 @@ public class AdministrationWebService {
 				LOG.info("Title " + unlockedTitle.getTitle().getLabel() + " has been removed from player " + unlockedTitle.getPlayer());
 			}
 		}
-	}
-
-	public void setGameService(GameService gameService) {
-		this.gameService = gameService;
 	}
 
 	public void setScoreService(ScoreService scoreService) {

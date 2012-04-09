@@ -31,7 +31,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.anzymus.neogeo.hiscores.converter.ScoreConverter;
 import com.google.common.base.Objects;
+import com.sun.syndication.feed.synd.SyndEntry;
 
 @Entity
 @Table(name = "SCORE")
@@ -45,7 +47,7 @@ import com.google.common.base.Objects;
 		@NamedQuery(name = "score_findAllOrderByDateDesc", query = "SELECT s FROM Score s ORDER BY s.creationDate DESC"), //
 		@NamedQuery(name = "score_getNumScoredGamesByGenres", query = "SELECT COUNT(DISTINCT s.game) FROM Score s WHERE s.player = :player AND s.game.genre IN :genres") //
 })
-public class Score implements Serializable {
+public class Score implements Serializable, Rssable {
 
 	private static final long serialVersionUID = -5889253204083818192L;
 
@@ -237,6 +239,21 @@ public class Score implements Serializable {
 
 	public boolean isSoccerWithGoalAverage() {
 		return SOCCER_WITH_GOAL_AVERAGE_PATTERN.matcher(value).matches();
+	}
+
+	private static final ScoreConverter scoreConverter = new ScoreConverter();
+
+	@Override
+	public SyndEntry asEntry() {
+		String scoreValue = scoreConverter.getAsString(getValue());
+		String playerName = getPlayer().getFullname();
+		String title = playerName;
+		title += " did " + scoreValue;
+		title += " on " + getGame().getName();
+		title += " (" + getLevel() + ")";
+		String link = "http://www.neogeo-hiscores.com/faces/score/edit.xhtml?scoreId=" + getId();
+		Date date = getCreationDate();
+		return Entries.createEntry(title, link, date);
 	}
 
 }
