@@ -14,20 +14,12 @@
  *     limitations under the License.
  */
 
-package com.anzymus.neogeo.hiscores.common;
+package com.anzymus.neogeo.hiscores.common.imagefetcher;
 
-import java.net.URL;
+public class PostImage extends PictureHost {
 
-public class ImageFetcher {
-
-	private ImageShack imageShack = new ImageShack();
-
-	public String get(String url) {
-		try {
-			return imageShack.extractDirectLink(new URL(url).openStream());
-		} catch (Exception e) {
-			return url;
-		}
+	public PostImage() {
+		super(".*<textarea wrap='off' onmouseover='this.focus\\(\\)' onfocus='this.select\\(\\)' id=\"code_2\" scrolling=\"no\">(.*)</textarea>.*");
 	}
 
 }

@@ -14,17 +14,12 @@
  *     limitations under the License.
  */
 
-package com.anzymus.neogeo.hiscores.common;
+package com.anzymus.neogeo.hiscores.common.imagefetcher;
 
-public class DirectLinkNotFoundException extends Exception {
+public class ImageShack extends PictureHost {
 
-	private static final long serialVersionUID = 1816140071477085986L;
-
-	public DirectLinkNotFoundException(String message, Throwable t) {
-		super(message, t);
+	public ImageShack() {
+		super(".*\\[IMG\\](.*)\\[\\/IMG\\].*");
 	}
 
-	public DirectLinkNotFoundException(String message) {
-		super(message);
-	}
 }

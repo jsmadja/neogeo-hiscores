@@ -36,7 +36,8 @@ import com.anzymus.neogeo.hiscores.clients.AuthenticationFailed;
 import com.anzymus.neogeo.hiscores.clients.Messages;
 import com.anzymus.neogeo.hiscores.clients.NeoGeoFansClient;
 import com.anzymus.neogeo.hiscores.clients.NeoGeoFansClientFactory;
-import com.anzymus.neogeo.hiscores.common.ImageFetcher;
+import com.anzymus.neogeo.hiscores.common.imagefetcher.DirectLinkNotFoundException;
+import com.anzymus.neogeo.hiscores.common.imagefetcher.ImageFetcher;
 import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
@@ -203,7 +204,12 @@ public class ScoreBean {
 		Score scoreFromDb = scoreService.findById(Integer.parseInt(id));
 		scoreFromDb.setMessage(message);
 		scoreFromDb.setGame(game);
-		scoreFromDb.setPictureUrl(imageFetcher.get(pictureUrl));
+		try {
+			scoreFromDb.setPictureUrl(imageFetcher.get(pictureUrl));
+		} catch (DirectLinkNotFoundException e) {
+			scoreFromDb.setPictureUrl(pictureUrl);
+			LOG.severe(e.getMessage());
+		}
 		scoreFromDb.setLevel(currentLevel);
 		scoreFromDb.setValue(score);
 		scoreFromDb.setAllClear(allClear || ALL_CLEAR.equals(stage));
@@ -218,7 +224,12 @@ public class ScoreBean {
 		if (player == null) {
 			player = playerService.store(new Player(fullname));
 		}
-		Score scoreToAdd = new Score(score, player, currentLevel, game, imageFetcher.get(pictureUrl));
+		try {
+			pictureUrl = imageFetcher.get(pictureUrl);
+		} catch (DirectLinkNotFoundException e) {
+			LOG.severe(e.getMessage());
+		}
+		Score scoreToAdd = new Score(score, player, currentLevel, game, pictureUrl);
 		scoreToAdd.setAllClear(allClear || ALL_CLEAR.equals(stage));
 		scoreToAdd.setStage(stage);
 		int end = message.length() > MAX_MESSAGE_LENGTH ? MAX_MESSAGE_LENGTH : message.length();

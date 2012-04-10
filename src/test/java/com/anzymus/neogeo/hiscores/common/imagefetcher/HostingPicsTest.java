@@ -14,7 +14,7 @@
  *     limitations under the License.
  */
 
-package com.anzymus.neogeo.hiscores.common;
+package com.anzymus.neogeo.hiscores.common.imagefetcher;
 
 import static org.junit.Assert.assertEquals;
 
@@ -22,19 +22,24 @@ import java.io.InputStream;
 
 import org.junit.Test;
 
-public class ImageShackTest {
+import com.anzymus.neogeo.hiscores.common.imagefetcher.DirectLinkNotFoundException;
+import com.anzymus.neogeo.hiscores.common.imagefetcher.HostingPics;
+import com.google.common.io.ByteStreams;
+
+public class HostingPicsTest {
 
 	@Test
 	public void should_extract_direct_link_from_page() throws Exception {
-		InputStream fis = this.getClass().getClassLoader().getResourceAsStream("imageshack/page.html");
-		String directLink = new ImageShack().extractDirectLink(fis);
-		assertEquals("http://img846.imageshack.us/img846/8463/wipcolor.png", directLink);
+		InputStream fis = this.getClass().getClassLoader().getResourceAsStream("hosting-pics/page.html");
+		String content = new HostingPics().extractDirectLink(new String(ByteStreams.toByteArray(fis)));
+		assertEquals("http://img11.hostingpics.net/pics/4914321003570.jpg", content);
 	}
 
 	@Test(expected = DirectLinkNotFoundException.class)
 	public void should_not_extract_direct_link_from_page() throws Exception {
 		InputStream fis = this.getClass().getClassLoader().getResourceAsStream("ngf/login-page.html");
-		new ImageShack().extractDirectLink(fis);
+		String content = new HostingPics().extractDirectLink(new String(ByteStreams.toByteArray(fis)));
+		new HostingPics().extractDirectLink(content);
 	}
 
 }
