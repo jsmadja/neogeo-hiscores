@@ -43,27 +43,10 @@ public class DateConverterTest {
 	}
 
 	@Test
-	public void should_format_in_weeks() {
-		DateTime cal = new DateTime();
-		cal = cal.minusWeeks(2);
-		assertEquals("1 week ago", dateConverter.getAsString(null, null, cal.toDate()));
-	}
-
-	@Test
 	public void should_format_in_weeks_in_french() {
 		DateTime cal = new DateTime();
 		cal = cal.minusWeeks(2);
-		assertEquals("il y a 1 semaine", dateConverter.getAsString(frenchContext, null, cal.toDate()));
-	}
-
-	@Test
-	public void should_format_in_days() {
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DAY_OF_YEAR, -1);
-		assertEquals("1 day ago", dateConverter.getAsString(null, null, cal.getTime()));
-
-		cal.add(Calendar.DAY_OF_YEAR, -2);
-		assertEquals("3 days ago", dateConverter.getAsString(null, null, cal.getTime()));
+		assertEquals("il y a 2 semaines", dateConverter.getAsString(frenchContext, null, cal.toDate()));
 	}
 
 	@Test
@@ -77,16 +60,6 @@ public class DateConverterTest {
 	}
 
 	@Test
-	public void should_format_in_hours() {
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.HOUR_OF_DAY, -1);
-		assertEquals("1 hour ago", dateConverter.getAsString(null, null, cal.getTime()));
-
-		cal.add(Calendar.HOUR_OF_DAY, -2);
-		assertEquals("3 hours ago", dateConverter.getAsString(null, null, cal.getTime()));
-	}
-
-	@Test
 	public void should_format_in_hours_in_french() {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.HOUR_OF_DAY, -1);
@@ -97,43 +70,20 @@ public class DateConverterTest {
 	}
 
 	@Test
-	public void should_format_in_minutes() {
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.MINUTE, -1);
-		assertEquals("1 minute ago", dateConverter.getAsString(null, null, cal.getTime()));
-
-		cal.add(Calendar.MINUTE, -2);
-		assertEquals("3 minutes ago", dateConverter.getAsString(null, null, cal.getTime()));
-	}
-
-	@Test
 	public void should_format_in_minutes_in_french() {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.MINUTE, -1);
-		assertEquals("il y a 1 minute", dateConverter.getAsString(frenchContext, null, cal.getTime()));
+		assertEquals("à l'instant", dateConverter.getAsString(frenchContext, null, cal.getTime()));
 
-		cal.add(Calendar.MINUTE, -2);
-		assertEquals("il y a 3 minutes", dateConverter.getAsString(frenchContext, null, cal.getTime()));
-	}
-
-	@Test
-	public void should_format_in_seconds() {
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.SECOND, -1);
-		assertEquals("1 second ago", dateConverter.getAsString(null, null, cal.getTime()));
-
-		cal.add(Calendar.SECOND, -2);
-		assertEquals("3 seconds ago", dateConverter.getAsString(null, null, cal.getTime()));
+		cal.add(Calendar.MINUTE, -10);
+		assertEquals("il y a 11 minutes", dateConverter.getAsString(frenchContext, null, cal.getTime()));
 	}
 
 	@Test
 	public void should_format_in_seconds_in_french() {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.SECOND, -1);
-		assertEquals("il y a 1 seconde", dateConverter.getAsString(frenchContext, null, cal.getTime()));
-
-		cal.add(Calendar.SECOND, -2);
-		assertEquals("il y a 3 secondes", dateConverter.getAsString(frenchContext, null, cal.getTime()));
+		assertEquals("à l'instant", dateConverter.getAsString(frenchContext, null, cal.getTime()));
 	}
 
 	@Test(expected = UnsupportedOperationException.class)

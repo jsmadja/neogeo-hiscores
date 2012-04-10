@@ -24,13 +24,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.ocpsoft.pretty.time.PrettyTime;
 
 @FacesConverter(value = "dateConverter")
 public class DateConverter implements Converter {
-
-	private static final Logger LOG = LoggerFactory.getLogger(DateConverter.class);
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -39,81 +36,15 @@ public class DateConverter implements Converter {
 
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
+		PrettyTime prettyTime = new PrettyTime();
 		if (context != null) {
 			if (context.getExternalContext() != null) {
 				Locale locale = context.getExternalContext().getRequestLocale();
-				if (Locale.FRENCH.equals(locale)) {
-					return toFormattedDateInFrench((Date) value);
-				} else {
-					LOG.info("Locale: " + locale + " is not handled");
-				}
+				prettyTime = new PrettyTime(locale);
 			}
 		}
 		Date date = (Date) value;
-		return toFormattedDate(date);
+		return prettyTime.format(date);
 	}
 
-	String toFormattedDate(Date date) {
-		long current = System.currentTimeMillis();
-		long event = date.getTime();
-
-		long durationInSeconds = (current - event) / 1000;
-		long durationInMinutes = durationInSeconds / 60;
-		long durationInHours = durationInMinutes / 60;
-		long durationInDays = durationInHours / 24;
-		long durationInWeeks = durationInDays / 7;
-
-		String formattedDate = "";
-		long finalDuration = durationInSeconds;
-		if (durationInWeeks >= 1) {
-			formattedDate += durationInWeeks + " week";
-			finalDuration = durationInWeeks;
-		} else if (durationInDays >= 1) {
-			formattedDate += durationInDays + " day";
-			finalDuration = durationInDays;
-		} else if (durationInHours >= 1) {
-			formattedDate += durationInHours + " hour";
-			finalDuration = durationInHours;
-		} else if (durationInMinutes >= 1) {
-			formattedDate += durationInMinutes + " minute";
-			finalDuration = durationInMinutes;
-		} else
-			formattedDate += durationInSeconds + " second";
-		if (finalDuration > 1) {
-			formattedDate += "s";
-		}
-		return formattedDate + " ago";
-	}
-
-	String toFormattedDateInFrench(Date date) {
-		long current = System.currentTimeMillis();
-		long event = date.getTime();
-
-		long durationInSeconds = (current - event) / 1000;
-		long durationInMinutes = durationInSeconds / 60;
-		long durationInHours = durationInMinutes / 60;
-		long durationInDays = durationInHours / 24;
-		long durationInWeeks = durationInDays / 7;
-
-		String formattedDate = "il y a ";
-		long finalDuration = durationInSeconds;
-		if (durationInWeeks >= 1) {
-			formattedDate += durationInWeeks + " semaine";
-			finalDuration = durationInWeeks;
-		} else if (durationInDays >= 1) {
-			formattedDate += durationInDays + " jour";
-			finalDuration = durationInDays;
-		} else if (durationInHours >= 1) {
-			formattedDate += durationInHours + " heure";
-			finalDuration = durationInHours;
-		} else if (durationInMinutes >= 1) {
-			formattedDate += durationInMinutes + " minute";
-			finalDuration = durationInMinutes;
-		} else
-			formattedDate += durationInSeconds + " seconde";
-		if (finalDuration > 1) {
-			formattedDate += "s";
-		}
-		return formattedDate;
-	}
 }
