@@ -16,6 +16,8 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -47,6 +49,7 @@ import com.anzymus.neogeo.hiscores.service.ScoreService;
 import com.anzymus.neogeo.hiscores.service.TitleRelockingService;
 import com.anzymus.neogeo.hiscores.service.TitleUnlockingService;
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.io.ByteStreams;
 
 @ManagedBean
 public class ScoreBean {
@@ -205,7 +208,7 @@ public class ScoreBean {
 		scoreFromDb.setMessage(message);
 		scoreFromDb.setGame(game);
 		try {
-			scoreFromDb.setPictureUrl(imageFetcher.get(pictureUrl));
+			scoreFromDb.setPictureUrl(imageFetcher.get(content(pictureUrl)));
 		} catch (DirectLinkNotFoundException e) {
 			scoreFromDb.setPictureUrl(pictureUrl);
 			LOG.severe(e.getMessage());
@@ -225,7 +228,7 @@ public class ScoreBean {
 			player = playerService.store(new Player(fullname));
 		}
 		try {
-			pictureUrl = imageFetcher.get(pictureUrl);
+			pictureUrl = imageFetcher.get(content(pictureUrl));
 		} catch (DirectLinkNotFoundException e) {
 			LOG.severe(e.getMessage());
 		}
@@ -238,6 +241,18 @@ public class ScoreBean {
 		postOnNgf(scoreToAdd, game, ngfClient);
 		titleUnlockingService.searchUnlockedTitlesFor(player);
 		titleRelockingService.relockTitles(scoreToAdd);
+	}
+
+	private String content(String pictureUrl) {
+		try {
+			InputStream stream = new URL(pictureUrl).openStream();
+			byte[] bytes = ByteStreams.toByteArray(stream);
+			String pageContent = new String(bytes);
+			return pageContent;
+		} catch (Exception e) {
+			LOG.severe(e.getMessage());
+		}
+		return "";
 	}
 
 	private void postOnNgf(Score score, Game game, NeoGeoFansClient ngfClient) {

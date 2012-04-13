@@ -39,7 +39,7 @@ public class ImageFetcher {
 			try {
 				return pictureHost.extractDirectLink(content);
 			} catch (DirectLinkNotFoundException e) {
-				logger.info("Cannot find direct link in " + pictureHost.getClass().getSimpleName());
+				logger.info("Cannot find direct link in " + pictureHost.getClass().getSimpleName() + " for url: " + content);
 			}
 		}
 		throw new DirectLinkNotFoundException("Cannot find directLink");
