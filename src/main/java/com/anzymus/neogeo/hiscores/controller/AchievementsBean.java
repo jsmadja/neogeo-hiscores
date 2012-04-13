@@ -16,6 +16,7 @@
 
 package com.anzymus.neogeo.hiscores.controller;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -37,20 +38,21 @@ public class AchievementsBean {
 	@EJB
 	private PlayerService playerService;
 
-	private List<Achievement> achievements;
+	private List<Achievement> achievements = new ArrayList<Achievement>();
 	private Player player;
 
 	@PostConstruct
 	public void init() {
-		player = playerService.findById(Long.parseLong(playerId));
-		List<Achievement> achievements = playerService.getAchievementsFor(player);
-		java.util.Collections.sort(achievements, new Comparator<Achievement>() {
-			@Override
-			public int compare(Achievement a1, Achievement a2) {
-				return a2.getProgressInPercent() - a1.getProgressInPercent();
-			}
-		});
-		setAchievements(achievements);
+		if (playerId != null) {
+			player = playerService.findById(Long.parseLong(playerId));
+			achievements.addAll(playerService.getAchievementsFor(player));
+			java.util.Collections.sort(achievements, new Comparator<Achievement>() {
+				@Override
+				public int compare(Achievement a1, Achievement a2) {
+					return a2.getProgressInPercent() - a1.getProgressInPercent();
+				}
+			});
+		}
 	}
 
 	public void setAchievements(List<Achievement> achievements) {
