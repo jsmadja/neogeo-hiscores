@@ -59,12 +59,14 @@ public class GameBean {
 
 	@PostConstruct
 	public void init() {
-		long gameId = Long.parseLong(id);
-		Game game = gameService.findById(gameId);
-		name = game.getName();
-		postId = game.getPostId();
-		scores = scoreService.findAllByGame(game);
-		loadLevelItems();
+		if (id != null) {
+			long gameId = Long.parseLong(id);
+			Game game = gameService.findById(gameId);
+			name = game.getName();
+			postId = game.getPostId();
+			scores = scoreService.findAllByGame(game);
+			loadLevelItems();
+		}
 	}
 
 	private void loadLevelItems() {

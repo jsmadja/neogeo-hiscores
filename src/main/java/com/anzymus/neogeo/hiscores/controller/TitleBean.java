@@ -54,6 +54,7 @@ public class TitleBean {
 
 	@PostConstruct
 	public void init() {
+	    if(titleId != null && playerId != null) {
 		title = titleService.findById(Long.parseLong(titleId));
 		player = playerService.findById(Long.parseLong(playerId));
 		achievement = playerService.getAchievementFor(player, title);
@@ -61,6 +62,7 @@ public class TitleBean {
 		for (UnlockedTitle unlockedTitle : unlockedTitles) {
 			players.add(unlockedTitle.getPlayer());
 		}
+	    }
 	}
 
 	public Player getPlayer() {

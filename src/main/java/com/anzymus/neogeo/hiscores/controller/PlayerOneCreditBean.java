@@ -56,8 +56,10 @@ public class PlayerOneCreditBean {
 
     @PostConstruct
     public void init() {
-        player = playerService.findByFullname(fullname);
-        loadScoreItemsOneCredit();
+	if (fullname != null) {
+	    player = playerService.findByFullname(fullname);
+	    loadScoreItemsOneCredit();
+	}
     }
 
     private void loadScoreItemsOneCredit() {
