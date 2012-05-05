@@ -13,72 +13,79 @@
  *     See the License for the specific language governing permissions and
  *     limitations under the License.
  */
-
 package com.anzymus.neogeo.hiscores.domain;
 
 public class TimelineItem {
 
-	private Score score;
-	private String pictureUrl;
-	private UnlockedTitle unlockedTitle;
-	private String avatarUrl;
-	private Challenge challenge;
-	private RelockedTitle relockedTitle;
+    private Score score;
+    private String pictureUrl;
+    private UnlockedTitle unlockedTitle;
+    private String avatarUrl;
+    private Challenge challenge;
+    private RelockedTitle relockedTitle;
+    private String rank;
 
-	public TimelineItem(Score score) {
-		this.score = score;
-	}
+    public TimelineItem(Score score) {
+	this.score = score;
+    }
 
-	public TimelineItem(UnlockedTitle unlockedTitle) {
-		this.unlockedTitle = unlockedTitle;
-	}
+    public TimelineItem(UnlockedTitle unlockedTitle) {
+	this.unlockedTitle = unlockedTitle;
+    }
 
-	public TimelineItem(RelockedTitle relockedTitle) {
-		this.setRelockedTitle(relockedTitle);
-	}
+    public TimelineItem(RelockedTitle relockedTitle) {
+	this.setRelockedTitle(relockedTitle);
+    }
 
-	public TimelineItem(Challenge challenge) {
-		this.setChallenge(challenge);
-	}
+    public TimelineItem(Challenge challenge) {
+	this.setChallenge(challenge);
+    }
 
-	public Score getScore() {
-		return score;
-	}
+    public Score getScore() {
+	return score;
+    }
 
-	public UnlockedTitle getUnlockedTitle() {
-		return unlockedTitle;
-	}
+    public UnlockedTitle getUnlockedTitle() {
+	return unlockedTitle;
+    }
 
-	public void setPictureUrl(String pictureUrl) {
-		this.pictureUrl = pictureUrl;
-	}
+    public void setPictureUrl(String pictureUrl) {
+	this.pictureUrl = pictureUrl;
+    }
 
-	public String getPictureUrl() {
-		return pictureUrl;
-	}
+    public String getPictureUrl() {
+	return pictureUrl;
+    }
 
-	public String getAvatarUrl() {
-		return avatarUrl;
-	}
+    public String getAvatarUrl() {
+	return avatarUrl;
+    }
 
-	public void setAvatarUrl(String avatarUrl) {
-		this.avatarUrl = avatarUrl;
-	}
+    public void setAvatarUrl(String avatarUrl) {
+	this.avatarUrl = avatarUrl;
+    }
 
-	public void setChallenge(Challenge challenge) {
-		this.challenge = challenge;
-	}
+    public void setChallenge(Challenge challenge) {
+	this.challenge = challenge;
+    }
 
-	public Challenge getChallenge() {
-		return challenge;
-	}
+    public Challenge getChallenge() {
+	return challenge;
+    }
 
-	public void setRelockedTitle(RelockedTitle relockedTitle) {
-		this.relockedTitle = relockedTitle;
-	}
+    public void setRelockedTitle(RelockedTitle relockedTitle) {
+	this.relockedTitle = relockedTitle;
+    }
 
-	public RelockedTitle getRelockedTitle() {
-		return relockedTitle;
-	}
+    public RelockedTitle getRelockedTitle() {
+	return relockedTitle;
+    }
 
+    public String getRank() {
+	return rank;
+    }
+
+    public void setRank(String rank) {
+	this.rank = rank;
+    }
 }

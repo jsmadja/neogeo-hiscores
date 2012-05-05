@@ -79,7 +79,7 @@ public class TimelineService {
 			} else {
 				item.setAvatarUrl("http://www.neogeofans.com/leforum/image.php?u=" + avatarId);
 			}
-
+			item.setRank(scoreService.getRankOf(score));
 			timeline.getItems().add(item);
 		}
 	}

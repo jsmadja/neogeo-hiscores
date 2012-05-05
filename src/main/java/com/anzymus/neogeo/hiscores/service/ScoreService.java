@@ -13,9 +13,10 @@
  *     See the License for the specific language governing permissions and
  *     limitations under the License.
  */
-
 package com.anzymus.neogeo.hiscores.service;
 
+import com.anzymus.neogeo.hiscores.common.IntegerToRank;
+import com.anzymus.neogeo.hiscores.comparator.ScoreSortedByValueDescComparator;
 import java.util.Date;
 import java.util.List;
 
@@ -31,110 +32,127 @@ import com.anzymus.neogeo.hiscores.domain.Game;
 import com.anzymus.neogeo.hiscores.domain.Player;
 import com.anzymus.neogeo.hiscores.domain.Score;
 import com.anzymus.neogeo.hiscores.domain.Scores;
+import java.util.Collections;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public class ScoreService extends GenericService<Score> {
 
-	private static final int MAX_SCORES_TO_RETURN = 10;
+    private static final int MAX_SCORES_TO_RETURN = 10;
 
-	public ScoreService() {
-		super(Score.class);
+    public ScoreService() {
+	super(Score.class);
+    }
+
+    public Scores findAllByGame(Game game) {
+	TypedQuery<Score> query = em.createNamedQuery("score_findAllByGame", Score.class);
+	query.setParameter("game", game);
+	List<Score> scores = query.getResultList();
+	return toScores(scores);
+    }
+
+    public Scores findAllByGame(Game game, String level) {
+	TypedQuery<Score> query = em.createNamedQuery("score_findAllByGameAndLevel", Score.class);
+	query.setParameter("game", game);
+	query.setParameter("level", level);
+	List<Score> scores = query.getResultList();
+	return toScores(scores);
+    }
+
+    public Scores findAllByGameThisMonth(Game game) {
+	TypedQuery<Score> query = em.createNamedQuery("score_findAllByGameThisMonth", Score.class);
+	query.setParameter("game", game);
+	Date beginDate = new DateTime().withDayOfMonth(1).toDate();
+	query.setParameter("beginDate", beginDate);
+	query.setParameter("endDate", Dates.findLastDayOfMonth());
+	return toScores(query.getResultList());
+    }
+
+    public Scores findAllOneCreditScoresByGame(Game game) {
+	TypedQuery<Score> query = em.createNamedQuery("score_findAllOneCreditScoresByGame", Score.class);
+	query.setParameter("game", game);
+	List<Score> scores = query.getResultList();
+	return toScores(scores);
+    }
+
+    public Scores findAllByPlayer(Player player) {
+	TypedQuery<Score> query = em.createNamedQuery("score_findAllByPlayer", Score.class);
+	query.setParameter("player", player);
+	List<Score> scores = query.getResultList();
+	return toScores(scores);
+    }
+
+    public Scores findAll() {
+	TypedQuery<Score> query = em.createNamedQuery("score_findAll", Score.class);
+	List<Score> scores = query.getResultList();
+	return toScores(scores);
+    }
+
+    public List<Score> findLastScoresOrderByDateDesc() {
+	TypedQuery<Score> query = em.createNamedQuery("score_findAllOrderByDateDesc", Score.class);
+	query.setMaxResults(MAX_SCORES_TO_RETURN);
+	return query.getResultList();
+    }
+
+    private Scores toScores(List<Score> scoreList) {
+	Scores scores = new Scores();
+	if (scoreList != null) {
+	    for (Score score : scoreList) {
+		scores.add(score);
+	    }
 	}
+	return scores;
+    }
 
-	public Scores findAllByGame(Game game) {
-		TypedQuery<Score> query = em.createNamedQuery("score_findAllByGame", Score.class);
-		query.setParameter("game", game);
-		List<Score> scores = query.getResultList();
-		return toScores(scores);
+    public long findCountByGame(Game game) {
+	String sql = "SELECT COUNT(id) FROM SCORE WHERE game_id = " + game.getId();
+	Query query = em.createNativeQuery(sql);
+	return Queries.getCount(query);
+    }
+
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void delete(Long scoreId) {
+	Score score = findById(scoreId);
+	em.remove(score);
+    }
+
+    public List<Player> findPlayersOrderByNumScores() {
+	String sql = "SELECT p.* FROM SCORE s, PLAYER p WHERE s.player_id = p.id GROUP BY s.player_id ORDER BY COUNT(s.id) DESC";
+	Query query = em.createNativeQuery(sql, Player.class);
+	return query.getResultList();
+    }
+
+    public List<Game> findGamesOrderByNumPlayers() {
+	String sql = "SELECT g.* FROM SCORE s, GAME g WHERE s.game_id = g.id GROUP BY s.game_id ORDER BY COUNT(DISTINCT s.player_id) DESC";
+	Query query = em.createNativeQuery(sql, Game.class);
+	return query.getResultList();
+    }
+
+    public long getNumberOfPlayedGames() {
+	Query query = em.createNativeQuery("SELECT count(distinct s.game_id) FROM SCORE s");
+	return Queries.getCount(query);
+    }
+
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void deleteAll() {
+	Query query = em.createQuery("DELETE FROM Score");
+	query.executeUpdate();
+    }
+
+    public String getRankOf(Score score) {
+	Player player = score.getPlayer();
+	Game game = score.getGame();
+	String level = score.getLevel();
+	Scores scores = findAllByGame(game, level);
+	List<Score> scoreList = scores.asSortedList();
+	Collections.sort(scoreList, new ScoreSortedByValueDescComparator());
+	for (int i = 0; i < scoreList.size(); i++) {
+	    Score score_ = scoreList.get(i);
+	    int rank = i + 1;
+	    if (score_.getPlayer().equals(player)) {
+		return IntegerToRank.getOrdinalFor(rank);
+	    }
 	}
-
-	public Scores findAllByGame(Game game, String level) {
-		TypedQuery<Score> query = em.createNamedQuery("score_findAllByGameAndLevel", Score.class);
-		query.setParameter("game", game);
-		query.setParameter("level", level);
-		List<Score> scores = query.getResultList();
-		return toScores(scores);
-	}
-
-	public Scores findAllByGameThisMonth(Game game) {
-		TypedQuery<Score> query = em.createNamedQuery("score_findAllByGameThisMonth", Score.class);
-		query.setParameter("game", game);
-		Date beginDate = new DateTime().withDayOfMonth(1).toDate();
-		query.setParameter("beginDate", beginDate);
-		query.setParameter("endDate", Dates.findLastDayOfMonth());
-		return toScores(query.getResultList());
-	}
-
-	public Scores findAllOneCreditScoresByGame(Game game) {
-		TypedQuery<Score> query = em.createNamedQuery("score_findAllOneCreditScoresByGame", Score.class);
-		query.setParameter("game", game);
-		List<Score> scores = query.getResultList();
-		return toScores(scores);
-	}
-
-	public Scores findAllByPlayer(Player player) {
-		TypedQuery<Score> query = em.createNamedQuery("score_findAllByPlayer", Score.class);
-		query.setParameter("player", player);
-		List<Score> scores = query.getResultList();
-		return toScores(scores);
-	}
-
-	public Scores findAll() {
-		TypedQuery<Score> query = em.createNamedQuery("score_findAll", Score.class);
-		List<Score> scores = query.getResultList();
-		return toScores(scores);
-	}
-
-	public List<Score> findLastScoresOrderByDateDesc() {
-		TypedQuery<Score> query = em.createNamedQuery("score_findAllOrderByDateDesc", Score.class);
-		query.setMaxResults(MAX_SCORES_TO_RETURN);
-		return query.getResultList();
-	}
-
-	private Scores toScores(List<Score> scoreList) {
-		Scores scores = new Scores();
-		if (scoreList != null) {
-			for (Score score : scoreList) {
-				scores.add(score);
-			}
-		}
-		return scores;
-	}
-
-	public long findCountByGame(Game game) {
-		String sql = "SELECT COUNT(id) FROM SCORE WHERE game_id = " + game.getId();
-		Query query = em.createNativeQuery(sql);
-		return Queries.getCount(query);
-	}
-
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void delete(Long scoreId) {
-		Score score = findById(scoreId);
-		em.remove(score);
-	}
-
-	public List<Player> findPlayersOrderByNumScores() {
-		String sql = "SELECT p.* FROM SCORE s, PLAYER p WHERE s.player_id = p.id GROUP BY s.player_id ORDER BY COUNT(s.id) DESC";
-		Query query = em.createNativeQuery(sql, Player.class);
-		return query.getResultList();
-	}
-
-	public List<Game> findGamesOrderByNumPlayers() {
-		String sql = "SELECT g.* FROM SCORE s, GAME g WHERE s.game_id = g.id GROUP BY s.game_id ORDER BY COUNT(DISTINCT s.player_id) DESC";
-		Query query = em.createNativeQuery(sql, Game.class);
-		return query.getResultList();
-	}
-
-	public long getNumberOfPlayedGames() {
-		Query query = em.createNativeQuery("SELECT count(distinct s.game_id) FROM SCORE s");
-		return Queries.getCount(query);
-	}
-
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void deleteAll() {
-		Query query = em.createQuery("DELETE FROM Score");
-		query.executeUpdate();
-	}
-
+	return null;
+    }
 }
