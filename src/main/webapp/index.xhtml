@@ -102,12 +102,12 @@
                                             <h:outputText value="${item.score.value}" converter="scoreConverter" />    
                                             <f:param name="scoreId" value="${item.score.id}" />
                                         </h:link>
-                                        ${msgs.on} 
+                                        (${item.rank}) ${msgs.on} 
                                         <h:link styleClass="game" outcome="game" value="${item.score.game.name}">
                                             <f:param name="id" value="${item.score.game.id}"/>
                                         </h:link> (${item.score.level})
                                         <br/>
-                                        <h:outputText value="(${item.rank}) ${item.score.message}" style="font-size:10pt;font-style: italic"/>
+                                        <h:outputText value="${item.score.message}" style="font-size:10pt;font-style: italic"/>
                                         <br/>
                                         <h:outputText value="${item.score.creationDate}" style="font-size:10pt" converter="dateConverter"/>
                                     </c:otherwise>
