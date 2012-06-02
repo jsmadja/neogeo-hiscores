@@ -264,11 +264,6 @@
 			<version>${joda-time-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>net.bull.javamelody</groupId>
-			<artifactId>javamelody-core</artifactId>
-			<version>1.35.0</version>
-		</dependency>
-		<dependency>
 			<groupId>org.ocpsoft.prettytime</groupId>
 			<artifactId>prettytime</artifactId>
 			<version>1.0.8.Final</version>
