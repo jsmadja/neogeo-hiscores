@@ -217,7 +217,7 @@ public class ScoreBean {
 		scoreFromDb.setValue(score);
 		scoreFromDb.setAllClear(allClear || ALL_CLEAR.equals(stage));
 		scoreFromDb.setStage(stage);
-		scoreService.store(scoreFromDb);
+		scoreService.merge(scoreFromDb);
 		updateFormWithSelectedGame(game);
 	}
 
