@@ -19,7 +19,11 @@ package com.neogeohiscores.web.services;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang.math.RandomUtils;
 import org.hibernate.Query;
+import org.hibernate.criterion.Restrictions;
+import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
 
 import com.neogeohiscores.entities.Game;
@@ -89,4 +93,11 @@ public class GameService extends GenericService<Game> {
         return query.list();
     }
 
+    public Game getGameOfTheDay() {
+        DateMidnight dateTime = new DateMidnight();
+        List<Game> games = findAll();
+        int num = (int) ((dateTime.getYear() * dateTime.getDayOfMonth() * dateTime.getMonthOfYear())%games.size());
+        Game gameOfTheDay = games.get(num);
+        return gameOfTheDay;
+    }
 }

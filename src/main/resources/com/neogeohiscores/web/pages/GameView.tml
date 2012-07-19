@@ -1,7 +1,10 @@
 <t:layout xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 	<div class="blue-bar big-bar center rounded-bar">${game.name}</div>
 	<t:loop source="levels" value="level">
-	    <h3>${level.label}</h3>
+	    <h3>
+	        <p style="text-align:center">${level.label}</p>
+
+        </h3>
 		<t:grid class="table table-bordered hall" rowsPerPage="1000" source="level.scoreItems" row="score" include="rank,player,stage,date,pictureUrl" add="score" reorder="rank,player,score,stage,date,pictureUrl">
 		
 		<p:rankHeader></p:rankHeader>
@@ -17,7 +20,14 @@
 		
 		<p:pictureUrlHeader></p:pictureUrlHeader>
 		<p:pictureUrlCell>
-			<img src="${score.pictureUrl}" />
+            <t:if test="${score.pictureUrl}">
+                <a class="screen_thumbnail" href="#screen_thumb">
+                    <img width="30px" height="30px" src="${score.pictureUrl}" alt=""/>
+                    <span>
+                        <img src="${score.pictureUrl}" width="350px" alt=""/>
+                    </span>
+                </a>
+            </t:if>
 		</p:pictureUrlCell>
 		
 		</t:grid>

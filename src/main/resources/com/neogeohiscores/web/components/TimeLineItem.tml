@@ -1,8 +1,13 @@
 <div id="timeLineItem" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 	<div id="thumbnail">
 		<t:if test="item.scoreItem">
-	 	   <img src="${item.avatarUrl}" width="100px" border="0" />
-			<p:else>
+	 	    <a class="screen_thumbnail_right" href="#screen_thumb_right">
+                <img width="100px" src="${item.avatarUrl}" alt=""/>
+                <span>
+                    <img src="${item.avatarUrl}" width="350px" alt=""/>
+                </span>
+            </a>
+            <p:else>
 				<img src="${item.pictureUrl}" width="100px" border="0" />
 			</p:else>
 		</t:if>

@@ -5,6 +5,10 @@
         <span class="title_neogeo" style="margin-right:20px">NEO·GEO</span><span class="title_hiscore">hiscores</span>
     </div>
 
+    <div class="center" style="margin-bottom:50px;font-size:12pt">
+        <p style="text-align:center">Le jeu du jour : <t:pageLink page="gameView"  context="gameOfTheDay">${gameOfTheDay.name}</t:pageLink></p>
+    </div>
+
     <t:timeline />
 
 </t:layout>

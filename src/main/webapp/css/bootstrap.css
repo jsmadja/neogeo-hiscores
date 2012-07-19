@@ -1528,10 +1528,10 @@ table {
 
 .table th,
 .table td {
-  padding: 8px;
+  padding-left: 8px;
   line-height: 18px;
 /*  text-align: left;*/
-  vertical-align: top;
+  vertical-align: middle;
   /*border-top: 1px solid #dddddd;*/
 }
 
@@ -5157,4 +5157,70 @@ a.badge:hover {
     color: red;
     font-weight: bolder;
     font-size:10pt;
+}
+
+.screen_thumbnail{
+    position: relative;
+    z-index: 0;
+    color: #FFFFFF;
+}
+
+.screen_thumbnail:hover{
+    background-color: transparent;
+    z-index: 50;
+}
+
+.screen_thumbnail span{ /*CSS for enlarged image*/
+    position: absolute;
+    background-color: grey;
+    padding: 0px;
+    left: -1000px;
+    border: 1px solid grey;
+    visibility: hidden;
+    color: black;
+    text-decoration: none;
+}
+
+.screen_thumbnail span img{ /*CSS for enlarged image*/
+    border-width: 0;
+    padding: 0px;
+}
+
+.screen_thumbnail:hover span{ /*CSS for enlarged image on hover*/
+    visibility: visible;
+    top: 30px;
+    left: -520px; /*position where enlarged image should offset horizontally */
+}
+
+.screen_thumbnail_right{
+    position: relative;
+    z-index: 0;
+    color: #FFFFFF;
+}
+
+.screen_thumbnail_right:hover{
+    background-color: transparent;
+    z-index: 50;
+}
+
+.screen_thumbnail_right span{ /*CSS for enlarged image*/
+    position: absolute;
+    background-color: grey;
+    padding: 0px;
+    left: 0px;
+    border: 1px solid grey;
+    visibility: hidden;
+    color: black;
+    text-decoration: none;
+}
+
+.screen_thumbnail_right span img{ /*CSS for enlarged image*/
+    border-width: 0;
+    padding: 0px;
+}
+
+.screen_thumbnail_right:hover span{ /*CSS for enlarged image on hover*/
+    visibility: visible;
+    top: 0px;
+    left: -350px; /*position where enlarged image should offset horizontally */
 }
