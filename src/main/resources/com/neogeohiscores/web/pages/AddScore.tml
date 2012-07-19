@@ -1,0 +1,111 @@
+<t:layout xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+	xmlns:p="tapestry:parameter">
+    <div class="blue-bar big-bar center rounded-bar">Ajouter un score</div>
+    <div style="margin-left:auto;margin-right:auto;width:50%">
+		<t:form id="form" t:id="form" class="form-horizontal">
+			<t:errors />
+			<table class="center">
+				<tr>
+					<td>
+						<div class="control-group">
+							<div class="controls">
+								<t:select value="game" model="games" t:id="game" />
+							</div>
+						</div>
+					</td>
+					<td>
+						<div class="control-group">
+							<div class="controls">
+								<t:textfield value="pictureUrl" t:id="pictureUrl"
+									placeholder="http://imageshack..." t:mixins="jquery/zoneUpdater"
+									t:clientEvent="blur" t:event="pictureUrlChanged" t:zone="imageZone" />
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="control-group">
+							<div class="controls">
+								<t:select value="level" model="levels" t:id="level" />
+							</div>
+						</div>
+					</td>
+					<td>
+						<div class="control-group">
+							<div class="controls">
+								<t:textfield value="fullname" t:id="fullname"
+									placeholder="Identifiant du forum" />
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="control-group">
+							<div class="controls">
+								<t:textfield value="score" t:id="score"
+									placeholder="Score (12343, 12:34:56, 4-7-5-0)" />
+							</div>
+						</div>
+					</td>
+					<td>
+						<div class="control-group">
+							<div class="controls">
+								<t:passwordfield value="password" t:id="password"
+									placeholder="Mot de passe du forum" />
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="control-group">
+							<t:textfield value="stage" t:id="stage"
+								placeholder="Stage" style="width:120px" />
+							<t:checkbox value="allClear"
+								style="display:inline-block; margin-bottom:5px;margin-right:5px;margin-left:10px"
+								t:id="allClear" />
+							<t:label for="allClear">All Clear</t:label>
+						</div>
+					</td>
+					<td>
+						<div class="control-group">
+							<t:checkbox value="postOnNgf" t:id="postOnNgf"
+								style="display:inline-block; margin-bottom:5px;margin-right:5px" />
+							<t:label for="postOnNgf">Poster sur NGF</t:label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div class="control-group">
+							<div class="controls">
+								<t:textarea rows="10" value="message" t:id="message"
+									style="width:100%" placeholder="Saisissez votre commentaire ..." />
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr><td colspan="2">
+					<t:zone t:id="imageZone" id="imageZone">
+				<img id="picture" src="${pictureUrl}" width="500px" />
+				</t:zone>
+				</td>
+				</tr>
+				<tr>
+					<td colspan="2">Votre image doit apparaitre. Si ce n'est pas le cas, l'url rentrée est invalide.</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="form-actions">
+							<button class="btn btn-primary" type="submit">
+								Valider
+							</button>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</t:form>
+	</div>
+</t:layout>

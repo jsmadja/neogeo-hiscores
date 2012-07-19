@@ -1,2 +1,10 @@
 <t:layout xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd">
+
+    <div class="center" style="width:60%">
+        <img width="100px" style="margin-bottom:30px;margin-right:20px; border-style: none" src="/myimages/logo.png" alt="logo" />
+        <span class="title_neogeo" style="margin-right:20px">NEO·GEO</span><span class="title_hiscore">hiscores</span>
+    </div>
+
+    <t:timeline />
+
 </t:layout>

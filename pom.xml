@@ -137,12 +137,31 @@
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
-		</plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>tomcat-maven-plugin</artifactId>
+                <version>1.1</version>
+                <configuration>
+                    <port>8080</port>
+                    <path>/</path>
+                    <systemProperties>
+                        <net.sf.ehcache.skipUpdateCheck>true</net.sf.ehcache.skipUpdateCheck>
+                        <tapestry.production-mode>false</tapestry.production-mode>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+
+        </plugins>
 		<finalName>hiscores</finalName>
 	</build>
 
 
 	<dependencies>
+		<dependency>
+			<groupId>net.bull.javamelody</groupId>
+			<artifactId>javamelody-core</artifactId>
+			<version>${javamelody-version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
@@ -231,6 +250,11 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-c3p0</artifactId>
 			<version>3.6.10.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql-release-version}</version>
 		</dependency>
 	</dependencies>
 

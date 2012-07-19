@@ -1,0 +1,72 @@
+<t:layout xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+	<div class="blue-bar big-bar center rounded-bar">${player.fullname}</div>
+    <div id="titlesLeft">
+		<ul>
+		<t:loop source="titlesLeft" value="titleItem">
+			<t:if test="unlocked">
+				<li class="label label-warning title">${titleItem.title.label}</li>
+				<p:else>
+					<li class="label title">${titleItem.title.label}</li>
+				</p:else>
+			</t:if>
+		</t:loop>
+		</ul>
+	</div>
+	<div id="titlesRight">
+		<ul>
+		<t:loop source="titlesRight" value="titleItem">
+			<t:if test="unlocked">
+				<li class="label label-warning title">${titleItem.title.label}</li>
+				<p:else>
+					<li class="label title">${titleItem.title.label}</li>
+				</p:else>
+			</t:if>
+		</t:loop>
+		</ul>
+	</div>
+	<div id="#scores">
+		<t:grid source="scores" reorder="game,level,score,rank,positiveGap,negativeGap" rowsPerPage="1000" class="table table-bordered table-condensed hall" row="score" include="level,rank,negativeGap,positiveGap" add="game,score">
+			
+			<p:levelHeader>
+				Difficulté
+			</p:levelHeader>
+			
+			<p:gameHeader>
+			</p:gameHeader>
+			<p:gameCell>
+				<t:pageLink page="gameView" context="score.game">${score.game.name}</t:pageLink>
+			</p:gameCell>
+			
+			<p:scoreHeader>
+				Score
+			</p:scoreHeader>
+			<p:scoreCell>
+				${score.score.formatted}
+			</p:scoreCell>
+			
+			<p:rankHeader>
+				Rang
+			</p:rankHeader>
+			<p:rankCell>
+				${score.rank}
+			</p:rankCell>
+			
+			<p:negativeGapHeader>
+			</p:negativeGapHeader>
+			<p:negativeGapCell>
+				<t:if test="score.formattedNegativeGap">
+					-${score.formattedNegativeGap}
+				</t:if>
+			</p:negativeGapCell>
+
+			<p:positiveGapHeader>
+			</p:positiveGapHeader>
+			<p:positiveGapCell>
+				<t:if test="score.formattedPositiveGap">
+					+${score.formattedPositiveGap}
+				</t:if>
+			</p:positiveGapCell>
+			
+		</t:grid>
+	</div>
+</t:layout>

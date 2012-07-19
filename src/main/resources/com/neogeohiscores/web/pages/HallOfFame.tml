@@ -1,0 +1,10 @@
+<t:layout xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+    <div class="blue-bar big-bar center rounded-bar">Classement général</div>
+    <t:grid source="players" add="player" rowsPerPage="1000" include="rank,score,contribution,average" reorder="rank,player,score,contribution,average" row="playerItem" pagerPosition="BOTH" class="table table-bordered table-condensed hall">
+		<p:rankHeader></p:rankHeader>
+        <p:playerHeader></p:playerHeader>
+        <p:playerCell>
+			<t:pageLink class="player" page="playerView" context="playerItem.player">${playerItem.player.fullname}</t:pageLink>
+        </p:playerCell>    
+    </t:grid>
+</t:layout>

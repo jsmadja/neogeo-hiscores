@@ -17,6 +17,9 @@ import org.apache.tapestry5.ioc.services.SymbolProvider;
 import org.apache.tapestry5.ioc.services.SymbolSource;
 import org.apache.tapestry5.services.AssetSource;
 
+import com.neogeohiscores.web.services.halloffame.HallOfFameService;
+import com.neogeohiscores.web.services.halloffame.HallOfOneCreditService;
+
 public class AppModule {
 
     public static void contributeFactoryDefaults(MappedConfiguration<String, Object> configuration) {
@@ -33,6 +36,16 @@ public class AppModule {
     }
 
     public static void bind(ServiceBinder binder) {
+        binder.bind(TimelineService.class);
+        binder.bind(ScoreService.class);
+        binder.bind(TitleUnlockingService.class);
+        binder.bind(TitleService.class);
+        binder.bind(GameService.class);
+        binder.bind(PlayerService.class);
+        binder.bind(ChallengeService.class);
+        binder.bind(HallOfFameService.class);
+        binder.bind(HallOfOneCreditService.class);
+        binder.bind(TitleRelockingService.class);
     }
 
     @Contribute(SymbolSource.class)

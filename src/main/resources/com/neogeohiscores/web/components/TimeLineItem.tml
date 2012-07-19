@@ -1,0 +1,35 @@
+<div id="timeLineItem" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+	<div id="thumbnail">
+		<t:if test="item.scoreItem">
+	 	   <img src="${item.avatarUrl}" width="100px" border="0" />
+			<p:else>
+				<img src="${item.pictureUrl}" width="100px" border="0" />
+			</p:else>
+		</t:if>
+	</div>
+	<t:if test="!item.challengeItem">
+		<div id="player">
+			<t:pageLink page="playerView" context="item.player">${item.playerName}</t:pageLink>
+		</div>
+	</t:if>
+	<div id="text">
+		<t:if test="item.scoreItem">
+			<span class="score">${item.score}</span> (${item.rank}) sur <t:pageLink class="game" page="gameView" context="item.game">${item.game.name}</t:pageLink> (${item.level}) 
+		</t:if>
+		<t:if test="item.unlockedTitleItem">
+			a débloqué le titre ${item.titleName} 
+		</t:if>
+		<t:if test="item.challengeItem">
+			<span class="player">${item.challenger1Name}</span> contre <span class="player">${item.challenger2Name}</span> sur <span class="game">${item.game.name}</span>
+		</t:if>
+		<t:if test="item.relockedTitle">
+			a perdu le titre ${item.titleName} à cause du score de <span class="player">${item.relockerName}</span> sur <t:pageLink page="gameView" class="game" context="item.game">${item.game.name}</t:pageLink> 
+		</t:if>
+	</div>
+	<div id="comment">
+		${item.comment}
+	</div>
+	<div id="date">
+		${item.date}
+	</div>
+</div>

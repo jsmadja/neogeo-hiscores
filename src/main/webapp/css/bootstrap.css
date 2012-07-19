@@ -37,6 +37,7 @@ html {
   font-size: 100%;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
+  background-color:black;
 }
 
 a:focus {
@@ -170,8 +171,8 @@ a {
 }
 
 a:hover {
-  color: #005580;
-  text-decoration: underline;
+  color: orange;
+/*  text-decoration: underline;*/
 }
 
 .row {
@@ -767,7 +768,7 @@ textarea {
 }
 
 label {
-  display: block;
+/*  display: block; */
   margin-bottom: 5px;
 }
 
@@ -1206,8 +1207,10 @@ select:focus:required:invalid:focus {
   padding: 17px 20px 18px;
   margin-top: 18px;
   margin-bottom: 18px;
+  /*
   background-color: #f5f5f5;
   border-top: 1px solid #e5e5e5;
+  */ /* pas de fond gris pour l arriere plan des boutons de formulaire */
   *zoom: 1;
 }
 
@@ -1494,7 +1497,7 @@ legend + .control-group {
 .form-horizontal .controls {
   *display: inline-block;
   *padding-left: 20px;
-  margin-left: 160px;
+/*  margin-left: 160px; */ /* aligne les labels et les input des formulaires */
   *margin-left: 0;
 }
 
@@ -1527,9 +1530,9 @@ table {
 .table td {
   padding: 8px;
   line-height: 18px;
-  text-align: left;
+/*  text-align: left;*/
   vertical-align: top;
-  border-top: 1px solid #dddddd;
+  /*border-top: 1px solid #dddddd;*/
 }
 
 .table th {
@@ -1550,7 +1553,7 @@ table {
 }
 
 .table tbody + tbody {
-  border-top: 2px solid #dddddd;
+/*  border-top: 2px solid;*/
 }
 
 .table-condensed th,
@@ -1559,7 +1562,7 @@ table {
 }
 
 .table-bordered {
-  border: 1px solid #dddddd;
+  /*border: 1px solid #dddddd;*/
   border-collapse: separate;
   *border-collapse: collapsed;
   border-left: 0;
@@ -1570,7 +1573,7 @@ table {
 
 .table-bordered th,
 .table-bordered td {
-  border-left: 1px solid #dddddd;
+  /*border-left: 1px solid #dddddd;*/
 }
 
 .table-bordered caption + thead tr:first-child th,
@@ -1623,7 +1626,7 @@ table {
 
 .table tbody tr:hover td,
 .table tbody tr:hover th {
-  background-color: #f5f5f5;
+  background-color: #333;
 }
 
 table .span1 {
@@ -4980,4 +4983,178 @@ a.badge:hover {
 
 .invisible {
   visibility: hidden;
+}
+
+#footer {
+	width:30%;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#timeLineItem {
+	margin-bottom:50px;
+	width:40%;
+	margin-left:auto;
+	margin-right:auto;
+	font-size:10pt;
+}
+
+#thumbnail {
+	clear:both;;
+	float:left;
+	margin-right: 5px;
+}
+
+#comment {
+	font-style: italic;
+}
+
+.center {
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.player {
+    color: #3399FF;
+    font-size:12pt;
+    max-width:100px;
+}
+
+#player {
+    color: #3399FF;
+    font-size:12pt;
+}
+
+.game {	
+    color: #3399FF;
+    font-size:12pt;
+}
+
+.score {
+    color: orange;
+    font-size:12pt;
+    text-align:right;
+}
+
+.rank {
+	text-align:right;
+}
+
+.contribution {
+	text-align:right;
+}
+
+.average {
+	text-align:right;
+}
+
+.hall {
+	margin-left:auto;
+	margin-right:auto;
+	width:50%;
+}
+
+.average {
+    font-size:12pt;
+}
+
+.contribution {
+    font-size:12pt;
+}
+
+.rank {
+    font-size:12pt;
+}
+
+#titlesLeft {
+	float:left;
+}
+
+#titlesLeft ul {
+	list-style: none;
+}
+
+#titlesRight {
+	float:right;
+	list-style: none;
+}
+
+#titlesRight ul {
+	list-style: none;
+}
+
+.blue-bar {
+	background: #6db3f2; /* Old browsers */
+	background: -moz-linear-gradient(top,  #6db3f2 0%, #54a3ee 50%, #3690f0 51%, #1e69de 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6db3f2), color-stop(50%,#54a3ee), color-stop(51%,#3690f0), color-stop(100%,#1e69de)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #6db3f2 0%,#54a3ee 50%,#3690f0 51%,#1e69de 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #6db3f2 0%,#54a3ee 50%,#3690f0 51%,#1e69de 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #6db3f2 0%,#54a3ee 50%,#3690f0 51%,#1e69de 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #6db3f2 0%,#54a3ee 50%,#3690f0 51%,#1e69de 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6db3f2', endColorstr='#1e69de',GradientType=0 ); /* IE6-9 */
+}
+
+.rounded-bar {
+    border-radius: 5px 5px 5px 5px;
+    color: white;
+    height: 30px;
+    text-shadow: 0 0 0 #333333;
+}
+
+.big-bar {
+    font-size: 24pt;
+	padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    width:50%;
+    height:20px;
+    margin-bottom: 30px;
+}
+
+.title {
+	width:130px;
+	margin-bottom:3px;
+}
+
+.date {
+	text-align:right;
+}
+
+.stage {
+	text-align:right;
+}
+
+.title_neogeo {
+    color: orange;
+    font-size: 48pt;
+    font-family: Times New Roman;
+    font-weight: bold;
+}
+
+.title_neogeo-mini {
+    color: orange;
+    font-family: Times New Roman;
+    font-weight: bold;
+}
+
+.title_hiscore {
+    color: #3399FF;
+    font-size: 48pt;
+}
+
+.title_hiscore-mini {
+    color: #3399FF;
+}
+
+.positive-gap {
+    color: green;
+    font-weight: bolder;
+    font-size:10pt;
+}
+
+.negative-gap {
+    color: red;
+    font-weight: bolder;
+    font-size:10pt;
 }

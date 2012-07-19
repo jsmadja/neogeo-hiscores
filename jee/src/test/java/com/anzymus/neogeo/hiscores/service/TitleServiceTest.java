@@ -26,7 +26,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
+import javax.persistence.Query;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -58,7 +58,7 @@ public class TitleServiceTest {
 		title.setDescription(description);
 		title.setClassname("com.anzymus.neogeo.hiscores.success.FirstScoreTitleStrategy");
 
-		TypedQuery query = Mockito.mock(TypedQuery.class);
+		Query query = Mockito.mock(Query.class);
 		when(query.getResultList()).thenReturn(Arrays.asList(title));
 
 		when(em.createNamedQuery(anyString(), any(Class.class))).thenReturn(query);
