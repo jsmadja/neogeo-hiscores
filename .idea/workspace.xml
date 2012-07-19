@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10aa8c1e-354a-4324-949c-7b089259e762" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hiscores.iml" afterPath="$PROJECT_DIR$/hiscores.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/Index.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/Index.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/GameService.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/GameService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/TimeLineItem.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/TimeLineItem.tml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/GameView.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/GameView.tml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/Index.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/Index.tml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/css/bootstrap.css" afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
     <ignored path="hiscores.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -77,10 +69,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bootstrap.css" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="bootstrap.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/css/bootstrap.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5224" column="13" selection-start="104222" selection-end="104222" vertical-scroll-proportion="0.74358976">
+            <state line="5224" column="13" selection-start="104222" selection-end="104222" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="276" column="10" selection-start="8763" selection-end="8763" vertical-scroll-proportion="0.9358974">
               <folding />
             </state>
           </provider>
@@ -99,7 +100,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/PlayerView.tml" />
         <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/HallOf1cc.tml" />
         <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/HallOfFame.tml" />
@@ -111,6 +111,7 @@
         <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/GameView.tml" />
         <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/TimeLineItem.tml" />
         <option value="$PROJECT_DIR$/src/main/webapp/css/bootstrap.css" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -988,11 +989,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="128" column="8" selection-start="4391" selection-end="4391" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/PlayerView.tml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="4" selection-start="102" selection-end="180" vertical-scroll-proportion="-1.25">
@@ -1103,7 +1099,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/css/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5224" column="13" selection-start="104222" selection-end="104222" vertical-scroll-proportion="0.74358976">
+        <state line="5224" column="13" selection-start="104222" selection-end="104222" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="276" column="10" selection-start="8763" selection-end="8763" vertical-scroll-proportion="0.9358974">
           <folding />
         </state>
       </provider>

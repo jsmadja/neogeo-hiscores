@@ -258,4 +258,20 @@
 		</dependency>
 	</dependencies>
 
+    <repositories>
+        <repository>
+            <id>Maven2 Repo 2</id>
+            <url>http://repo2.maven.org/maven2</url>
+            <name>Maven2 Repo 2</name>
+        </repository>
+        <repository>
+            <id>devlab722-repo</id>
+            <url>http://nexus.devlab722.net/nexus/content/repositories/releases
+            </url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
 </project>
