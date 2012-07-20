@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10aa8c1e-354a-4324-949c-7b089259e762" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/AddScore.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/AddScore.tml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/ExceptionReport.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/ExceptionReport.tml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/GameView.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/GameView.tml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/HallOf1cc.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/HallOf1cc.tml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/HallOfFame.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/HallOfFame.tml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/Index.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/Index.tml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/PlayerView.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/PlayerView.tml" />
     </list>
     <ignored path="hiscores.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -78,10 +84,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="276" column="10" selection-start="8763" selection-end="8763" vertical-scroll-proportion="0.9358974">
+            <state line="252" column="8" selection-start="8088" selection-end="8088" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameView.tml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/GameView.tml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="41" selection-start="592" selection-end="592" vertical-scroll-proportion="-5.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayerView.tml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/PlayerView.tml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="61" column="84" selection-start="2378" selection-end="2378" vertical-scroll-proportion="0.7221007">
               <folding />
             </state>
           </provider>
@@ -100,7 +124,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/PlayerView.tml" />
         <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/HallOf1cc.tml" />
         <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/HallOfFame.tml" />
         <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/AddScore.tml" />
@@ -108,10 +131,11 @@
         <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/Index.java" />
         <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/Index.tml" />
         <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/GameService.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/GameView.tml" />
         <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/TimeLineItem.tml" />
         <option value="$PROJECT_DIR$/src/main/webapp/css/bootstrap.css" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/GameView.tml" />
+        <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/PlayerView.tml" />
       </list>
     </option>
   </component>
@@ -989,13 +1013,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/PlayerView.tml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="4" selection-start="102" selection-end="180" vertical-scroll-proportion="-1.25">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/HallOf1cc.tml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="5" selection-start="106" selection-end="106" vertical-scroll-proportion="-0.625">
@@ -1083,16 +1100,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/GameView.tml">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/TimeLineItem.tml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="20" selection-start="989" selection-end="1279" vertical-scroll-proportion="-11.0">
+        <state line="6" column="20" selection-start="347" selection-end="347" vertical-scroll-proportion="-3.75">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/TimeLineItem.tml">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="20" selection-start="347" selection-end="347" vertical-scroll-proportion="-3.75">
+        <state line="252" column="8" selection-start="8088" selection-end="8088" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/GameView.tml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="41" selection-start="592" selection-end="592" vertical-scroll-proportion="-5.0">
           <folding />
         </state>
       </provider>
@@ -1104,9 +1128,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/PlayerView.tml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="276" column="10" selection-start="8763" selection-end="8763" vertical-scroll-proportion="0.9358974">
+        <state line="61" column="84" selection-start="2378" selection-end="2378" vertical-scroll-proportion="0.7221007">
           <folding />
         </state>
       </provider>
