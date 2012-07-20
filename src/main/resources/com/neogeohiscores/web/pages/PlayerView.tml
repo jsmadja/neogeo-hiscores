@@ -38,7 +38,7 @@
 
             <p:scoreHeader></p:scoreHeader>
             <p:scoreCell>
-                ${score.score.formatted}
+                <t:pageLink page="AddScore" class="score" context="score.score">${score.score.formatted}</t:pageLink>
             </p:scoreCell>
 
             <p:rankHeader>

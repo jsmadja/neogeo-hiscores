@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import org.apache.tapestry5.annotations.DiscardAfter;
 import org.apache.tapestry5.annotations.InjectComponent;
+import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.beaneditor.Validate;
 import org.apache.tapestry5.corelib.components.Form;
@@ -105,9 +106,24 @@ public class AddScore {
     @Inject
     private Request request;
 
+    @Persist
+    private Score currentScore;
+
     void onActivate() {
         level = "MVS";
         game = gameService.findByName(DEFAULT_GAME);
+    }
+
+    void onActivate(Score score) {
+        this.score = score.getValue();
+        this.allClear = score.getAllClear();
+        this.fullname = score.getPlayerName();
+        this.game = score.getGame();
+        this.level = score.getLevel();
+        this.message = score.getMessage();
+        this.stage = score.getStage();
+        this.pictureUrl = score.getPictureUrl();
+        this.currentScore = score;
     }
 
     public List<Game> getGames() {
@@ -153,15 +169,25 @@ public class AddScore {
         } catch (DirectLinkNotFoundException e) {
             LOG.severe(e.getMessage());
         }
-        Score scoreToAdd = new Score(score, player, level, game, pictureUrl);
-        scoreToAdd.setAllClear(allClear || ALL_CLEAR.equals(stage));
-        scoreToAdd.setStage(stage);
-        int end = message.length() > MAX_MESSAGE_LENGTH ? MAX_MESSAGE_LENGTH : message.length();
-        scoreToAdd.setMessage(message.substring(0, end));
-        scoreToAdd = scoreService.store(scoreToAdd);
-        postOnNgf(scoreToAdd, game, ngfClient);
+        Score scoreToStore = storeScore(ngfClient, player);
         titleUnlockingService.searchUnlockedTitlesFor(player);
-        titleRelockingService.relockTitles(scoreToAdd);
+        titleRelockingService.relockTitles(scoreToStore);
+    }
+
+    private Score storeScore(NeoGeoFansClient ngfClient, Player player) {
+        Score scoreToStore;
+        if(currentScore == null) {
+            scoreToStore = new Score(score, player, level, game, pictureUrl);
+        } else {
+            scoreToStore = currentScore;
+        }
+        scoreToStore.setAllClear(allClear || ALL_CLEAR.equals(stage));
+        scoreToStore.setStage(stage);
+        int end = message.length() > MAX_MESSAGE_LENGTH ? MAX_MESSAGE_LENGTH : message.length();
+        scoreToStore.setMessage(message.substring(0, end));
+        scoreToStore = scoreService.store(scoreToStore);
+        postOnNgf(scoreToStore, game, ngfClient);
+        return scoreToStore;
     }
 
     private String content(String pictureUrl) {
