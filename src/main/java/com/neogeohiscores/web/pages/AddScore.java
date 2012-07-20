@@ -180,6 +180,9 @@ public class AddScore {
             scoreToStore = new Score(score, player, level, game, pictureUrl);
         } else {
             scoreToStore = currentScore;
+            scoreToStore.setLevel(level);
+            scoreToStore.setGame(game);
+            scoreToStore.setPictureUrl(pictureUrl);
         }
         scoreToStore.setAllClear(allClear || ALL_CLEAR.equals(stage));
         scoreToStore.setStage(stage);

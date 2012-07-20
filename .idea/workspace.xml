@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10aa8c1e-354a-4324-949c-7b089259e762" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/AddScore.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/AddScore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/TimeLineItem.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/TimeLineItem.tml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/AddScore.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/AddScore.tml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/GameView.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/GameView.tml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/PlayerView.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/PlayerView.tml" />
     </list>
     <ignored path="hiscores.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -146,19 +142,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AddScore.tml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AddScore.tml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/AddScore.tml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="97" column="101" selection-start="4673" selection-end="4673" vertical-scroll-proportion="0.3107221">
+            <state line="37" column="46" selection-start="1775" selection-end="1775" vertical-scroll-proportion="2.8333333">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AddScore.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="AddScore.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/AddScore.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="167" column="21" selection-start="4907" selection-end="4907" vertical-scroll-proportion="0.0">
+            <state line="181" column="39" selection-start="5497" selection-end="5509" vertical-scroll-proportion="0.46777546">
               <folding />
             </state>
           </provider>
@@ -194,11 +190,11 @@
         <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/GameService.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/css/bootstrap.css" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/AddScore.java" />
         <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/TimeLineItem.tml" />
         <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/GameView.tml" />
         <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/PlayerView.tml" />
         <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/AddScore.tml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/AddScore.java" />
       </list>
     </option>
   </component>
@@ -789,13 +785,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/AddScore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="167" column="21" selection-start="4907" selection-end="4907" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/GenericService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="13" selection-start="438" selection-end="438" vertical-scroll-proportion="0.0">
@@ -840,7 +829,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/AddScore.tml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="101" selection-start="4673" selection-end="4673" vertical-scroll-proportion="0.3107221">
+        <state line="37" column="46" selection-start="1775" selection-end="1775" vertical-scroll-proportion="2.8333333">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/AddScore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="181" column="39" selection-start="5497" selection-end="5509" vertical-scroll-proportion="0.46777546">
           <folding />
         </state>
       </provider>
