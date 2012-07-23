@@ -32,7 +32,7 @@
   </head>
 
   <body>
-    <div class="navbar navbar-fixed-top" style="margin-left:auto;margin-right:auto">
+    <div class="navbar navbar-fixed-top" style="margin-left:auto;margin-right:auto;width:800px">
       <div class="navbar-inner">
         <div class="container" style="margin-left:auto;margin-right:auto">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
