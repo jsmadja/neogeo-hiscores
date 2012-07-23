@@ -2,10 +2,11 @@
     <div class="blue-bar big-bar center rounded-bar">Jeux les plus joués</div>
     <t:grid source="games" add="game" include="count,genre" reorder="game, count, genre"
             row="gameItem" rowsPerPage="1000" class="table table-bordered table-condensed hall" style="width:60%">
-            <p:gameHeader>Jeux</p:gameHeader>
+            <p:gameHeader></p:gameHeader>
             <p:gameCell>
                 <t:pageLink page="gameView" context="gameItem.id">${gameItem.name}</t:pageLink>
             </p:gameCell>
+            <p:countHeader>Scores</p:countHeader>
 
     </t:grid>
 </t:layout>

@@ -6,9 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10aa8c1e-354a-4324-949c-7b089259e762" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/UnlockedTitle.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/UnlockedTitle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/components/Layout.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/components/Layout.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/Layout.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/Layout.tml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/Games.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/Games.tml" />
     </list>
     <ignored path="hiscores.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -201,10 +199,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Layout.tml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Layout.tml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/Layout.tml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="62" column="22" selection-start="2919" selection-end="2919" vertical-scroll-proportion="0.49324325">
+            <state line="62" column="22" selection-start="2919" selection-end="2919" vertical-scroll-proportion="-9.125">
               <folding />
             </state>
           </provider>
@@ -244,10 +242,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Games.tml" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Games.tml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/Games.tml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="30" selection-start="414" selection-end="414" vertical-scroll-proportion="-2.5">
+            <state line="8" column="28" selection-start="601" selection-end="601" vertical-scroll-proportion="0.26258206">
               <folding />
             </state>
           </provider>
@@ -352,10 +350,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/common/GameItem.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/GameService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/Games.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/Games.tml" />
         <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/components/Layout.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/UnlockedTitle.java" />
         <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/Layout.tml" />
+        <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/Games.tml" />
       </list>
     </option>
   </component>
@@ -995,13 +993,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/Games.tml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="30" selection-start="414" selection-end="414" vertical-scroll-proportion="-2.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/hiscores.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -1025,7 +1016,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/Layout.tml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="22" selection-start="2919" selection-end="2919" vertical-scroll-proportion="0.49324325">
+        <state line="62" column="22" selection-start="2919" selection-end="2919" vertical-scroll-proportion="-9.125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/Games.tml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="28" selection-start="601" selection-end="601" vertical-scroll-proportion="0.26258206">
           <folding />
         </state>
       </provider>
