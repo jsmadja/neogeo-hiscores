@@ -20,17 +20,7 @@ import static com.google.common.base.Objects.equal;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.PrePersist;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 import com.google.common.base.Objects;
 import com.sun.syndication.feed.synd.SyndEntry;
@@ -43,7 +33,7 @@ import com.sun.syndication.feed.synd.SyndEntry;
 public class RelockedTitle implements Rssable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
     @ManyToOne
@@ -60,11 +50,6 @@ public class RelockedTitle implements Rssable {
     private Score relockerScore;
 
     public RelockedTitle() {
-
-    }
-
-    @PrePersist
-    public void prePersist() {
         relockDate = new Date();
     }
 

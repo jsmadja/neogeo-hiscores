@@ -60,9 +60,6 @@ public class NeoGeoFansClient {
             HtmlPage loginPage = getLoginPage();
             HtmlForm loginForm = fillForm(loginPage);
             String contentResult = submitForm(loginForm);
-            File tempFile = File.createTempFile("neogeohiscores", "login.html");
-            Files.write(loginPage.asXml().getBytes(), tempFile);
-            LOG.info("login page written to " + tempFile);
             return contentResult.contains("Merci de vous être identifié, " + login + ".");
         } catch (IOException e) {
             LOG.error(login + " has not successfully logged in", e);

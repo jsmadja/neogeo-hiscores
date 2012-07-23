@@ -144,9 +144,14 @@ public class AddScore {
     @DiscardAfter
     public Object onSuccess() {
         try {
+            if(message == null) {
+                message ="";
+            }
             NeoGeoFansClient ngfClient = neoGeoFansClientFactory.create();
+            LOG.info("Tentative d authentification de "+fullname);
             boolean isAuthenticated = ngfClient.authenticate(fullname, password);
             if (isAuthenticated) {
+                LOG.info("Authentification reussie");
                 acceptScore(ngfClient);
                 return Index.class;
             } else {
@@ -163,15 +168,14 @@ public class AddScore {
     private void acceptScore(NeoGeoFansClient ngfClient) {
         Player player = playerService.findByFullname(fullname);
         if (player == null) {
+            LOG.info("Enregistrement du nouvel utilisateur "+fullname);
             player = playerService.store(new Player(fullname));
         }
-        try {
-            pictureUrl = imageFetcher.get(content(pictureUrl));
-        } catch (DirectLinkNotFoundException e) {
-            LOG.severe(e.getMessage());
-        }
+        LOG.info("Enregistrement du score");
         Score scoreToStore = storeScore(ngfClient, player);
-        titleUnlockingService.searchUnlockedTitlesFor(player);
+        LOG.info("Recherche de nouveaux titres débloqués");
+       titleUnlockingService.searchUnlockedTitlesFor(player);
+        LOG.info("Recherche de titres à rebloquer");
         titleRelockingService.relockTitles(scoreToStore);
     }
 
@@ -192,18 +196,6 @@ public class AddScore {
         scoreToStore = scoreService.store(scoreToStore);
         postOnNgf(scoreToStore, game, ngfClient);
         return scoreToStore;
-    }
-
-    private String content(String pictureUrl) {
-        try {
-            InputStream stream = new URL(pictureUrl).openStream();
-            byte[] bytes = ByteStreams.toByteArray(stream);
-            String pageContent = new String(bytes);
-            return pageContent;
-        } catch (Exception e) {
-            LOG.severe(e.getMessage());
-        }
-        return "";
     }
 
     private void postOnNgf(Score score, Game game, NeoGeoFansClient ngfClient) {
