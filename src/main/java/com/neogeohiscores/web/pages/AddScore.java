@@ -107,6 +107,7 @@ public class AddScore {
     private Request request;
 
     @Persist
+    @Property
     private Score currentScore;
 
     void onActivate() {

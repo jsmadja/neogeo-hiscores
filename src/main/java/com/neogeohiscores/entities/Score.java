@@ -282,4 +282,8 @@ public class Score implements Serializable, Rssable {
     public void setRank(int rank) {
         this.rank = rank;
     }
+
+    public Integer getNghPoints() {
+        return this.nghPoints;
+    }
 }
