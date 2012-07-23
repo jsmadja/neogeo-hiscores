@@ -59,8 +59,8 @@
     </div> <!-- /container -->
 
 	<div id="footer">	
-		<p style="color: rgb(118, 118, 118); font-size: 8pt;">NEO·GEO-hiscores version 2.0 · <a href="http://www.neogeofans.com/leforum/showthread.php?t=41884">Signaler un problème</a>
-                    · ©2012
+		<p style="color: rgb(118, 118, 118); font-size: 8pt;">NEO·GEO-hiscores version ${version} · <a href="http://www.neogeofans.com/leforum/showthread.php?t=41884">Signaler un problème</a>
+                    · 2012
         </p>
 	</div>
     

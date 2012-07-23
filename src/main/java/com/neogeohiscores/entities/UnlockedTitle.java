@@ -18,6 +18,7 @@ package com.neogeohiscores.entities;
 
 import static com.google.common.base.Objects.equal;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -38,7 +39,7 @@ import com.sun.syndication.feed.synd.SyndEntry;
 @NamedQueries({//
 @NamedQuery(name = "findLastUnlockedTitlesOrderByDateDesc", query = "SELECT ut FROM UnlockedTitle ut ORDER BY ut.unlockDate DESC") //
 })
-public class UnlockedTitle implements Rssable {
+public class UnlockedTitle implements Serializable, Rssable {
 
     @Id
     @GeneratedValue
