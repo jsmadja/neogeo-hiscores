@@ -4,7 +4,7 @@
         <ul>
             <t:loop source="titlesLeft" value="titleItem">
                 <t:if test="unlocked">
-                    <li class="label label-warning title">${titleItem.title.label}</li>
+                    <li class="label label-info title">${titleItem.title.label}</li>
                     <p:else>
                         <li class="label title">${titleItem.title.label}</li>
                     </p:else>
@@ -16,7 +16,7 @@
         <ul>
             <t:loop source="titlesRight" value="titleItem">
                 <t:if test="unlocked">
-                    <li class="label label-warning title">${titleItem.title.label}</li>
+                    <li class="label label-info title">${titleItem.title.label}</li>
                     <p:else>
                         <li class="label title">${titleItem.title.label}</li>
                     </p:else>
