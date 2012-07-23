@@ -82,6 +82,15 @@ public class Score implements Serializable, Rssable {
 
     private String stage;
 
+    @Column(name="RANK", nullable = true)
+    private Integer rank;
+
+    @Column(name="NGH_POINTS", nullable = true)
+    private Integer nghPoints;
+
+    @Column(name="GAME_OF_THE_DAY", nullable = true)
+    private Boolean gameOfTheDay;
+
     @Type(type = "org.hibernate.type.NumericBooleanType")
     @Column(columnDefinition = "TINYINT", name = "ALL_CLEAR")
     private boolean allClear;
@@ -261,4 +270,16 @@ public class Score implements Serializable, Rssable {
         return player.getFullname();
     }
 
+
+    public void setNghPoints(int nghPoints) {
+        this.nghPoints = nghPoints;
+    }
+
+    public void setGameOfTheDay(boolean gameOfTheDay) {
+        this.gameOfTheDay = gameOfTheDay;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
 }

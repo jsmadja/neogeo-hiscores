@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.tapestry5.ioc.annotations.Inject;
 import org.hibernate.Query;
 import org.joda.time.DateTime;
 
@@ -30,6 +31,9 @@ import com.neogeohiscores.entities.Score;
 import com.neogeohiscores.entities.Scores;
 
 public class ScoreService extends GenericService<Score> {
+
+    @Inject
+    private GameService gameService;
 
     private static final int MAX_SCORES_TO_RETURN = 10;
 
@@ -131,6 +135,14 @@ public class ScoreService extends GenericService<Score> {
     }
 
     public String getRankOf(Score score) {
+        int rank = getNumRankOf(score);
+        if(rank == 0) {
+            return null;
+        }
+        return IntegerToRank.getOrdinalFor(rank);
+    }
+
+    public int getNumRankOf(Score score) {
         Player player = score.getPlayer();
         Game game = score.getGame();
         String level = score.getLevel();
@@ -141,9 +153,29 @@ public class ScoreService extends GenericService<Score> {
             Score score_ = scoreList.get(i);
             int rank = i + 1;
             if (score_.getPlayer().equals(player)) {
-                return IntegerToRank.getOrdinalFor(rank);
+                return rank;
             }
         }
-        return null;
+        return 0;
     }
+
+    public Score store(Score score) {
+        Game gameOfTheDay = gameService.getGameOfTheDay();
+        int bonusFactor = 1;
+        boolean isGameOfTheDay = score.getGame().equals(gameOfTheDay);
+        if(isGameOfTheDay) {
+            bonusFactor = 2;
+        }
+        int rank = getNumRankOf(score);
+        int totalScore = findAllByGame(score.getGame(), score.getLevel()).count();
+        int rankFactor = totalScore - rank + 1;
+        int nghPoints = bonusFactor * rankFactor;
+
+        score.setNghPoints(nghPoints);
+        score.setGameOfTheDay(isGameOfTheDay);
+        score.setRank(rank);
+        return super.store(score);
+    }
+
+
 }
