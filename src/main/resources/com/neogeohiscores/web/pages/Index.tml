@@ -3,7 +3,7 @@
     <div class="center" style="width:60%">
         <img width="100px" style="margin-bottom:30px;margin-right:10px; border-style: none;display:inline-block" src="/myimages/logo.png"
              alt="logo"/>
-        <p class="title_neogeo" style="margin-right:20px;display:inline-block">NEO·GEO</p> <p style="display:inline-block;margin-top:20px;margin-bottom:20px" class="title_hiscore">hiscores</p>
+        <p class="title_neogeo" style="margin-right:20px;display:inline-block">NEO·GEO</p> <p style="display:inline-block;margin-top:20px;margin-bottom:10px" class="title_hiscore">hiscores</p>
     </div>
 
     <div class="center" style="margin-bottom:80px;font-size:12pt">

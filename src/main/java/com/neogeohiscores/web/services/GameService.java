@@ -58,7 +58,7 @@ public class GameService extends GenericService<Game> {
     }
 
     public List<Object[]> findAllScoreCountForEachGames() {
-        Query query = session.getNamedQuery(Game.findAllScoreCountForEachGames);
+        Query query = session.createSQLQuery(Game.findAllScoreCountForEachGames);
         return query.list();
     }
 

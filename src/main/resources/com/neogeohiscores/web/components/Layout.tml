@@ -45,8 +45,9 @@
             <ul class="nav">
               <li><a href="/AddScore">Ajouter un score</a></li>
               <li><a href="/HallOfFame">Classement général</a></li>
-              <li><a href="/HallOf1cc">Classement 1 crédit</a></li>
-              <li><a href="http://www.twitter.com/neogeohiscores"><img src="http://twitter-badges.s3.amazonaws.com/twitter-c.png" alt="Follow neogeohiscores on Twitter" /></a></li>
+               <li><a href="/HallOf1cc">Classement 1 crédit</a></li>
+               <li><a href="/Games">Jeux</a></li>
+               <li><a href="http://www.twitter.com/neogeohiscores"><img src="http://twitter-badges.s3.amazonaws.com/twitter-c.png" alt="Follow neogeohiscores on Twitter" /></a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
