@@ -17,5 +17,5 @@ public class Index {
     Game getGameOfTheDay() {
         return gameService.getGameOfTheDay();
     }
-    
+
 }
