@@ -11,10 +11,7 @@ public class Index {
     @Inject
     private GameService gameService;
 
-    @Property
-    private Game gameOfTheDay;
-
-    Game getGameOfTheDay() {
+    public Game getGameOfTheDay() {
         return gameService.getGameOfTheDay();
     }
 

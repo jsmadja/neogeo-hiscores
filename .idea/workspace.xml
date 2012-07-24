@@ -5,9 +5,7 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10aa8c1e-354a-4324-949c-7b089259e762" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/PlayerView.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/PlayerView.tml" />
-    </list>
+    <list default="true" id="10aa8c1e-354a-4324-949c-7b089259e762" name="Default" comment="" />
     <ignored path="hiscores.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -152,10 +150,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayerView.tml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="PlayerView.tml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/PlayerView.tml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="0" selection-start="2537" selection-end="2537" vertical-scroll-proportion="0.7702407">
+            <state line="67" column="0" selection-start="2537" selection-end="2537" vertical-scroll-proportion="-41.875">
               <folding />
             </state>
           </provider>
@@ -173,10 +171,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Index.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Index.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/Index.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="0" selection-start="487" selection-end="487" vertical-scroll-proportion="0.0">
+            <state line="13" column="11" selection-start="371" selection-end="371" vertical-scroll-proportion="0.28066528">
               <folding />
             </state>
           </provider>
@@ -209,8 +207,8 @@
         <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/AchievementsView.tml" />
         <option value="$PROJECT_DIR$/src/main/webapp/css/bootstrap.css" />
         <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/TitleView.tml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/Index.java" />
         <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/PlayerView.tml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/Index.java" />
       </list>
     </option>
   </component>
@@ -893,16 +891,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/Index.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/PlayerView.tml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="0" selection-start="487" selection-end="487" vertical-scroll-proportion="0.0">
+        <state line="67" column="0" selection-start="2537" selection-end="2537" vertical-scroll-proportion="-41.875">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/PlayerView.tml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/Index.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="0" selection-start="2537" selection-end="2537" vertical-scroll-proportion="0.7702407">
+        <state line="13" column="11" selection-start="371" selection-end="371" vertical-scroll-proportion="0.28066528">
           <folding />
         </state>
       </provider>
