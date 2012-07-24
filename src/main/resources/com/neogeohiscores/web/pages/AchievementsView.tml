@@ -1,0 +1,20 @@
+<t:layout xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+    <div class="blue-bar big-bar center rounded-bar">${player.fullname}</div>
+    <t:grid source="achievements" exclude="progressInPercent" add="title,progress" row="achievement" rowsPerPage="1000" class="table table-bordered table-condensed hall">
+        <p:titleHeader></p:titleHeader>
+        <p:progressHeader></p:progressHeader>
+
+        <p:titleCell>
+            <t:pageLink page="titleView" context="[achievement.title,player]">${achievement.title.label}</t:pageLink>
+        </p:titleCell>
+        <p:progressCell>
+            <div id="progress_bar" class="ui-progress-bar ui-container transition" style="width:300px" align="left">
+                <div style="width:${achievement.progressInPercent}%;" class="ui-progress">
+                    <span style="display: block;" class="ui-label">
+                        <b class="value">${achievement.progressInPercent}%</b>
+                    </span>
+                </div>
+            </div>
+        </p:progressCell>
+    </t:grid>
+</t:layout>

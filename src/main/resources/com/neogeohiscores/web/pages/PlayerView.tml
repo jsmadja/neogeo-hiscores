@@ -65,4 +65,7 @@
 
         </t:grid>
     </div>
+
+    <t:pageLink page="achievementsView" context="player">Voir la progression</t:pageLink>
+
 </t:layout>

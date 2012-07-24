@@ -3,6 +3,7 @@ package com.neogeohiscores.web.pages;
 import com.neogeohiscores.entities.Game;
 import com.neogeohiscores.web.services.GameService;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.annotations.SetupRender;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 public class Index {
@@ -13,8 +14,8 @@ public class Index {
     @Property
     private Game gameOfTheDay;
 
-    void onActivate() {
-        this.gameOfTheDay = gameService.getGameOfTheDay();
+    Game getGameOfTheDay() {
+        return gameService.getGameOfTheDay();
     }
-
+    
 }
