@@ -3,8 +3,6 @@ package com.neogeohiscores.web.pages;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.apache.tapestry5.annotations.DiscardAfter;
 import org.apache.tapestry5.annotations.InjectComponent;
@@ -15,6 +13,7 @@ import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.services.Request;
 
 import com.google.common.io.ByteStreams;
@@ -33,13 +32,15 @@ import com.neogeohiscores.web.services.PlayerService;
 import com.neogeohiscores.web.services.ScoreService;
 import com.neogeohiscores.web.services.TitleRelockingService;
 import com.neogeohiscores.web.services.TitleUnlockingService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AddScore {
 
     private static final String ALL_CLEAR = "ALL CLEAR";
     public static final String DEFAULT_GAME = "3 Count Bout (3 minutes)";
     public static final long DEFAULT_POST_ID = 41930;
-    public static final Logger LOG = Logger.getLogger(AddScore.class.getName());
+    public static final Logger LOG = LoggerFactory.getLogger(AddScore.class);
 
     @Inject
     private ScoreService scoreService;
@@ -90,6 +91,10 @@ public class AddScore {
     @Property
     @Validate("required")
     private String password;
+
+    @Inject
+    @Symbol("bypass.ngf.authentication")
+    private boolean bypassNgfAuthentication;
 
     private static final int MAX_MESSAGE_LENGTH = 255;
 
@@ -149,7 +154,7 @@ public class AddScore {
             }
             NeoGeoFansClient ngfClient = neoGeoFansClientFactory.create();
             LOG.info("Tentative d authentification de "+fullname);
-            boolean isAuthenticated = ngfClient.authenticate(fullname, password);
+            boolean isAuthenticated = bypassNgfAuthentication ? true : ngfClient.authenticate(fullname, password);
             if (isAuthenticated) {
                 LOG.info("Authentification reussie");
                 acceptScore(ngfClient);
@@ -159,7 +164,7 @@ public class AddScore {
                 return this;
             }
         } catch (AuthenticationFailed ex) {
-            Logger.getLogger(AddScore.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.error("Impossible de s'authentifier sur NGF", ex);
             form.recordError(ex.getMessage());
             return this;
         }
@@ -177,6 +182,7 @@ public class AddScore {
        titleUnlockingService.searchUnlockedTitlesFor(player);
         LOG.info("Recherche de titres à rebloquer");
         titleRelockingService.relockTitles(scoreToStore);
+        LOG.info("Score enregistré");
     }
 
     private Score storeScore(NeoGeoFansClient ngfClient, Player player) {

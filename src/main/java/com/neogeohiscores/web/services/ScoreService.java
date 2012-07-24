@@ -156,7 +156,7 @@ public class ScoreService extends GenericService<Score> {
                 return rank;
             }
         }
-        return 0;
+        return scoreList.size()+1;
     }
 
     public Score store(Score score) {
