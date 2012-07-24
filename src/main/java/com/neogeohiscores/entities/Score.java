@@ -36,7 +36,6 @@ import org.hibernate.annotations.Type;
 
 import com.google.common.base.Objects;
 import com.neogeohiscores.common.ScoreConverter;
-import com.sun.syndication.feed.synd.SyndEntry;
 
 @Entity
 @Table(name = "SCORE")
@@ -50,7 +49,7 @@ import com.sun.syndication.feed.synd.SyndEntry;
         @NamedQuery(name = "score_findAllOrderByDateDesc", query = "SELECT s FROM Score s ORDER BY s.creationDate DESC"), //
         @NamedQuery(name = "score_getNumScoredGamesByGenres", query = "SELECT COUNT(DISTINCT s.game) FROM Score s WHERE s.player = :player AND s.game.genre IN :genres") //
 })
-public class Score implements Serializable, Rssable {
+public class Score implements Serializable {
 
     private static final long serialVersionUID = -5889253204083818192L;
 
@@ -260,13 +259,7 @@ public class Score implements Serializable, Rssable {
         return SOCCER_WITH_GOAL_AVERAGE_PATTERN.matcher(value).matches();
     }
 
-    @Override
-    public SyndEntry asEntry() {
-        // TODO RSS
-        return null;
-    }
-
-    public String getPlayerName() {
+   public String getPlayerName() {
         return player.getFullname();
     }
 

@@ -32,11 +32,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.google.common.base.Objects;
-import com.sun.syndication.feed.synd.SyndEntry;
 
 @Entity
 @NamedQueries({ @NamedQuery(name = "challenge_findAllActiveChallenges", query = "SELECT c FROM Challenge c WHERE c.finishDate > :finishDate ORDER BY c.finishDate ASC") })
-public class Challenge implements Rssable {
+public class Challenge {
 
     @Id
     @GeneratedValue
@@ -151,17 +150,6 @@ public class Challenge implements Rssable {
 
     public Date getCreationDate() {
         return creationDate;
-    }
-
-    @Override
-    public SyndEntry asEntry() {
-        String player1Name = getPlayer1().getFullname();
-        String player2Name = getPlayer2().getFullname();
-        String gameName = getGame().getName();
-        String title = player1Name + " vs " + player2Name + " on " + gameName;
-        String link = "http://www.neogeo-hiscores.com";
-        Date date = getCreationDate();
-        return Entries.createEntry(title, link, date);
     }
 
     public String getPlayer1Name() {

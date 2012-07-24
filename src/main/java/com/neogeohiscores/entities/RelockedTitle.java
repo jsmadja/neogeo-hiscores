@@ -23,14 +23,13 @@ import java.util.Date;
 import javax.persistence.*;
 
 import com.google.common.base.Objects;
-import com.sun.syndication.feed.synd.SyndEntry;
 
 @Entity
 @Table(name = "RELOCKED_TITLE")
 @NamedQueries({//
 @NamedQuery(name = "findLastRelockedTitlesOrderByDateDesc", query = "SELECT rt FROM RelockedTitle rt ORDER BY rt.relockDate DESC") //
 })
-public class RelockedTitle implements Rssable {
+public class RelockedTitle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -105,17 +104,6 @@ public class RelockedTitle implements Rssable {
 
     public Date getRelockDate() {
         return relockDate;
-    }
-
-    @Override
-    public SyndEntry asEntry() {
-        String titleLabel = getTitle().getLabel();
-        String playerName = getPlayer().getFullname();
-        String title = playerName;
-        title += " lost the title " + titleLabel;
-        String link = "http://www.neogeo-hiscores.com/faces/player/view.xhtml?fullname=" + playerName;
-        Date date = getRelockDate();
-        return Entries.createEntry(title, link, date);
     }
 
     public Game getGame() {

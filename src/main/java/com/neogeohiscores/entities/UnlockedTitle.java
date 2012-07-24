@@ -24,14 +24,13 @@ import java.util.Date;
 import javax.persistence.*;
 
 import com.google.common.base.Objects;
-import com.sun.syndication.feed.synd.SyndEntry;
 
 @Entity
 @Table(name = "UNLOCKED_TITLE")
 @NamedQueries({//
 @NamedQuery(name = "findLastUnlockedTitlesOrderByDateDesc", query = "SELECT ut FROM UnlockedTitle ut ORDER BY ut.unlockDate DESC") //
 })
-public class UnlockedTitle implements Serializable, Rssable {
+public class UnlockedTitle implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -109,17 +108,6 @@ public class UnlockedTitle implements Serializable, Rssable {
                 add("Player", player).//
                 add("Unlock date", unlockDate).//
                 toString();
-    }
-
-    @Override
-    public SyndEntry asEntry() {
-        String titleLabel = getTitle().getLabel();
-        String playerName = getPlayer().getFullname();
-        String title = playerName;
-        title += " unlocked title " + titleLabel;
-        String link = "http://www.neogeo-hiscores.com/faces/player/view.xhtml?fullname=" + playerName;
-        Date date = getUnlockDate();
-        return Entries.createEntry(title, link, date);
     }
 
     public String getPlayerName() {
