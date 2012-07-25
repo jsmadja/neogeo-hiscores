@@ -2,7 +2,7 @@ package com.neogeohiscores.web.pages;
 
 import com.neogeohiscores.entities.Achievement;
 import com.neogeohiscores.entities.Player;
-import com.neogeohiscores.web.services.PlayerService;
+import com.neogeohiscores.web.services.TitleBoard;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -26,12 +26,11 @@ public class AchievementsView {
     }
 
     @Inject
-    private PlayerService playerService;
-
+    private TitleBoard titleBoard;
 
     public List<Achievement> getAchievements() {
         List<Achievement> achievements = new ArrayList<Achievement>();
-        achievements.addAll(playerService.getAchievementsFor(player));
+        achievements.addAll(titleBoard.getAchievementsFor(player));
         Collections.sort(achievements, new Comparator<Achievement>() {
             @Override
             public int compare(Achievement a1, Achievement a2) {

@@ -16,20 +16,18 @@
 
 package com.neogeohiscores.entities;
 
-import static com.google.common.base.Objects.equal;
+import com.google.common.base.Objects;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.*;
-
-import com.google.common.base.Objects;
+import static com.google.common.base.Objects.equal;
 
 @Entity
 @Table(name = "UNLOCKED_TITLE")
-@NamedQueries({//
-@NamedQuery(name = "findLastUnlockedTitlesOrderByDateDesc", query = "SELECT ut FROM UnlockedTitle ut ORDER BY ut.unlockDate DESC") //
-})
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class UnlockedTitle implements Serializable {
 
     @Id

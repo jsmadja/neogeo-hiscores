@@ -1,5 +1,5 @@
 <div xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd">
-	<t:loop source="items" value="item">
-		<t:timelineItem item="item" />
-	</t:loop>
+    <t:loop source="items" value="item">
+        <t:timelineItem item="item"/>
+    </t:loop>
 </div>

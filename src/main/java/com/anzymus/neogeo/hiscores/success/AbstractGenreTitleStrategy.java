@@ -16,13 +16,13 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.neogeohiscores.common.IntegerToRank;
 import com.neogeohiscores.entities.Achievement;
 import com.neogeohiscores.entities.Player;
 import com.neogeohiscores.entities.Scores;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractGenreTitleStrategy extends AbstractTitleStrategy {
 
@@ -30,7 +30,7 @@ public abstract class AbstractGenreTitleStrategy extends AbstractTitleStrategy {
 
     @Override
     public boolean isUnlockable(Player player) {
-        List<Scores> scoresByGame = titleService.getScoresByGameGenre(getGenre());
+        List<Scores> scoresByGame = scoreBoard.getScoresByGameGenre(getGenre());
         if (scoresByGame.isEmpty()) {
             return false;
         }
@@ -55,7 +55,7 @@ public abstract class AbstractGenreTitleStrategy extends AbstractTitleStrategy {
 
     @Override
     public Achievement getAchievementFor(Player player) {
-        List<Scores> scoresByGame = titleService.getScoresByGameGenre(getGenre());
+        List<Scores> scoresByGame = scoreBoard.getScoresByGameGenre(getGenre());
         if (scoresByGame.isEmpty()) {
             Achievement achievement = new Achievement(getTitle(), 0);
             Step step = new Step("Have a rank Between 1st and 3rd place in " + getGenre() + " games", false);

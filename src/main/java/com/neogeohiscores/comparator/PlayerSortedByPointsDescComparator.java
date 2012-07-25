@@ -16,9 +16,9 @@
 
 package com.neogeohiscores.comparator;
 
-import java.util.Comparator;
-
 import com.neogeohiscores.entities.Player;
+
+import java.util.Comparator;
 
 public class PlayerSortedByPointsDescComparator implements Comparator<Player> {
 

@@ -1,8 +1,8 @@
 package com.neogeohiscores.common;
 
-import java.util.List;
-
 import com.neogeohiscores.entities.Game;
+
+import java.util.List;
 
 public class GameItem {
 

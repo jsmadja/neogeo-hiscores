@@ -25,13 +25,13 @@ public class TopTierTitleStrategy extends AbstractTitleStrategy {
 
     @Override
     public boolean isUnlockable(Player player) {
-        double averageScore = titleService.getAverageScoreFor(player);
+        double averageScore = player.getAverageScoreFor();
         return averageScore >= 7;
     }
 
     @Override
     public Achievement getAchievementFor(Player player) {
-        double averageScore = titleService.getAverageScoreFor(player);
+        double averageScore = player.getAverageScoreFor();
         boolean completed = averageScore >= MINIMUM_SCORE;
         if (averageScore > MINIMUM_SCORE) {
             averageScore = MINIMUM_SCORE;

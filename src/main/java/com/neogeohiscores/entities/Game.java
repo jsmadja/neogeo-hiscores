@@ -16,38 +16,25 @@
 
 package com.neogeohiscores.entities;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
-
+import com.google.common.base.Objects;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
-import com.google.common.base.Objects;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "GAME", uniqueConstraints = @UniqueConstraint(columnNames = { "NAME" }))
+@Table(name = "GAME", uniqueConstraints = @UniqueConstraint(columnNames = {"NAME"}))
 @NamedQueries({ //
-@NamedQuery(name = "game_findAll", query = "SELECT g FROM Game g ORDER BY g.name ASC"), //
         @NamedQuery(name = "game_findByName", query = "SELECT g FROM Game g WHERE g.name = :name"), //
         @NamedQuery(name = "game_findGamesByGenre", query = "SELECT g FROM Game g WHERE g.genre = :genre") //
 })
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Game implements Comparable<Game>, Serializable {
-
-    public static final String findAllPlayedGames = "SELECT * FROM GAME WHERE id IN (SELECT DISTINCT game_id FROM SCORE) ORDER BY name";
-    public static final String findAllGamesPlayedBy = "SELECT * FROM GAME WHERE id IN (SELECT DISTINCT game_id FROM SCORE WHERE player_id = ?) ORDER BY name";
-    public static final String findAllGamesOneCreditedBy = "SELECT * FROM GAME WHERE id IN (SELECT DISTINCT game_id FROM SCORE WHERE player_id = ? AND all_clear = 1) ORDER BY name";
-    public static final String getNumberOfGames = "SELECT COUNT(id) FROM GAME";
-    public static final String findAllScoreCountForEachGames = "SELECT g.id, g.name, COUNT(s.id), g.genre FROM SCORE s, GAME g WHERE s.game_id = g.id GROUP BY g.id ORDER BY g.name";
-    public static final String findAllUnplayedGames = "SELECT * FROM GAME WHERE id NOT IN (SELECT DISTINCT game_id FROM SCORE) ORDER BY name";
-    public static final String findAllPlayedGamesThisMonth = "SELECT * FROM GAME WHERE id IN (SELECT DISTINCT game_id FROM SCORE WHERE CREATIONDATE >= ? AND CREATIONDATE <= ?)";
 
     private static final long serialVersionUID = -8252960983109413218L;
     public static final Game EMPTY = new Game("");
@@ -73,6 +60,9 @@ public class Game implements Comparable<Game>, Serializable {
     @Column(columnDefinition = "TINYINT")
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean improvable;
+
+    @OneToMany(mappedBy = "game")
+    private List<Score> scores = new ArrayList<Score>();
 
     public Game() {
     }
@@ -157,4 +147,34 @@ public class Game implements Comparable<Game>, Serializable {
         return genre;
     }
 
+    // used by Games.tml
+    public int getNumScorers() {
+        Set<Player> players = new HashSet<Player>();
+        for (Score score : scores) {
+            players.add(score.getPlayer());
+        }
+        return players.size();
+    }
+
+    public Scores getScores() {
+        Scores scores = new Scores();
+        for (Score score : this.scores) {
+            scores.add(score);
+        }
+        return scores;
+    }
+
+    public Scores getScores(String level) {
+        Scores scores = new Scores();
+        for (Score score : this.scores) {
+            if (score.hasLevel(level)) {
+                scores.add(score);
+            }
+        }
+        return scores;
+    }
+
+    public boolean hasName(String name) {
+        return this.name.equalsIgnoreCase(name);
+    }
 }

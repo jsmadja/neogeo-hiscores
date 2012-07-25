@@ -19,7 +19,9 @@
                 <t:pageLink page="playerView" context="score.score.player">${score.score.player}</t:pageLink>
             </p:playerCell>
 
-            <p:scoreCell><t:pageLink page="AddScore" class="score" context="score.score">${score.score.formatted}</t:pageLink></p:scoreCell>
+            <p:scoreCell>
+                <t:pageLink page="AddScore" class="score" context="score.score">${score.score.formatted}</t:pageLink>
+            </p:scoreCell>
 
             <p:pictureUrlHeader></p:pictureUrlHeader>
             <p:pictureUrlCell>

@@ -1,41 +1,23 @@
 package com.neogeohiscores.web.pages;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
-
+import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
+import com.neogeohiscores.common.*;
+import com.neogeohiscores.entities.Game;
+import com.neogeohiscores.entities.Player;
+import com.neogeohiscores.entities.Scores;
+import com.neogeohiscores.entities.Title;
+import com.neogeohiscores.web.services.TitleBoard;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SetupRender;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
-import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
-import com.neogeohiscores.common.Levels;
-import com.neogeohiscores.common.Players;
-import com.neogeohiscores.common.ScoreItem;
-import com.neogeohiscores.common.ScoreItems;
-import com.neogeohiscores.common.TitleItem;
-import com.neogeohiscores.entities.Game;
-import com.neogeohiscores.entities.Player;
-import com.neogeohiscores.entities.Scores;
-import com.neogeohiscores.entities.Title;
-import com.neogeohiscores.web.services.GameService;
-import com.neogeohiscores.web.services.ScoreService;
-import com.neogeohiscores.web.services.TitleService;
+import java.util.*;
 
 public class PlayerView {
 
     @Inject
-    private GameService gameService;
-
-    @Inject
-    private TitleService titleService;
-
-    @Inject
-    private ScoreService scoreService;
+    private TitleBoard titleBoard;
 
     @Persist
     @Property
@@ -65,7 +47,7 @@ public class PlayerView {
 
     private void loadScoreItems() {
         scoreItems = new ArrayList<ScoreItem>();
-        for (Game game : gameService.findAllGamesPlayedBy(player)) {
+        for (Game game : player.getPlayedGames()) {
             extractScoreItemsFromGame(scoreItems, game);
         }
         ScoreItems.discoverImprovableScores(scoreItems);
@@ -73,7 +55,7 @@ public class PlayerView {
 
     private void loadTitleItems() {
         titleItems = new ArrayList<TitleItem>();
-        Map<Title, TitleUnlockingStrategy> strategies = titleService.findAllStrategies();
+        Map<Title, TitleUnlockingStrategy> strategies = titleBoard.findAllStrategies();
         Set<Title> allTitles = strategies.keySet();
         Set<Title> titles = new TreeSet<Title>(allTitles);
         for (Title title : titles) {
@@ -101,7 +83,7 @@ public class PlayerView {
     }
 
     private void extractScoreItemsFromGame(List<ScoreItem> scoreItems, Game game) {
-        Scores scores = scoreService.findAllByGame(game);
+        Scores scores = game.getScores();
         for (String level : Levels.list()) {
             Players.extractScoreItemsFromLevels(scoreItems, game, scores, level, player.getFullname());
         }

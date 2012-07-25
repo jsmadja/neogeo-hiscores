@@ -16,53 +16,36 @@
 
 package com.neogeohiscores.web.services;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import org.apache.tapestry5.ioc.annotations.Inject;
-
 import com.neogeohiscores.comparator.TimelineSortedByDateDescComparator;
-import com.neogeohiscores.entities.Challenge;
 import com.neogeohiscores.entities.RelockedTitle;
 import com.neogeohiscores.entities.Score;
-import com.neogeohiscores.entities.Timeline;
 import com.neogeohiscores.entities.TimelineItem;
 import com.neogeohiscores.entities.UnlockedTitle;
+import org.apache.tapestry5.ioc.annotations.Inject;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class TimelineService {
 
     @Inject
-    ScoreService scoreService;
+    private ScoreBoard scoreBoard;
 
     @Inject
-    TitleUnlockingService titleUnlockingService;
+    private TitleBoard titleBoard;
 
-    @Inject
-    ChallengeService challengeService;
-
-    public Timeline createTimeline() {
-        Timeline timeline = new Timeline();
+    public List<TimelineItem> createTimeline() {
+        List<TimelineItem> timeline = new ArrayList<TimelineItem>();
         addLastScores(timeline);
         addLastUnlockedTitles(timeline);
         addLastRelockedTitles(timeline);
-        addLastChallenges(timeline);
-        sortItemsByDateDesc(timeline);
+        Collections.sort(timeline, new TimelineSortedByDateDescComparator());
         return timeline;
     }
 
-    private void addLastChallenges(Timeline timeline) {
-        Collection<Challenge> challenges = challengeService.findAllActiveChallenges();
-        for (Challenge challenge : challenges) {
-            TimelineItem item = new TimelineItem(challenge);
-            item.setPictureUrl("myimages/challenge.png");
-            timeline.getItems().add(item);
-        }
-    }
-
-    private void addLastScores(Timeline timeline) {
-        List<Score> scores = scoreService.findLastScoresOrderByDateDesc();
+    private void addLastScores(List<TimelineItem> timeline) {
+        List<Score> scores = scoreBoard.findLastScoresOrderByDateDesc();
         for (Score score : scores) {
             TimelineItem item = new TimelineItem(score);
             final String pictureUrl = score.getPictureUrl();
@@ -77,33 +60,27 @@ public class TimelineService {
             } else {
                 item.setAvatarUrl("http://www.neogeofans.com/leforum/image.php?u=" + avatarId);
             }
-            item.setRank(scoreService.getRankOf(score));
-            timeline.getItems().add(item);
+            item.setRank(score.getRank());
+            timeline.add(item);
         }
     }
 
-    private void addLastUnlockedTitles(Timeline timeline) {
-        List<UnlockedTitle> unlockedTitles = titleUnlockingService.findLastUnlockedTitlesOrderByDateDesc();
+    private void addLastUnlockedTitles(List<TimelineItem> timeline) {
+        List<UnlockedTitle> unlockedTitles = titleBoard.findLastUnlockedTitlesOrderByDateDesc();
         for (UnlockedTitle unlockTitle : unlockedTitles) {
             TimelineItem item = new TimelineItem(unlockTitle);
             item.setPictureUrl("myimages/success.png");
-            timeline.getItems().add(item);
+            timeline.add(item);
         }
     }
 
-    private void addLastRelockedTitles(Timeline timeline) {
-        List<RelockedTitle> relockedTitles = titleUnlockingService.findLastRelockedTitlesOrderByDateDesc();
+    private void addLastRelockedTitles(List<TimelineItem> timeline) {
+        List<RelockedTitle> relockedTitles = titleBoard.findLastRelockedTitlesOrderByDateDesc();
         for (RelockedTitle relockTitle : relockedTitles) {
             TimelineItem item = new TimelineItem(relockTitle);
             item.setPictureUrl("myimages/relock_title.png");
-            timeline.getItems().add(item);
+            timeline.add(item);
         }
     }
-
-    private void sortItemsByDateDesc(Timeline timeline) {
-        Collections.sort(timeline.getItems(), timelineSortedByDateDescComparator);
-    }
-
-    private static final Comparator<TimelineItem> timelineSortedByDateDescComparator = new TimelineSortedByDateDescComparator();
 
 }

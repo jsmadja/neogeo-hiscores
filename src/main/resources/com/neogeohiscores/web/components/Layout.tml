@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
-  <head>
-    <meta charset="utf-8" />
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd">
+<head>
+    <meta charset="utf-8"/>
     <title>neogeo-hiscores</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
 
     <!-- Le styles -->
-    <link href="/css/bootstrap.css" rel="stylesheet" />
+    <link href="/css/bootstrap.css" rel="stylesheet"/>
     <style>
-      body {
-      	color:white;
-      	background-color:black;
-      	padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
+        body {
+            color: white;
+            background-color: black;
+            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        }
     </style>
-    <link href="/css/bootstrap-responsive.css" rel="stylesheet" />
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet"/>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -24,62 +24,67 @@
     <![endif]-->
 
     <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="../assets/ico/favicon.ico" />
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../ico/apple-touch-icon-72-precomposed.png" />
-    <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png" />
-  </head>
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico"/>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../ico/apple-touch-icon-72-precomposed.png"/>
+    <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png"/>
+</head>
 
-  <body>
-    <div class="navbar navbar-fixed-top" style="margin-left:auto;margin-right:auto;width:800px">
-      <div class="navbar-inner">
+<body>
+<div class="navbar navbar-fixed-top" style="margin-left:auto;margin-right:auto;width:800px">
+    <div class="navbar-inner">
         <div class="container" style="margin-left:auto;margin-right:auto">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="/"><span class="title_neogeo-mini" style="margin-right:10px">NEO·GEO</span><span class="title_hiscore-mini">hiscores</span>.com</a>
-		  <div class="nav-collapse">
-            <ul class="nav">
-              <li><a href="/AddScore">Ajouter un score</a></li>
-              <li><a href="/HallOfFame">Classement général</a></li>
-               <li><a href="/HallOf1cc">Classement 1 crédit</a></li>
-               <li><a href="/Games">Jeux</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="/"><span class="title_neogeo-mini" style="margin-right:10px">NEO·GEO</span><span
+                    class="title_hiscore-mini">hiscores</span>.com</a>
+
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <li><a href="/AddScore">Ajouter un score</a></li>
+                    <li><a href="/HallOfFame">Classement général</a></li>
+                    <li><a href="/HallOf1cc">Classement 1 crédit</a></li>
+                    <li><a href="/Games">Jeux</a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
         </div>
-      </div>
     </div>
+</div>
 
-    <div class="container">
-        <t:body />
-    </div> <!-- /container -->
+<div class="container">
+    <t:body/>
+</div>
+<!-- /container -->
 
-	<div id="footer">	
-		<p style="color: rgb(118, 118, 118); font-size: 8pt;">NEO·GEO-hiscores version ${version} · <a href="http://www.neogeofans.com/leforum/showthread.php?t=41884">Signaler un problème</a>
-                    · 2012
-        </p>
-	</div>
-    
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/jquery.js"></script>
-    <script src="/js/bootstrap-transition.js"></script>
-    <script src="/js/bootstrap-alert.js"></script>
-    <script src="/js/bootstrap-modal.js"></script>
-    <script src="/js/bootstrap-dropdown.js"></script>
-    <script src="/js/bootstrap-scrollspy.js"></script>
-    <script src="/js/bootstrap-tab.js"></script>
-    <script src="/js/bootstrap-tooltip.js"></script>
-    <script src="/js/bootstrap-popover.js"></script>
-    <script src="/js/bootstrap-button.js"></script>
-    <script src="/js/bootstrap-collapse.js"></script>
-    <script src="/js/bootstrap-carousel.js"></script>
-    <script src="/js/bootstrap-typeahead.js"></script>
+<div id="footer">
+    <p style="color: rgb(118, 118, 118); font-size: 8pt;">NEO·GEO-hiscores version ${version} · <a
+            href="http://www.neogeofans.com/leforum/showthread.php?t=41884">Signaler un problème</a>
+        · 2012
+    </p>
+</div>
 
-  </body>
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap-transition.js"></script>
+<script src="/js/bootstrap-alert.js"></script>
+<script src="/js/bootstrap-modal.js"></script>
+<script src="/js/bootstrap-dropdown.js"></script>
+<script src="/js/bootstrap-scrollspy.js"></script>
+<script src="/js/bootstrap-tab.js"></script>
+<script src="/js/bootstrap-tooltip.js"></script>
+<script src="/js/bootstrap-popover.js"></script>
+<script src="/js/bootstrap-button.js"></script>
+<script src="/js/bootstrap-collapse.js"></script>
+<script src="/js/bootstrap-carousel.js"></script>
+<script src="/js/bootstrap-typeahead.js"></script>
+
+</body>
 </html>
 

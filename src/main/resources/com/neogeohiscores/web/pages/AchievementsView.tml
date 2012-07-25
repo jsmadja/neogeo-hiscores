@@ -1,6 +1,7 @@
 <t:layout xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
     <div class="blue-bar big-bar center rounded-bar">${player.fullname}</div>
-    <t:grid source="achievements" exclude="progressInPercent" add="title,progress" row="achievement" rowsPerPage="1000" class="table table-bordered table-condensed hall">
+    <t:grid source="achievements" exclude="progressInPercent" add="title,progress" row="achievement" rowsPerPage="1000"
+            class="table table-bordered table-condensed hall">
         <p:titleHeader></p:titleHeader>
         <p:progressHeader></p:progressHeader>
 

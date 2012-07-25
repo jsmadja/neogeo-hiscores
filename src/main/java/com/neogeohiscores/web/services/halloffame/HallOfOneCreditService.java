@@ -16,24 +16,19 @@
 
 package com.neogeohiscores.web.services.halloffame;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.neogeohiscores.entities.Player;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import com.neogeohiscores.entities.Player;
-import com.neogeohiscores.web.services.PlayerService;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HallOfOneCreditService {
 
     @Inject
     Session em;
-
-    private @Inject
-    PlayerService playerService;
 
     private static final String ONE_CREDIT_QUERY = "SELECT s.PLAYER_ID, COUNT(DISTINCT s.GAME_ID) FROM SCORE s, PLAYER p WHERE s.ALL_CLEAR = 1 AND s.PLAYER_ID=p.ID AND s.LEVEL_LABEL = \"MVS\" GROUP BY PLAYER_ID ORDER BY COUNT(DISTINCT s.GAME_ID) DESC, p.FULLNAME ASC";
 
@@ -44,7 +39,7 @@ public class HallOfOneCreditService {
         for (Object[] result : results) {
             Long playerId = ((BigInteger) result[0]).longValue();
             Long points = ((BigInteger) result[1]).longValue();
-            Player player = playerService.findById(playerId);
+            Player player = (Player) em.load(Player.class, playerId);
             player.setPoints(points.intValue());
             player.setContribution(points.intValue());
             players.add(player);

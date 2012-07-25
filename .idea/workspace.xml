@@ -5,7 +5,219 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10aa8c1e-354a-4324-949c-7b089259e762" name="Default" comment="" />
+    <list default="true" id="10aa8c1e-354a-4324-949c-7b089259e762" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/GameRoom.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/ScoreBoard.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/TitleBoard.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Challenge.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Timeline.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/ChallengeService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/Dates.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/GameService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/GenericService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/PlayerService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/Queries.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/ScoreService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/TitleRelockingService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/TitleService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/TitleUnlockingService.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hiscores.iml" afterPath="$PROJECT_DIR$/hiscores.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/clients/Messages.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/clients/Messages.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/clients/NeoGeoFansClient.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/clients/NeoGeoFansClient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/AchievementsBean.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/AchievementsBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/ChallengeBean.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/ChallengeBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/ChallengeableGame.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/ChallengeableGame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/GameBean.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/GameBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/GameItem.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/GameItem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/GamesBean.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/GamesBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/HallOfFameBean.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/HallOfFameBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/HallOfOneCreditBean.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/HallOfOneCreditBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/LevelItem.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/LevelItem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/MonthlyContestBean.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/MonthlyContestBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/NewChallengeBean.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/NewChallengeBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/PlayerBean.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/PlayerBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/PlayerOneCreditBean.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/PlayerOneCreditBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/Players.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/Players.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/ScoreBean.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/ScoreBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/ScoreItem.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/ScoreItem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/ScoreItems.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/ScoreItems.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/StatsBean.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/StatsBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/TimelineBean.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/TimelineBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/TitleBean.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/controller/TitleBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/converter/DateConverter.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/converter/DateConverter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/converter/DateDDMMYYYYConverter.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/converter/DateDDMMYYYYConverter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/converter/DateMMDDYYConverter.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/converter/DateMMDDYYConverter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/converter/ScoreConverter.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/converter/ScoreConverter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/webservice/AdministrationWebService.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/webservice/AdministrationWebService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/webservice/RssResource.java" afterPath="$PROJECT_DIR$/jee/src/main/java/com/anzymus/neogeo/hiscores/webservice/RssResource.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/resources/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/jee/src/main/resources/META-INF/persistence.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/WEB-INF/faces-config.xml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/WEB-INF/faces-config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/WEB-INF/glassfish-web.xml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/WEB-INF/glassfish-web.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/WEB-INF/web.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/achievements/view.xhtml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/achievements/view.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/challenge/create.xhtml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/challenge/create.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/challenge/create_new_challenge.xhtml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/challenge/create_new_challenge.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/credits.xhtml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/credits.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/game/view.xhtml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/game/view.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/games.xhtml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/games.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/hallOf1cc.xhtml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/hallOf1cc.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/hallOfFame.xhtml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/hallOfFame.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/index.xhtml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/index.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/monthly-contest.xhtml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/monthly-contest.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/mystyle.css" afterPath="$PROJECT_DIR$/jee/src/main/webapp/mystyle.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/player/view.xhtml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/player/view.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/player/viewOneCreditWall.xhtml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/player/viewOneCreditWall.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/rules.xhtml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/rules.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/score/create.xhtml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/score/create.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/score/edit.xhtml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/score/edit.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/stats.xhtml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/stats.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/template.xhtml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/template.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/title/view.xhtml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/title/view.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/main/webapp/unplayed-games.xhtml" afterPath="$PROJECT_DIR$/jee/src/main/webapp/unplayed-games.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/clients/MessagesTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/clients/MessagesTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/clients/NeoGeoFansClientIT.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/clients/NeoGeoFansClientIT.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/clients/NeoGeoFansClientTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/clients/NeoGeoFansClientTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/common/IntegerToRankTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/common/IntegerToRankTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/common/imagefetcher/HostingPicsIT.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/common/imagefetcher/HostingPicsIT.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/common/imagefetcher/HostingPicsTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/common/imagefetcher/HostingPicsTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/common/imagefetcher/ImageFetcherTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/common/imagefetcher/ImageFetcherTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/common/imagefetcher/ImageShackTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/common/imagefetcher/ImageShackTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/common/imagefetcher/PostImageTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/common/imagefetcher/PostImageTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/comparator/PlayerItemsSortedWithAverageComparatorTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/comparator/PlayerItemsSortedWithAverageComparatorTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/comparator/PlayerSortedByPointsDescComparatorTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/comparator/PlayerSortedByPointsDescComparatorTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/comparator/ScoreComparatorTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/comparator/ScoreComparatorTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/comparator/ScoreSortedByValueDescComparatorTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/comparator/ScoreSortedByValueDescComparatorTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/comparator/TimelineSortedByDateDescComparatorTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/comparator/TimelineSortedByDateDescComparatorTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/controller/GameBeanTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/controller/GameBeanTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/controller/GamesBeanTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/controller/GamesBeanTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/controller/HallOfFameBeanTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/controller/HallOfFameBeanTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/controller/MonthlyContestBeanTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/controller/MonthlyContestBeanTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/controller/PlayerBeanTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/controller/PlayerBeanTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/controller/ScoreBeanTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/controller/ScoreBeanTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/controller/ScoreItemsTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/controller/ScoreItemsTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/controller/StatsBeanTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/controller/StatsBeanTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/controller/TimelineBeanTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/controller/TimelineBeanTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/converter/DateConverterTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/converter/DateConverterTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/converter/DateDDMMYYYYConverterTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/converter/DateDDMMYYYYConverterTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/converter/DateMMDDYYConverterTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/converter/DateMMDDYYConverterTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/converter/ScoreConverterTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/converter/ScoreConverterTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/domain/GameTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/domain/GameTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/domain/PlayerTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/domain/PlayerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/domain/ScoreTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/domain/ScoreTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/domain/ScoresTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/domain/ScoresTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/domain/SoccerScoreTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/domain/SoccerScoreTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/domain/SoccerWithGoalAverageScoreTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/domain/SoccerWithGoalAverageScoreTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/domain/TitleTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/domain/TitleTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/AbstractTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/AbstractTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/ChallengeServiceIT.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/ChallengeServiceIT.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/DatesTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/DatesTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/GameServiceIT.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/GameServiceIT.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/PlayerServiceIT.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/PlayerServiceIT.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/QueriesTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/QueriesTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/RssServiceTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/RssServiceTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/ScoreServiceIT.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/ScoreServiceIT.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/TimelineServiceTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/TimelineServiceTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/TitleRelockingServiceIT.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/TitleRelockingServiceIT.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/TitleServiceIT.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/TitleServiceIT.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/TitleServiceTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/TitleServiceTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/TitleUnlockingServiceIT.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/TitleUnlockingServiceIT.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/halloffame/HallOfFameServiceTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/halloffame/HallOfFameServiceTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/halloffame/NgfPointCalculatorTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/halloffame/NgfPointCalculatorTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/rss/TimelineRssTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/service/rss/TimelineRssTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/AbstractAllClearerTitleStrategyTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/AbstractAllClearerTitleStrategyTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/AbstractGenreTitleStrategyTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/AbstractGenreTitleStrategyTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/AbstractMegaShockTitleStrategyTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/AbstractMegaShockTitleStrategyTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/AllClearerTitleStrategyTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/AllClearerTitleStrategyTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/FirstScoreTitleStrategyTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/FirstScoreTitleStrategyTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/GodTierTitleStrategyTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/GodTierTitleStrategyTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/LowTierTitleStrategyTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/LowTierTitleStrategyTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/MegaShock10TitleStrategyTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/MegaShock10TitleStrategyTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/MegaShock20TitleStrategyTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/MegaShock20TitleStrategyTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/MiddleTierTitleStrategyTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/MiddleTierTitleStrategyTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/TopTierTitleStrategyTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/TopTierTitleStrategyTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/WorldHeroTitleStrategyTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/success/WorldHeroTitleStrategyTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/webservice/AdministrationWebServiceIT.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/webservice/AdministrationWebServiceIT.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/webservice/RssResourceTest.java" afterPath="$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/webservice/RssResourceTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/resources/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/jee/src/test/resources/META-INF/persistence.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/resources/hosting-pics/page.html" afterPath="$PROJECT_DIR$/jee/src/test/resources/hosting-pics/page.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/resources/imageshack/page.html" afterPath="$PROJECT_DIR$/jee/src/test/resources/imageshack/page.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/resources/ngf/clientscript/vbulletin_global.js" afterPath="$PROJECT_DIR$/jee/src/test/resources/ngf/clientscript/vbulletin_global.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/resources/ngf/clientscript/vbulletin_md5.js" afterPath="$PROJECT_DIR$/jee/src/test/resources/ngf/clientscript/vbulletin_md5.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/resources/ngf/clientscript/vbulletin_menu.js" afterPath="$PROJECT_DIR$/jee/src/test/resources/ngf/clientscript/vbulletin_menu.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/resources/ngf/clientscript/vbulletin_read_marker.js" afterPath="$PROJECT_DIR$/jee/src/test/resources/ngf/clientscript/vbulletin_read_marker.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/resources/ngf/login-page.html" afterPath="$PROJECT_DIR$/jee/src/test/resources/ngf/login-page.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/resources/ngf/post-login.html" afterPath="$PROJECT_DIR$/jee/src/test/resources/ngf/post-login.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jee/src/test/resources/post-image/page.html" afterPath="$PROJECT_DIR$/jee/src/test/resources/post-image/page.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AbstractGenreTitleStrategy.java" afterPath="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AbstractGenreTitleStrategy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AbstractMinimumAllClearTitleStrategy.java" afterPath="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AbstractMinimumAllClearTitleStrategy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AbstractMinimumScoreTitleStrategy.java" afterPath="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AbstractMinimumScoreTitleStrategy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AbstractTitleStrategy.java" afterPath="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AbstractTitleStrategy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AbstractUnlockingByScoringInManyGamesStrategy.java" afterPath="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AbstractUnlockingByScoringInManyGamesStrategy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/GodTierTitleStrategy.java" afterPath="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/GodTierTitleStrategy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/LowTierTitleStrategy.java" afterPath="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/LowTierTitleStrategy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/MiddleTierTitleStrategy.java" afterPath="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/MiddleTierTitleStrategy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/TitleUnlockingStrategy.java" afterPath="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/TitleUnlockingStrategy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/TopTierTitleStrategy.java" afterPath="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/TopTierTitleStrategy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/common/GameItem.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/common/GameItem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/common/IntegerToRank.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/common/IntegerToRank.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/common/LevelItem.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/common/LevelItem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/common/Players.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/common/Players.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/common/ScoreItem.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/common/ScoreItem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/common/ScoreItems.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/common/ScoreItems.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/common/clients/Messages.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/common/clients/Messages.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/common/clients/NeoGeoFansClient.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/common/clients/NeoGeoFansClient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/common/imagefetcher/ImageFetcher.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/common/imagefetcher/ImageFetcher.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/PlayerSortedByPointsDescComparator.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/PlayerSortedByPointsDescComparator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/ScoreSortedByValueDescComparator.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/ScoreSortedByValueDescComparator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/TimelineSortedByDateDescComparator.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/TimelineSortedByDateDescComparator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Achievement.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Achievement.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Game.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Game.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Player.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/RelockedTitle.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/RelockedTitle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Score.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Score.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Scores.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Scores.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/TimelineItem.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/TimelineItem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Title.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Title.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/UnlockedTitle.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/UnlockedTitle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/package-info.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/package-info.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/components/TimeLine.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/components/TimeLine.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/components/Title.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/components/Title.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/entities/package-info.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/entities/package-info.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/AchievementsView.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/AchievementsView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/AddScore.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/AddScore.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/GameView.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/GameView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/Games.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/Games.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/HallOf1cc.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/HallOf1cc.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/HallOfFame.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/HallOfFame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/Index.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/Index.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/PlayerView.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/PlayerView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/AppModule.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/AppModule.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/TimelineService.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/TimelineService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/halloffame/HallOfFameService.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/halloffame/HallOfFameService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/halloffame/HallOfOneCreditService.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/halloffame/HallOfOneCreditService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/halloffame/NgfPointCalculator.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/halloffame/NgfPointCalculator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/Layout.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/Layout.tml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/TimeLine.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/TimeLine.tml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/TimeLineItem.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/TimeLineItem.tml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/AchievementsView.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/AchievementsView.tml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/GameView.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/GameView.tml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/Games.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/Games.tml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/Index.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/Index.tml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/TitleView.tml" afterPath="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/TitleView.tml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/ehcache.xml" afterPath="$PROJECT_DIR$/src/main/resources/ehcache.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-responsive.css" afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-responsive.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-responsive.min.css" afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-responsive.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/css/bootstrap.css" afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/js/bootstrap.js" afterPath="$PROJECT_DIR$/src/main/webapp/js/bootstrap.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/src/main/webapp/js/bootstrap.min.js" />
+    </list>
     <ignored path="hiscores.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,21 +238,6 @@
     <groupTables value="false" />
   </component>
   <component name="DebuggerManager">
-    <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/ScoreService.java" line="170" class="com.neogeohiscores.web.services.ScoreService" package="com.neogeohiscores.web.services">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
     <breakpoint_any>
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -81,53 +278,131 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AchievementsView.tml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/AchievementsView.tml">
+      <file leaf-file-name="Player.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="26" selection-start="416" selection-end="416" vertical-scroll-proportion="-2.5">
+            <state line="224" column="21" selection-start="6729" selection-end="6729" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mystyle.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/jee/src/main/webapp/mystyle.css">
+      <file leaf-file-name="PlayerItem.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/PlayerItem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="383" column="0" selection-start="4920" selection-end="11029" vertical-scroll-proportion="0.0">
+            <state line="18" column="13" selection-start="735" selection-end="735" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bootstrap.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/css/bootstrap.css">
+      <file leaf-file-name="RelockedTitle.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/RelockedTitle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4593" column="2" selection-start="84569" selection-end="84569" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1343148337000" expanded="true" signature="85220:86131" placeholder="{...}" />
-                <marker date="1343148337000" expanded="true" signature="86148:87373" placeholder="{...}" />
-                <marker date="1343148337000" expanded="true" signature="87398:88917" placeholder="{...}" />
-                <marker date="1343148337000" expanded="true" signature="88941:89254" placeholder="{...}" />
-                <marker date="1343148337000" expanded="true" signature="89278:89866" placeholder="{...}" />
-                <marker date="1343148337000" expanded="true" signature="89907:91274" placeholder="{...}" />
-                <marker date="1343148337000" expanded="true" signature="91299:91887" placeholder="{...}" />
-                <marker date="1343148337000" expanded="true" signature="91929:93296" placeholder="{...}" />
-                <marker date="1343148337000" expanded="true" signature="93318:93906" placeholder="{...}" />
-                <marker date="1343148337000" expanded="true" signature="93945:95312" placeholder="{...}" />
-                <marker date="1343148337000" expanded="true" signature="95337:95925" placeholder="{...}" />
-                <marker date="1343148337000" expanded="true" signature="95967:97334" placeholder="{...}" />
-              </folding>
+            <state line="31" column="0" selection-start="1096" selection-end="1096" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TitleView.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/TitleView.java">
+      <file leaf-file-name="AbstractMinimumAllClearTitleStrategy.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AbstractMinimumAllClearTitleStrategy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="0" selection-start="217" selection-end="217" vertical-scroll-proportion="0.0">
+            <state line="21" column="82" selection-start="904" selection-end="904" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AchievementsView.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/AchievementsView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="48" selection-start="178" selection-end="178" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TitleBoard.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/TitleBoard.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="69" column="63" selection-start="2604" selection-end="2604" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#5212#5225#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AbstractMinimumScoreTitleStrategy.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AbstractMinimumScoreTitleStrategy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="50" selection-start="1171" selection-end="1171" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Games.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/Games.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="22" selection-start="254" selection-end="254" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TitleUnlockingStrategy.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/TitleUnlockingStrategy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="64" selection-start="1073" selection-end="1073" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameView.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/GameView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="51" column="9" selection-start="1666" selection-end="1666" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Score.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Score.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="44" column="13" selection-start="2192" selection-end="2192" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Scores.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Scores.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="25" column="13" selection-start="962" selection-end="962" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TimelineItem.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/TimelineItem.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="13" selection-start="851" selection-end="851" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Title.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Title.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="0" selection-start="1452" selection-end="1452" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -141,40 +416,138 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TitleView.tml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/TitleView.tml">
+      <file leaf-file-name="ChronoScore.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/ChronoScore.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="0" selection-start="101" selection-end="101" vertical-scroll-proportion="-0.625">
+            <state line="20" column="13" selection-start="763" selection-end="763" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayerView.tml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/PlayerView.tml">
+      <file leaf-file-name="ScoreBoard.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/ScoreBoard.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="0" selection-start="2537" selection-end="2537" vertical-scroll-proportion="-41.875">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AchievementsView.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/AchievementsView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="13" selection-start="460" selection-end="460" vertical-scroll-proportion="0.0">
+            <state line="50" column="0" selection-start="1591" selection-end="1591" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#819#832#0" expanded="true" />
+                <element signature="e#1403#1411#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Index.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AbstractGenreTitleStrategy.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AbstractGenreTitleStrategy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="71" selection-start="1036" selection-end="1036" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TimelineService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/TimelineService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="29" column="21" selection-start="1146" selection-end="1146" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Game.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Game.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="0" selection-start="1110" selection-end="1345" vertical-scroll-proportion="0.3014553">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AddScore.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/AddScore.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="163" column="29" selection-start="4813" selection-end="4813" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AbstractTitleStrategy.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AbstractTitleStrategy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="64" selection-start="939" selection-end="939" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TopTierTitleStrategy.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/TopTierTitleStrategy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="21" column="59" selection-start="881" selection-end="881" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AllClearerTitleStrategy.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AllClearerTitleStrategy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="76" selection-start="806" selection-end="806" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HallOfFameService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/halloffame/HallOfFameService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="29" column="13" selection-start="1186" selection-end="1186" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HallOfOneCreditService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/halloffame/HallOfOneCreditService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="34" column="4" selection-start="1314" selection-end="1314" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Index.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/Index.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="11" selection-start="371" selection-end="371" vertical-scroll-proportion="0.28066528">
+            <state line="4" column="36" selection-start="165" selection-end="165" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayerView.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/PlayerView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="33" selection-start="660" selection-end="660" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AppModule.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/AppModule.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="36" column="0" selection-start="1674" selection-end="1674" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameRoom.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/GameRoom.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="13" selection-start="347" selection-end="347" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -193,22 +566,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Challenge.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/RelockedTitle.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/UnlockedTitle.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/PlayerService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/ScoreService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/ChallengeService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/GameService.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/Achievement.tml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/Achievement.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/halloffame/HallOfOneCreditService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/Games.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/GameRoom.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/AppModule.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/AchievementsView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/TitleView.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/AchievementsView.tml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/css/bootstrap.css" />
-        <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/TitleView.tml" />
-        <option value="$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/PlayerView.tml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/Index.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/TimelineService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/RelockedTitle.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AbstractMinimumScoreTitleStrategy.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Title.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Player.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/ScoreBoard.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AbstractGenreTitleStrategy.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AbstractTitleStrategy.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/TitleUnlockingStrategy.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/TitleBoard.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Game.java" />
       </list>
     </option>
   </component>
@@ -232,6 +605,73 @@
     <option name="y" value="22" />
     <option name="width" value="1405" />
     <option name="height" value="878" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Concurrency annotation issues</id>
+          </State>
+          <State>
+            <id>GeneralJavaScript</id>
+          </State>
+          <State>
+            <id>Hibernate Issues</id>
+          </State>
+          <State>
+            <id>J2ME Plugin</id>
+          </State>
+          <State>
+            <id>JBoss Seam issues</id>
+          </State>
+          <State>
+            <id>JUnit issues</id>
+          </State>
+          <State>
+            <id>Java EE issues</id>
+          </State>
+          <State>
+            <id>JavaScript</id>
+          </State>
+          <State>
+            <id>Logging issues</id>
+          </State>
+          <State>
+            <id>Numeric issues</id>
+          </State>
+          <State>
+            <id>Probable bugs</id>
+          </State>
+          <State>
+            <id>RELAX NG</id>
+          </State>
+          <State>
+            <id>Resource management issues</id>
+          </State>
+          <State>
+            <id>SQL</id>
+          </State>
+          <State>
+            <id>Serialization issues</id>
+          </State>
+          <State>
+            <id>XPath</id>
+          </State>
+          <State>
+            <id>XSLT</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Hibernate Issues</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -259,20 +699,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="TapestryProjectView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="com.intellij.tapestry.intellij.view.nodes.RootNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hiscores" />
-              <option name="myItemType" value="com.intellij.tapestry.intellij.view.nodes.ModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -293,6 +719,52 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="hiscores" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewLibrariesNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="neogeo-hiscores" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hiscores" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="internal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="neogeo-hiscores" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hiscores" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="neogeo-hiscores" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hiscores" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com.neogeohiscores.web.services.halloffame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -319,35 +791,21 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="com.neogeohiscores.web.pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="neogeo-hiscores" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hiscores" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com.neogeohiscores.web.components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="neogeo-hiscores" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hiscores" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="com.neogeohiscores.entities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="neogeo-hiscores" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hiscores" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com.anzymus.neogeo.hiscores.success" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -373,6 +831,20 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="TapestryProjectView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="com.intellij.tapestry.intellij.view.nodes.RootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hiscores" />
+              <option name="myItemType" value="com.intellij.tapestry.intellij.view.nodes.ModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="Favorites" />
     </panes>
   </component>
@@ -384,7 +856,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="preferences.keymap" />
+    <property name="options.lastSelected" value="Errors" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
@@ -392,9 +864,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="dynamic.classpath" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager" selected="Maven.neogeo-hiscores-maven">
     <configuration default="false" name="Default" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console" temporary="true">
@@ -479,25 +951,6 @@
         <option name="PhingTarget" enabled="false" />
       </method>
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-        <option name="PhingTarget" enabled="false" />
-      </method>
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -524,6 +977,25 @@
       <envs />
       <properties />
       <listeners />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+        <option name="PhingTarget" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -691,6 +1163,7 @@
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3989432" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Tapestry" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -699,19 +1172,18 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22328666" sideWeight="0.67107004" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22254974" sideWeight="0.67107004" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32893" sideWeight="0.4944731" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3989432" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -777,130 +1249,117 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/RelockedTitle.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="0" selection-start="867" selection-end="867" vertical-scroll-proportion="0.0">
+        <state line="31" column="0" selection-start="1096" selection-end="1096" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/UnlockedTitle.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Score.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="5" selection-start="1574" selection-end="1574" vertical-scroll-proportion="0.0">
+        <state line="44" column="13" selection-start="2192" selection-end="2192" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/GameService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Scores.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="0" selection-start="823" selection-end="823" vertical-scroll-proportion="0.0">
+        <state line="25" column="13" selection-start="962" selection-end="962" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/GenericService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/TimelineItem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="22" selection-start="117" selection-end="117" vertical-scroll-proportion="0.0">
+        <state line="22" column="13" selection-start="851" selection-end="851" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/PlayerService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AbstractMinimumScoreTitleStrategy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="29" selection-start="1529" selection-end="1529" vertical-scroll-proportion="0.0">
+        <state line="30" column="50" selection-start="1171" selection-end="1171" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/Queries.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Title.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="13" selection-start="768" selection-end="768" vertical-scroll-proportion="0.0">
+        <state line="35" column="0" selection-start="1452" selection-end="1452" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="13" selection-start="1319" selection-end="1319" vertical-scroll-proportion="0.0">
+        <state line="224" column="21" selection-start="6729" selection-end="6729" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jee/src/main/webapp/mystyle.css">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/ScoreBoard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="383" column="0" selection-start="4920" selection-end="11029" vertical-scroll-proportion="0.0">
+        <state line="50" column="0" selection-start="1591" selection-end="1591" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#1403#1411#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AbstractGenreTitleStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="71" selection-start="1036" selection-end="1036" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/TitleView.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AllClearerTitleStrategy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="217" selection-end="217" vertical-scroll-proportion="0.0">
+        <state line="18" column="76" selection-start="806" selection-end="806" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AbstractMinimumAllClearTitleStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="82" selection-start="904" selection-end="904" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/TopTierTitleStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="59" selection-start="881" selection-end="881" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/AbstractTitleStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="64" selection-start="939" selection-end="939" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/anzymus/neogeo/hiscores/success/TitleUnlockingStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="64" selection-start="1073" selection-end="1073" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/TitleBoard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="63" selection-start="2604" selection-end="2604" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#5212#5225#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Achievement.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="13" selection-start="837" selection-end="837" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/AchievementsView.tml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="26" selection-start="416" selection-end="416" vertical-scroll-proportion="-2.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/css/bootstrap.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4593" column="2" selection-start="84569" selection-end="84569" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1343148337000" expanded="true" signature="85220:86131" placeholder="{...}" />
-            <marker date="1343148337000" expanded="true" signature="86148:87373" placeholder="{...}" />
-            <marker date="1343148337000" expanded="true" signature="87398:88917" placeholder="{...}" />
-            <marker date="1343148337000" expanded="true" signature="88941:89254" placeholder="{...}" />
-            <marker date="1343148337000" expanded="true" signature="89278:89866" placeholder="{...}" />
-            <marker date="1343148337000" expanded="true" signature="89907:91274" placeholder="{...}" />
-            <marker date="1343148337000" expanded="true" signature="91299:91887" placeholder="{...}" />
-            <marker date="1343148337000" expanded="true" signature="91929:93296" placeholder="{...}" />
-            <marker date="1343148337000" expanded="true" signature="93318:93906" placeholder="{...}" />
-            <marker date="1343148337000" expanded="true" signature="93945:95312" placeholder="{...}" />
-            <marker date="1343148337000" expanded="true" signature="95337:95925" placeholder="{...}" />
-            <marker date="1343148337000" expanded="true" signature="95967:97334" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/TitleView.tml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="101" selection-end="101" vertical-scroll-proportion="-0.625">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/AchievementsView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="13" selection-start="460" selection-end="460" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#819#832#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/PlayerView.tml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="0" selection-start="2537" selection-end="2537" vertical-scroll-proportion="-41.875">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/Index.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="11" selection-start="371" selection-end="371" vertical-scroll-proportion="0.28066528">
+        <state line="35" column="0" selection-start="1110" selection-end="1345" vertical-scroll-proportion="0.3014553">
           <folding />
         </state>
       </provider>

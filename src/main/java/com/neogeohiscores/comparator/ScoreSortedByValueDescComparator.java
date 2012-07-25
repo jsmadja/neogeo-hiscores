@@ -16,11 +16,11 @@
 
 package com.neogeohiscores.comparator;
 
-import java.util.Comparator;
-
 import com.neogeohiscores.entities.Game;
 import com.neogeohiscores.entities.Score;
 import com.neogeohiscores.entities.SoccerWithGoalAverageScore;
+
+import java.util.Comparator;
 
 public class ScoreSortedByValueDescComparator implements Comparator<Score> {
     @Override

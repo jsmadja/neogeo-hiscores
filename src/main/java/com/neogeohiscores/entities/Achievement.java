@@ -16,10 +16,10 @@
 
 package com.neogeohiscores.entities;
 
+import com.anzymus.neogeo.hiscores.success.Step;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.anzymus.neogeo.hiscores.success.Step;
 
 public class Achievement {
 

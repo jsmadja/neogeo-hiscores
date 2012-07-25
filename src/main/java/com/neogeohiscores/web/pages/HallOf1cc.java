@@ -1,15 +1,14 @@
 package com.neogeohiscores.web.pages;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.ioc.annotations.Inject;
-
 import com.neogeohiscores.common.IntegerToRank;
 import com.neogeohiscores.entities.Player;
 import com.neogeohiscores.entities.PlayerItem;
 import com.neogeohiscores.web.services.halloffame.HallOfOneCreditService;
+import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.ioc.annotations.Inject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HallOf1cc {
 
