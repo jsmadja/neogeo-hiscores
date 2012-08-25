@@ -16,16 +16,16 @@
 
 package com.neogeohiscores.common;
 
+import static com.neogeohiscores.common.IntegerToRank.getOrdinalFor;
+
+import java.util.Collections;
+import java.util.List;
+
 import com.neogeohiscores.comparator.ScoreComparator;
 import com.neogeohiscores.comparator.ScoreSortedByValueDescComparator;
 import com.neogeohiscores.entities.Game;
 import com.neogeohiscores.entities.Score;
 import com.neogeohiscores.entities.Scores;
-
-import java.util.Collections;
-import java.util.List;
-
-import static com.neogeohiscores.common.IntegerToRank.getOrdinalFor;
 
 public class Players {
 

@@ -16,22 +16,31 @@
 
 package com.neogeohiscores.web.services.halloffame;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.tapestry5.ioc.annotations.Inject;
+
 import com.neogeohiscores.comparator.PlayerSortedByPointsDescComparator;
 import com.neogeohiscores.comparator.ScoreSortedByValueDescComparator;
 import com.neogeohiscores.entities.Game;
 import com.neogeohiscores.entities.Player;
 import com.neogeohiscores.entities.Score;
 import com.neogeohiscores.entities.Scores;
-import com.neogeohiscores.web.services.GameRoom;
-import org.apache.tapestry5.ioc.annotations.Inject;
-
-import java.util.*;
+import com.neogeohiscores.web.services.GameService;
+import com.neogeohiscores.web.services.ScoreService;
 
 public class HallOfFameService {
 
     @Inject
-    private GameRoom gameRoom;
+    ScoreService scoreService;
 
+    @Inject
+    GameService gameService;
     private static Comparator<Score> sortScoreByValueDesc = new ScoreSortedByValueDescComparator();
 
     private Comparator<Player> sortByPlayerPointsComparator = new PlayerSortedByPointsDescComparator();
@@ -43,9 +52,9 @@ public class HallOfFameService {
 
     private List<Player> createPlayerList(String level, PointCalculator pointCalculator) {
         Map<String, Player> players = new HashMap<String, Player>();
-        List<Game> games = gameRoom.findAllGames();
+        List<Game> games = gameService.findAll();
         for (Game game : games) {
-            Scores scores = game.getScores();
+            Scores scores = scoreService.findAllByGame(game);
             List<Score> scoresByLevel = scores.getScoresByLevel(level);
             int maxPoints = scoresByLevel.size() >= 10 ? 10 : scoresByLevel.size();
             Collections.sort(scoresByLevel, sortScoreByValueDesc);

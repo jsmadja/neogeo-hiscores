@@ -16,23 +16,21 @@
 
 package com.neogeohiscores.entities;
 
-import com.google.common.base.Objects;
-import com.neogeohiscores.comparator.ScoreSortedByValueDescComparator;
-import com.neogeohiscores.web.services.halloffame.NgfPointCalculator;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.*;
+
+import com.google.common.base.Objects;
 
 @Entity
-@Table(name = "PLAYER", uniqueConstraints = @UniqueConstraint(columnNames = {"fullname"}))
+@Table(name = "PLAYER", uniqueConstraints = @UniqueConstraint(columnNames = { "fullname" }))
 @NamedQueries({ //
-        @NamedQuery(name = "player_findByFullname", query = "SELECT p FROM Player p WHERE p.fullname = :fullname"), //
+@NamedQuery(name = "player_findByFullname", query = "SELECT p FROM Player p WHERE p.fullname = :fullname"), //
         @NamedQuery(name = "player_findAll", query = "SELECT p FROM Player p ORDER BY p.fullname"), //
         @NamedQuery(name = "player_getNumberOfPlayers", query = "SELECT COUNT(p) FROM Player p") //
 })
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Player implements Serializable, Comparable<Player> {
 
     private static final long serialVersionUID = 2067603406910806588L;
@@ -57,9 +55,6 @@ public class Player implements Serializable, Comparable<Player> {
 
     @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
     private Set<RelockedTitle> relockedTitles = new HashSet<RelockedTitle>();
-
-    @OneToMany(mappedBy = "player")
-    private List<Score> scores = new ArrayList<Score>();
 
     private Long avatarId = 0L;
 
@@ -159,69 +154,4 @@ public class Player implements Serializable, Comparable<Player> {
         return fullname.toLowerCase().compareTo(p.getFullname().toLowerCase());
     }
 
-    public double getAverageScoreFor() {
-        String level = "MVS";
-        double points = 0;
-        double contributions = 0;
-        ScoreSortedByValueDescComparator scoreSortedByValueDescComparator = new ScoreSortedByValueDescComparator();
-        NgfPointCalculator ngfPointCalculator = new NgfPointCalculator();
-        for (Game game : getPlayedGames()) {
-            Scores scores = game.getScores(level);
-            List<Score> scoresByLevel = scores.asSortedList();
-            int maxPoints = scoresByLevel.size() >= 10 ? 10 : scoresByLevel.size();
-            Collections.sort(scoresByLevel, scoreSortedByValueDescComparator);
-            Score oldScore = null;
-            int oldPoint = 0;
-            for (int i = 0; i < scoresByLevel.size() && i < 8; i++) {
-                Score score = scoresByLevel.get(i);
-                int point = ngfPointCalculator.getPointsByIndex(i, maxPoints);
-                if (oldScore != null && score.getValue().equals(oldScore.getValue())) {
-                    point = oldPoint;
-                }
-                if (score.getPlayer().equals(this)) {
-                    points += point;
-                    contributions++;
-                }
-                oldScore = score;
-                oldPoint = point;
-            }
-        }
-        return points / contributions;
-    }
-
-    public Set<Game> getPlayedGames() {
-        Set<Game> games = new HashSet<Game>();
-        for (Score score : scores) {
-            games.add(score.getGame());
-        }
-        return games;
-    }
-
-    public boolean isCalled(String fullname) {
-        return this.fullname.equalsIgnoreCase(fullname);
-    }
-
-    public int getNumAllClearsByPlayer() {
-        Set<Game> games = new HashSet<Game>();
-        for (Score score : scores) {
-            if (score.getAllClear()) {
-                games.add(score.getGame());
-            }
-        }
-        return games.size();
-    }
-
-    public List<Score> getScores() {
-        return scores;
-    }
-
-    public boolean hasScored(String game) {
-        Set<Game> playedGames = getPlayedGames();
-        for (Game playedGame : playedGames) {
-            if(playedGame.hasName(game)) {
-                return true;
-            }
-        }
-        return false;
-    }
 }

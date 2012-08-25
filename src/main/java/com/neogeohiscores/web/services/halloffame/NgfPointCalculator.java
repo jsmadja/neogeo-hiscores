@@ -17,7 +17,7 @@
 package com.neogeohiscores.web.services.halloffame;
 
 public class NgfPointCalculator implements PointCalculator {
-    private static final int[] POINTS = new int[]{10, 8, 6, 5, 4, 3, 2, 1};
+    private static final int[] POINTS = new int[] { 10, 8, 6, 5, 4, 3, 2, 1 };
 
     @Override
     public int getPointsByIndex(int i, int maxPoints) {

@@ -23,12 +23,12 @@ public abstract class AbstractMinimumAllClearTitleStrategy extends AbstractTitle
 
     @Override
     public boolean isUnlockable(Player player) {
-        return player.getNumAllClearsByPlayer() >= getNumAllClearsToUnlock();
+        return titleService.getNumAllClearsByPlayer(player) >= getNumAllClearsToUnlock();
     }
 
     @Override
     public Achievement getAchievementFor(Player player) {
-        long numAllClears = player.getNumAllClearsByPlayer();
+        long numAllClears = titleService.getNumAllClearsByPlayer(player);
         if (numAllClears > getNumAllClearsToUnlock()) {
             numAllClears = getNumAllClearsToUnlock();
         }

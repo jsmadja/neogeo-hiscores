@@ -16,19 +16,19 @@
 
 package com.neogeohiscores.entities;
 
-import com.google.common.base.Objects;
-import org.hibernate.annotations.*;
+import static com.google.common.base.Objects.equal;
 
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.util.Date;
 
-import static com.google.common.base.Objects.equal;
+import javax.persistence.*;
+
+import com.google.common.base.Objects;
 
 @Entity
 @Table(name = "RELOCKED_TITLE")
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@NamedQueries({//
+@NamedQuery(name = "findLastRelockedTitlesOrderByDateDesc", query = "SELECT rt FROM RelockedTitle rt ORDER BY rt.relockDate DESC") //
+})
 public class RelockedTitle {
 
     @Id

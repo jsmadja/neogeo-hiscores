@@ -16,11 +16,12 @@
 
 package com.neogeohiscores.common.clients;
 
-import com.neogeohiscores.common.ScoreConverter;
-import com.neogeohiscores.entities.Score;
-
 import static java.text.MessageFormat.format;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
+
+import com.neogeohiscores.common.ScoreConverter;
+import com.neogeohiscores.entities.Challenge;
+import com.neogeohiscores.entities.Score;
 
 public class Messages {
 
@@ -57,6 +58,14 @@ public class Messages {
             stage = stage.trim();
         }
         return stage;
+    }
+
+    public static String toMessage(Challenge challenge) {
+        String fullname = challenge.getPlayer2().getFullname();
+        String game = challenge.getGame().getName();
+        String title = challenge.getTitle();
+        String description = challenge.getDescription();
+        return format(CHALLENGE_PATTERN, fullname, game, title, description);
     }
 
 }

@@ -25,12 +25,12 @@ public class GodTierTitleStrategy extends AbstractTitleStrategy {
 
     @Override
     public boolean isUnlockable(Player player) {
-        return player.getAverageScoreFor() >= MINIMUM_SCORE;
+        return titleService.getAverageScoreFor(player) >= MINIMUM_SCORE;
     }
 
     @Override
     public Achievement getAchievementFor(Player player) {
-        double averageScore = player.getAverageScoreFor();
+        double averageScore = titleService.getAverageScoreFor(player);
         boolean completed = averageScore >= MINIMUM_SCORE;
         if (averageScore > MINIMUM_SCORE) {
             averageScore = MINIMUM_SCORE;

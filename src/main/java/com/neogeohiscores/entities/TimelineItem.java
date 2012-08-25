@@ -15,10 +15,11 @@
  */
 package com.neogeohiscores.entities;
 
-import com.neogeohiscores.common.ScoreConverter;
+import java.util.Date;
+
 import org.ocpsoft.pretty.time.PrettyTime;
 
-import java.util.Date;
+import com.neogeohiscores.common.ScoreConverter;
 
 public class TimelineItem {
 
@@ -26,6 +27,7 @@ public class TimelineItem {
     private String pictureUrl;
     private UnlockedTitle unlockedTitle;
     private String avatarUrl;
+    private Challenge challenge;
     private RelockedTitle relockedTitle;
     private String rank;
 
@@ -41,12 +43,19 @@ public class TimelineItem {
         this.setRelockedTitle(relockedTitle);
     }
 
+    public TimelineItem(Challenge challenge) {
+        this.setChallenge(challenge);
+    }
+
     public String getPlayerName() {
         if (isScoreItem()) {
             return score.getPlayerName();
         }
         if (isUnlockedTitleItem()) {
             return unlockedTitle.getPlayerName();
+        }
+        if (isChallengeItem()) {
+            return "";
         }
         if (isRelockedTitleItem()) {
             return relockedTitle.getPlayer().getFullname();
@@ -74,6 +83,9 @@ public class TimelineItem {
         if (isUnlockedTitleItem()) {
             return unlockedTitle.getTitle().getDescription();
         }
+        if (isChallengeItem()) {
+            return challenge.getDescription();
+        }
         return "";
     }
 
@@ -89,12 +101,22 @@ public class TimelineItem {
         if (isUnlockedTitleItem()) {
             date = unlockedTitle.getUnlockDate();
         }
+        if (isChallengeItem()) {
+            date = challenge.getCreationDate();
+        }
         return new PrettyTime().format(date);
+    }
+
+    public boolean isChallengeItem() {
+        return challenge != null;
     }
 
     public Game getGame() {
         if (isScoreItem()) {
             return score.getGame();
+        }
+        if (isChallengeItem()) {
+            return challenge.getGame();
         }
         if (isRelockedTitleItem()) {
             return relockedTitle.getGame();
@@ -134,6 +156,14 @@ public class TimelineItem {
         this.avatarUrl = avatarUrl;
     }
 
+    public void setChallenge(Challenge challenge) {
+        this.challenge = challenge;
+    }
+
+    public Challenge getChallenge() {
+        return challenge;
+    }
+
     public void setRelockedTitle(RelockedTitle relockedTitle) {
         this.relockedTitle = relockedTitle;
     }
@@ -153,6 +183,9 @@ public class TimelineItem {
     public Date getCreationDate() {
         if (isScoreItem()) {
             return score.getCreationDate();
+        }
+        if (isChallengeItem()) {
+            return challenge.getCreationDate();
         }
         if (isUnlockedTitleItem()) {
             return unlockedTitle.getUnlockDate();
@@ -180,6 +213,14 @@ public class TimelineItem {
 
     public String getRelockerName() {
         return relockedTitle.getRelockerScore().getPlayerName();
+    }
+
+    public String getChallenger1Name() {
+        return challenge.getPlayer1Name();
+    }
+
+    public String getChallenger2Name() {
+        return challenge.getPlayer2().getFullname();
     }
 
 }

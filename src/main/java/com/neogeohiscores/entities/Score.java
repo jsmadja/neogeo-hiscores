@@ -16,32 +16,39 @@
 
 package com.neogeohiscores.entities;
 
-import com.google.common.base.Objects;
-import com.neogeohiscores.common.IntegerToRank;
-import com.neogeohiscores.common.ScoreConverter;
-import com.neogeohiscores.comparator.ScoreSortedByValueDescComparator;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.regex.Pattern;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.regex.Pattern;
+import com.google.common.base.Objects;
+import com.neogeohiscores.common.ScoreConverter;
 
 @Entity
 @Table(name = "SCORE")
 @NamedQueries({ //
+@NamedQuery(name = "score_findAllByGame", query = "SELECT s FROM Score s WHERE s.game = :game"), //
         @NamedQuery(name = "score_findAllByGameAndLevel", query = "SELECT s FROM Score s WHERE s.game = :game AND s.level = :level"), //
         @NamedQuery(name = "score_findAllByGameThisMonth", query = "SELECT s FROM Score s WHERE s.game = :game AND s.creationDate >= :beginDate AND s.creationDate <= :endDate"), //
         @NamedQuery(name = "score_findAllOneCreditScoresByGame", query = "SELECT s FROM Score s WHERE s.game = :game AND s.allClear = true"), //
         @NamedQuery(name = "score_findAllByPlayer", query = "SELECT s FROM Score s WHERE s.player = :player"), //
         @NamedQuery(name = "score_findAll", query = "SELECT s FROM Score s"), //
+        @NamedQuery(name = "score_findAllOrderByDateDesc", query = "SELECT s FROM Score s ORDER BY s.creationDate DESC"), //
         @NamedQuery(name = "score_getNumScoredGamesByGenres", query = "SELECT COUNT(DISTINCT s.game) FROM Score s WHERE s.player = :player AND s.game.genre IN :genres") //
 })
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Score implements Serializable {
 
     private static final long serialVersionUID = -5889253204083818192L;
@@ -74,13 +81,13 @@ public class Score implements Serializable {
 
     private String stage;
 
-    @Column(name = "RANK", nullable = true)
+    @Column(name="RANK", nullable = true)
     private Integer rank;
 
-    @Column(name = "NGH_POINTS", nullable = true)
+    @Column(name="NGH_POINTS", nullable = true)
     private Integer nghPoints;
 
-    @Column(name = "GAME_OF_THE_DAY", nullable = true)
+    @Column(name="GAME_OF_THE_DAY", nullable = true)
     private Boolean gameOfTheDay;
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
@@ -217,7 +224,7 @@ public class Score implements Serializable {
         return value;
     }
 
-    /**
+    /***
      * Soccer are like : 6-13-2
      */
     private static final String SOCCER_PATTERN = "\\d+-\\d+-\\d+";
@@ -226,7 +233,7 @@ public class Score implements Serializable {
         return value.matches(SOCCER_PATTERN);
     }
 
-    /**
+    /***
      * Chrono are like 12:55:50
      */
     private static final String CHRONO_PATTERN = "\\d+:\\d+:\\d+";
@@ -243,7 +250,7 @@ public class Score implements Serializable {
         return game.isImprovable() && isClassicScore();
     }
 
-    /**
+    /***
      * Soccer with goal average are like : 6-13-2-1+3 or 6-4-5-6-7
      */
     private static final Pattern SOCCER_WITH_GOAL_AVERAGE_PATTERN = Pattern.compile("\\d+-\\d+-\\d+-\\d+[-+]\\d+");
@@ -252,7 +259,7 @@ public class Score implements Serializable {
         return SOCCER_WITH_GOAL_AVERAGE_PATTERN.matcher(value).matches();
     }
 
-    public String getPlayerName() {
+   public String getPlayerName() {
         return player.getFullname();
     }
 
@@ -271,37 +278,5 @@ public class Score implements Serializable {
 
     public Integer getNghPoints() {
         return this.nghPoints;
-    }
-
-    public String getRank() {
-        Scores scores = game.getScores(level);
-        List<Score> scoreList = scores.asSortedList();
-        Collections.sort(scoreList, new ScoreSortedByValueDescComparator());
-        for (int i = 0; i < scoreList.size(); i++) {
-            Score score_ = scoreList.get(i);
-            int rank = i + 1;
-            if (score_.getPlayer().equals(player)) {
-                return IntegerToRank.getOrdinalFor(rank);
-            }
-        }
-        return IntegerToRank.getOrdinalFor(scoreList.size() + 1);
-    }
-
-    public boolean hasLevel(String level) {
-        return this.level.equalsIgnoreCase(level);
-    }
-
-    public int getNumRankOf() {
-        Scores scores = game.getScores(level);
-        List<Score> scoreList = scores.asSortedList();
-        Collections.sort(scoreList, new ScoreSortedByValueDescComparator());
-        for (int i = 0; i < scoreList.size(); i++) {
-            Score score_ = scoreList.get(i);
-            int rank = i + 1;
-            if (score_.getPlayer().equals(player)) {
-                return rank;
-            }
-        }
-        return scoreList.size() + 1;
     }
 }

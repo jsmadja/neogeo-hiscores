@@ -16,11 +16,11 @@
 
 package com.anzymus.neogeo.hiscores.success;
 
-import com.neogeohiscores.entities.Achievement;
-import com.neogeohiscores.entities.Player;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.neogeohiscores.entities.Achievement;
+import com.neogeohiscores.entities.Player;
 
 public abstract class AbstractUnlockingByScoringInManyGamesStrategy extends AbstractTitleStrategy {
 
@@ -28,7 +28,7 @@ public abstract class AbstractUnlockingByScoringInManyGamesStrategy extends Abst
     public boolean isUnlockable(Player player) {
         List<String> gameNames = getGameNamesToScore();
         for (String gameName : gameNames) {
-            if (!player.hasScored(gameName)) {
+            if (!titleService.hasScoreInGame(player, gameName)) {
                 return false;
             }
         }
@@ -41,7 +41,7 @@ public abstract class AbstractUnlockingByScoringInManyGamesStrategy extends Abst
         List<Step> steps = new ArrayList<Step>();
         List<String> gameNames = getGameNamesToScore();
         for (String gameName : gameNames) {
-            boolean completed = player.hasScored(gameName);
+            boolean completed = titleService.hasScoreInGame(player, gameName);
             if (completed) {
                 completedGamesCount++;
             }

@@ -1,8 +1,9 @@
 package com.neogeohiscores.web.components;
 
-import com.neogeohiscores.entities.Player;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
+
+import com.neogeohiscores.entities.Player;
 
 public class Title {
 

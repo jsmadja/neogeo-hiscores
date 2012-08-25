@@ -16,10 +16,10 @@
 
 package com.neogeohiscores.common;
 
+import java.util.Date;
+
 import com.neogeohiscores.entities.Game;
 import com.neogeohiscores.entities.Score;
-
-import java.util.Date;
 
 public class ScoreItem {
 

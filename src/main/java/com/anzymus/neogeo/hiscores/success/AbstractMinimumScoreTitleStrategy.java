@@ -23,12 +23,12 @@ public abstract class AbstractMinimumScoreTitleStrategy extends AbstractTitleStr
 
     @Override
     public boolean isUnlockable(Player player) {
-        return player.getScores().size() >= getNumScoresToUnlock();
+        return titleService.getNumScoresByPlayer(player) >= getNumScoresToUnlock();
     }
 
     @Override
     public Achievement getAchievementFor(Player player) {
-        long numScores = player.getScores().size();
+        long numScores = titleService.getNumScoresByPlayer(player);
         if (numScores >= getNumScoresToUnlock()) {
             numScores = getNumScoresToUnlock();
         }

@@ -14,16 +14,16 @@
  *     limitations under the License.
  */
 
-package com.neogeohiscores.comparator;
+package com.neogeohiscores.entities;
 
-import java.util.Comparator;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.neogeohiscores.entities.Player;
+public class Timeline {
 
-public class PlayerSortedByPointsDescComparator implements Comparator<Player> {
+    private List<TimelineItem> items = new ArrayList<TimelineItem>();
 
-    @Override
-    public int compare(Player p1, Player p2) {
-        return p2.getPoints() - p1.getPoints();
+    public List<TimelineItem> getItems() {
+        return items;
     }
 }

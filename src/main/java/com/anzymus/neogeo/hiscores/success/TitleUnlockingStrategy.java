@@ -19,12 +19,11 @@ package com.anzymus.neogeo.hiscores.success;
 import com.neogeohiscores.entities.Achievement;
 import com.neogeohiscores.entities.Player;
 import com.neogeohiscores.entities.Title;
-import com.neogeohiscores.web.services.ScoreBoard;
-import com.neogeohiscores.web.services.TitleBoard;
+import com.neogeohiscores.web.services.TitleService;
 
 public interface TitleUnlockingStrategy {
 
-    void initialize(TitleBoard titleBoard, ScoreBoard scoreBoard);
+    void initialize(TitleService titleService);
 
     boolean isUnlockable(Player player);
 

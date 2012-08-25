@@ -1,4 +1,4 @@
 /***
- *
+ * 
  */
 package com.neogeohiscores.entities;

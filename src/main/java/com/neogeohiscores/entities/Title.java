@@ -16,22 +16,28 @@
 
 package com.neogeohiscores.entities;
 
-import com.google.common.base.Objects;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.google.common.base.Objects;
+
 @Entity
 @Table(name = "TITLE")
 @NamedQueries({ //
-        @NamedQuery(name = "getNumAllClearsByPlayer", query = "SELECT DISTINCT s.game FROM Score s WHERE s.player = :player AND s.allClear = true AND s.level LIKE 'MVS'"),
-        @NamedQuery(name = "hasScoreInGame", query = "SELECT COUNT(s) FROM Score s WHERE s.player = :player AND s.game.name = :game")
+@NamedQuery(name = "getNumAllClearsByPlayer", query = "SELECT DISTINCT s.game FROM Score s WHERE s.player = :player AND s.allClear = true AND s.level LIKE 'MVS'"),
+        @NamedQuery(name = "hasScoreInGame", query = "SELECT COUNT(s) FROM Score s WHERE s.player = :player AND s.game.name = :game"),
+        @NamedQuery(name = "getNumScoresByPlayer", query = "SELECT COUNT(s) FROM Score s WHERE s.player = :player"), @NamedQuery(name = "findAllStrategies", query = "SELECT t FROM Title t") //
 })
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Title implements Serializable, Comparable<Title> {
 
     private static final long serialVersionUID = -4525267232614553107L;

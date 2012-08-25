@@ -16,13 +16,13 @@
 
 package com.neogeohiscores.common;
 
-import com.neogeohiscores.entities.Score;
+import static com.neogeohiscores.common.IntegerToRank.getOrdinalFor;
+import static org.apache.commons.lang.StringUtils.isNotBlank;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.neogeohiscores.common.IntegerToRank.getOrdinalFor;
-import static org.apache.commons.lang.StringUtils.isNotBlank;
+import com.neogeohiscores.entities.Score;
 
 public class ScoreItems {
 

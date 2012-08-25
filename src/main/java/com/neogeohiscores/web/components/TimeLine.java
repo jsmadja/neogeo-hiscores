@@ -1,11 +1,12 @@
 package com.neogeohiscores.web.components;
 
-import com.neogeohiscores.entities.TimelineItem;
-import com.neogeohiscores.web.services.TimelineService;
+import java.util.List;
+
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
-import java.util.List;
+import com.neogeohiscores.entities.TimelineItem;
+import com.neogeohiscores.web.services.TimelineService;
 
 public class TimeLine {
 
@@ -16,7 +17,8 @@ public class TimeLine {
     private TimelineItem item;
 
     public List<TimelineItem> getItems() {
-        return timelineService.createTimeline().subList(0, 10);
+        List<TimelineItem> items = timelineService.createTimeline().getItems();
+        return items.subList(0, 10);
     }
 
 }

@@ -25,14 +25,14 @@ public class IntegerToRank {
             return value + "th";
         }
         switch (tenRemainder) {
-            case 1:
-                return value + "st";
-            case 2:
-                return value + "nd";
-            case 3:
-                return value + "rd";
-            default:
-                return value + "th";
+        case 1:
+            return value + "st";
+        case 2:
+            return value + "nd";
+        case 3:
+            return value + "rd";
+        default:
+            return value + "th";
         }
     }
 

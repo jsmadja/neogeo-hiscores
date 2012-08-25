@@ -14,16 +14,14 @@
  *     limitations under the License.
  */
 
-package com.neogeohiscores.comparator;
+package com.neogeohiscores.web.services;
 
-import java.util.Comparator;
+import org.hibernate.Query;
 
-import com.neogeohiscores.entities.Player;
+public class Queries {
 
-public class PlayerSortedByPointsDescComparator implements Comparator<Player> {
-
-    @Override
-    public int compare(Player p1, Player p2) {
-        return p2.getPoints() - p1.getPoints();
+    static long getCount(Query query) {
+        return (Long) query.uniqueResult();
     }
+
 }

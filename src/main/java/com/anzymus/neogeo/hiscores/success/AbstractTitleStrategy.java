@@ -17,18 +17,15 @@
 package com.anzymus.neogeo.hiscores.success;
 
 import com.neogeohiscores.entities.Title;
-import com.neogeohiscores.web.services.ScoreBoard;
-import com.neogeohiscores.web.services.TitleBoard;
+import com.neogeohiscores.web.services.TitleService;
 
 public abstract class AbstractTitleStrategy implements TitleUnlockingStrategy {
 
-    protected TitleBoard titleBoard;
-    protected ScoreBoard scoreBoard;
+    protected TitleService titleService;
     protected Title title;
 
-    public void initialize(TitleBoard titleBoard, ScoreBoard scoreBoard) {
-        this.titleBoard = titleBoard;
-        this.scoreBoard = scoreBoard;
+    public void initialize(TitleService titleService) {
+        this.titleService = titleService;
     }
 
     protected int percent(long up, long down) {
