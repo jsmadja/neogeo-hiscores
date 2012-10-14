@@ -16,10 +16,10 @@
 
 package com.neogeohiscores.comparator;
 
+import com.neogeohiscores.entities.TimelineItem;
+
 import java.util.Comparator;
 import java.util.Date;
-
-import com.neogeohiscores.entities.TimelineItem;
 
 public class TimelineSortedByDateDescComparator implements Comparator<TimelineItem> {
 
@@ -34,15 +34,6 @@ public class TimelineSortedByDateDescComparator implements Comparator<TimelineIt
     }
 
     private Date getDate(TimelineItem timelineItem) {
-        if (timelineItem.isScoreItem()) {
-            return timelineItem.getCreationDate();
-        }
-        if (timelineItem.isUnlockedTitleItem()) {
-            return timelineItem.getUnlockedTitle().getUnlockDate();
-        }
-        if (timelineItem.getRelockedTitle() != null) {
-            return timelineItem.getRelockedTitle().getRelockDate();
-        }
-        return timelineItem.getChallenge().getCreationDate();
+        return timelineItem.getCreationDate();
     }
 }

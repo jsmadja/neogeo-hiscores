@@ -16,38 +16,21 @@
 
 package com.neogeohiscores.entities;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
-
-import org.hibernate.annotations.Type;
-
 import com.google.common.base.Objects;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "GAME", uniqueConstraints = @UniqueConstraint(columnNames = { "NAME" }))
 @NamedQueries({ //
 @NamedQuery(name = "game_findAll", query = "SELECT g FROM Game g ORDER BY g.name ASC"), //
-        @NamedQuery(name = "game_findByName", query = "SELECT g FROM Game g WHERE g.name = :name"), //
-        @NamedQuery(name = "game_findGamesByGenre", query = "SELECT g FROM Game g WHERE g.genre = :genre") //
+        @NamedQuery(name = "game_findByName", query = "SELECT g FROM Game g WHERE g.name = :name") //
 })
 public class Game implements Comparable<Game>, Serializable {
 
-    public static final String findAllPlayedGames = "SELECT * FROM GAME WHERE id IN (SELECT DISTINCT game_id FROM SCORE) ORDER BY name";
     public static final String findAllGamesPlayedBy = "SELECT * FROM GAME WHERE id IN (SELECT DISTINCT game_id FROM SCORE WHERE player_id = ?) ORDER BY name";
-    public static final String findAllGamesOneCreditedBy = "SELECT * FROM GAME WHERE id IN (SELECT DISTINCT game_id FROM SCORE WHERE player_id = ? AND all_clear = 1) ORDER BY name";
-    public static final String getNumberOfGames = "SELECT COUNT(id) FROM GAME";
     public static final String findAllScoreCountForEachGames = "SELECT g.id, g.name, COUNT(s.id), g.genre FROM SCORE s, GAME g WHERE s.game_id = g.id GROUP BY g.id ORDER BY g.name";
-    public static final String findAllUnplayedGames = "SELECT * FROM GAME WHERE id NOT IN (SELECT DISTINCT game_id FROM SCORE) ORDER BY name";
-    public static final String findAllPlayedGamesThisMonth = "SELECT * FROM GAME WHERE id IN (SELECT DISTINCT game_id FROM SCORE WHERE CREATIONDATE >= ? AND CREATIONDATE <= ?)";
 
     private static final long serialVersionUID = -8252960983109413218L;
     public static final Game EMPTY = new Game("");
@@ -61,18 +44,11 @@ public class Game implements Comparable<Game>, Serializable {
 
     private Long postId;
 
-    @Column(name = "GENRE", nullable = false)
-    private String genre = "Unknown";
-
     @Column(nullable = true, name = "CUSTOM_STAGE_VALUES")
     private String customStageValues;
 
     @Transient
     private int contribution;
-
-    @Column(columnDefinition = "TINYINT")
-    @Type(type = "org.hibernate.type.NumericBooleanType")
-    private boolean improvable;
 
     public Game() {
     }
@@ -97,24 +73,8 @@ public class Game implements Comparable<Game>, Serializable {
         return postId;
     }
 
-    public void setPostId(Long postId) {
-        this.postId = postId;
-    }
-
     public String getCustomStageValues() {
         return customStageValues;
-    }
-
-    public void setCustomStageValues(String customStageValues) {
-        this.customStageValues = customStageValues;
-    }
-
-    public boolean isImprovable() {
-        return improvable;
-    }
-
-    public void setImprovable(boolean improvable) {
-        this.improvable = improvable;
     }
 
     @Override
@@ -147,14 +107,6 @@ public class Game implements Comparable<Game>, Serializable {
 
     public void setContribution(int contribution) {
         this.contribution = contribution;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public String getGenre() {
-        return genre;
     }
 
 }

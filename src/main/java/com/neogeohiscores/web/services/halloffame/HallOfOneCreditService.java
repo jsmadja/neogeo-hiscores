@@ -30,7 +30,7 @@ import com.neogeohiscores.web.services.PlayerService;
 public class HallOfOneCreditService {
 
     @Inject
-    Session em;
+    Session session;
 
     private @Inject
     PlayerService playerService;
@@ -39,7 +39,7 @@ public class HallOfOneCreditService {
 
     public List<Player> getPlayersOrderByAllClearCount() {
         List<Player> players = new ArrayList<Player>();
-        Query query = em.createSQLQuery(ONE_CREDIT_QUERY);
+        Query query = session.createSQLQuery(ONE_CREDIT_QUERY);
         List<Object[]> results = query.list();
         for (Object[] result : results) {
             Long playerId = ((BigInteger) result[0]).longValue();

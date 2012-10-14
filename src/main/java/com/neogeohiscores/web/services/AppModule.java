@@ -38,14 +38,10 @@ public class AppModule {
     public static void bind(ServiceBinder binder) {
         binder.bind(TimelineService.class);
         binder.bind(ScoreService.class);
-        binder.bind(TitleUnlockingService.class);
-        binder.bind(TitleService.class);
         binder.bind(GameService.class);
         binder.bind(PlayerService.class);
-        binder.bind(ChallengeService.class);
         binder.bind(HallOfFameService.class);
         binder.bind(HallOfOneCreditService.class);
-        binder.bind(TitleRelockingService.class);
     }
 
     @Contribute(SymbolSource.class)

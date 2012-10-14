@@ -9,7 +9,6 @@ public class GameItem {
     private String name;
     private long id;
     private long count;
-    private Game game;
     private String genre;
     private List<ScoreItem> scores;
 
@@ -24,10 +23,6 @@ public class GameItem {
         this.setGenre(genre);
     }
 
-    public GameItem(Game game) {
-        this.game = game;
-    }
-
     public String getName() {
         return name;
     }
@@ -38,14 +33,6 @@ public class GameItem {
 
     public long getCount() {
         return count;
-    }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public void setScores(List<ScoreItem> scores) {
-        this.scores = scores;
     }
 
     public List<ScoreItem> getScores() {

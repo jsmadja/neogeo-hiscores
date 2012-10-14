@@ -15,25 +15,18 @@
  */
 package com.neogeohiscores.web.services;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-
-import org.apache.tapestry5.ioc.annotations.Inject;
-import org.hibernate.Query;
-import org.joda.time.DateTime;
-
 import com.neogeohiscores.common.IntegerToRank;
 import com.neogeohiscores.comparator.ScoreSortedByValueDescComparator;
 import com.neogeohiscores.entities.Game;
 import com.neogeohiscores.entities.Player;
 import com.neogeohiscores.entities.Score;
 import com.neogeohiscores.entities.Scores;
+import org.hibernate.Query;
+
+import java.util.Collections;
+import java.util.List;
 
 public class ScoreService extends GenericService<Score> {
-
-    @Inject
-    private GameService gameService;
 
     private static final int MAX_SCORES_TO_RETURN = 10;
 
@@ -52,29 +45,6 @@ public class ScoreService extends GenericService<Score> {
         Query query = session.getNamedQuery("score_findAllByGameAndLevel");
         query.setParameter("game", game);
         query.setParameter("level", level);
-        List<Score> scores = query.list();
-        return toScores(scores);
-    }
-
-    public Scores findAllByGameThisMonth(Game game) {
-        Query query = session.getNamedQuery("score_findAllByGameThisMonth");
-        query.setParameter("game", game);
-        Date beginDate = new DateTime().withDayOfMonth(1).toDate();
-        query.setParameter("beginDate", beginDate);
-        query.setParameter("endDate", Dates.findLastDayOfMonth());
-        return toScores(query.list());
-    }
-
-    public Scores findAllOneCreditScoresByGame(Game game) {
-        Query query = session.getNamedQuery("score_findAllOneCreditScoresByGame");
-        query.setParameter("game", game);
-        List<Score> scores = query.list();
-        return toScores(scores);
-    }
-
-    public Scores findAllByPlayer(Player player) {
-        Query query = session.getNamedQuery("score_findAllByPlayer");
-        query.setParameter("player", player);
         List<Score> scores = query.list();
         return toScores(scores);
     }
@@ -99,39 +69,6 @@ public class ScoreService extends GenericService<Score> {
             }
         }
         return scores;
-    }
-
-    public long findCountByGame(Game game) {
-        String sql = "SELECT COUNT(id) FROM SCORE WHERE game_id = " + game.getId();
-        Query query = session.createSQLQuery(sql);
-        return Queries.getCount(query);
-    }
-
-    public void delete(Long scoreId) {
-        Score score = findById(scoreId);
-        session.delete(score);
-    }
-
-    public List<Player> findPlayersOrderByNumScores() {
-        String sql = "SELECT p.* FROM SCORE s, PLAYER p WHERE s.player_id = p.id GROUP BY s.player_id ORDER BY COUNT(s.id) DESC";
-        Query query = session.createSQLQuery(sql);
-        return query.list();
-    }
-
-    public List<Game> findGamesOrderByNumPlayers() {
-        String sql = "SELECT g.* FROM SCORE s, GAME g WHERE s.game_id = g.id GROUP BY s.game_id ORDER BY COUNT(DISTINCT s.player_id) DESC";
-        Query query = session.createSQLQuery(sql);
-        return query.list();
-    }
-
-    public long getNumberOfPlayedGames() {
-        Query query = session.createSQLQuery("SELECT count(distinct s.game_id) FROM SCORE s");
-        return Queries.getCount(query);
-    }
-
-    public void deleteAll() {
-        Query query = session.createQuery("DELETE FROM Score");
-        query.executeUpdate();
     }
 
     public String getRankOf(Score score) {
@@ -160,22 +97,9 @@ public class ScoreService extends GenericService<Score> {
     }
 
     public Score store(Score score) {
-        Game gameOfTheDay = gameService.getGameOfTheDay();
-        int bonusFactor = 1;
-        boolean isGameOfTheDay = score.getGame().equals(gameOfTheDay);
-        if(isGameOfTheDay) {
-            bonusFactor = 2;
-        }
         int rank = getNumRankOf(score);
-        int totalScore = findAllByGame(score.getGame(), score.getLevel()).count();
-        int rankFactor = totalScore - rank + 1;
-        int nghPoints = bonusFactor * rankFactor;
-
-        score.setNghPoints(nghPoints);
-        score.setGameOfTheDay(isGameOfTheDay);
         score.setRank(rank);
         return super.store(score);
     }
-
 
 }

@@ -16,21 +16,17 @@
 
 package com.neogeohiscores.common.clients;
 
+import com.neogeohiscores.common.ScoreConverter;
+import com.neogeohiscores.entities.Score;
+
 import static java.text.MessageFormat.format;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
-
-import com.neogeohiscores.common.ScoreConverter;
-import com.neogeohiscores.entities.Challenge;
-import com.neogeohiscores.entities.Score;
 
 public class Messages {
 
     private static final ScoreConverter SCORE_CONVERTER = new ScoreConverter();
 
-    private static final String MESSAGE_PATTERN = "{0} - [URL=\"{1}\"][SIZE=\"3\"]{2}[/SIZE][/URL]\n" + "[I]{3}{4}{5}[/I]\n" + "[SIZE=\"1\"]posté depuis [url]www.neogeo-hiscores.com[/url][/SIZE]";
-
-    private static final String CHALLENGE_PATTERN = "Here comes a new challenger!\n\n" + "Je défie publiquement [B]{0}[/B] sur [B]{1}[/B]\n\n" + "[I]{2} :[/I]\n" + "[I]{3}[/I]\n\n"
-            + "[SIZE=1]posté depuis [URL]www.neogeo-hiscores.com[/URL][/SIZE]";
+    private static final String MESSAGE_PATTERN = "{0} - [URL=\"{1}\"][SIZE=\"3\"]{2}[/SIZE][/URL]\n" + "[I]{3}{4}{5}[/I]\n" + "[SIZE=\"1\"]posté depuis [url]www.neogeohiscores.com[/url][/SIZE]";
 
     public static String toMessage(Score score) {
         String scoreValue = SCORE_CONVERTER.getAsString(score.getValue());
@@ -58,14 +54,6 @@ public class Messages {
             stage = stage.trim();
         }
         return stage;
-    }
-
-    public static String toMessage(Challenge challenge) {
-        String fullname = challenge.getPlayer2().getFullname();
-        String game = challenge.getGame().getName();
-        String title = challenge.getTitle();
-        String description = challenge.getDescription();
-        return format(CHALLENGE_PATTERN, fullname, game, title, description);
     }
 
 }

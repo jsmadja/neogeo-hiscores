@@ -50,15 +50,7 @@ public class Player implements Serializable, Comparable<Player> {
     @Transient
     private int contribution;
 
-    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UnlockedTitle> unlockedTitles = new HashSet<UnlockedTitle>();
-
-    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
-    private Set<RelockedTitle> relockedTitles = new HashSet<RelockedTitle>();
-
-    private Long avatarId = 0L;
-
-    public Player() {
+    Player() {
     }
 
     public Player(String fullname) {
@@ -110,43 +102,6 @@ public class Player implements Serializable, Comparable<Player> {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Set<UnlockedTitle> getUnlockedTitles() {
-        return unlockedTitles;
-    }
-
-    public void setUnlockedTitles(Set<UnlockedTitle> unlockedTitles) {
-        this.unlockedTitles = unlockedTitles;
-    }
-
-    public boolean hasNotUnlocked(Title title) {
-        for (UnlockedTitle unlockedTitle : unlockedTitles) {
-            if (unlockedTitle.getTitle().equals(title)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean hasUnlocked(Title title) {
-        return !hasNotUnlocked(title);
-    }
-
-    public Long getAvatarId() {
-        return avatarId;
-    }
-
-    public void setAvatarId(Long avatarId) {
-        this.avatarId = avatarId;
-    }
-
-    public void setRelockedTitles(Set<RelockedTitle> relockedTitles) {
-        this.relockedTitles = relockedTitles;
-    }
-
-    public Set<RelockedTitle> getRelockedTitles() {
-        return relockedTitles;
     }
 
     @Override

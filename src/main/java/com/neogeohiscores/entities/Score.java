@@ -46,8 +46,7 @@ import com.neogeohiscores.common.ScoreConverter;
         @NamedQuery(name = "score_findAllOneCreditScoresByGame", query = "SELECT s FROM Score s WHERE s.game = :game AND s.allClear = true"), //
         @NamedQuery(name = "score_findAllByPlayer", query = "SELECT s FROM Score s WHERE s.player = :player"), //
         @NamedQuery(name = "score_findAll", query = "SELECT s FROM Score s"), //
-        @NamedQuery(name = "score_findAllOrderByDateDesc", query = "SELECT s FROM Score s ORDER BY s.creationDate DESC"), //
-        @NamedQuery(name = "score_getNumScoredGamesByGenres", query = "SELECT COUNT(DISTINCT s.game) FROM Score s WHERE s.player = :player AND s.game.genre IN :genres") //
+        @NamedQuery(name = "score_findAllOrderByDateDesc", query = "SELECT s FROM Score s ORDER BY s.creationDate DESC") //
 })
 public class Score implements Serializable {
 
@@ -83,12 +82,6 @@ public class Score implements Serializable {
 
     @Column(name="RANK", nullable = true)
     private Integer rank;
-
-    @Column(name="NGH_POINTS", nullable = true)
-    private Integer nghPoints;
-
-    @Column(name="GAME_OF_THE_DAY", nullable = true)
-    private Boolean gameOfTheDay;
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
     @Column(columnDefinition = "TINYINT", name = "ALL_CLEAR")
@@ -146,10 +139,6 @@ public class Score implements Serializable {
 
     public Date getCreationDate() {
         return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
     }
 
     public String getPictureUrl() {
@@ -246,10 +235,6 @@ public class Score implements Serializable {
         return !isSoccer() && !isChrono();
     }
 
-    public boolean isImprovable() {
-        return game.isImprovable() && isClassicScore();
-    }
-
     /***
      * Soccer with goal average are like : 6-13-2-1+3 or 6-4-5-6-7
      */
@@ -263,20 +248,8 @@ public class Score implements Serializable {
         return player.getFullname();
     }
 
+   public void setRank(int rank) {
+      this.rank = rank;
+   }
 
-    public void setNghPoints(int nghPoints) {
-        this.nghPoints = nghPoints;
-    }
-
-    public void setGameOfTheDay(boolean gameOfTheDay) {
-        this.gameOfTheDay = gameOfTheDay;
-    }
-
-    public void setRank(int rank) {
-        this.rank = rank;
-    }
-
-    public Integer getNghPoints() {
-        return this.nghPoints;
-    }
 }

@@ -52,44 +52,8 @@ public class GameService extends GenericService<Game> {
         return query.list();
     }
 
-    public List<Game> findAllPlayedGames() {
-        Query query = session.getNamedQuery(Game.findAllPlayedGames);
-        return query.list();
-    }
-
     public List<Object[]> findAllScoreCountForEachGames() {
         Query query = session.createSQLQuery(Game.findAllScoreCountForEachGames);
-        return query.list();
-    }
-
-    public List<Game> findAllGamesOneCreditedBy(Player player) {
-        Query query = session.getNamedQuery(Game.findAllGamesOneCreditedBy);
-        query = query.setParameter(1, player.getId());
-        return query.list();
-    }
-
-    public long getNumberOfGames() {
-        Query query = session.getNamedQuery(Game.getNumberOfGames);
-        return Queries.getCount(query);
-    }
-
-    public List<Game> findAllUnplayedGames() {
-        Query query = session.getNamedQuery(Game.findAllUnplayedGames);
-        return query.list();
-    }
-
-    public List<Game> findAllPlayedGamesThisMonth() {
-        Query query = session.createSQLQuery(Game.findAllPlayedGamesThisMonth);
-        Date beginDate = new DateTime().withDayOfMonth(1).withHourOfDay(0).withMinuteOfHour(0).toDate();
-        Date endDate = Dates.findLastDayOfMonth();
-        query.setParameter(1, beginDate);
-        query.setParameter(2, endDate);
-        return query.list();
-    }
-
-    public List<Game> findGamesByGenre(String genre) {
-        Query query = session.getNamedQuery("game_findGamesByGenre");
-        query.setParameter("genre", genre);
         return query.list();
     }
 

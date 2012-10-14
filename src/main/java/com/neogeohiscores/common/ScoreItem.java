@@ -39,7 +39,6 @@ public class ScoreItem {
     private boolean allClear;
     private String stage;
     private Score score;
-    private boolean improvable;
 
     private int MAX_MESSAGE_LENGTH = 25;
 
@@ -49,14 +48,6 @@ public class ScoreItem {
 
     public ScoreItem(Score score) {
         this.score = score;
-    }
-
-    public boolean isImprovable() {
-        return improvable;
-    }
-
-    public void setImprovable(boolean improvable) {
-        this.improvable = improvable;
     }
 
     public Score getScore() {

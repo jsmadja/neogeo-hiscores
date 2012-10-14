@@ -1,29 +1,5 @@
 <t:layout xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
     <div class="blue-bar big-bar center rounded-bar">${player.fullname}</div>
-    <div id="titlesLeft">
-        <ul>
-            <t:loop source="titlesLeft" value="titleItem">
-                <t:if test="unlocked">
-                    <li class="label label-info title">${titleItem.title.label}</li>
-                    <p:else>
-                        <li class="label title">${titleItem.title.label}</li>
-                    </p:else>
-                </t:if>
-            </t:loop>
-        </ul>
-    </div>
-    <div id="titlesRight">
-        <ul>
-            <t:loop source="titlesRight" value="titleItem">
-                <t:if test="unlocked">
-                    <li class="label label-info title">${titleItem.title.label}</li>
-                    <p:else>
-                        <li class="label title">${titleItem.title.label}</li>
-                    </p:else>
-                </t:if>
-            </t:loop>
-        </ul>
-    </div>
     <div id="#scores">
         <t:grid source="scores" reorder="game,level,score,rank,positiveGap,negativeGap" rowsPerPage="1000"
                 class="table table-bordered table-condensed hall" row="score"

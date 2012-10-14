@@ -67,7 +67,7 @@ public class NeoGeoFansClient {
         }
     }
 
-    protected HtmlPage getLoginPage() throws IOException, MalformedURLException {
+    protected HtmlPage getLoginPage() throws IOException {
         return (HtmlPage) webClient.getPage("http://www.neogeofans.com/leforum/index.php");
     }
 

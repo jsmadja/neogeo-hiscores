@@ -9,9 +9,6 @@ public abstract class GenericService<T> {
 
     private Class<T> clazz;
 
-    public GenericService() {
-    }
-
     public GenericService(Class<T> clazz) {
         this.clazz = clazz;
     }
@@ -22,11 +19,6 @@ public abstract class GenericService<T> {
 
     public T store(T t) {
         return (T) session.merge(t);
-    }
-
-    public T merge(T t) {
-        session.saveOrUpdate(t);
-        return t;
     }
 
 }

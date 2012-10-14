@@ -78,10 +78,6 @@ public class Scores implements Iterable<Score> {
         return scores.iterator();
     }
 
-    public List<Score> sortByDateDesc() {
-        return asSortedList(comparatorByDateDesc);
-    }
-
     private List<Score> asSortedList(Comparator<Score> comparator) {
         List<Score> sortedScores = new ArrayList<Score>();
         sortedScores.addAll(scores);
@@ -90,17 +86,8 @@ public class Scores implements Iterable<Score> {
     }
 
     public List<Score> asSortedList() {
-        return asSortedList(comparatorByValueDesc);
+        return asSortedList(new ScoreSortedByValueDescComparator());
     }
-
-    private static Comparator<Score> comparatorByDateDesc = new Comparator<Score>() {
-        @Override
-        public int compare(Score s1, Score s2) {
-            return s2.getCreationDate().compareTo(s1.getCreationDate());
-        }
-    };
-
-    private static Comparator<Score> comparatorByValueDesc = new ScoreSortedByValueDescComparator();
 
     public List<Score> getScoresByLevel(String level) {
         List<Score> scoresByLevel = new ArrayList<Score>();
@@ -110,27 +97,6 @@ public class Scores implements Iterable<Score> {
             }
         }
         return scoresByLevel;
-    }
-
-    public int getRank(Player player) {
-        keepOnlyLevel("MVS");
-        List<Score> asSortedList = asSortedList();
-        for (int i = 0; i < asSortedList.size(); i++) {
-            if (asSortedList.get(i).getPlayer().equals(player)) {
-                return i + 1;
-            }
-        }
-        return Integer.MAX_VALUE;
-    }
-
-    private void keepOnlyLevel(final String level) {
-        Predicate<Score> predicate = new Predicate<Score>() {
-            @Override
-            public boolean apply(Score score) {
-                return score.getLevel().equals(level);
-            }
-        };
-        scores = Sets.filter(scores, predicate);
     }
 
 }

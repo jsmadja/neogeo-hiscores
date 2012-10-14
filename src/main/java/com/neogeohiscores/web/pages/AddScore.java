@@ -1,9 +1,17 @@
 package com.neogeohiscores.web.pages;
 
-import java.io.InputStream;
-import java.net.URL;
-import java.util.List;
-
+import com.neogeohiscores.common.Levels;
+import com.neogeohiscores.common.clients.AuthenticationFailed;
+import com.neogeohiscores.common.clients.Messages;
+import com.neogeohiscores.common.clients.NeoGeoFansClient;
+import com.neogeohiscores.common.clients.NeoGeoFansClientFactory;
+import com.neogeohiscores.common.imagefetcher.ImageFetcher;
+import com.neogeohiscores.entities.Game;
+import com.neogeohiscores.entities.Player;
+import com.neogeohiscores.entities.Score;
+import com.neogeohiscores.web.services.GameService;
+import com.neogeohiscores.web.services.PlayerService;
+import com.neogeohiscores.web.services.ScoreService;
 import org.apache.tapestry5.annotations.DiscardAfter;
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.Persist;
@@ -15,25 +23,10 @@ import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.services.Request;
-
-import com.google.common.io.ByteStreams;
-import com.neogeohiscores.common.Levels;
-import com.neogeohiscores.common.clients.AuthenticationFailed;
-import com.neogeohiscores.common.clients.Messages;
-import com.neogeohiscores.common.clients.NeoGeoFansClient;
-import com.neogeohiscores.common.clients.NeoGeoFansClientFactory;
-import com.neogeohiscores.common.imagefetcher.DirectLinkNotFoundException;
-import com.neogeohiscores.common.imagefetcher.ImageFetcher;
-import com.neogeohiscores.entities.Game;
-import com.neogeohiscores.entities.Player;
-import com.neogeohiscores.entities.Score;
-import com.neogeohiscores.web.services.GameService;
-import com.neogeohiscores.web.services.PlayerService;
-import com.neogeohiscores.web.services.ScoreService;
-import com.neogeohiscores.web.services.TitleRelockingService;
-import com.neogeohiscores.web.services.TitleUnlockingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 public class AddScore {
 
@@ -50,12 +43,6 @@ public class AddScore {
 
     @Inject
     private PlayerService playerService;
-
-    @Inject
-    private TitleUnlockingService titleUnlockingService;
-
-    @Inject
-    private TitleRelockingService titleRelockingService;
 
     @Property
     private Game game;
@@ -99,8 +86,6 @@ public class AddScore {
     private static final int MAX_MESSAGE_LENGTH = 255;
 
     private NeoGeoFansClientFactory neoGeoFansClientFactory = new NeoGeoFansClientFactory();
-
-    private ImageFetcher imageFetcher = new ImageFetcher();
 
     @InjectComponent
     private Form form;
@@ -177,11 +162,7 @@ public class AddScore {
             player = playerService.store(new Player(fullname));
         }
         LOG.info("Enregistrement du score");
-        Score scoreToStore = storeScore(ngfClient, player);
-        LOG.info("Recherche de nouveaux titres débloqués");
-       titleUnlockingService.searchUnlockedTitlesFor(player);
-        LOG.info("Recherche de titres à rebloquer");
-        titleRelockingService.relockTitles(scoreToStore);
+        storeScore(ngfClient, player);
         LOG.info("Score enregistré");
     }
 
@@ -209,7 +190,7 @@ public class AddScore {
             if ("MVS".equals(level)) {
                 Long postId = game.getPostId();
                 if (postId == null) {
-                    postId = 41930L;
+                    postId = DEFAULT_POST_ID;
                 }
                 ngfClient.post(Messages.toMessage(score), postId);
             }

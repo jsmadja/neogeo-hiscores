@@ -16,41 +16,15 @@
 
 package com.neogeohiscores.web.services;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.tapestry5.ioc.annotations.Inject;
+import com.neogeohiscores.entities.Player;
 import org.hibernate.Query;
 
-import com.anzymus.neogeo.hiscores.success.TitleUnlockingStrategy;
-import com.neogeohiscores.entities.Achievement;
-import com.neogeohiscores.entities.Player;
-import com.neogeohiscores.entities.Title;
+import java.util.List;
 
 public class PlayerService extends GenericService<Player> {
 
-    @Inject
-    private TitleService titleService;
-
     public PlayerService() {
         super(Player.class);
-    }
-
-    public Achievement getAchievementFor(Player player, Title title) {
-        TitleUnlockingStrategy strategy = titleService.getStrategyByTitle(title);
-        return strategy.getAchievementFor(player);
-    }
-
-    public List<Achievement> getAchievementsFor(Player player) {
-        Map<Title, TitleUnlockingStrategy> StrategiesByTitle = titleService.findAllStrategies();
-        Collection<TitleUnlockingStrategy> strategies = StrategiesByTitle.values();
-        List<Achievement> achievements = new ArrayList<Achievement>();
-        for (TitleUnlockingStrategy strategy : strategies) {
-            achievements.add(strategy.getAchievementFor(player));
-        }
-        return achievements;
     }
 
     public Player findByFullname(String fullname) {
@@ -66,15 +40,6 @@ public class PlayerService extends GenericService<Player> {
     public List<Player> findAll() {
         Query query = session.getNamedQuery("player_findAll");
         return query.list();
-    }
-
-    public long getNumberOfPlayers() {
-        return (Long) session.getNamedQuery("player_getNumberOfPlayers").uniqueResult();
-    }
-
-    public void deleteAll() {
-        Query query = session.createQuery("DELETE FROM Player");
-        query.executeUpdate();
     }
 
 }
