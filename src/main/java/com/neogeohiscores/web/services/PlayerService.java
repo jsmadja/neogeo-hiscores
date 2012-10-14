@@ -16,6 +16,7 @@
 
 package com.neogeohiscores.web.services;
 
+import com.google.common.base.Preconditions;
 import com.neogeohiscores.entities.Player;
 import org.hibernate.Query;
 
@@ -28,6 +29,7 @@ public class PlayerService extends GenericService<Player> {
     }
 
     public Player findByFullname(String fullname) {
+        Preconditions.checkNotNull(fullname, "fullname est obligatoire");
         Query query = session.getNamedQuery("player_findByFullname");
         query.setParameter("fullname", fullname);
         List<Player> player = query.list();

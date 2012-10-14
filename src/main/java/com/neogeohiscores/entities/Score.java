@@ -231,10 +231,6 @@ public class Score implements Serializable {
         return value.matches(CHRONO_PATTERN);
     }
 
-    public boolean isClassicScore() {
-        return !isSoccer() && !isChrono();
-    }
-
     /***
      * Soccer with goal average are like : 6-13-2-1+3 or 6-4-5-6-7
      */

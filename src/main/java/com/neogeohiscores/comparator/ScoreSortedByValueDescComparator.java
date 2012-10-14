@@ -34,7 +34,7 @@ public class ScoreSortedByValueDescComparator implements Comparator<Score> {
         String value1 = s1.getValue();
         String value2 = s2.getValue();
         try {
-            int comparison = 0;
+            int comparison;
             if (isNegativeScoreGame(gameName)) {
                 comparison = compareAsNegativeInt(value1, value2);
             } else if (isChronoGame(gameName)) {

@@ -34,13 +34,7 @@
                     <td>
                         <div class="control-group">
                             <div class="controls">
-                                <t:if test="currentScore">
-                                    ${fullname}
-                                    <p:else>
-                                        <t:textfield value="fullname" t:id="fullname"
-                                                     placeholder="Identifiant du forum"/>
-                                    </p:else>
-                                </t:if>
+                                <t:textfield value="fullname" t:id="fullname" placeholder="Identifiant du forum"/>
                             </div>
                         </div>
                     </td>

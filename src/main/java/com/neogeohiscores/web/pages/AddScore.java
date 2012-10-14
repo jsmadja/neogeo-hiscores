@@ -12,10 +12,7 @@ import com.neogeohiscores.entities.Score;
 import com.neogeohiscores.web.services.GameService;
 import com.neogeohiscores.web.services.PlayerService;
 import com.neogeohiscores.web.services.ScoreService;
-import org.apache.tapestry5.annotations.DiscardAfter;
-import org.apache.tapestry5.annotations.InjectComponent;
-import org.apache.tapestry5.annotations.Persist;
-import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.annotations.*;
 import org.apache.tapestry5.beaneditor.Validate;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.corelib.components.Zone;
@@ -79,10 +76,6 @@ public class AddScore {
     @Validate("required")
     private String password;
 
-    @Inject
-    @Symbol("bypass.ngf.authentication")
-    private boolean bypassNgfAuthentication;
-
     private static final int MAX_MESSAGE_LENGTH = 255;
 
     private NeoGeoFansClientFactory neoGeoFansClientFactory = new NeoGeoFansClientFactory();
@@ -100,21 +93,25 @@ public class AddScore {
     @Property
     private Score currentScore;
 
-    void onActivate() {
-        level = "MVS";
-        game = gameService.findByName(DEFAULT_GAME);
+    void onActivate(Score score) {
+        this.currentScore = score;
     }
 
-    void onActivate(Score score) {
-        this.score = score.getValue();
-        this.allClear = score.getAllClear();
-        this.fullname = score.getPlayerName();
-        this.game = score.getGame();
-        this.level = score.getLevel();
-        this.message = score.getMessage();
-        this.stage = score.getStage();
-        this.pictureUrl = score.getPictureUrl();
-        this.currentScore = score;
+    @SetupRender
+    void init() {
+        level = "MVS";
+        if(currentScore == null) {
+            game = gameService.findByName(DEFAULT_GAME);
+        } else {
+            this.game = currentScore.getGame();
+            this.score = currentScore.getValue();
+            this.allClear = currentScore.getAllClear();
+            this.fullname = currentScore.getPlayerName();
+            this.level = currentScore.getLevel();
+            this.message = currentScore.getMessage();
+            this.stage = currentScore.getStage();
+            this.pictureUrl = currentScore.getPictureUrl();
+        }
     }
 
     public List<Game> getGames() {
@@ -135,11 +132,11 @@ public class AddScore {
     public Object onSuccess() {
         try {
             if(message == null) {
-                message ="";
+                message = "";
             }
             NeoGeoFansClient ngfClient = neoGeoFansClientFactory.create();
             LOG.info("Tentative d authentification de "+fullname);
-            boolean isAuthenticated = bypassNgfAuthentication ? true : ngfClient.authenticate(fullname, password);
+            boolean isAuthenticated = ngfClient.authenticate(fullname, password);
             if (isAuthenticated) {
                 LOG.info("Authentification reussie");
                 acceptScore(ngfClient);
@@ -156,6 +153,9 @@ public class AddScore {
     }
 
     private void acceptScore(NeoGeoFansClient ngfClient) {
+        if(currentScore != null) {
+            fullname = currentScore.getPlayerName();
+        }
         Player player = playerService.findByFullname(fullname);
         if (player == null) {
             LOG.info("Enregistrement du nouvel utilisateur "+fullname);
