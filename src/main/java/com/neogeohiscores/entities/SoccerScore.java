@@ -42,10 +42,10 @@ public class SoccerScore implements Comparable<SoccerScore> {
     @Override
     public int compareTo(SoccerScore score) {
         if (won != score.won) {
-            return won.compareTo(score.won);
+            return score.won.compareTo(won);
         }
         if (goalsFor != score.goalsFor) {
-            return goalsFor.compareTo(score.goalsFor);
+            return score.goalsFor.compareTo(goalsFor);
         }
         if (goalAgainst != score.goalAgainst) {
             return score.goalAgainst.compareTo(goalAgainst);
