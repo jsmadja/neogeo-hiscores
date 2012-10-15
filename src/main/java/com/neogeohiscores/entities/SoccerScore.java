@@ -48,7 +48,7 @@ public class SoccerScore implements Comparable<SoccerScore> {
             return score.goalsFor.compareTo(goalsFor);
         }
         if (goalAgainst != score.goalAgainst) {
-            return score.goalAgainst.compareTo(goalAgainst);
+            return goalAgainst.compareTo(score.goalAgainst);
         }
         return 0;
     }

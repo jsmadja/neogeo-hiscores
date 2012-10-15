@@ -248,4 +248,7 @@ public class Score implements Serializable {
       this.rank = rank;
    }
 
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
 }

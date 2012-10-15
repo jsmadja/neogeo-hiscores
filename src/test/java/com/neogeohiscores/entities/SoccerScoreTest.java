@@ -32,14 +32,14 @@ public class SoccerScoreTest {
 	public void should_compare_two_different_scores() {
 		SoccerScore score1 = new SoccerScore(new Score("2-3-4"));
 		SoccerScore score2 = new SoccerScore(new Score("2-3-5"));
-		assertEquals(1, score1.compareTo(score2));
+		assertEquals(-1, score1.compareTo(score2));
 	}
 
 	@Test
 	public void should_compare_two_different_scores_reverse() {
 		SoccerScore score1 = new SoccerScore(new Score("2-3-5"));
 		SoccerScore score2 = new SoccerScore(new Score("2-3-4"));
-		assertEquals(-1, score1.compareTo(score2));
+		assertEquals(1, score1.compareTo(score2));
 	}
 
     @Test
