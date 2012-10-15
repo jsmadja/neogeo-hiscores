@@ -45,4 +45,7 @@ public class ImageFetcher {
         throw new DirectLinkNotFoundException("Cannot find directLink");
     }
 
+    public void setPictureHosts(List<PictureHost> pictureHosts) {
+        this.pictureHosts = pictureHosts;
+    }
 }
