@@ -6,15 +6,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10aa8c1e-354a-4324-949c-7b089259e762" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/neogeohiscores/comparator/PlayerItemsSortedWithAverageComparatorTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/neogeohiscores/comparator/PlayerSortedByPointsDescComparatorTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/neogeohiscores/comparator/ScoreComparatorTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/neogeohiscores/comparator/ScoreSortedByValueDescComparatorTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/neogeohiscores/comparator/TimelineSortedByDateDescComparatorTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/ScoreComparator.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/ScoreComparator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Score.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Score.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/SoccerScore.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/SoccerScore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/neogeohiscores/entities/SoccerScoreTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/neogeohiscores/entities/SoccerScoreTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/ScoreSortedByValueDescComparator.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/ScoreSortedByValueDescComparator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Scores.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Scores.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/GameView.java" afterPath="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/GameView.java" />
     </list>
     <ignored path="hiscores.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -76,268 +72,59 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="GameView.tml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/pages/GameView.tml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TimeLine.tml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/TimeLine.tml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TimeLineItem.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/components/TimeLineItem.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="13" selection-start="159" selection-end="159" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TimeLine.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/components/TimeLine.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="13" selection-start="290" selection-end="290" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Layout.tml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/Layout.tml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ChronoScore.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/ChronoScore.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="13" selection-start="763" selection-end="763" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HostingPicsIT.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/test/com/neogeohiscores/common/imagefetcher/HostingPicsIT.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="0" selection-start="741" selection-end="741" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HostingPicsIT.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/common/imagefetcher/HostingPicsIT.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="11" selection-start="961" selection-end="961" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HostingPicsTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/common/imagefetcher/HostingPicsTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="9" selection-start="911" selection-end="911" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="page.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/resources/imageshack/page.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerItemsSortedWithAverageComparatorTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/comparator/PlayerItemsSortedWithAverageComparatorTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="17" selection-start="1096" selection-end="1096" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerSortedByPointsDescComparatorTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/comparator/PlayerSortedByPointsDescComparatorTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="17" selection-start="982" selection-end="982" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ScoreComparatorTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/comparator/ScoreComparatorTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="46" selection-start="2424" selection-end="2424" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ScoreSortedByValueDescComparatorTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/comparator/ScoreSortedByValueDescComparatorTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="10" selection-start="1324" selection-end="1324" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TimelineSortedByDateDescComparatorTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/comparator/TimelineSortedByDateDescComparatorTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="43" selection-start="939" selection-end="939" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Score.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Score.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="240" column="5" selection-start="6695" selection-end="6695" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ImageFetcherTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/common/imagefetcher/ImageFetcherTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="32" selection-start="1594" selection-end="1594" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ImageFetcher.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/common/imagefetcher/ImageFetcher.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="65" selection-start="1715" selection-end="1715" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IntegerToRankTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/common/IntegerToRankTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="32" selection-start="752" selection-end="752" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ImageShackTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/common/imagefetcher/ImageShackTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="13" selection-start="886" selection-end="886" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ScoresTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/entities/ScoresTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="13" selection-start="871" selection-end="871" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ScoreTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/entities/ScoreTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="13" selection-start="891" selection-end="891" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SoccerScoreTest.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/entities/SoccerScoreTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="21" selection-start="1490" selection-end="1490" vertical-scroll-proportion="1.3668225">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SoccerWithGoalAverageScoreTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/entities/SoccerWithGoalAverageScoreTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="13" selection-start="931" selection-end="931" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#1392#1420#0" expanded="true" />
-                <element signature="e#2722#2750#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PostImageTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/common/imagefetcher/PostImageTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="13" selection-start="886" selection-end="886" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerItemsSortedWithAverageComparator.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/PlayerItemsSortedWithAverageComparator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="13" selection-start="767" selection-end="767" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerSortedByPointsDescComparator.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/PlayerSortedByPointsDescComparator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="13" selection-start="811" selection-end="811" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ScoreComparator.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/ScoreComparator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="31" selection-start="1621" selection-end="1621" vertical-scroll-proportion="0.0">
+            <state line="39" column="10" selection-start="1413" selection-end="1413" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Scores.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Scores.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="43" column="46" selection-start="1587" selection-end="1587" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#1839#1846#0" expanded="true" />
+                <element signature="e#1862#2113#0" expanded="true" />
+                <element signature="e#2102#2103#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScoreService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/ScoreService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="63" column="19" selection-start="2232" selection-end="2232" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameView.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/GameView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="47" column="72" selection-start="1311" selection-end="1311" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScoreSortedByValueDescComparator.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/ScoreSortedByValueDescComparator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="33" column="9" selection-start="1398" selection-end="1398" vertical-scroll-proportion="0.32622603">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SoccerWithGoalAverageScore.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/SoccerWithGoalAverageScore.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="28" column="11" selection-start="1010" selection-end="1010" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -346,45 +133,16 @@
       <file leaf-file-name="SoccerScore.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/SoccerScore.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="32" selection-start="1367" selection-end="1367" vertical-scroll-proportion="0.0">
+            <state line="43" column="0" selection-start="1535" selection-end="1535" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScoreSortedByValueDescComparator.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/ScoreSortedByValueDescComparator.java">
+      <file leaf-file-name="ScoreComparatorTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/comparator/ScoreComparatorTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="13" selection-start="914" selection-end="914" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TimelineSortedByDateDescComparator.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/TimelineSortedByDateDescComparator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="13" selection-start="840" selection-end="840" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerItemsSortedWithAverageComparatorTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/test/com/neogeohiscores/comparator/PlayerItemsSortedWithAverageComparatorTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerSortedByPointsDescComparatorTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/test/com/neogeohiscores/comparator/PlayerSortedByPointsDescComparatorTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="24" column="27" selection-start="880" selection-end="880" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -393,76 +151,12 @@
         </entry>
       </file>
       <file leaf-file-name="ScoreComparatorTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/test/com/neogeohiscores/comparator/ScoreComparatorTest.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/comparator/ScoreComparatorTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="51" column="46" selection-start="1705" selection-end="1705" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="n#!!doc" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ScoreSortedByValueDescComparatorTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/test/com/neogeohiscores/comparator/ScoreSortedByValueDescComparatorTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TimelineSortedByDateDescComparatorTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/test/com/neogeohiscores/comparator/TimelineSortedByDateDescComparatorTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MessagesTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/test/com/neogeohiscores/common/clients/MessagesTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="97" column="0" selection-start="3565" selection-end="3565" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NeoGeoFansClientTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/test/com/neogeohiscores/common/clients/NeoGeoFansClientTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TitleTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/domain/TitleTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TimeLineItem.tml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/TimeLineItem.tml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -480,9 +174,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/test/java/com/neogeohiscores/common/imagefetcher/HostingPicsTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/neogeohiscores/common/imagefetcher/ImageFetcherTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/common/imagefetcher/ImageFetcher.java" />
         <option value="$PROJECT_DIR$/src/main/test/com/neogeohiscores/common/clients/MessagesTest.java" />
         <option value="$PROJECT_DIR$/src/main/test/com/neogeohiscores/common/imagefetcher/HostingPicsIT.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/neogeohiscores/common/imagefetcher/HostingPicsIT.java" />
@@ -493,9 +184,12 @@
         <option value="$PROJECT_DIR$/src/test/java/com/neogeohiscores/comparator/ScoreSortedByValueDescComparatorTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Score.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/neogeohiscores/comparator/TimelineSortedByDateDescComparatorTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/ScoreComparator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/SoccerScore.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/neogeohiscores/entities/SoccerScoreTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Scores.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/GameView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/SoccerScore.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/ScoreComparator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/ScoreSortedByValueDescComparator.java" />
       </list>
     </option>
   </component>
@@ -516,6 +210,7 @@
     <option name="LAST_EDITED_TAB_NAME" />
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="9" />
     <option name="y" value="22" />
     <option name="width" value="1405" />
     <option name="height" value="878" />
@@ -1441,6 +1136,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/test/java/com/neogeohiscores/entities" />
     <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="OverrideImplement.combined" value="true" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
@@ -1472,35 +1168,7 @@
       <recent name="$PROJECT_DIR$/src/test" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in hiscores">
-    <configuration default="false" name="SoccerScoreTest" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.neogeohiscores.entities.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="hiscores" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.neogeohiscores.entities" />
-      <option name="MAIN_CLASS_NAME" value="com.neogeohiscores.entities.SoccerScoreTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JUnit.ScoreComparatorTest">
     <configuration default="false" name="com in hiscores" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -1598,6 +1266,34 @@
       <option name="MAIN_CLASS_NAME" value="com.neogeohiscores.comparator.ScoreComparatorTest" />
       <option name="METHOD_NAME" value="should_return_max_of_two_scores_as_soccer_with_max_goal_against" />
       <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="ScoreComparatorTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.neogeohiscores.comparator.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="hiscores" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.neogeohiscores.comparator" />
+      <option name="MAIN_CLASS_NAME" value="com.neogeohiscores.comparator.ScoreComparatorTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -1865,11 +1561,11 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Maven.neogeo-hiscores-maven" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.SoccerScoreTest" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.com in hiscores" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.All in hiscores" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.ScoreComparatorTest.should_return_max_of_two_scores_as_soccer_with_max_won" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.ScoreComparatorTest.should_return_max_of_two_scores_as_soccer_with_max_goal_against" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.com in hiscores" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.All in hiscores" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.ScoreComparatorTest.should_return_max_of_two_scores_as_soccer_with_max_won" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.ScoreComparatorTest.should_return_max_of_two_scores_as_soccer_with_max_goal_against" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.ScoreComparatorTest" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -1904,8 +1600,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1405" height="878" extended-state="6" />
-    <editor active="false" />
+    <frame x="9" y="22" width="1405" height="878" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294031" sideWeight="0.67107004" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1914,7 +1610,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3989432" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3989432" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Tapestry" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893" sideWeight="0.5003685" order="7" side_tool="true" content_ui="tabs" />
@@ -1927,8 +1623,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3294031" sideWeight="0.6010568" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32760897" sideWeight="0.4944731" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3294031" sideWeight="0.672391" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32760897" sideWeight="0.4944731" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1996,9 +1692,36 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/test/com/neogeohiscores/comparator/ScoreComparatorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="0" selection-start="852" selection-end="852" vertical-scroll-proportion="0.10273973">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/test/com/neogeohiscores/comparator/ScoreSortedByValueDescComparatorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/test/com/neogeohiscores/comparator/TimelineSortedByDateDescComparatorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/test/com/neogeohiscores/common/clients/MessagesTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="0" selection-start="3565" selection-end="3565" vertical-scroll-proportion="0.0">
+        <state line="97" column="0" selection-start="3565" selection-end="3565" vertical-scroll-proportion="0.8356164">
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -2007,6 +1730,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/test/com/neogeohiscores/common/clients/NeoGeoFansClientTest.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.17123288">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/domain/TitleTest.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -2014,87 +1746,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/test/com/neogeohiscores/common/imagefetcher/HostingPicsIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="0" selection-start="741" selection-end="741" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/common/imagefetcher/HostingPicsIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="11" selection-start="961" selection-end="961" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/common/imagefetcher/HostingPicsTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="9" selection-start="911" selection-end="911" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/resources/imageshack/page.html">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/com/neogeohiscores/web/components/TimeLineItem.tml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/PlayerItemsSortedWithAverageComparator.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/pages/GameView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="13" selection-start="767" selection-end="767" vertical-scroll-proportion="0.0">
+        <state line="47" column="72" selection-start="1311" selection-end="1311" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/comparator/PlayerItemsSortedWithAverageComparatorTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/web/services/ScoreService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="17" selection-start="1096" selection-end="1096" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/comparator/PlayerSortedByPointsDescComparatorTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="17" selection-start="982" selection-end="982" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/comparator/ScoreSortedByValueDescComparatorTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="10" selection-start="1324" selection-end="1324" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Score.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="240" column="5" selection-start="6695" selection-end="6695" vertical-scroll-proportion="0.0">
+        <state line="63" column="19" selection-start="2232" selection-end="2232" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/comparator/TimelineSortedByDateDescComparatorTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/Scores.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="43" selection-start="939" selection-end="939" vertical-scroll-proportion="0.0">
+        <state line="43" column="46" selection-start="1587" selection-end="1587" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#1839#1846#0" expanded="true" />
+            <element signature="e#1862#2113#0" expanded="true" />
+            <element signature="e#2102#2103#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/SoccerWithGoalAverageScore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="11" selection-start="1010" selection-end="1010" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/SoccerScore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="0" selection-start="1535" selection-end="1535" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jee/src/test/java/com/anzymus/neogeo/hiscores/comparator/ScoreComparatorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="27" selection-start="880" selection-end="880" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/comparator/ScoreComparatorTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="46" selection-start="2424" selection-end="2424" vertical-scroll-proportion="0.0">
+        <state line="51" column="46" selection-start="1705" selection-end="1705" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -2103,21 +1812,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/ScoreComparator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="31" selection-start="1621" selection-end="1621" vertical-scroll-proportion="0.0">
+        <state line="39" column="10" selection-start="1413" selection-end="1413" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/entities/SoccerScore.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/neogeohiscores/comparator/ScoreSortedByValueDescComparator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="32" selection-start="1367" selection-end="1367" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/neogeohiscores/entities/SoccerScoreTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="21" selection-start="1490" selection-end="1490" vertical-scroll-proportion="1.3668225">
+        <state line="33" column="9" selection-start="1398" selection-end="1398" vertical-scroll-proportion="0.32622603">
           <folding />
         </state>
       </provider>

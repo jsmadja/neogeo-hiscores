@@ -20,6 +20,7 @@ import java.util.Comparator;
 
 import com.neogeohiscores.entities.Game;
 import com.neogeohiscores.entities.Score;
+import com.neogeohiscores.entities.SoccerScore;
 import com.neogeohiscores.entities.SoccerWithGoalAverageScore;
 
 public class ScoreSortedByValueDescComparator implements Comparator<Score> {
@@ -27,6 +28,9 @@ public class ScoreSortedByValueDescComparator implements Comparator<Score> {
     public int compare(Score s1, Score s2) {
         if (s1.isSoccerWithGoalAverage() && s2.isSoccerWithGoalAverage()) {
             return new SoccerWithGoalAverageScore(s1).compareTo(new SoccerWithGoalAverageScore(s2));
+        }
+        if (s1.isSoccer() && s2.isSoccer()) {
+            return new SoccerScore(s1).compareTo(new SoccerScore(s2));
         }
 
         Game game = s1.getGame();

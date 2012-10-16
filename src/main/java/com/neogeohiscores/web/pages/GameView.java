@@ -20,6 +20,9 @@ import com.neogeohiscores.entities.Scores;
 import com.neogeohiscores.web.services.GameService;
 import com.neogeohiscores.web.services.ScoreService;
 
+import static com.neogeohiscores.common.ScoreItems.createScoreItems;
+import static java.util.Collections.sort;
+
 public class GameView {
 
     private static final int MIN_SCORE_TO_SHOW = 10;
@@ -57,8 +60,8 @@ public class GameView {
         for (String level : Levels.list()) {
             List<Score> scoreList = scores.getScoresByLevel(level);
             if (!scoreList.isEmpty()) {
-                Collections.sort(scoreList, sortScoreByValueDesc);
-                List<ScoreItem> scoreItems = ScoreItems.createScoreItems(scoreList, MIN_SCORE_TO_SHOW);
+                sort(scoreList, sortScoreByValueDesc);
+                List<ScoreItem> scoreItems = createScoreItems(scoreList, MIN_SCORE_TO_SHOW);
                 LevelItem levelItem = new LevelItem(level);
                 levelItem.setScoreItems(scoreItems);
                 levelItems.add(levelItem);

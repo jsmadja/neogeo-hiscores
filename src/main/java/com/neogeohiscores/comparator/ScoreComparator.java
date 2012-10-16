@@ -37,13 +37,13 @@ public class ScoreComparator {
         }
     }
 
-    private static Score maxAsSoccer(Score score1, Score score2) {
+    public static Score maxAsSoccer(Score score1, Score score2) {
         SoccerScore soccerScore1 = new SoccerScore(score1);
         SoccerScore soccerScore2 = new SoccerScore(score2);
-        if (soccerScore1.compareTo(soccerScore2) > 0) {
-            return score2;
+        if (soccerScore1.compareTo(soccerScore2) < 0) {
+            return score1;
         }
-        return score1;
+        return score2;
     }
 
     private static Score maxAsSoccerWithGoalAverage(Score score1, Score score2) {

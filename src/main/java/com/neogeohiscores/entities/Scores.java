@@ -16,18 +16,18 @@
 
 package com.neogeohiscores.entities;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.Sets;
 import com.neogeohiscores.comparator.ScoreComparator;
 import com.neogeohiscores.comparator.ScoreSortedByValueDescComparator;
+
+import javax.annotation.Nullable;
+
+import static com.google.common.collect.Collections2.filter;
+import static java.util.Collections.sort;
 
 public class Scores implements Iterable<Score> {
 
@@ -47,13 +47,18 @@ public class Scores implements Iterable<Score> {
         }
     }
 
-    public Score getBestScoreFor(Player player, String level, Game game) {
-        for (Score score : scores) {
-            if (score.getLevel().equals(level) && score.getPlayer().equals(player) && score.getGame().equals(game)) {
-                return score;
+    public Score getBestScoreFor(final Player player, final String level, final Game game) {
+        List<Score> filterScores = new ArrayList<Score>(filter(scores, new Predicate<Score>() {
+            @Override
+            public boolean apply(@Nullable Score input) {
+                return input.getLevel().equals(level) && input.getPlayer().equals(player) && input.getGame().equals(game);
             }
+        }));
+        sort(filterScores, new ScoreSortedByValueDescComparator());
+        if(filterScores.isEmpty()) {
+            return null;
         }
-        return null;
+        return filterScores.get(0);
     }
 
     public boolean contains(Score score) {
@@ -81,7 +86,7 @@ public class Scores implements Iterable<Score> {
     private List<Score> asSortedList(Comparator<Score> comparator) {
         List<Score> sortedScores = new ArrayList<Score>();
         sortedScores.addAll(scores);
-        Collections.sort(sortedScores, comparator);
+        sort(sortedScores, comparator);
         return sortedScores;
     }
 
