@@ -7,7 +7,10 @@
             </span>
         </a>
     </div>
-	<div id="text">
+    <div id="player">
+        <t:pageLink page="playerView" context="item.player">${item.playerName}</t:pageLink>
+    </div>
+    <div id="text">
         <t:pageLink page="AddScore" class="score" context="item.scoreValue">${item.score}</t:pageLink> (${item.rank}) sur <t:pageLink class="game" page="gameView" context="item.game">${item.game.name}</t:pageLink> (${item.level})
     </div>
 	<div id="comment">
