@@ -20,7 +20,7 @@
 
 	<groupId>com.anzymus.neogeo</groupId>
 	<artifactId>hiscores</artifactId>
-	<version>2.0.8</version>
+	<version>2.0.9-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>hiscores</name>
 	<description>Hi-Scores management of Neo Geo games</description>
