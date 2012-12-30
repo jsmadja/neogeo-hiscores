@@ -8,7 +8,7 @@ public class NeoGeoFansClientIT {
     @Test
     public void should_post() throws AuthenticationFailed {
         NeoGeoFansClient client = new NeoGeoFansClient();
-        boolean authenticate = client.authenticate("anzymus", "xedy4bsa");
+        boolean authenticate = client.authenticate("anzymus", "password");
         Assert.assertTrue(authenticate);
         client.post("test");
     }
