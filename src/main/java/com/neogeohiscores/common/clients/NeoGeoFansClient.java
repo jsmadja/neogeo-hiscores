@@ -16,6 +16,7 @@
 
 package com.neogeohiscores.common.clients;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.*;
@@ -57,6 +58,7 @@ public class NeoGeoFansClient {
     }
 
     protected HtmlPage getLoginPage() throws IOException {
+
         return (HtmlPage) webClient.getPage("http://www.neogeofans.com/leforum/index.php");
     }
 
