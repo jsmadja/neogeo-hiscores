@@ -8,11 +8,4 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 
 public class Index {
 
-    @Inject
-    private GameService gameService;
-
-    public Game getGameOfTheDay() {
-        return gameService.getGameOfTheDay();
-    }
-
 }

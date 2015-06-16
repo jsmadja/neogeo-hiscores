@@ -6,12 +6,6 @@
         <p class="title_neogeo" style="margin-right:20px;display:inline-block">NEO·GEO</p> <p style="display:inline-block;margin-top:20px;margin-bottom:10px" class="title_hiscore">hiscores</p>
     </div>
 
-    <div class="center" style="margin-bottom:50px;font-size:12pt">
-        <p style="text-align:center">Le jeu du jour :
-            <t:pageLink page="gameView" context="gameOfTheDay">${gameOfTheDay.name}</t:pageLink>
-        </p>
-    </div>
-
     <t:timeline/>
 
 </t:layout>

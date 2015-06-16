@@ -1,11 +1,6 @@
 package com.neogeohiscores.web.pages;
 
 import com.neogeohiscores.common.Levels;
-import com.neogeohiscores.common.clients.AuthenticationFailed;
-import com.neogeohiscores.common.clients.Messages;
-import com.neogeohiscores.common.clients.NeoGeoFansClient;
-import com.neogeohiscores.common.clients.NeoGeoFansClientFactory;
-import com.neogeohiscores.common.imagefetcher.ImageFetcher;
 import com.neogeohiscores.entities.Game;
 import com.neogeohiscores.entities.Player;
 import com.neogeohiscores.entities.Score;
@@ -18,7 +13,6 @@ import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.services.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,59 +21,36 @@ import java.util.List;
 
 public class AddScore {
 
-    private static final String ALL_CLEAR = "ALL CLEAR";
     public static final String DEFAULT_GAME = "3 Count Bout (3 minutes)";
-    public static final long DEFAULT_POST_ID = 41930;
     public static final Logger LOG = LoggerFactory.getLogger(AddScore.class);
-
+    private static final String ALL_CLEAR = "ALL CLEAR";
+    private static final int MAX_MESSAGE_LENGTH = 255;
     @Inject
     private ScoreService scoreService;
-
     @Inject
     private GameService gameService;
-
     @Inject
     private PlayerService playerService;
-
     @Property
     private Game game;
-
     @Property
     @Validate("required")
     private String pictureUrl;
-
     @Property
     @Validate("required")
     private String level;
-
     @Property
     @Validate("required")
     private String score;
-
     @Property
     private String stage;
-
     @Property
     private boolean allClear;
-
     @Property
     private String message;
-
-    @Property
-    private boolean postOnNgf;
-
     @Property
     @Validate("required")
     private String fullname;
-
-    @Property
-    @Validate("required")
-    private String password;
-
-    private static final int MAX_MESSAGE_LENGTH = 255;
-
-    private NeoGeoFansClientFactory neoGeoFansClientFactory = new NeoGeoFansClientFactory();
-
     @InjectComponent
     private Form form;
 
@@ -100,7 +71,7 @@ public class AddScore {
     @SetupRender
     void init() {
         level = "MVS";
-        if(currentScore == null) {
+        if (currentScore == null) {
             game = gameService.findByName(DEFAULT_GAME);
         } else {
             this.game = currentScore.getGame();
@@ -130,45 +101,30 @@ public class AddScore {
     @CommitAfter
     @DiscardAfter
     public Object onSuccess() {
-        try {
-            if(message == null) {
-                message = "";
-            }
-            NeoGeoFansClient ngfClient = neoGeoFansClientFactory.create();
-            LOG.info("Tentative d authentification de "+fullname);
-            boolean isAuthenticated = ngfClient.authenticate(fullname, password);
-            if (isAuthenticated) {
-                LOG.info("Authentification reussie");
-                acceptScore(ngfClient);
-                return Index.class;
-            } else {
-                form.recordError("Your NGF account is invalid");
-                return this;
-            }
-        } catch (AuthenticationFailed ex) {
-            LOG.error("Impossible de s'authentifier sur NGF", ex);
-            form.recordError(ex.getMessage());
-            return this;
+        if (message == null) {
+            message = "";
         }
+        acceptScore();
+        return Index.class;
     }
 
-    private void acceptScore(NeoGeoFansClient ngfClient) {
-        if(currentScore != null) {
+    private void acceptScore() {
+        if (currentScore != null) {
             fullname = currentScore.getPlayerName();
         }
         Player player = playerService.findByFullname(fullname);
         if (player == null) {
-            LOG.info("Enregistrement du nouvel utilisateur "+fullname);
+            LOG.info("Enregistrement du nouvel utilisateur " + fullname);
             player = playerService.store(new Player(fullname));
         }
         LOG.info("Enregistrement du score");
-        storeScore(ngfClient, player);
+        storeScore(player);
         LOG.info("Score enregistré");
     }
 
-    private Score storeScore(NeoGeoFansClient ngfClient, Player player) {
+    private Score storeScore(Player player) {
         Score scoreToStore;
-        if(currentScore == null) {
+        if (currentScore == null) {
             scoreToStore = new Score(score, player, level, game, pictureUrl);
         } else {
             scoreToStore = currentScore;
@@ -181,20 +137,7 @@ public class AddScore {
         int end = message.length() > MAX_MESSAGE_LENGTH ? MAX_MESSAGE_LENGTH : message.length();
         scoreToStore.setMessage(message.substring(0, end));
         scoreToStore = scoreService.store(scoreToStore);
-        postOnNgf(scoreToStore, game, ngfClient);
         return scoreToStore;
-    }
-
-    private void postOnNgf(Score score, Game game, NeoGeoFansClient ngfClient) {
-        if (postOnNgf) {
-            if ("MVS".equals(level)) {
-                Long postId = game.getPostId();
-                if (postId == null) {
-                    postId = DEFAULT_POST_ID;
-                }
-                ngfClient.post(Messages.toMessage(score), postId);
-            }
-        }
     }
 
 }
